@@ -8,7 +8,7 @@ Consume this library anywhere you want by running:
 ```
 npm install --save github:alastria/alastria-identity-lib
 ```
-Or use it from somotherproject/src/somefiles.ts with:
+Use it from somotherproject/src/somefiles.ts with:
 ```
 import {sayHello} from 'alastria-identity-lib'
 sayHello();

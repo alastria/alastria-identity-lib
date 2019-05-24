@@ -1,5 +1,5 @@
 {
-  "name": "hwrld",
+  "name": "alastria-identity-lib",
   "version": "1.0.0",
   "description": "Library for Alastria identity",
   "main": "dist/index.js",

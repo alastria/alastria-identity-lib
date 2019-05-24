@@ -1,7 +1,28 @@
 {
   "name": "alastria-identity-lib",
   "version": "1.0.0",
-  "description": "Library for Alastria identity",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts"
+  "description": "A library to interact with alastria-identity smart contracts",
+  "main": "index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "sayHello"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alastria/alastria-identity-lib.git"
+  },
+  "keywords": [
+    "alastria",
+    "identity",
+    "self-sovereign-identity",
+    "ssi",
+    "blockchain",
+    "quorum"
+  ],
+  "author": "Informatica el Corte Ingles (IECISA)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alastria/alastria-identity-lib/issues"
+  },
+  "homepage": "https://github.com/alastria/alastria-identity-lib#readme"
 }

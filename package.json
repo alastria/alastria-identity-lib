@@ -1,0 +1,7 @@
+{
+  "name": "hwrld",
+  "version": "1.0.0",
+  "description": "Library for Alastria identity",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
+}

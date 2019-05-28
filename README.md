@@ -20,5 +20,5 @@ lib.sayHello();
 ```
 If you want to use it from command line:
 ```
-sudo -g npm install --save github:alastria/alastria-identity-lib
+sudo -g npm install --save github:alastria/alastria-identity-lib.git
 ```

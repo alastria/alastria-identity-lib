@@ -10,7 +10,7 @@ npm init -y
 ```
 Consume this library anywhere you want by running:
 ```
-npm install --save github:alastria/alastria-identity-lib
+npm install --save github:alastria/alastria-identity-lib.git
 ```
 Check you have alastria-identity-lib in node-modules.
 You can use it from somotherproject/src/somefiles.js with:

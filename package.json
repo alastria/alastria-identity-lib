@@ -1,10 +1,10 @@
 {
-  "name": "alastria-identity-lib",
+  "name": "alastria-identity-lib-alberto",
   "version": "1.0.0",
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "dist/index.js",
   "bin": {
-      "alastria-identity-lib": "dist/index.js"
+    "alastria-identity-lib": "dist/index.js"
   },
   "types": "dist/index.d.ts",
   "scripts": {
@@ -27,5 +27,9 @@
   "bugs": {
     "url": "https://github.com/alastria/alastria-identity-lib/issues"
   },
-  "homepage": "https://github.com/alastria/alastria-identity-lib#readme"
+  "homepage": "https://github.com/alastria/alastria-identity-lib#readme",
+  "dependencies": {
+    "alastria-identity-lib": "github:alastria/alastria-identity-lib",
+    "web3": "^1.0.0-beta.55"
+  }
 }

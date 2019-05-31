@@ -15,7 +15,7 @@ npm install --save github:alastria/alastria-identity-lib.git
 Check you have alastria-identity-lib in node-modules.
 You can use it from somotherproject/src/somefiles.js with:
 ```
-let lib = require('alastria-identity-lib');
+let lib = require('alastria-id-lib');
 lib.sayHello();
 ```
 If you want to use it from command line:

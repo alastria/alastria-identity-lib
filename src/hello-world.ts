@@ -21,23 +21,27 @@ export function addSubjectPresentationRegistry(subjectPresentationHash, URI, fro
 }
 
 /*
-export function updateSubjectPresentation(){
+export function updateSubjectPresentationRegistry(subjectPresentationHash, status, from){
+  presentationRegistry.methods.updateSubjectPresentation(subjectPresentationHash, status).send({from: from});
+  var event = presentationRegistry.PresentationUpdated({}, from:, to:)
+  console.log('Se ha actualizado la presentation' + subjectPresentationHash);
 
 }
-export function getSubjectPresentationStatus(){
-
+export function getSubjectPresentationRegistryStatus(subject, subjectPresentationHash, from){
+  presentationRegistry.methods.getSubjectPresentationStatus(subject, subjectPresentationHash).call({from: from});
+  console.log('Se ha obtenido correctamente el estado de la presentation' + subjectPresentationHash + 'del sujeto' + subject);
 }
-export function getSubjectPresentationList(){
-
+export function getSubjectPresentationRegistryList(from){
+  presentationRegistry.methods.getSubjectPresentationList().call({from: from});
 }
-export function updateReceiverPresentation(receiverPresentationHash, status){
-
+export function updateReceiverPresentationRegistry(receiverPresentationHash, status,from){
+  presentationRegistry.methods.updateReceiverPresentation(receiverPresentationHash, satus).send({from: from});
 }
-export function getReceiverPresentationStatus(to, receiverPresentationHash){
-
+export function getReceiverPresentationRegistryStatus(from, receiverPresentationHash){
+  presentationRegistry.methods.getReceiverPresentationStatus(receiverPresentationHash).call({from: from});
 }
-export function getPresentationStatus(subjectStatus, receiverStatus){
-
+export function getPresentationRegistryStatus(subjectStatus, receiverStatus){
+  presentationRegistry.methods.getPresentationStatus
 }*/
 
 //AlastriaCredentialRegistry

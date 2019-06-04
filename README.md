@@ -28,7 +28,5 @@ Run it to check it works:
 ```
 node file.js
 ```
-If you want to use it from command line:
-```
-sudo -g npm install --save github:alastria/alastria-identity-lib.git
-```
+
+Enjoy and contribute!

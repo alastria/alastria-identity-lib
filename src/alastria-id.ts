@@ -22,8 +22,8 @@ export function sayGoodbye(){
 }
 
 // Some functions to configure web3
-export function setProvider(web3Instance){
-  web3 = web3Instance;
+export function setProvider(ip){
+  web3 = new Web3(new Web3.providers.HttpProvider(ip));
   ipconfig = true;
 }
 

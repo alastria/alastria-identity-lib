@@ -1,1 +1,1 @@
-export { sayHello, sayGoodbye, addSubjectPresentationRegistry } from './alatria-id.ts';
+export { sayHello, sayGoodbye, addSubjectPresentationRegistry } from './alastria-id';

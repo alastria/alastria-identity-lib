@@ -1,6 +1,6 @@
-# Typescript Alastria Identity Library 
+# Typescript Alastria Identity Library
 ## What it does
-This library interacts with the Alastria Identity smart contracts. 
+This library interacts with the Alastria Identity smart contracts.
 [https://github.com/alastria/alastria-identity](https://github.com/alastria/alastria-identity)
 
 ## How to use it

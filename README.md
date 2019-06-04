@@ -12,13 +12,17 @@ Consume this library anywhere you want by running:
 ```
 npm install --save github:alastria/alastria-identity-lib.git
 ```
-Open node_modules/alastria-id-lib/dist/alastria-id.js with your favourite. Introduce your trusted IP node, an account and its password to unlock it.
+Open with your favourite editor:
+```
+nano node_modules/alastria-id-lib/dist/alastria-id.js
+```
+Introduce your trusted IP node, an account and its password to unlock it.
 ```javascript
 var IP_NODE = "http://5.56.60.217/rpc";
 var ACCOUNT = "";
 var ACCOUNT_PSW = "";
 ```
-Now, you can use this library from any JavaScript file in the project with:
+Now, you can use this library from any JavaScript file in the project in this way:
 ```javascript
 let lib = require('alastria-id-lib');
 lib.sayHello();

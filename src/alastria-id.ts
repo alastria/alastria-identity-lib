@@ -6,7 +6,7 @@ var ABI_PRESENTATION_REGISTRY =
 var ADDRESS_PRESENTATION_REGISTRY = "0x8e78E1BfBdcD1564309d86d4925fCF533a6dcBC8";
 
 // Web3 and Smart Contracts instances
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://5.56.60.217/rpc"));
 web3.eth.defaultAccount = web3.eth.accounts[0];
 var presentationRegistry;
 var ipconfig = false;
@@ -27,9 +27,10 @@ export function setProvider(web3Instance){
   ipconfig = true;
 }
 
-export function setAccount(account){
+export function setAccount(account, psw){
   web3.eth.defaultAccount = account;
-  ipconfig = true;
+  web3.eth.personal.unlockAccount(web3.eth.defaultAccount, psw);
+  accountconfig = true;
 }
 
 export function setContract(){

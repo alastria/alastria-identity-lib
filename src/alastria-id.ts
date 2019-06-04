@@ -41,7 +41,7 @@ export function setContract(){
   }
 }
 
-//Alastria-PresentationRegistry
+//AlastriaPresentationRegistry
 export function addSubjectPresentationRegistry(subjectPresentationHash, URI) {
   if(ipconfig && accountconfig){
     presentationRegistry.methods.addSubjectPresentation(subjectPresentationHash, URI).send({ from: web3.eth.defaultAccount });

@@ -12,13 +12,19 @@ Consume this library anywhere you want by running:
 ```
 npm install --save github:alastria/alastria-identity-lib.git
 ```
-Check you have alastria-id-lib in node-modules.
-You can use it from somotherproject/src/file.js with:
+Open gedit node_modules/alastria-id-lib/dist/alastria-id.js with your favourite editor and introduce your trusted IP node, an account and its password to unlock it.
+```
+var IP_NODE = "http://5.56.60.217/rpc";
+var ACCOUNT = "";
+var ACCOUNT_PSW = "";
+```
+Now, you can use this library from any JavaScript file in the project with:
 ```
 let lib = require('alastria-id-lib');
+lib.sayHello();
 lib.addSubjectPresentationRegistry("HASH", "URI", "ADDRESS_FROM");
 ```
-And test it with:
+Run it to check it works:
 ```
 node file.js
 ```

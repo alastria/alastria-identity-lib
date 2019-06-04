@@ -12,7 +12,7 @@ Consume this library anywhere you want by running:
 ```
 npm install --save github:alastria/alastria-identity-lib.git
 ```
-Open gedit node_modules/alastria-id-lib/dist/alastria-id.js with your favourite editor and introduce your trusted IP node, an account and its password to unlock it.
+Open node_modules/alastria-id-lib/dist/alastria-id.js with your favourite. Introduce your trusted IP node, an account and its password to unlock it.
 ```
 var IP_NODE = "http://5.56.60.217/rpc";
 var ACCOUNT = "";

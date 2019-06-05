@@ -19,8 +19,8 @@ export class UserIdentity {
         this.privateKey = _privateKey;
     }
 
-    public addTransaction(transaction) {
-        this.transactions.push(customize(transaction,{}));
+    public addTransaction(transaction,target) {
+        this.transactions.push(customize(transaction,{},this.endPoint,this.address,target));
     }
 
     public signTransactions(){
@@ -38,10 +38,10 @@ export class UserIdentity {
 * @param transaction 
 * @param user 
 */
-function customize(transaction, user) {
+function customize(transaction, user, endPoint, address, target) {
     try {
-        transaction.nonce = getUserNonce(this.endPoint, 'web3', this.address);
-        transaction.to = alastriaIdentityManager;
+        transaction.nonce = getUserNonce(endPoint, 'web3', address);
+        transaction.to = target;
         return transaction;
     } catch(err) {
         console.log(err);

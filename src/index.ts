@@ -40,6 +40,4 @@ export {
   getTransactionGetPublicKeyStatus
 } from './factory/transactions-factory'
 
-export {customizeTransaction} from './factory/customize-transactions'
-
-export {signTransaction} from './factory/sign-transactions'
+export {UserIdentity} from './factory/transactionProcess'

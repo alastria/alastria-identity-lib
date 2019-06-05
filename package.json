@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/alastria/alastria-identity-lib#readme",
   "dependencies": {
-    "web3": "^0.20.2"
+    "web3": "^0.20.2",
+    "web3-utils": "^1.0.0-beta.55"
   }
 }

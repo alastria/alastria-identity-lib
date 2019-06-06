@@ -1,3 +1,5 @@
+//With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
+//TODO: change encoding when v1.0.0 releases stable version
 import { toHex, leftPad } from "../../node_modules/web3-utils";
 
 const basicTransaction = {

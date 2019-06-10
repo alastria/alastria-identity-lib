@@ -11,6 +11,8 @@ const basicTransaction = {
     nonce: ''
 }
 const zeroValue = '00000000000000000000000000000000000000000000000000000000000000000000';
+const delegateCallSignature = '597b2e9b';
+const delegateCallInvoke = (registryAddress) => { return `${delegateCallSignature}000000000000000000000000${registryAddress.slice(2, 40)}${zeroValue}` }
 
 export function generateAccessToken(){
     return {};
@@ -31,6 +33,19 @@ export function generateAccessToken(){
     return transaction;
   }
   
-  export function delegateCall(){
-    return {};
-  }
+/**
+ * 
+ * @param registryAddress
+ * @param presentationHash should have 32 bytes
+ */
+const addSubjectPresentationSignature = '4e3a5de5';
+const addSubjectPresentationCost = 200000;
+export function addSubjectCredential(registryAddress, presentationHash, uri) {
+    let transaction = basicTransaction;
+    transaction.data =
+        `0x${delegateCallInvoke(registryAddress)}${addSubjectPresentationSignature}${presentationHash}
+    0000000000000000000000000000000000000000000000000000000000000040
+    ${leftPad(uri.length, 64)}${toHex(uri)}`;
+    transaction.gas = addSubjectPresentationCost;
+    return transaction;
+}

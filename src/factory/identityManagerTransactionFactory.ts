@@ -109,3 +109,52 @@ export function updateReceiverPresentation(receiverPresentationHash, status) {
   transaction.gas = 600000;
   return transaction;
 }
+
+
+// PublicKey Registry TxFactory
+export function addKey(publicKey) {
+  let callSignature = "60e6cfd8";
+  let tx = basicTransaction;
+  tx.data = 
+    `0x${delegateCallInvoke(publicKeyRegistry)}
+      ${callSignature}
+      ${leftPad(publicKey.slice(2), 64)}`;
+  tx.gas = 600000;
+  return tx;
+}
+
+export function revokePublicKey(publicKey) {
+  let callSignature = "a8c59169";
+  let tx = basicTransaction;
+  tx.data = 
+    `0x${delegateCallInvoke(publicKeyRegistry)}
+    ${callSignature}
+    ${leftPad(publicKey.slice(2), 64)}`;
+  tx.gas = 600000;
+  return tx;
+}
+
+export function deletePublicKey(publicKey) {
+  let callSignature = "1993b4f9";
+  let tx = basicTransaction;
+  tx.data = 
+    `0x${delegateCallInvoke(publicKeyRegistry)}
+    ${callSignature}
+    ${leftPad(publicKey.slice(2), 64)}`;
+  tx.gas = 600000;
+  return tx;
+}
+
+
+// Credential Registry TxFactory
+export function updateCredentialStatus(issuerCredHash, status) {
+  let callSignature = "dd517e10";
+  let tx = basicTransaction;
+  tx.data = 
+    `0x${delegateCallInvoke(credentialRegistry)}
+    ${callSignature}
+    ${leftPad(issuerCredHash.slice(2), 64)}
+    ${toHex(leftPad(status, 64)).slice(2)}`;
+  tx.gas = 600000;
+  return tx;
+}

@@ -1,6 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-import { toHex, leftPad } from "../../node_modules/web3-utils";
+import { toHex, leftPad, rightPad } from "../../node_modules/web3-utils";
 
 const basicTransaction = {
     from: '',
@@ -18,7 +18,7 @@ export function getSubjectCredentialList() {
     return transaction
 }
 
-export function getTransactionDeleteSubjectCredential() {
+export function deleteSubjectCredential() {
     return {};
 }
 
@@ -30,19 +30,28 @@ const getSubjectCredentialStatusSignature = '52bdf827'
 export function getSubjectCredentialStatus(subject,subjectCredentialHash) {
     let transaction = basicTransaction;
     transaction.data = `0x${getSubjectCredentialStatusSignature}
-    ${leftPad(subject,64)}
-    ${subjectCredentialHash}`
+    ${leftPad(subject.slice(2), 64)}
+    ${rightPad(subjectCredentialHash.slice(2), 64)}`
     return transaction
 }
 
-export function getTransactionUpdateCredentialStatus() {
-    return {};
+
+export function getIssuerCredentialStatus(issuerAddr, issuerCredentialHash) {
+    let callSignature = '5faf7d94';
+    let tx = basicTransaction;
+    tx.data = `0x${callSignature}
+        ${leftPad(issuerAddr.slice(2), 64)}
+        ${rightPad(issuerCredentialHash.slice(2), 64)}`;
+    tx.gas = 600000;
+    return tx;
 }
 
-export function getTransactionGetIssuerCredentialStatus() {
-    return {};
-}
-
-export function getTransactionGetCredentialStatus() {
-    return {};
+export function getCredentialStatus(subjectStatus, issuerStatus) {
+    let callSignature = '5faf7d94';
+    let tx = basicTransaction;
+    tx.data = `0x${callSignature}
+        ${leftPad(toHex(subjectStatus).slice(2), 64)}
+        ${leftPad(toHex(issuerStatus).slice(2), 64)}`;
+    tx.gas = 600000;
+    return tx;
 }

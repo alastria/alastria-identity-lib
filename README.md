@@ -1,7 +1,7 @@
 # Typescript Alastria Identity Library
 ## What it does
-This library interacts with the Alastria Identity smart contracts.
-[https://github.com/alastria/alastria-identity](https://github.com/alastria/alastria-identity)
+This library interacts with the Alastria Identity smart contracts which are in the
+alastria-identity repository](https://github.com/alastria/alastria-identity)
 
 ## How to use it
 Init npm on your working directory with

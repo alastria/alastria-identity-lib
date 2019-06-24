@@ -1,5 +1,8 @@
+//With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
+//TODO: change encoding when v1.0.0 releases stable version
 import EthereumTx from 'ethereumjs-tx';
 
+//TODO not hardcoded, import from config file
 const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 
 export class UserIdentity {
@@ -19,33 +22,32 @@ export class UserIdentity {
         this.privateKey = _privateKey;
     }
 
-    public addTransaction(transaction,target) {
-        this.transactions.push(customize(transaction,{},this.endPoint,this.address,target));
+    public addTransaction(transaction, target) {
+        this.transactions.push(this.customize(transaction, {}));
     }
 
-    public signTransactions(){
+    public getSignedTransactions() {
         let processedTransactions = [];
         this.transactions.forEach(transaction => {
-            processedTransactions.push(signTransaction(transaction,this.privateKey));
+            processedTransactions.push(signTransaction(transaction, this.privateKey));
         });
         this.transactions = []
         return processedTransactions;
     }
-}
 
-/**
-* Customize the transaction with the user data
-* @param transaction 
-* @param user 
-*/
-function customize(transaction, user, endPoint, address, target) {
-    try {
-        transaction.nonce = getUserNonce(endPoint, 'web3', address);
-        transaction.to = target;
-        return transaction;
-    } catch(err) {
-        console.log(err);
-        throw err;
+    /**
+    * Customize the transaction with the user data
+    * @param transaction 
+    * @param user 
+    */
+    private customize(transaction, user) {
+        try {
+            transaction.nonce = getUserNonce(this.endPoint, 'web3', this.address);
+            return transaction;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 }
 

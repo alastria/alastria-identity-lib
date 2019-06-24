@@ -14,12 +14,13 @@ npm install --save github:alastria/alastria-identity-lib.git
 ```
 Now, you can use this library from any JavaScript file in the project in this way:
 ```javascript
-let lib = require('alastria-id-lib');
-lib.sayHello();
-lib.setProvider("http://5.56.60.217/rpc");
-lib.setAccount("YOUR_ACCOUNT", "YOUR_PSW");
-lib.setContract();
-lib.addSubjectPresentationRegistry("HASH", "URI");
+const {transactionFactory, transactionProcess} = require('alastria-id-lib');
+const identityForUse = new UserIdentity('myBlockchainServiceIp','walletAddress','privateKeyFromKeyStore');
+
+identityForUse.addTransaction(transactionFactory.identityManager.addSubjectCredential(hash,uri));
+let transactionStack = identityForUSe.getSignedTransactions();
+
+doStuffWith(transactionStack);
 ```
 Run it to check it works:
 ```

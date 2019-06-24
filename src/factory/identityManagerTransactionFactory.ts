@@ -13,8 +13,10 @@ const addSubjectCredentialFunctionHash = 'e04ce02c';
 const addSubjectPresentationFunctionHash = '4e3a5de5';
 const updateSubjectPresentationFunctionHash = 'e64af938';
 const updateReceiverPresentationFunctionHash = '3000dc39';
-
-
+const addIdentityIssuerFunctionHash = '';
+const updateIdentityIssuerEidasLevelFunctionHash = '';
+const deleteIdentityIssuerFunctionHash = '';
+const getEidasLevelFunctionHash = '';
 
 
 const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
@@ -115,7 +117,7 @@ export function updateReceiverPresentation(receiverPresentationHash, status) {
 export function addKey(publicKey) {
   let callSignature = "60e6cfd8";
   let tx = basicTransaction;
-  tx.data = 
+  tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
       ${callSignature}
       ${leftPad(publicKey.slice(2), 64)}`;
@@ -126,7 +128,7 @@ export function addKey(publicKey) {
 export function revokePublicKey(publicKey) {
   let callSignature = "a8c59169";
   let tx = basicTransaction;
-  tx.data = 
+  tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
     ${callSignature}
     ${leftPad(publicKey.slice(2), 64)}`;
@@ -137,7 +139,7 @@ export function revokePublicKey(publicKey) {
 export function deletePublicKey(publicKey) {
   let callSignature = "1993b4f9";
   let tx = basicTransaction;
-  tx.data = 
+  tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
     ${callSignature}
     ${leftPad(publicKey.slice(2), 64)}`;
@@ -150,7 +152,7 @@ export function deletePublicKey(publicKey) {
 export function updateCredentialStatus(issuerCredHash, status) {
   let callSignature = "dd517e10";
   let tx = basicTransaction;
-  tx.data = 
+  tx.data =
     `0x${delegateCallInvoke(credentialRegistry)}
     ${callSignature}
     ${leftPad(issuerCredHash.slice(2), 64)}
@@ -158,3 +160,42 @@ export function updateCredentialStatus(issuerCredHash, status) {
   tx.gas = 600000;
   return tx;
 }
+
+ // AlastriaIdentityIssuer.sol
+
+ export function addIdentityIssuer(identityIssuer, level) {
+   let transaction = basicTransaction;
+   transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${addIdentityIssuerFunctionHash}${identityIssuer}
+   0000000000000000000000000000000000000000000000000000000000000040
+   ${leftPad(level.length, 64)}${toHex(level)}`;
+   transaction.gas = 600000;
+   return transaction;
+ }
+
+ export function updateIdentityIssuerEidasLevel(identityIssuer, level) {
+   let transaction = basicTransaction;
+   transaction.data = `${delegateCallInvoke(alastriaIdentityManager)}
+   ${updateIdentityIssuerEidasLevelFunctionHash}
+   ${rightPad(identityIssuer.slice(2), 64)}
+   ${leftPad(toHex(level).slice(2), 64)}`;
+   transaction.gas = 600000;
+   return transaction;
+ }
+
+ export function deleteIdentityIssuer(identityIssuer) {
+   let callSignature = "1993b4f9";
+   let transaction = basicTransaction;
+   transaction.data =
+   `0x${delegateCallInvoke(alastriaIdentityManager)}${deleteIdentityIssuerFunctionHash}
+   ${callSignature}
+   ${leftPad(identityIssuer.slice(2), 64)}`;
+   transaction.gas = 600000;
+   return transaction;
+ }
+
+ export function getEidasLevel(identityIssuer) {
+   let transaction = basicTransaction;
+   transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${getEidasLevelFunctionHash}
+   ${leftPad(identityIssuer.slice(2), 64)}`;
+   return transaction;
+ }

@@ -19,8 +19,8 @@ function sayGoodbye() {
 }
 exports.sayGoodbye = sayGoodbye;
 // Some functions to configure web3
-function setProvider(web3Instance) {
-    web3 = web3Instance;
+function setProvider(ip) {
+    web3 = new web3_1.default(new web3_1.default.providers.HttpProvider(ip));
     ipconfig = true;
 }
 exports.setProvider = setProvider;

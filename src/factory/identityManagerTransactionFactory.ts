@@ -199,3 +199,28 @@ export function updateCredentialStatus(issuerCredHash, status) {
    ${leftPad(identityIssuer.slice(2), 64)}`;
    return transaction;
  }
+
+  // AlastriaIdentityServiceProvider.sol
+
+  export function addIdentityServiceProvider(identityServiceProvider) {
+    let transaction = basicTransaction;
+    transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${addIdentityServiceProviderFunctionHash}${identityServiceProvider}
+    0000000000000000000000000000000000000000000000000000000000000040` ;
+    transaction.gas = 600000;
+    return transaction;
+  }
+
+  export function deleteIdentityServiceProvider(identityServiceProvider) {
+    let callSignature = "1993b4f9";
+    let transaction = basicTransaction;
+    transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${deleteServiceProviderFunctionHash}
+    ${callSignature}
+    ${leftPad(identityServiceProvider.slice(2), 64)}`;
+    transaction.gas = 600000;
+    return transaction;
+  }
+
+  export function isIdentityServiceProvider(identityServiceProvider) {
+    let transaction = basicTransaction;
+    return transaction;
+  }

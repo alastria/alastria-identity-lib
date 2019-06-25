@@ -7,9 +7,6 @@ const basicTransaction = {
     gas: 0,
     nonce: ''
 }
-const delegateCallSignature = '597b2e9b';
-const zeroValue = '00000000000000000000000000000000000000000000000000000000000000000000';
-const delegateCallInvoke = (registryAddress) => { return `${delegateCallSignature}000000000000000000000000${registryAddress.slice(2, 40)}${zeroValue}` }
 
 export function getCurrentPublicKey(addr) {
     let callSignature = '31f7f259';

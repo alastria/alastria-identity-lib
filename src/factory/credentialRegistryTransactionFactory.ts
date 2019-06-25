@@ -1,6 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-import { toHex, leftPad, rightPad } from "../../node_modules/web3-utils";
+import { toHex, leftPad, rightPad } from "../utils.helper";
 
 const basicTransaction = {
     from: '',
@@ -55,3 +55,4 @@ export function getCredentialStatus(subjectStatus, issuerStatus) {
     tx.gas = 600000;
     return tx;
 }
+

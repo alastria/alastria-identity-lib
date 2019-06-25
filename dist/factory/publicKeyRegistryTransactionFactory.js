@@ -8,9 +8,6 @@ var basicTransaction = {
     gas: 0,
     nonce: ''
 };
-var delegateCallSignature = '597b2e9b';
-var zeroValue = '00000000000000000000000000000000000000000000000000000000000000000000';
-var delegateCallInvoke = function (registryAddress) { return delegateCallSignature + "000000000000000000000000" + registryAddress.slice(2, 40) + zeroValue; };
 function getCurrentPublicKey(addr) {
     var callSignature = '31f7f259';
     var tx = basicTransaction;

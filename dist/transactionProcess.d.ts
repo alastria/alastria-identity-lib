@@ -11,5 +11,11 @@ export declare class UserIdentity {
      */
     constructor(_endPoint: any, _address: any, _privateKey: any);
     addTransaction(transaction: any, target: any): void;
-    signTransactions(): any[];
+    getSignedTransactions(): any[];
+    /**
+    * Customize the transaction with the user data
+    * @param transaction
+    * @param user
+    */
+    private customize(transaction, user);
 }

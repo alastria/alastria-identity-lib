@@ -5,7 +5,13 @@ export declare function getSubjectCredentialList(): {
     gas: number;
     nonce: string;
 };
-export declare function deleteSubjectCredential(): {};
+export declare function deleteSubjectCredential(subjectCredentialHash: any): {
+    from: string;
+    to: string;
+    data: string;
+    gas: number;
+    nonce: string;
+};
 export declare function getSubjectCredentialStatus(subject: any, subjectCredentialHash: any): {
     from: string;
     to: string;

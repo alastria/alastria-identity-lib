@@ -11,6 +11,8 @@ var basicTransaction = {
     nonce: ''
 };
 var zeroValue = '00000000000000000000000000000000000000000000000000000000000000000000';
+var delegateCallSignature = '597b2e9b';
+var delegateCallInvoke = function (registryAddress) { return delegateCallSignature + "000000000000000000000000" + registryAddress.slice(2, 40) + zeroValue; };
 var getSubjectCredentialListSignature = '52bdf827';
 function getSubjectCredentialList() {
     var transaction = basicTransaction;
@@ -18,8 +20,11 @@ function getSubjectCredentialList() {
     return transaction;
 }
 exports.getSubjectCredentialList = getSubjectCredentialList;
-function deleteSubjectCredential() {
-    return {};
+function deleteSubjectCredential(subjectCredentialHash) {
+    var callSignature = "";
+    var transaction = basicTransaction;
+    transaction.data = '';
+    return transaction;
 }
 exports.deleteSubjectCredential = deleteSubjectCredential;
 /**

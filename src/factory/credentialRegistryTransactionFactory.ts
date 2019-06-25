@@ -20,16 +20,6 @@ export function getSubjectCredentialList() {
     return transaction
 }
 
-export function addSubjectCredential(subjectCredentialHash, uri) {
-  let transaction = basicTransaction;
-  transaction.data = `0x${delegateCallInvoke(alastriaCredentialRegistry)}${addSubjectCredentialHashFunctionHash}${subjectCredentialHash}
-  0000000000000000000000000000000000000000000000000000000000000040
-  ${leftPad(uri.length, 64)}${toHex(uri)}`;
-  transaction.gas = 600000;
-  return transaction;
-
-}
-
 export function deleteSubjectCredential(subjectCredentialHash) {
   let callSignature = "";
   let transaction = basicTransaction;

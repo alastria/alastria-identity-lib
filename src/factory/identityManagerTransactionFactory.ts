@@ -13,10 +13,10 @@ const addSubjectCredentialFunctionHash = 'e04ce02c';
 const addSubjectPresentationFunctionHash = '4e3a5de5';
 const updateSubjectPresentationFunctionHash = 'e64af938';
 const updateReceiverPresentationFunctionHash = '3000dc39';
-const addIdentityIssuerFunctionHash = '';
-const updateIdentityIssuerEidasLevelFunctionHash = '';
-const deleteIdentityIssuerFunctionHash = '';
-const getEidasLevelFunctionHash = '';
+const addIdentityIssuerFunctionHash = '889776a8';
+const updateIdentityIssuerEidasLevelFunctionHash = '44963610';
+const deleteIdentityIssuerFunctionHash = 'cb691599';
+const getEidasLevelFunctionHash = '0e5a4fbb';
 
 
 const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';

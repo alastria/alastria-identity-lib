@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
+//TODO: change encoding when v1.0.0 releases stable version
 var ethereumjs_tx_1 = require("ethereumjs-tx");
+//TODO not hardcoded, import from config file
 var alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 var UserIdentity = /** @class */ (function () {
     /**
@@ -15,9 +18,9 @@ var UserIdentity = /** @class */ (function () {
         this.privateKey = _privateKey;
     }
     UserIdentity.prototype.addTransaction = function (transaction, target) {
-        this.transactions.push(customize(transaction, {}, this.endPoint, this.address, target));
+        this.transactions.push(this.customize(transaction, {}));
     };
-    UserIdentity.prototype.signTransactions = function () {
+    UserIdentity.prototype.getSignedTransactions = function () {
         var _this = this;
         var processedTransactions = [];
         this.transactions.forEach(function (transaction) {
@@ -26,25 +29,24 @@ var UserIdentity = /** @class */ (function () {
         this.transactions = [];
         return processedTransactions;
     };
+    /**
+    * Customize the transaction with the user data
+    * @param transaction
+    * @param user
+    */
+    UserIdentity.prototype.customize = function (transaction, user) {
+        try {
+            transaction.nonce = getUserNonce(this.endPoint, 'web3', this.address);
+            return transaction;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
     return UserIdentity;
 }());
 exports.UserIdentity = UserIdentity;
-/**
-* Customize the transaction with the user data
-* @param transaction
-* @param user
-*/
-function customize(transaction, user, endPoint, address, target) {
-    try {
-        transaction.nonce = getUserNonce(endPoint, 'web3', address);
-        transaction.to = target;
-        return transaction;
-    }
-    catch (err) {
-        console.log(err);
-        throw err;
-    }
-}
 /**
  * Sign the payload data
  * @param {object} transaction transaction to be signed

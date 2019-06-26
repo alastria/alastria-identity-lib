@@ -10,6 +10,8 @@ const basicTransaction = {
     nonce: ''
 }
 const zeroValue = '00000000000000000000000000000000000000000000000000000000000000000000';
+const delegateCallSignature = '597b2e9b';
+const delegateCallInvoke = (registryAddress) => { return `${delegateCallSignature}000000000000000000000000${registryAddress.slice(2, 40)}${zeroValue}` }
 
 const getSubjectCredentialListSignature = '52bdf827';
 export function getSubjectCredentialList() {
@@ -18,13 +20,16 @@ export function getSubjectCredentialList() {
     return transaction
 }
 
-export function deleteSubjectCredential() {
-    return {};
+export function deleteSubjectCredential(subjectCredentialHash) {
+  let callSignature = "";
+  let transaction = basicTransaction;
+  transaction.data = '';
+  return transaction;
 }
 
 /**
  * @param subject alastria Id
- * @param subjectCredentialHash should have 32 bytes 
+ * @param subjectCredentialHash should have 32 bytes
  */
 const getSubjectCredentialStatusSignature = '52bdf827'
 export function getSubjectCredentialStatus(subject,subjectCredentialHash) {

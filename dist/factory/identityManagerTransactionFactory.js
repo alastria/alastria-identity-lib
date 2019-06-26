@@ -13,10 +13,12 @@ var addSubjectCredentialFunctionHash = 'e04ce02c';
 var addSubjectPresentationFunctionHash = '4e3a5de5';
 var updateSubjectPresentationFunctionHash = 'e64af938';
 var updateReceiverPresentationFunctionHash = '3000dc39';
-var addIdentityIssuerFunctionHash = '';
-var updateIdentityIssuerEidasLevelFunctionHash = '';
-var deleteIdentityIssuerFunctionHash = '';
-var getEidasLevelFunctionHash = '';
+var addIdentityIssuerFunctionHash = '889776a8';
+var updateIdentityIssuerEidasLevelFunctionHash = '44963610';
+var deleteIdentityIssuerFunctionHash = 'cb691599';
+var getEidasLevelFunctionHash = '0e5a4fbb';
+var addIdentityServiceProviderFunctionHash = '0ebbbffc';
+var deleteServiceProviderFunctionHash = '3bf47215';
 var alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 var basicTransaction = {
     from: '',
@@ -151,3 +153,24 @@ function getEidasLevel(identityIssuer) {
     return transaction;
 }
 exports.getEidasLevel = getEidasLevel;
+// AlastriaIdentityServiceProvider.sol
+function addIdentityServiceProvider(identityServiceProvider) {
+    var transaction = basicTransaction;
+    transaction.data = "0x" + delegateCallInvoke(alastriaIdentityManager) + addIdentityServiceProviderFunctionHash + identityServiceProvider + "\n    0000000000000000000000000000000000000000000000000000000000000040";
+    transaction.gas = 600000;
+    return transaction;
+}
+exports.addIdentityServiceProvider = addIdentityServiceProvider;
+function deleteIdentityServiceProvider(identityServiceProvider) {
+    var callSignature = "1993b4f9";
+    var transaction = basicTransaction;
+    transaction.data = "0x" + delegateCallInvoke(alastriaIdentityManager) + deleteServiceProviderFunctionHash + "\n    " + callSignature + "\n    " + web3_utils_1.leftPad(identityServiceProvider.slice(2), 64);
+    transaction.gas = 600000;
+    return transaction;
+}
+exports.deleteIdentityServiceProvider = deleteIdentityServiceProvider;
+function isIdentityServiceProvider(identityServiceProvider) {
+    var transaction = basicTransaction;
+    return transaction;
+}
+exports.isIdentityServiceProvider = isIdentityServiceProvider;

@@ -20,7 +20,7 @@ import {getSubjectCredentialList,
  import {getSubjectPresentationStatus,
     getSubjectPresentationList,
     getReceiverPresentationStatus,
-    getPresentationStatus} from "./presenationRegistrytransactionFactory";
+    getPresentationStatus} from "./presentationRegistryTransactionFactory";
 
  import {getCurrentPublicKey, 
     getPublicKeyStatus} from "./publicKeyRegistryTransactionFactory";

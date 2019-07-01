@@ -73,9 +73,10 @@ function getUserNonce(endPoint, type, address) {
     switch (type) {
         case 'web3': {
             endPoint.eth.getTransactionCount(address);
+            break;
         }
         default: {
-            endPoint.getTransactionCount(address);
+            endPoint.eth.getTransactionCount(address);
         }
     }
 }

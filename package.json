@@ -4,11 +4,10 @@
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "src/index.ts",
   "bin": {
-    "alastria-identity-lib": "dist/index.js"
+    "alastria-identity-lib": "src/index.ts"
   },
   "types": "src/index.d.ts",
   "scripts": {
-    "test": "sayHello",
     "postinstall": "tsc",
     "build": "tsc"
   },

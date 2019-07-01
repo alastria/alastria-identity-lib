@@ -6,7 +6,7 @@
   "bin": {
     "alastria-identity-lib": "dist/index.js"
   },
-  "types": "dist/index.d.ts",
+  "types": "src/index.d.ts",
   "scripts": {
     "test": "sayHello",
     "postinstall": "tsc",

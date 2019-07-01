@@ -1,6 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-import { toHex, leftPad, rightPad } from "../../node_modules/web3-utils";
+import { toHex, leftPad, rightPad } from "web3-utils";
 
 // TODO: import contract address from configfile
 const publicKeyRegistry = '0x0b337E2aC98a9725615dE042E950dD8C8b66b0fA';

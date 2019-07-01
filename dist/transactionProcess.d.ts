@@ -17,5 +17,5 @@ export declare class UserIdentity {
     * @param transaction
     * @param user
     */
-    private customize(transaction, user);
+    private customize;
 }

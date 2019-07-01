@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-var web3_utils_1 = require("../../node_modules/web3-utils");
+var web3_utils_1 = require("web3-utils");
 // TODO: import contract address from configfile
 var publicKeyRegistry = '0x0b337E2aC98a9725615dE042E950dD8C8b66b0fA';
 var credentialRegistry = '0xE4f91b47399Dc2560025Aafb4fFA7Cd5C483330e';
@@ -19,6 +19,7 @@ var deleteIdentityIssuerFunctionHash = 'cb691599';
 var getEidasLevelFunctionHash = '0e5a4fbb';
 var addIdentityServiceProviderFunctionHash = '0ebbbffc';
 var deleteServiceProviderFunctionHash = '3bf47215';
+var isIdentityServiceProviderFunctionHash = 'd024d9a4';
 var alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 var basicTransaction = {
     from: '',
@@ -171,6 +172,7 @@ function deleteIdentityServiceProvider(identityServiceProvider) {
 exports.deleteIdentityServiceProvider = deleteIdentityServiceProvider;
 function isIdentityServiceProvider(identityServiceProvider) {
     var transaction = basicTransaction;
+    transaction.data = "0x" + delegateCallInvoke(alastriaIdentityManager) + isIdentityServiceProviderFunctionHash + "\n      " + web3_utils_1.leftPad(identityServiceProvider.slice(2), 64);
     return transaction;
 }
 exports.isIdentityServiceProvider = isIdentityServiceProvider;

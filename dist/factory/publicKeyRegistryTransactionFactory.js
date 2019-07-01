@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var web3_utils_1 = require("../../node_modules/web3-utils");
+var web3_utils_1 = require("web3-utils");
 var basicTransaction = {
     from: '',
     to: '',

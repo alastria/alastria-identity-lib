@@ -19,6 +19,7 @@ const deleteIdentityIssuerFunctionHash = 'cb691599';
 const getEidasLevelFunctionHash = '0e5a4fbb';
 const addIdentityServiceProviderFunctionHash = '0ebbbffc';
 const deleteServiceProviderFunctionHash = '3bf47215';
+const isIdentityServiceProviderFunctionHash = 'd024d9a4';
 
 const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 const basicTransaction = {
@@ -222,6 +223,8 @@ export function updateCredentialStatus(issuerCredHash, status) {
   }
 
   export function isIdentityServiceProvider(identityServiceProvider) {
-    let transaction = basicTransaction;
-    return transaction;
+      let transaction = basicTransaction;
+      transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${isIdentityServiceProviderFunctionHash}
+      ${leftPad(identityServiceProvider.slice(2), 64)}`;
+      return transaction;
   }

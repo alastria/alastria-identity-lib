@@ -1,4 +1,4 @@
-import { toHex, leftPad, rightPad } from "../../node_modules/web3-utils";
+import { toHex, leftPad, rightPad } from 'web3-utils';
 
 const basicTransaction = {
     from: '',

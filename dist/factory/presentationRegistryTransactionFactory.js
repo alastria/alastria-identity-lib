@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-var web3_utils_1 = require("../../node_modules/web3-utils");
+var web3_utils_1 = require("web3-utils");
 var basicTransaction = {
     from: '',
     to: '',

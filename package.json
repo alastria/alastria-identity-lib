@@ -8,7 +8,9 @@
   },
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "sayHello"
+    "test": "sayHello",
+    "postinstall": "tsc",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -33,5 +35,8 @@
     "jsontokens": "^2.0.2",
     "web3": "^0.20.2",
     "web3-utils": "^1.0.0-beta.55"
+  },
+  "devDependencies": {
+    "typescript": "^3.5.2"
   }
 }

@@ -1,6 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-import { toHex, leftPad, rightPad } from 'web3-utils';
+import { toHex, padLeft, padRight } from 'web3-utils';
 
 // TODO: import contract address from configfile
 const publicKeyRegistry = '0x0b337E2aC98a9725615dE042E950dD8C8b66b0fA';
@@ -39,7 +39,7 @@ export function generateAccessToken(signAddress) {
   let transaction = basicTransaction;
   transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}
   ${generateAccessTokenFunctionHash}
-  ${leftPad(signAddress.slice(2), 64)}`;
+  ${padLeft(signAddress.slice(2), 64)}`;
   transaction.gas = 600000;
   return transaction;
 }
@@ -49,8 +49,8 @@ export function createAlastriaIdentity(publicKeyData) {
   transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}
   ${createAlastriaIdentityFunctionHash}
   0000000000000000000000000000000000000000000000000000000000000020
-  ${leftPad(toHex(publicKeyData.length).slice(2), 64)}
-  ${rightPad(toHex(publicKeyData).slice(2), 64)}`;
+  ${padLeft(toHex(publicKeyData.length).slice(2), 64)}
+  ${padRight(toHex(publicKeyData).slice(2), 64)}`;
   transaction.gas = 600000;
   return transaction;
 }
@@ -59,7 +59,7 @@ export function createIdentity(publicKey) {
   let transaction = basicTransaction;
   transaction.data = `0x6d69d99a
     0000000000000000000000000000000000000000000000000000000000000020
-    ${leftPad(publicKey.length, 64)}
+    ${padLeft(publicKey.length, 64)}
     60e6cfd87fdf96e9f8749d267319088775ad1cc245e5cd9fa0d6567426788a3e
     a10e675e00000000000000000000000000000000000000000000000000000000`;
   transaction.gas = 200000;
@@ -75,7 +75,7 @@ export function addSubjectCredential(presentationHash, uri) {
   transaction.data =
     `0x${delegateCallInvoke(credentialRegistry)}${addSubjectCredentialFunctionHash}${presentationHash}
     0000000000000000000000000000000000000000000000000000000000000040
-    ${leftPad(uri.length, 64)}${toHex(uri)}`;
+    ${padLeft(uri.length, 64)}${toHex(uri)}`;
   transaction.gas = addSubjectPresentationCost;
   return transaction;
 }
@@ -86,10 +86,10 @@ export function addSubjectPresentation(subjectPresentationHash, uri) {
   let transaction = basicTransaction;
   transaction.data = `0x${delegateCallInvoke(presentationRegistry)}
   ${addSubjectPresentationFunctionHash}
-  ${rightPad(subjectPresentationHash.slice(2), 64)}
+  ${padRight(subjectPresentationHash.slice(2), 64)}
   0000000000000000000000000000000000000000000000000000000000000040
-  ${leftPad(toHex(uri.length).slice(2), 64)}
-  ${rightPad(toHex(uri).slice(2), 64)}`;
+  ${padLeft(toHex(uri.length).slice(2), 64)}
+  ${padRight(toHex(uri).slice(2), 64)}`;
   transaction.gas = 600000;
   return transaction;
 }
@@ -98,8 +98,8 @@ export function updateSubjectPresentation(subjectPresentationHash, status) {
   let transaction = basicTransaction;
   transaction.data = `${delegateCallInvoke(presentationRegistry)}
   ${updateSubjectPresentationFunctionHash}
-  ${rightPad(subjectPresentationHash.slice(2), 64)}
-  ${leftPad(toHex(status).slice(2), 64)}`;
+  ${padRight(subjectPresentationHash.slice(2), 64)}
+  ${padLeft(toHex(status).slice(2), 64)}`;
   transaction.gas = 600000;
   return transaction;
 }
@@ -108,8 +108,8 @@ export function updateReceiverPresentation(receiverPresentationHash, status) {
   let transaction = basicTransaction;
   transaction.data = `${delegateCallInvoke(presentationRegistry)}
   ${updateReceiverPresentationFunctionHash}
-  ${rightPad(receiverPresentationHash.slice(2), 64)}
-  ${leftPad(toHex(status).slice(2), 64)}`;
+  ${padRight(receiverPresentationHash.slice(2), 64)}
+  ${padLeft(toHex(status).slice(2), 64)}`;
   transaction.gas = 600000;
   return transaction;
 }
@@ -122,7 +122,7 @@ export function addKey(publicKey) {
   tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
       ${callSignature}
-      ${leftPad(publicKey.slice(2), 64)}`;
+      ${padLeft(publicKey.slice(2), 64)}`;
   tx.gas = 600000;
   return tx;
 }
@@ -133,7 +133,7 @@ export function revokePublicKey(publicKey) {
   tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
     ${callSignature}
-    ${leftPad(publicKey.slice(2), 64)}`;
+    ${padLeft(publicKey.slice(2), 64)}`;
   tx.gas = 600000;
   return tx;
 }
@@ -144,7 +144,7 @@ export function deletePublicKey(publicKey) {
   tx.data =
     `0x${delegateCallInvoke(publicKeyRegistry)}
     ${callSignature}
-    ${leftPad(publicKey.slice(2), 64)}`;
+    ${padLeft(publicKey.slice(2), 64)}`;
   tx.gas = 600000;
   return tx;
 }
@@ -157,8 +157,8 @@ export function updateCredentialStatus(issuerCredHash, status) {
   tx.data =
     `0x${delegateCallInvoke(credentialRegistry)}
     ${callSignature}
-    ${leftPad(issuerCredHash.slice(2), 64)}
-    ${toHex(leftPad(status, 64)).slice(2)}`;
+    ${padLeft(issuerCredHash.slice(2), 64)}
+    ${toHex(padLeft(status, 64)).slice(2)}`;
   tx.gas = 600000;
   return tx;
 }
@@ -169,7 +169,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
    let transaction = basicTransaction;
    transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${addIdentityIssuerFunctionHash}${identityIssuer}
    0000000000000000000000000000000000000000000000000000000000000040
-   ${leftPad(level.length, 64)}${toHex(level)}`;
+   ${padLeft(level.length, 64)}${toHex(level)}`;
    transaction.gas = 600000;
    return transaction;
  }
@@ -178,8 +178,8 @@ export function updateCredentialStatus(issuerCredHash, status) {
    let transaction = basicTransaction;
    transaction.data = `${delegateCallInvoke(alastriaIdentityManager)}
    ${updateIdentityIssuerEidasLevelFunctionHash}
-   ${rightPad(identityIssuer.slice(2), 64)}
-   ${leftPad(toHex(level).slice(2), 64)}`;
+   ${padRight(identityIssuer.slice(2), 64)}
+   ${padLeft(toHex(level).slice(2), 64)}`;
    transaction.gas = 600000;
    return transaction;
  }
@@ -190,7 +190,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
    transaction.data =
    `0x${delegateCallInvoke(alastriaIdentityManager)}${deleteIdentityIssuerFunctionHash}
    ${callSignature}
-   ${leftPad(identityIssuer.slice(2), 64)}`;
+   ${padLeft(identityIssuer.slice(2), 64)}`;
    transaction.gas = 600000;
    return transaction;
  }
@@ -198,7 +198,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
  export function getEidasLevel(identityIssuer) {
    let transaction = basicTransaction;
    transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${getEidasLevelFunctionHash}
-   ${leftPad(identityIssuer.slice(2), 64)}`;
+   ${padLeft(identityIssuer.slice(2), 64)}`;
    return transaction;
  }
 
@@ -217,7 +217,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
     let transaction = basicTransaction;
     transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${deleteServiceProviderFunctionHash}
     ${callSignature}
-    ${leftPad(identityServiceProvider.slice(2), 64)}`;
+    ${padLeft(identityServiceProvider.slice(2), 64)}`;
     transaction.gas = 600000;
     return transaction;
   }
@@ -225,6 +225,6 @@ export function updateCredentialStatus(issuerCredHash, status) {
   export function isIdentityServiceProvider(identityServiceProvider) {
       let transaction = basicTransaction;
       transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${isIdentityServiceProviderFunctionHash}
-      ${leftPad(identityServiceProvider.slice(2), 64)}`;
+      ${padLeft(identityServiceProvider.slice(2), 64)}`;
       return transaction;
   }

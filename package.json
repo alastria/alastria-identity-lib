@@ -2,11 +2,11 @@
   "name": "alastria-id-lib",
   "version": "1.0.0",
   "description": "A library to interact with alastria-identity smart contracts",
-  "main": "src/index.ts",
+  "main": "src/index.js",
   "bin": {
-    "alastria-identity-lib": "src/index.ts"
+    "alastria-identity-lib": "src/index.js"
   },
-  "types": "src/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "tsc",
     "build": "tsc"

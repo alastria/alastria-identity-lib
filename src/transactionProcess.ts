@@ -1,6 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
-import EthereumTx from 'ethereumjs-tx';
+import * as EthereumTxAll from 'ethereumjs-tx';
 // import Web3 from 'web3';
 
 //TODO not hardcoded, import from config file
@@ -59,7 +59,7 @@ export class UserIdentity {
  */
 function signTransaction(transaction, privateKey) {
     try {
-        const tx = new EthereumTx(transaction);
+        const tx = new EthereumTxAll(transaction);
         tx.sign(privateKey);
         const signedTx = `0x${tx.serialize().toString('hex')}`;
         return signedTx;

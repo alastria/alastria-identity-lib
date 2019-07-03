@@ -1,4 +1,4 @@
-const {transactionFactory, UserIdentity} = require('alastria-id-lib');
+const {transactionFactory, UserIdentity} = require('alastria-identity-lib');
 let Web3 = require('web3');
 
 let myBlockchainServiceIp = 'http://localhost:8545';

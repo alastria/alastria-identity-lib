@@ -9,7 +9,7 @@ export const tokensFactory = {
 
 // Used by Service Provider
 export function signPresentationRequest(presentationRequest) {
-  return presentationRequestJWT;
+  //return presentationRequestJWT;
 }
 
 // Used by Subject Wallet
@@ -19,7 +19,7 @@ export function verifyPresentationRequest(presentationRequestJWT) {
 
 // Used by Subject Wallet
 export function signPresentation(presentation) {
-  return presentationJWT;
+  //return presentationJWT;
 }
 
 // Used by Service Provider

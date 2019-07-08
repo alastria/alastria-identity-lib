@@ -11,3 +11,15 @@ let uri = 'www.google.es'
 identityForUse.addTransaction(transactionFactory.identityManager.addSubjectPresentation(subjectPresentationHash,uri));
 let transactionStack = identityForUse.getSignedTransactions();
 doStuffWith(transactionStack);
+
+
+// To test tokensFactory:
+/*
+const {tokensFactory} = require('alastria-identity-lib')
+console.log("Ejecutando prueba")
+tokensFactory.presentation.signPresentationRequest()
+tokensFactory.presentation.verifyPresentationRequest()
+tokensFactory.presentation.signPresentation()
+tokensFactory.presentation.verifyPresentation()
+console.log("Finaliza prueba")
+*/

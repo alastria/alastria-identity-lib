@@ -1,5 +1,3 @@
-import {TokenVerifier, TokenSigner} from 'jsontokens'
-
 export const tokensFactory = {
   presentation: {
     'signPresentationRequest': signPresentationRequest,
@@ -10,32 +8,23 @@ export const tokensFactory = {
 }
 
 // Used by Service Provider
-export function signPresentationRequest(presentationRequest, rawPrivateKey) {
+export function signPresentationRequest(presentationRequest) {
   //return presentationRequestJWT;
   console.log('hi signPresentationRequest')
-  jsonObject = new TokenSigner('ES256K', rawPrivateKey).sign(presentationRequest)
-  return jsonObject
 }
 
 // Used by Subject Wallet
-export function verifyPresentationRequest(presentationRequestJWT, rawPublicKey) {
+export function verifyPresentationRequest(presentationRequestJWT) {
   console.log('hi verifyPresentationRequest')
-  console.log('hi')
-  jsonObject = new TokenVerifier('ES256K', rawPublicKey).verify(presentationRequestJWT)
-  return jsonObject
 }
 
 // Used by Subject Wallet
-export function signPresentation(tokenPresentation, rawPrivateKey) {
+export function signPresentation(presentation) {
   //return presentationJWT;
   console.log('hi signPresentation')
-  jsonObject = new TokenSigner('ES256K', rawPrivateKey).sign(tokenPresentation)
-  return jsonObject
 }
 
 // Used by Service Provider
-export function verifyPresentation(presentationJWT, rawPublicKey) {
+export function verifyPresentation(presentationJWT) {
   console.log('hi verifyPresentation')
-  jsonObject = new TokenVerifier('ES256K', rawPublicKey).verify(presentationJWT)
-  return jsonObject
 }

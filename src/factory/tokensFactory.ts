@@ -1,4 +1,5 @@
-import {TokenVerifier} from 'jsontokens'
+//import { TokenVerifier } from 'jsontokens'
+ const _: any = require('jsontokens');
 export const tokensFactory = {
   presentation: {
     'signPresentationRequest': signPresentationRequest,
@@ -18,7 +19,7 @@ export function signPresentationRequest(presentationRequest) {
 export function verifyPresentationRequest(presentationRequestJWT, rawPublicKey) {
   console.log('hi verifyPresentationRequest')
   console.log('hi')
-  const jsonObject = new TokenVerifier('ES256K', rawPublicKey).verify(presentationRequestJWT)
+  const jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(presentationRequestJWT)
   return jsonObject
 }
 

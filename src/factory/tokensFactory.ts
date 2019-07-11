@@ -1,4 +1,4 @@
-//import { TokenVerifier } from 'jsontokens'
+//import * as _ from 'jsontokens'
 const _: any = require('jsontokens');
 export const tokensFactory = {
   presentation: {
@@ -11,7 +11,7 @@ export const tokensFactory = {
 
 // Used by Service Provider
 export function signPresentationRequest(presentationRequest, rawPrivateKey) {
-  //return presentationRequestJWT;
+  // TODO recibimos un array de strings con las credenciales y lo transformamos a presentationRequest
   console.log('hi signPresentationRequest')
   var jsonObject = new _.TokenSigner('ES256K', rawPrivateKey).sign(presentationRequest);
   console.log('The token is: ' + jsonObject)

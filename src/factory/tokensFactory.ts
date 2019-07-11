@@ -1,4 +1,4 @@
-//import * as _ from 'jsontokens'
+//import { default as _ } from 'jsontokens'
 const _: any = require('jsontokens');
 export const tokensFactory = {
   presentation: {
@@ -22,8 +22,11 @@ export function signPresentationRequest(presentationRequest, rawPrivateKey) {
 export function verifyPresentationRequest(presentationRequestJWT, rawPublicKey) {
   console.log('hi verifyPresentationRequest')
   var jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(presentationRequestJWT);
-  console.log(jsonObject)
-  return jsonObject
+  var tokenData = null
+  if(jsonObject){
+    tokenData = _.decodeToken(presentationRequestJWT)
+  }
+  return tokenData
 }
 
 // Used by Subject Wallet

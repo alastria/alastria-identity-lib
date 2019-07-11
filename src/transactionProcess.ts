@@ -9,12 +9,12 @@ const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 export class UserIdentity {
     public endPoint: any;
     public address: string;
-    private privateKey: string;
+    private privateKey: any;
     public transactions = new Array<any>();
     /**
-     * 
-     * @param _endPoint 
-     * @param _address 
+     *
+     * @param _endPoint
+     * @param _address
      * @param _privateKey get from keythereum.recover(password, JSON.parse(fs.readFileSync(keyStorePath, 'utf8'))),
      */
     public constructor(_endPoint, _address, _privateKey) {
@@ -29,7 +29,7 @@ export class UserIdentity {
 
     public getSignedTransactions() {
         let processedTransactions = [];
-        this.transactions.forEach(transaction => {
+        this.transactions.map(transaction => {
             processedTransactions.push(signTransaction(transaction, this.privateKey));
         });
         this.transactions = []
@@ -38,13 +38,16 @@ export class UserIdentity {
 
     /**
     * Customize the transaction with the user data
-    * @param transaction 
-    * @param user 
+    * @param transaction
+    * @param user
     */
     private customize(transaction, user) {
         try {
-            transaction.nonce = getUserNonce(this.endPoint, 'web3', this.address);
-            return transaction;
+            return getUserNonce(this.endPoint, 'web3', this.address)
+            .then((result) => {
+              transaction.nonce = result;
+              return transaction.nonce;
+            });
         } catch (err) {
             console.log(err);
             throw err;
@@ -70,13 +73,15 @@ function signTransaction(transaction, privateKey) {
 }
 
 function getUserNonce(endPoint, type, address) {
+    let nonce;
     switch (type) {
         case 'web3': {
-            endPoint.eth.getTransactionCount(address);
+            nonce = endPoint.eth.getTransactionCount(address);
             break;
         }
         default: {
-            endPoint.eth.getTransactionCount(address);
+            nonce = endPoint.getTransactionCount(address);
         }
     }
+    return nonce;
 }

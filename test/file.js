@@ -2,7 +2,7 @@ const {transactionFactory, UserIdentity} = require('alastria-identity-lib')
 let Web3 = require('web3')
 let keythereum = require('keythereum')
 
-let myBlockchainServiceIp = 'http://yourIP:RPCPort'
+let myBlockchainServiceIp = 'http://youIP:yourPort'
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 
 let userWallet = '6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11'
@@ -17,7 +17,9 @@ try{
 let identityForUse = new UserIdentity(web3, userWallet, userPrivateKey)
 
 // Example of creating, signing and sending a tx
-let subjectPresentationHash = 'subject-presentation-hash'
+let subjectPresentation = 'subject-presentation'
+let subjectPresentationHash = web3.utils.keccak256(subjectPresentation)
+console.log("HASH", subjectPresentationHash)
 let uri = 'presentation-identifier-in-repository'
 let tx = transactionFactory.identityManager.addSubjectPresentation(subjectPresentationHash,uri)
 console.log(tx);
@@ -32,7 +34,7 @@ web3.eth.sendSignedTransaction(signedTx, (result, error) => {
 })*/
 
 // To test tokensFactory:
-
+/*
 const {tokensFactory} = require('alastria-identity-lib')
 console.log("Ejecutando prueba")
 var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJpYXQiOjE0NDA3MTM0MTQuODV9.cnCOBNFSfzpn35pwo2aT74xoH7JzCwmCEAWvKRxwqGV4lUiKLmWeA6V4fnU9-NX8sYNrsrUzY-5g5oEhzQ3mqQ'
@@ -45,3 +47,4 @@ console.log(jsonvpr)
 //jwt = tokensFactory.presentation.signPresentation(tokenPayload, rawPrivateKey)
 //const jsonvp = tokensFactory.presentation.verifyPresentation(jwt, rawPublicKey)
 console.log("Finaliza prueba")
+*/

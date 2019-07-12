@@ -26,6 +26,29 @@ Run it to check it works:
 ```
 node file.js
 ```
+
+### How to use functions that do not change the blockchain state
+```javascript
+// Import tokensFactory to sign and verify
+const {tokensFactory} = require('alastria-identity-lib')
+
+//Sign a presentation request
+let signedjwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
+console.log('The signed jwt is: ', signedjwt)
+
+//Verify the signed presentation request and get the decoded token
+let jwt = tokensFactory.presentation.verifyPresentationRequest(signedjwt, rawPublicKey)
+console.log('The verified token is:', jwt)
+
+//Sign a presentation
+signedjwt = tokensFactory.presentation.signPresentation(tokenPayload, rawPrivateKey)
+console.log('The signed jwt is: ', signedjwt)
+
+//Verify the signed presentation and get the decoded token
+jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
+console.log('The verified token is:', jwt)
+```
+
 ## Dependencies
 This library is using functionality from others.
 

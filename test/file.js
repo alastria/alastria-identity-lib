@@ -1,8 +1,9 @@
-const {transactionFactory, UserIdentity} = require('alastria-identity-lib')
+const {transactionFactory, UserIdentity, tokensFactory} = require('alastria-identity-lib')
 let Web3 = require('web3')
 let keythereum = require('keythereum')
 
-let myBlockchainServiceIp = 'http://yourIP:RPCPort'
+//let myBlockchainServiceIp = 'http://yourIP:RPCPort'
+let myBlockchainServiceIp = 'http://127.0.0.1:8545'
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 
 let userWallet = '6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11'
@@ -31,17 +32,28 @@ web3.eth.sendSignedTransaction(signedTx, (result, error) => {
 	console.log("SEND", result, error)
 })*/
 
-// To test tokensFactory:
+// Using sign and verify functions which not directly interact with the blockchain
 
-const {tokensFactory} = require('alastria-identity-lib')
-console.log("Ejecutando prueba")
-var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NksifQ.eyJpYXQiOjE0NDA3MTM0MTQuODV9.cnCOBNFSfzpn35pwo2aT74xoH7JzCwmCEAWvKRxwqGV4lUiKLmWeA6V4fnU9-NX8sYNrsrUzY-5g5oEhzQ3mqQ'
+// Some fake data to test
 const rawPublicKey = '03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479'
+
 const rawPrivateKey = '278a5de700e29faae8e40e366ec5012b5ec63d36ec77e8a2417154cc1d25383f'
-const tokenPayload = {"iat": 1440713414.85}
-jwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
-const jsonvpr = tokensFactory.presentation.verifyPresentationRequest(jwt, rawPublicKey)
-console.log(jsonvpr)
-//jwt = tokensFactory.presentation.signPresentation(tokenPayload, rawPrivateKey)
-//const jsonvp = tokensFactory.presentation.verifyPresentation(jwt, rawPublicKey)
-console.log("Finaliza prueba")
+
+let tokenPayload = {"iat": 1440713414.85}
+
+//Sign a presentation request
+let signedjwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
+console.log('The signed jwt is: ', signedjwt)
+
+//Verify the signed presentation request and get the decoded token
+let jwt = tokensFactory.presentation.verifyPresentationRequest(signedjwt, rawPublicKey)
+console.log('The verified token is:', jwt)
+
+//Sign a presentation
+signedjwt = tokensFactory.presentation.signPresentation(tokenPayload, rawPrivateKey)
+console.log('The signed jwt is: ', signedjwt)
+
+//Verify the signed presentation and get the decoded token
+jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
+console.log('The verified token is:', jwt)
+

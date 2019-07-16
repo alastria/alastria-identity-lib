@@ -1,45 +1,54 @@
-//import { default as _ } from 'jsontokens'
+/**
+*   This file contains function which are used by Service Providers, Issuers
+*   and Subjects which do not interact with the blockchain. Just make eassier
+*   using JWT (sign, verify and deconde) and access tokens
+*/
 const _: any = require('jsontokens');
+
 export const tokensFactory = {
   presentation: {
-    'signPresentationRequest': signPresentationRequest,
-    'verifyPresentationRequest': verifyPresentationRequest,
-    'signPresentation': signPresentation,
-    'verifyPresentation': verifyPresentation
+    'signJWT': signJWT,
+    'verifyJWT': verifyJWT,
+    'decodeJWT': decodeJWT,
+    'createAlastriaSession': createAlastriaSession,
+    'createAlastriaToken' : createAlastriaToken,
+    'createCredential' : createCredential,
+    'createPresentation' : createPresentation,
+    'createPresentationRequest' : createPresentationRequest
   }
 }
 
-// Used by Service Provider
-export function signPresentationRequest(presentationRequest, rawPrivateKey) {
-  // TODO recibimos un array de strings con las credentials y transformarlo a presentationRequest
-  var jsonObject = new _.TokenSigner('ES256K', rawPrivateKey).sign(presentationRequest);
-  return jsonObject
-
-};
-
-// Used by Subject Wallet
-export function verifyPresentationRequest(presentationRequestJWT, rawPublicKey) {
-  var jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(presentationRequestJWT);
-  var tokenData = null
-  if(jsonObject){
-    tokenData = _.decodeToken(presentationRequestJWT)
-  }
-  return tokenData
+export function signJWT(jwt, rawPrivateKey) {
+  var jsonObject = new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
+  return jsonObject;
 }
 
-// Used by Subject Wallet
-export function signPresentation(presentation, rawPrivateKey) {
-// TODO recibimos un array de strings con las credentials y transformarlo a presentation
-  var jsonObject = new _.TokenSigner('ES256K', rawPrivateKey).sign(presentation);
-  return jsonObject
+export function verifyJWT(jwt, rawPublicKey) {
+  var jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
+  return jsonObject;
 }
 
-// Used by Service Provider
-export function verifyPresentation(presentationJWT, rawPublicKey) {
-  var jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(presentationJWT);
-  var tokenData = null
-  if(jsonObject){
-    tokenData = _.decodeToken(presentationJWT)
-  }
-  return tokenData
+export function decodeJWT(jwt, rawPublicKey) {
+  var tokenData = _.decodeToken(jwt);
+  return tokenData;
+}
+
+export function createAlastriaSession(address) {
+
+}
+
+export function createAlastriaToken(address){
+
+}
+
+export function createCredential(object){
+
+}
+
+export function createPresentation(object){
+
+}
+
+export function createPresentationRequest(object){
+
 }

@@ -206,8 +206,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
 
   export function addIdentityServiceProvider(identityServiceProvider) {
     let transaction = basicTransaction;
-    transaction.data = `0x${delegateCallInvoke(alastriaIdentityManager)}${addIdentityServiceProviderFunctionHash}${identityServiceProvider}
-    0000000000000000000000000000000000000000000000000000000000000040` ;
+    transaction.data = `0x${addIdentityServiceProviderFunctionHash}000000000000000000000000${identityServiceProvider}`;
     transaction.gas = 600000;
     return transaction;
   }

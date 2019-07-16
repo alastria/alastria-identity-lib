@@ -206,7 +206,7 @@ export function updateCredentialStatus(issuerCredHash, status) {
 
   export function addIdentityServiceProvider(identityServiceProvider) {
     let transaction = basicTransaction;
-    transaction.data = `0x${addIdentityServiceProviderFunctionHash}000000000000000000000000${identityServiceProvider}`;
+    transaction.data = `0x${addIdentityServiceProviderFunctionHash}${padLeft(identityServiceProvider.slice(2), 64)}`;
     transaction.gas = 600000;
     return transaction;
   }

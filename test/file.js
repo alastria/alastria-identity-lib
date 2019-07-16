@@ -3,36 +3,59 @@ let Web3 = require('web3')
 let keythereum = require('keythereum')
 
 //let myBlockchainServiceIp = 'http://yourIP:RPCPort'
-let myBlockchainServiceIp = 'http://127.0.0.1:8545'
+let myBlockchainServiceIp = 'http://63.33.206.111/rpc'
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 
-let userWallet = '6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11'
-let keyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
-let userPrivateKey
+// Instantiate a UserIdentity for an existing Service Provider
+let existingSPAddress = '0xda80820ade1f39fea17acdb0531e2bb3bd29bf72'
+let existingSPkeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
+let existingSPPrivateKey
 try{
-	userPrivateKey = keythereum.recover('Passw0rd', keyStore)
+	existingSPPrivateKey = keythereum.recover('Passw0rd', existingSPkeyStore)
 }catch(error){
 	console.log("ERROR: ", error)
 }
+// TODO find a better name to avoid "new", such as, UserIdentity.get_X_FromExistingIdentity
+let existingSPIdentity = new UserIdentity(web3, existingSPAddress, existingSPPrivateKey, 1)
+console.log(existingSPPrivateKey)
+// Add a new Service Provider in Alastria, just its address
+let newSPAddress = '0xda80820ade1f39fea17acdb0531e2bb3bd29bf74'
 
-let identityForUse = new UserIdentity(web3, userWallet, userPrivateKey)
+/*let anonimousTxAddIdentitySP = transactionFactory.identityManager.addIdentityServiceProvider(newSPAddress)
+console.log("anonimousTxAddIdentitySP ", anonimousTxAddIdentitySP)
+existingSPIdentity.addTransaction(anonimousTxAddIdentitySP, 'selfManaged')
+console.log("TRANSACTIONS", existingSPIdentity.transactions)
+let signedTransactionStack = existingSPIdentity.getSignedTransactions()
+let signedTxAddIdentitySP = signedTransactionStack[0] // to get the one that we just added -> TODO make in batch
+console.log("signedTxAddIdentitySP ", signedTxAddIdentitySP)
+web3.eth.sendSignedTransaction(signedTxAddIdentitySP, (result, error) => {
+	console.log("SEND", result, error)
+})*/
 
-// Example of creating an identity
-// A Service Provider generates access tokens to the new address
-let keyStoreSP = {"address":"643266eb3105f4bf8b4f4fec50886e453f0da9ad","crypto":{"cipher":"aes-128-ctr","ciphertext":"019b915ddee1172f8475fb201bf9995cf3aac1b9fe22b438667def44a5537152","cipherparams":{"iv":"f8dd7c0eaa7a2b7c87991fe30dc9d632"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"966a16bff9a4b14df58a462ba3c49364d42f2804b9eb47daf241f08950af8bdb"},"mac":"924356fbaa036d416fd9ab8c48dec451634f47dd093af4ce1fa682e8bf6753b3"},"id":"3073c62d-2dc1-4c1e-aa1c-ca089b69de16","version":3}
-let SPPrivateKey;
-try{
-	SPPrivateKey = keythereum.recover('Passw0rd', keyStoreSP)
-}catch(error){
-	console.log("ERROR: ", error)
-}
-// Create a new Service Provider
+let ret = existingSPIdentity.signTransaction(
+	{ to: "0xf18bd0f5a4f3944f3074453ce2015e8af12ed196",
+	  data: "0x0ebbbffc000000000000000000000000da80820ade1f39fea17acdb0531e2bb3bd29bf74",
+	  gas: 600000,
+	  gasPrice: 0,
+	  nonce: 1 },
+	existingSPPrivateKey)
+
+console.log("RET", ret)
+
+/*
+Create a UserIdentity for the new Service Provider, we just created
+
 let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
+let newSPPrivateKey;
+try{
+	newSPPrivateKey = keythereum.recover('Passw0rd', newSPKeyStore)
+}catch(error){
+	console.log("ERROR: ", error)
+}
+let newSPIdentity = new UserIdentity(web3, existingSPAddress, existingSPPrivateKey)
+*/
 
-let txGenerateAccessToken = transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address)
-console.log(txGenerateAccessToken)
-
-
+/*
 // Example of creating, signing and sending a tx
 let subjectPresentationHash = 'subject-presentation-hash'
 let uri = 'presentation-identifier-in-repository'
@@ -42,11 +65,11 @@ identityForUse.addTransaction(tx)
 let signedTransactionStack = identityForUse.getSignedTransactions()
 console.log(signedTransactionStack)
 
-/*let signedTx = signedTransactionStack[0]
+let signedTx = signedTransactionStack[0]
 console.log("SIGNED TX ", signedTx)
 web3.eth.sendSignedTransaction(signedTx, (result, error) => {
 	console.log("SEND", result, error)
-})*/
+})
 
 // Using sign and verify functions which not directly interact with the blockchain
 
@@ -72,3 +95,4 @@ console.log('The signed jwt is: ', signedjwt)
 //Verify the signed presentation and get the decoded token
 jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
 console.log('The verified token is:', jwt)
+*/

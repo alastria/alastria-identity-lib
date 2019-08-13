@@ -7,9 +7,9 @@ export const tokensFactory = {
     'signPresentation': signPresentation,
     'verifyPresentation': verifyPresentation,
     //'createCredential': createCredential,
-    'decodeJWT': decodeJWT
-    //'signJWT': signJWT,
-    //'verifyJWT': verifyJWT,
+    'decodeJWT': decodeJWT,
+    'signJWT': signJWT,
+    'verifyJWT': verifyJWT
     //'createAlastriaSession': createAlastriaSession,
     //'createAlastriaToken': createAlastriaToken,
     //'createPresentation': createPresentation,
@@ -69,21 +69,15 @@ export function decodeJWT(jwt) {
   }
   return tokenData
 }
-/*
+
 function signJWT(jwt, rawPrivateKey) {
-  var jsonObject = new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
-  return jsonObject
+  return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
 }
 
 function verifyJWT(jwt, rawPublicKey) {
-  var jsonObject = new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
-  var tokenData = null
-  if(jsonObject){
-    tokenData = _.decodeToken(jwt)
-  }
-  return tokenData
+  return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
 }
-
+/*
 function createAlastriaSession(issuerDID, publicKeyUserWallet, verifiedJwt, tokenValidTime, setUpTokenTime) {
 
   return jsonObject
@@ -93,7 +87,7 @@ function createAlastriaToken(issuerDID, gwu, cbu, tokenValidTime, setUpTokenTime
   return jsonObject
 }*/
 
-function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
+/*function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject
 }
 

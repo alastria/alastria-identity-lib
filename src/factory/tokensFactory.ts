@@ -9,9 +9,9 @@ export const tokensFactory = {
     //'createCredential': createCredential,
     'decodeJWT': decodeJWT,
     'signJWT': signJWT,
-    'verifyJWT': verifyJWT
-    //'createAlastriaSession': createAlastriaSession,
-    //'createAlastriaToken': createAlastriaToken,
+    'verifyJWT': verifyJWT,
+    'createAlastriaSession': createAlastriaSession,
+    'createAlastriaToken': createAlastriaToken,
     //'createPresentation': createPresentation,
     //'createPresentationRequest': createPresentationRequest
   }
@@ -77,15 +77,34 @@ function signJWT(jwt, rawPrivateKey) {
 function verifyJWT(jwt, rawPublicKey) {
   return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
 }
-/*
-function createAlastriaSession(issuerDID, publicKeyUserWallet, verifiedJwt, tokenValidTime, setUpTokenTime) {
 
-  return jsonObject
+function createAlastriaSession(context, iss, pku, verifiedAT, iat, exp?: string, nbf?: string, jti?: string) {
+  const jwt = {
+    "@context": context,
+    "iss": iss,
+    "pku": pku,
+    "iat": iat,
+    "exp": exp,
+    "nbf": nbf,
+    "data": verifiedAT,
+    "jti": jti
+  }
+  return jwt
 }
 
-function createAlastriaToken(issuerDID, gwu, cbu, tokenValidTime, setUpTokenTime) {
-  return jsonObject
-}*/
+function createAlastriaToken(issuerDID, gwu, cbu, iat, exp, ani, nbf?: string, jti?: string) {
+  const jwt = {
+    "iss": issuerDID,
+    "gwu": gwu,
+    "cbu": cbu,
+    "iat": iat,
+    "ani": ani,
+    "nbf": nbf,
+    "exp": exp,
+    "jti": jti
+  }
+  return jwt
+}
 
 /*function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject

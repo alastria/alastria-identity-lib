@@ -94,6 +94,13 @@ console.log('The decoded token is: ', decodedJwt)
 let verifyJwt = tokensFactory.presentation.verifyJWT(token, rawPublicKey)
 console.log('The verified token is: ', verifyJwt)
 
+const alastriaToken = tokensFactory.presentation.createAlastriaToken("did:ala:quor:telsius:0x12345", "https://regular.telsius.blockchainbyeveris.io:2000", "https://serviceprovider.alastria.blockchainbyeveris.io/api/login/", 1563782792,1563783392,"Alastria network",1563782792, "ze298y42sba")
+console.log('The Alastria token is: ', alastriaToken)
+
+let signedAT = tokensFactory.presentation.signJWT(alastriaToken, rawPrivateKey)
+console.log(signedAT)
+const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
+console.log(alastriaSession)
 //Creating a credential
 /*let jsonCredential = tokensFactory.presentation.createCredential(context, levelOfAssurance, fieldName, fieldValue)
 console.log('The credential is: ', jsonCredential)

@@ -1,18 +1,17 @@
 # Typescript Alastria Identity Library
 ## What it does
-This library interacts with the Alastria Identity smart contracts which are in the
-alastria-identity repository](https://github.com/alastria/alastria-identity)
+This library interacts with the Alastria Identity smart contracts which are in the alastria-identity repository (https://github.com/alastria/alastria-identity). 
 
 ## How to use it
-Init npm on your working directory with
+In your working directory init npm with
 ```
 npm init -y
 ```
-Consume this library anywhere you want by running:
+Consume this library by running:
 ```
 npm install --save github:alastria/alastria-identity-lib.git
 ```
-Now, you can use this library from any JavaScript file in the project in this way:
+Now, you can use it from any JavaScript file in your workiing directory. You can copy an example from `test/file.js` such as:
 ```javascript
 const {transactionFactory, transactionProcess} = require('alastria-id-lib');
 const identityForUse = new UserIdentity('myBlockchainServiceIp','walletAddress','privateKeyFromKeyStore');
@@ -26,6 +25,28 @@ Run it to check it works:
 ```
 node file.js
 ```
+## How to collaborate
+You will work with two different directories:
+- alastria-identity-lib : main folder of this lib that you get by clonning this repository where make your changes.
+- example : an empty folder in the same path for testing your changing.
+
+Steps for your first time:
+1. Make your changes in alastria-identity-lib directory.
+2. From the root directory alastria-identity-lib , transpile with `tsc`
+3. Now, create a working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`)
+4. Init npm with `npm init -y` 
+5. Install the lib with `npm install --save github:alastria/alastria-identity-lib.git`
+6. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` from `alastria-identity-lib/dist`
+7. Run your file to test in your example directory `node file.js`
+
+Steps for your following times:
+1. Make your changes in alastria-identity-lib directory.
+2. From the root directory alastria-identity-lib , transpile with `tsc`
+3. Now, change to your working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`)
+4. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` from `alastria-identity-lib/dist`
+5. Run your file to test in your example directory `node file.js`
+
+If you make any changes in file.js, please comment and copy them to alastria-identity-lib/test/file.js and push. Thanks!
 
 ### How to use functions that do not change the blockchain state
 ```javascript

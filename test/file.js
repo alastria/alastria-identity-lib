@@ -1,6 +1,8 @@
+let  any = require('jsontokens')
 const {transactionFactory, UserIdentity, tokensFactory} = require('alastria-identity-lib')
 let Web3 = require('web3')
 let keythereum = require('keythereum')
+
 
 //let myBlockchainServiceIp = 'http://yourIP:RPCPort'
 let myBlockchainServiceIp = 'http://127.0.0.1:8545'
@@ -29,24 +31,30 @@ try{
 // Create a new Service Provider
 let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
 
-let txGenerateAccessToken = transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address)
-console.log(txGenerateAccessToken)
+transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address, web3)
+.then(txGenerateAccessToken => {
+	console.log('TXGENERATEACCESSTOKEN -> ', txGenerateAccessToken)
+})
 
 
 // Example of creating, signing and sending a tx
 let subjectPresentationHash = 'subject-presentation-hash'
 let uri = 'presentation-identifier-in-repository'
 let tx = transactionFactory.identityManager.addSubjectPresentation(subjectPresentationHash,uri)
-console.log(tx)
 identityForUse.addTransaction(tx)
-let signedTransactionStack = identityForUse.getSignedTransactions()
-console.log(signedTransactionStack)
+.then(txs => {
+	let signedTransactionStack = identityForUse.getSignedTransactions()
+	console.log('SIGNEDTRANSACTIONSTACK -> ', signedTransactionStack)
+	// let signedTx = signedTransactionStack
+	// web3.eth.sendSignedTransaction(signedTx)
+	// .then(sendSigned => {
+	// 	console.log('SEND -> ', sendSigned)
+	// })
+	// .catch(error => {
+	// 	console.log(error)
+	// })
+})
 
-/*let signedTx = signedTransactionStack[0]
-console.log("SIGNED TX ", signedTx)
-web3.eth.sendSignedTransaction(signedTx, (result, error) => {
-	console.log("SEND", result, error)
-})*/
 
 // Using sign and verify functions which not directly interact with the blockchain
 
@@ -55,12 +63,20 @@ const rawPublicKey = '03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2e
 
 const rawPrivateKey = '278a5de700e29faae8e40e366ec5012b5ec63d36ec77e8a2417154cc1d25383f'
 
-let tokenPayload = {"iat": 1440713414.85}
+//const tokenPayload = {"iat": 1440713414.85}
+
+const tokenPayload = {
+ "iss": "joe",
+ "exp": 1300819380,
+ "http://example.com/is_root": true
+}
 
 //Sign a presentation request
-let signedjwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
+/*let signedjwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
 console.log('The signed jwt is: ', signedjwt)
-
+let signature = new any.TokenSigner('ES256K', rawPrivateKey).sign(tokenPayload)
+console.log(signature)
+/*
 //Verify the signed presentation request and get the decoded token
 let jwt = tokensFactory.presentation.verifyPresentationRequest(signedjwt, rawPublicKey)
 console.log('The verified token is:', jwt)
@@ -72,3 +88,35 @@ console.log('The signed jwt is: ', signedjwt)
 //Verify the signed presentation and get the decoded token
 jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
 console.log('The verified token is:', jwt)
+*/
+
+const token = tokensFactory.presentation.signJWT(tokenPayload, rawPrivateKey)
+console.log('The token is: ', token)
+
+//Decoding a jwt
+let decodedJwt = tokensFactory.presentation.decodeJWT(token)
+console.log('The decoded token is: ', decodedJwt)
+
+let verifyJwt = tokensFactory.presentation.verifyJWT(token, rawPublicKey)
+console.log('The verified token is: ', verifyJwt)
+
+const alastriaToken = tokensFactory.presentation.createAlastriaToken("did:ala:quor:telsius:0x12345", "https://regular.telsius.blockchainbyeveris.io:2000", "https://serviceprovider.alastria.blockchainbyeveris.io/api/login/", 1563782792,1563783392,"Alastria network",1563782792, "ze298y42sba")
+console.log('The Alastria token is: ', alastriaToken)
+
+let signedAT = tokensFactory.presentation.signJWT(alastriaToken, rawPrivateKey)
+console.log(signedAT)
+const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
+console.log(alastriaSession)
+//Creating a credential
+/*let jsonCredential = tokensFactory.presentation.createCredential(context, levelOfAssurance, fieldName, fieldValue)
+console.log('The credential is: ', jsonCredential)
+
+//Sign JWT
+signedjwt = tokensFactory.presentation.signJWT(tokenPayload, rawPrivateKey)
+console.log('The signed jwt is: ', signedjwt)
+
+jwt = tokensFactory.presentation.verifyJWT(signedjwt, rawPublicKey)
+console.log('The verifed token is:', jwt)
+*/
+
+//

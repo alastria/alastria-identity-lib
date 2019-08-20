@@ -3,9 +3,9 @@
 import { toHex, padLeft, padRight } from 'web3-utils';
 
 // TODO: import contract address from configfile
-const publicKeyRegistry = '0x0b337E2aC98a9725615dE042E950dD8C8b66b0fA';
-const credentialRegistry = '0xE4f91b47399Dc2560025Aafb4fFA7Cd5C483330e';
-const presentationRegistry = '0x8e78E1BfBdcD1564309d86d4925fCF533a6dcBC8';
+const publicKeyRegistry = '0x32340d1Fbe4b4290504A7486531FbB86242D0aA2';
+const credentialRegistry = '0x879bC25943A7b430c3f456CaCCE9F056a4dEDF23';
+const presentationRegistry = '0x44560E5d258E753D3Ff432a585Ef01de00D286f8';
 
 const generateAccessTokenFunctionHash = '4284f8d4';
 const createAlastriaIdentityFunctionHash = '6d69d99a';
@@ -21,7 +21,7 @@ const addIdentityServiceProviderFunctionHash = '0ebbbffc';
 const deleteServiceProviderFunctionHash = '3bf47215';
 const isIdentityServiceProviderFunctionHash = 'd024d9a4';
 
-const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
+const alastriaIdentityManager = '0x73864d52a004e968b7aca6042d4e351e283c3a60';
 const basicTransaction = {
   from: '',
   to: alastriaIdentityManager,
@@ -204,11 +204,22 @@ export function updateCredentialStatus(issuerCredHash, status) {
 
   // AlastriaIdentityServiceProvider.sol
 
-  export function addIdentityServiceProvider(identityServiceProvider) {
-    let transaction = basicTransaction;
-    transaction.data = `0x${addIdentityServiceProviderFunctionHash}000000000000000000000000${identityServiceProvider}`;
-    transaction.gas = 600000;
-    return transaction;
+  export function addIdentityServiceProvider(identityServiceProvider, web3) {
+    return new Promise((resolve, reject) => {
+      let transaction = basicTransaction;
+      transaction.from = '0x' + identityServiceProvider
+      web3.eth.getTransactionCount(transaction.from)
+      .then(mynonce => {
+          transaction.data = "0x" + addIdentityServiceProviderFunctionHash + padLeft(identityServiceProvider.slice(2), 64);
+          transaction.gas = 600000;
+          transaction.nonce = mynonce
+          resolve(transaction)
+      })
+      .catch(error => {
+          console.log(error)
+          reject(error)
+      })
+  })
   }
 
   export function deleteIdentityServiceProvider(identityServiceProvider) {

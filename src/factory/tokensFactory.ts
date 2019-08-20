@@ -93,9 +93,9 @@ function createAlastriaToken(issuerDID, gwu, cbu, tokenValidTime, setUpTokenTime
   return jsonObject
 }*/
 
-function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
+/*function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject
-}
+}*/
 
 /*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject

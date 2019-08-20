@@ -27,9 +27,19 @@ export class UserIdentity {
     }
 
     public addTransaction(transaction, nonceType) {
-      let tx =this.customize(transaction, nonceType);
-        this.transactions.push(tx);
-        console.log("ADD TRANSACTION ", tx);
+        return new Promise((resolve, reject) => {
+            nonceType = 'web3'
+            this.customize(transaction, nonceType)
+            .then(tx => {
+                console.log("ADD TRANSACTION ", tx);
+                this.transactions.push(tx)
+                resolve(this.transactions)
+            })
+            .catch(error => {
+                console.log('ERROR -> ', error)
+                reject(error)
+            })
+        })
     }
 
     public getSignedTransactions() {
@@ -46,16 +56,19 @@ export class UserIdentity {
     * @param transaction
     * @param user  //TODO quitar
     */
-    private customize(transaction, nonceType) {
-      transaction.nonce = this.getUserNonce(this.endPoint, nonceType, this.address)
-      transaction.gasprice = 0;
-        /*.then((result) => {
-          console.log(result);
-          transaction.nonce = result;
-          transaction.gasprice = 0;
-          return result;
-        });*/
-        return transaction;
+    private async customize(transaction, nonceType) {
+        return new Promise((resolve, reject) => {
+            this.getUserNonce(this.endPoint, nonceType, this.address)
+            .then(mynonce => {
+                transaction.nonce = mynonce
+                transaction.gasprice = 0;
+                resolve(transaction)
+            })
+            .catch(error => {
+                console.log(error)
+                reject(error)
+            })
+        })
     }
 
     /**
@@ -66,7 +79,8 @@ export class UserIdentity {
     public signTransaction(transaction, privateKey) {
         try {
             const tx = new EthereumTxAll(transaction);
-            tx.sign(privateKey);
+            let privKeyBuffered = Buffer.from(privateKey, 'hex')
+            tx.sign(privKeyBuffered);
             const signedTx = `0x${tx.serialize().toString('hex')}`;
             return signedTx;
         } catch (err) {
@@ -84,21 +98,39 @@ export class UserIdentity {
     *   @param {address} address user
     */
     private getUserNonce(endPoint, type, address) {
-        let nonce;
-        switch (type) {
-            case 'web3': {
-                nonce = endPoint.eth.getTransactionCount(address);
-                break;
+        return new Promise((resolve, reject) => {
+            let nonce
+            switch (type) {
+                case 'web3': {
+                    endPoint.eth.getTransactionCount(address)
+                    .then(mynonce => {
+                        nonce = mynonce
+                        resolve(nonce)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        reject(error)
+                    })
+                    break;
+                }
+                case 'selfManaged': {
+                    nonce = this.nonce;
+                    this.nonce += 1;
+                    resolve(nonce)
+                    break;
+                }
+                default: {
+                    endPoint.getTransactionCount(address)
+                    .then(mynonce => {
+                        nonce = mynonce
+                        resolve(nonce)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        reject(error)
+                    })
+                }
             }
-            case 'selfManaged': {
-                nonce = this.nonce;
-                this.nonce += 1;
-                break;
-            }
-            default: {
-                nonce = endPoint.getTransactionCount(address);
-            }
-        }
-        return nonce;
+        })
     }
 }

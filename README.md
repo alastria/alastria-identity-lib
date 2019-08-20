@@ -40,17 +40,21 @@ mkdir example
 cd example
 cp ../alastria-identity-lib/test/file.js .
 ```
-4. Init npm with `npm init -y` 
-5. Install the lib with `npm install --save github:alastria/alastria-identity-lib.git`
+4. Init npm with 
+`npm init -y`
+5. Install the lib with 
+`npm install --save github:alastria/alastria-identity-lib.git`
 6. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command: 
 ```
 cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`
 ```
-7. Run your file to test in your example directory `node file.js`
+7. Run your file to test in your example directory
+`node file.js`
 
 Steps for your following times:
 1. Make your changes in alastria-identity-lib directory.
-2. From the root directory alastria-identity-lib , transpile with `tsc`
+2. From the root directory alastria-identity-lib , transpile with 
+`tsc`
 3. Now, change to your working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`) doing:
 ```bash
 cd ../example
@@ -60,7 +64,8 @@ cp ../alastria-identity-lib/test/file.js .
 ```
 cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`
 ```
-5. Run your file to test in your example directory `node file.js`
+5. Run your file to test in your example directory 
+`node file.js`
 
 If you make any changes in file.js, please comment and copy them to alastria-identity-lib/test/file.js and push. Thanks!
 

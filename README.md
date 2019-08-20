@@ -32,7 +32,8 @@ You will work with two different directories:
 
 Steps for your first time:
 1. Make your changes in alastria-identity-lib directory.
-2. From the root directory alastria-identity-lib , transpile with `tsc`
+2. From the root directory alastria-identity-lib , transpile with
+`tsc`
 3. Now, create a working directory `example` where you have your JavaScript file. You can copy paste the content of `alastria-identity-lib/test/file.js` doing:
 ```bash
 cd ..

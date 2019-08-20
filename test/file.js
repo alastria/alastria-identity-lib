@@ -31,7 +31,7 @@ try{
 // Create a new Service Provider
 let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
 
-transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address)
+transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address, web3)
 .then(txGenerateAccessToken => {
 	console.log('TXGENERATEACCESSTOKEN -> ', txGenerateAccessToken)
 })

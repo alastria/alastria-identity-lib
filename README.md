@@ -40,7 +40,10 @@ cp ../alastria-identity-lib/test/file.js .
 ```
 4. Init npm with `npm init -y` 
 5. Install the lib with `npm install --save github:alastria/alastria-identity-lib.git`
-6. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` from `alastria-identity-lib/dist`
+6. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command: 
+```
+cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`
+```
 7. Run your file to test in your example directory `node file.js`
 
 Steps for your following times:

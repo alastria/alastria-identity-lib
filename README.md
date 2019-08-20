@@ -35,6 +35,8 @@ Steps for your first time:
 2. From the root directory alastria-identity-lib , transpile with `tsc`
 3. Now, create a working directory `example` where you have your JavaScript file. You can copy paste the content of `alastria-identity-lib/test/file.js` doing:
 ```bash
+cd ..
+mkdir example
 cd example
 cp ../alastria-identity-lib/test/file.js .
 ```
@@ -49,7 +51,11 @@ cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`
 Steps for your following times:
 1. Make your changes in alastria-identity-lib directory.
 2. From the root directory alastria-identity-lib , transpile with `tsc`
-3. Now, change to your working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`)
+3. Now, change to your working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`) doing:
+```bash
+cd ../example
+cp ../alastria-identity-lib/test/file.js .
+```
 4. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command: 
 ```
 cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`

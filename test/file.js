@@ -123,14 +123,14 @@ console.log('The signedToken is verified?: ', verifyJWT)
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of AlastriaToken and AlastriaSession ------ \n')
 
-// Creating an alastriaToken
+// Creating an AlastriaToken
 const alastriaToken = tokensFactory.presentation.createAlastriaToken("did:ala:quor:telsius:0x12345", "https://regular.telsius.blockchainbyeveris.io:2000", "https://serviceprovider.alastria.blockchainbyeveris.io/api/login/", 1563782792,1563783392,"Alastria network",1563782792, "ze298y42sba")
 console.log('The Alastria token is: ', alastriaToken)
 
-// Signing the alastriaToken
+// Signing the AlastriaToken
 let signedAT = tokensFactory.presentation.signJWT(alastriaToken, rawPrivateKey)
 console.log('The signed Alastria token is: ', signedAT)
 
-// Creating an alastriaSession
+// Creating an AlastriaSession using the signed AlastriaToken
 const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
 console.log('The Alastria session is: ', alastriaSession)

@@ -105,7 +105,19 @@ const tokenPayload = {
  "exp": 1300819380,
  "http://example.com/is_root": true
 }
-
+let credentialNames = ["CarnetEstudiante", "CarnetPolideportivo", "Nacionalidad", "Genero", "CarnetConducir"]
+let credentialValues = ["11235813", "21345589", "Española", "Varón", "B"]
+var credentialFeatures = null
+const credential2 = {
+	"Context": "JWT",
+	"levelOfAssurance": 2,
+	"Email": "agp@gmail.com"
+}
+const credential3 = {
+	"Context": "JWT",
+	"levelOfAssurance": 3,
+	"DNI": "71236152N"
+}
 // Signing a JWT
 const signedJWT = tokensFactory.presentation.signJWT(tokenPayload, rawPrivateKey)
 console.log('The signed token is: ', signedJWT)
@@ -134,3 +146,21 @@ console.log('The signed Alastria token is: ', signedAT)
 // Creating an AlastriaSession using the signed AlastriaToken
 const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
 console.log('The Alastria session is: ', alastriaSession)
+
+
+//------------------------------------------------------------------------------
+console.log('\n ------ Example of creating a credential ------ \n')
+var credentialFeatures = {}
+for (i=0; i<credentialNames.length; i++)  {
+		credentialFeatures[credentialNames[i]] = credentialValues[i]
+	}
+	credentialFeature = JSON.stringify(credentialFeatures)
+
+const credential = tokensFactory.presentation.createCredential("JWT", 2, credentialFeatures)
+console.log('The credential is: ', credential)
+
+
+//------------------------------------------------------------------------------
+console.log('\n ------ Example of creating a presentation ------ \n')
+const presentation = tokensFactory.presentation.createPresentation("https://w3id.org/credentials/v1","https://www.metrovacesa.com/alastria/credentials/3732", "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb", "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb", credential, credential2, credential3)
+console.log('The presentation is: ', presentation)

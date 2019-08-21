@@ -6,13 +6,13 @@ export const tokensFactory = {
     'verifyPresentationRequest': verifyPresentationRequest,
     'signPresentation': signPresentation,
     'verifyPresentation': verifyPresentation,
-    //'createCredential': createCredential,
+    'createCredential': createCredential,
     'decodeJWT': decodeJWT,
     'signJWT': signJWT,
     'verifyJWT': verifyJWT,
     'createAlastriaSession': createAlastriaSession,
     'createAlastriaToken': createAlastriaToken,
-    //'createPresentation': createPresentation,
+    'createPresentation': createPresentation,
     //'createPresentationRequest': createPresentationRequest
   }
 }
@@ -52,11 +52,11 @@ export function verifyPresentation(presentationJWT, rawPublicKey) {
   return tokenData
 }
 
-export function createCredential(credentialContext, levelAssurance, fieldName, fieldValue) {
+export function createCredential(credentialContext, levelAssurance, credentialFeatures) {
   const jwt = {
-    "@context": credentialContext,
+    "Context": credentialContext,
     "levelOfAssurance": levelAssurance,
-    fieldName: fieldValue
+    "features": {credentialFeatures}
   }
   return jwt;
 }
@@ -80,7 +80,7 @@ function verifyJWT(jwt, rawPublicKey) {
 
 function createAlastriaSession(context, iss, pku, verifiedAT, iat, exp?: string, nbf?: string, jti?: string) {
   const jwt = {
-    "@context": context,
+    "Context": context,
     "iss": iss,
     "pku": pku,
     "iat": iat,
@@ -106,9 +106,26 @@ function createAlastriaToken(issuerDID, gwu, cbu, iat, exp, ani, nbf?: string, j
   return jwt
 }
 
-/*function createPresentation(issuerDID, subjectDID, credentials, tokenValidTime, setUpTokenTime, tokenId) {
-  return jsonObject
-}*/
+function createPresentation(context, jti, iss, sub, credential, credential2, credential3) {
+  const jwt = {
+    "header": {
+      "typ": "JWT",
+      "alg": "ES256K"
+    },
+    "Payload": {
+      "Context": context,
+      "jti": jti,
+      "iss": iss,
+      "sub": sub
+    },
+    "Credentials": {
+      "credential1": credential,
+      "credential2": credential2,
+      "credential3": credential3
+    }
+  }
+  return jwt
+}
 
 /*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject

@@ -123,8 +123,32 @@ console.log('The signedToken is verified?: ', verifyJWT)
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of AlastriaToken and AlastriaSession ------ \n')
 
+//Some fake data
+
+
+//The context of the jwt
+let context = "https://w3id.org/did/v1"
+//The user wallet public key
+let userPublicKey = "AE2309349218937HASKHIUE9287432"
+// The issuer DID will be stored in "iss" field
+let didIsssuer = "did:ala:quor:telsius:0x12345"
+//The provider gateway URL "gwu"
+let providerURL = "https://regular.telsius.blockchainbyeveris.io:2000"
+//Callback URL that must be answered with the user rawPublicKey "cbu"
+let callbackURL = "https://serviceprovider.alastria.blockchainbyeveris.io/api/login/"
+//Alastria network identifier "ani"
+let alastriaNetId = "Alastria network"
+//Token broadcast date "iat" (issued at) (timestamp)
+let tokenBroadcastDate = 1563782792
+//Token expiration time "exp" (timestamp)
+let tokenExpTime = 1563783392
+//(optional parameter)Token activation date "nbf" (timestamp)
+let tokenActivationDate = 1563782792
+//(optional parameter)Token identifier "jti"
+let jsonTokenId = "ze298y42sba"
+
 // Creating an AlastriaToken
-const alastriaToken = tokensFactory.presentation.createAlastriaToken("did:ala:quor:telsius:0x12345", "https://regular.telsius.blockchainbyeveris.io:2000", "https://serviceprovider.alastria.blockchainbyeveris.io/api/login/", 1563782792,1563783392,"Alastria network",1563782792, "ze298y42sba")
+const alastriaToken = tokensFactory.presentation.createAlastriaToken(didIsssuer, providerURL, callbackURL, alastriaNetId, tokenBroadcastDate, tokenExpTime, tokenActivationDate, jsonTokenId)
 console.log('The Alastria token is: ', alastriaToken)
 
 // Signing the AlastriaToken
@@ -132,7 +156,7 @@ let signedAT = tokensFactory.presentation.signJWT(alastriaToken, rawPrivateKey)
 console.log('The signed Alastria token is: ', signedAT)
 
 // Creating an AlastriaSession using the signed AlastriaToken
-const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
+const alastriaSession = tokensFactory.presentation.createAlastriaSession(context, didIsssuer, userPublicKey, signedAT, tokenBroadcastDate, tokenExpTime, tokenActivationDate, jsonTokenId)
 console.log('The Alastria session is: ', alastriaSession)
 
 
@@ -144,7 +168,7 @@ console.log('\n ------ Example of creating a credential ------ \n')
 let credentialKey ="StudentID"
 let credentialValue ="11235813"
 
-const credential1 = tokensFactory.presentation.createCredential("JWT", 2, credentialKey, credentialValue)
+const credential1 = tokensFactory.presentation.createCredential("JWT", 2, "StudentID", "11235813")
 console.log('The credential1 is: ', credential1)
 
 const credential2 = tokensFactory.presentation.createCredential("JWT", 2, "Email", "agp@gmail.com")
@@ -158,17 +182,17 @@ console.log('\n ------ Example of creating a presentation ------ \n')
 
 // Some fake data
 
-// El DID del issuer que se almacenaria en el campo "iss"
+// The issuer DID will be stored in "iss" field
 let didIssuer = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
-// El DID del subject que se almacenaria en el campo "sub"
+// The subject DID will be stored in "sub" field
 let didSubject = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
-// Un array de credentials que sigan el formato del método createCredential
+// A credentials array that follows the createCredential method format
 let credentials = [credential1, credential2, credential3]
-// (parametro opcional) Una medida en millis de cuanto tiempo sera valido el token. Este numero se sumara desde timestampo de "iat" para crear el "exp"
+// (optional parameter) milli seconds that the token will be valid. This number will be added from the "iat" timestampo to create the "exp"
 let timeExp = 2030735444
-// (parametro opcional) Una medida en millis de en que momento comienza a ser valido el token que sera un timestamp que se copiará en el campo "nbf"
+// (optional parameter) milli seconds when the token starts to be valid that will be a timestamp that will be copied in the "nbf" field
 let timeNbf = 1525465044
-// (parametro opcional) Un identificador único para este token "jti"
+// (optional parameter) A unique token identifier "jti"
 let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)

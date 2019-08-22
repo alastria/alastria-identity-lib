@@ -45,15 +45,15 @@ function createAlastriaSession(context, iss, pku, verifiedAT, iat, exp?: string,
   return jwt
 }
 
-function createAlastriaToken(issuerDID, gwu, cbu, iat, exp, ani, nbf?: string, jti?: string) {
+function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId, tokenBroadcastDate, tokenExpTime, nbf?: string, jti?: string) {
   const jwt = {
-    "iss": issuerDID,
-    "gwu": gwu,
-    "cbu": cbu,
-    "iat": iat,
-    "ani": ani,
+    "iss": didIssuer,
+    "gwu": providerURL,
+    "cbu": callbackURL,
+    "iat": tokenBroadcastDate,
+    "ani": alastriaNetId,
     "nbf": nbf,
-    "exp": exp,
+    "exp": tokenExpTime,
     "jti": jti
   }
   return jwt
@@ -65,7 +65,7 @@ export function createCredential(context, levelOfAssurance, credentialKey, crede
   const jwt = {
     "@context": context,
     "levelOfAssurance": levelOfAssurance,
-    credentialKey: credentialValue //TODO que ponga el contenido del parametro
+    credentialKey.toString(): credentialValue //TODO que ponga el nombre del parametro
   }
   return jwt;
 }
@@ -89,7 +89,7 @@ function createPresentation(didIssuer, didSubject, credentials, timeExp?: number
       "iat": timeNbf, // ?? Como se calcula
       "exp": timeExp,
       "nbf": timeNbf,
-      "credentials": [credentials] // TODO que ponga el contenido de cada credencial
+      "credentials": credentials // TODO que ponga el contenido de cada credencial
     }
   }
   return jwt

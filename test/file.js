@@ -105,19 +105,7 @@ const tokenPayload = {
  "exp": 1300819380,
  "http://example.com/is_root": true
 }
-let credentialNames = ["CarnetEstudiante", "CarnetPolideportivo", "Nacionalidad", "Genero", "CarnetConducir"]
-let credentialValues = ["11235813", "21345589", "Española", "Varón", "B"]
-var credentialFeatures = null
-const credential2 = {
-	"Context": "JWT",
-	"levelOfAssurance": 2,
-	"Email": "agp@gmail.com"
-}
-const credential3 = {
-	"Context": "JWT",
-	"levelOfAssurance": 3,
-	"DNI": "71236152N"
-}
+
 // Signing a JWT
 const signedJWT = tokensFactory.presentation.signJWT(tokenPayload, rawPrivateKey)
 console.log('The signed token is: ', signedJWT)
@@ -148,19 +136,40 @@ const alastriaSession = tokensFactory.presentation.createAlastriaSession("https:
 console.log('The Alastria session is: ', alastriaSession)
 
 
+
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a credential ------ \n')
-var credentialFeatures = {}
-for (i=0; i<credentialNames.length; i++)  {
-		credentialFeatures[credentialNames[i]] = credentialValues[i]
-	}
-	credentialFeature = JSON.stringify(credentialFeatures)
 
-const credential = tokensFactory.presentation.createCredential("JWT", 2, credentialFeatures)
-console.log('The credential is: ', credential)
+// Some fake data
+let credentialKey ="StudentID"
+let credentialValue ="11235813"
 
+const credential1 = tokensFactory.presentation.createCredential("JWT", 2, credentialKey, credentialValue)
+console.log('The credential1 is: ', credential1)
+
+const credential2 = tokensFactory.presentation.createCredential("JWT", 2, "Email", "agp@gmail.com")
+console.log('The credential2 is: ', credential2)
+
+const credential3 = tokensFactory.presentation.createCredential("JWT", 2, "DNI", "71236152N")
+console.log('The credential3 is: ', credential3)
 
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a presentation ------ \n')
-const presentation = tokensFactory.presentation.createPresentation("https://w3id.org/credentials/v1","https://www.metrovacesa.com/alastria/credentials/3732", "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb", "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb", credential, credential2, credential3)
+
+// Some fake data
+
+// El DID del issuer que se almacenaria en el campo "iss"
+let didIssuer = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
+// El DID del subject que se almacenaria en el campo "sub"
+let didSubject = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
+// Un array de credentials que sigan el formato del método createCredential
+let credentials = [credential1, credential2, credential3]
+// (parametro opcional) Una medida en millis de cuanto tiempo sera valido el token. Este numero se sumara desde timestampo de "iat" para crear el "exp"
+let timeExp = 2030735444
+// (parametro opcional) Una medida en millis de en que momento comienza a ser valido el token que sera un timestamp que se copiará en el campo "nbf"
+let timeNbf = 1525465044
+// (parametro opcional) Un identificador único para este token "jti"
+let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
+
+const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)

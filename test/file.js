@@ -168,7 +168,7 @@ console.log('\n ------ Example of creating a credential ------ \n')
 let credentialKey ="StudentID"
 let credentialValue ="11235813"
 
-const credential1 = tokensFactory.presentation.createCredential("JWT", 2, "StudentID", "11235813")
+const credential1 = tokensFactory.presentation.createCredential("JWT", 2, credentialKey, credentialValue)
 console.log('The credential1 is: ', credential1)
 
 const credential2 = tokensFactory.presentation.createCredential("JWT", 2, "Email", "agp@gmail.com")

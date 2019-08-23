@@ -59,15 +59,18 @@ function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId,
   return jwt
 }
 
+/*let jwt = {
+  "@context": context,
+  "levelOfAssurance": levelOfAssurance,
+  credentialKey: credentialValue //TODO que ponga el nombre del parametro
+}*/
 
 // It builds a JWT with credential info
 export function createCredential(context, levelOfAssurance, credentialKey: string, credentialValue) {
-  console.log("Credentialkey is: ", credentialKey)
-  let jwt = {
-    "@context": context,
-    "levelOfAssurance": levelOfAssurance,
-    credentialKey: credentialValue //TODO que ponga el nombre del parametro
-  }
+  let jwt = {}
+  jwt["@context"] = context
+  jwt["levelOfAssurance"] = levelOfAssurance
+  jwt[credentialKey] = credentialValue
   return jwt;
 }
 
@@ -78,7 +81,7 @@ export function createCredential(context, levelOfAssurance, credentialKey: strin
 * @param credentials This is an array that contains some credentials taht follows the "createCredential" format
 * @param timeExp (optional) "exp". This parameter shows, in miliseconds, how much time will the token be valid. This number will be calculated from the "iat"
 * @param timeNbf (optional) "nbf". This parameter shows, in miliseconds, when the token starts to be valid.
-* @param
+* @param jti (optional) Unique token identifier
 */
 function createPresentation(didIssuer, didSubject, credentials, timeExp?: number, timeNbf?: number, jti?: number) {
   const jwt = {

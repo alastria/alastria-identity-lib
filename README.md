@@ -31,7 +31,10 @@ You will work with two different directories:
 - example : an empty folder in the same path for testing your changing.
 
 Steps for your first time:
-1. Make your changes in alastria-identity-lib directory.
+1. Install dependencies in alastria-identity-lib directory. Then, make your changes.
+```
+npm install
+```
 2. From the root directory alastria-identity-lib , transpile with
 ```
 tsc

@@ -2,6 +2,7 @@ import { config } from '../config';
 
 
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
+  console.log(subjectPresentationHash);
   let transaction = config.basicTransaction;
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["addSubjectPresentation"],
@@ -120,6 +121,6 @@ export function getPresentationStatus(web3, subjectStatus, receiverStatus) {
 
 function delegated(web3, delegatedData) {
   return web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaIdentityManager"]["delegatedCall"],
+    config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
     [config.alastriaPresentationRegistry, 0, delegatedData])
 }

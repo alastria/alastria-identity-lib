@@ -110,5 +110,5 @@ export function getCredentialStatus(web3, subjectStatus, issuerStatus) {
 }
 
 function delegated(web3, delegatedData) {
-    return web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["delegatedCall"], [config.alastriaCredentialRegistry, 0, delegatedData])
+    return web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["delegateCall"], [config.alastriaCredentialRegistry, 0, delegatedData])
   }

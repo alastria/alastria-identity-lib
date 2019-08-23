@@ -83,6 +83,6 @@ export function getPublicKeyStatus(web3, subject, publicKey) {
 
 function delegated(web3, delegatedData) {
     return web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaIdentityManager"]["delegatedCall"],
+        config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
         [config.alastriaPublicKeyRegistry, 0, delegatedData])
   }

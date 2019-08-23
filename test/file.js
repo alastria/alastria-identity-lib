@@ -29,7 +29,8 @@ try{
 	console.log("ERROR: ", error)
 }
 // Init a UserIdentity object with the previous values
-let identityForUse = new UserIdentity(web3, keyStore.address, userPrivateKey)
+// It is important to add '0x' before the address
+let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
 
 
 
@@ -37,24 +38,13 @@ let identityForUse = new UserIdentity(web3, keyStore.address, userPrivateKey)
 console.log('\n ------ Example of creating, signing and sending a transaction ------ \n')
 
 // Some fake data to use as parameters
-let subjectPresentationHash = 'subject-presentation-hash'
+let subjectPresentationHash = '0x951e8035e1971634d1e63e18678e87d1ad4ee116a0c317e23546c80759be1527'
 let uri = 'presentation-identifier-in-repository'
 // Step 1, create the transaction
-let tx = transactionFactory.identityManager.addSubjectPresentation(subjectPresentationHash,uri)
-// Step 2, Add the transaction to your existing identity
-identityForUse.addTransaction(tx)
-.then(() => {
-	// Step 3, sign the queue of transactions
-	let signedTransactionStack = identityForUse.getSignedTransactions()
-	// Step 4, send them to the blockchain
-	// let signedTx = signedTransactionStack
-	// web3.eth.sendSignedTransaction(signedTx)
-	// .then(sendSigned => {
-	// 	console.log('SEND -> ', sendSigned)
-	// })
-	// .catch(error => {
-	// 	console.log(error)
-	// })
+let tx = identityForUse.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash,uri))
+// Step 2, send a transaction to the blockchain
+web3.eth.sendSignedTransaction(tx, (e, hash) => {
+	console.log("SignedTx: ", hash);
 })
 
 
@@ -134,3 +124,43 @@ console.log('The signed Alastria token is: ', signedAT)
 // Creating an AlastriaSession using the signed AlastriaToken
 const alastriaSession = tokensFactory.presentation.createAlastriaSession("https://w3id.org/did/v1", "did:ala:quor:telsius:0x123ABC", "AE2309349218937HASKHIUE9287432", signedAT, 123123145, 123131314, 123123145, "JWTID")
 console.log('The Alastria session is: ', alastriaSession)
+
+
+
+//------------------------------------------------------------------------------
+console.log('\n ------ Example of creating a credential ------ \n')
+
+// Some fake data
+let credentialKey ="StudentID"
+let credentialValue ="11235813"
+
+const credential1 = tokensFactory.presentation.createCredential("JWT", 2, credentialKey, credentialValue)
+console.log('The credential1 is: ', credential1)
+
+const credential2 = tokensFactory.presentation.createCredential("JWT", 2, "Email", "agp@gmail.com")
+console.log('The credential2 is: ', credential2)
+
+const credential3 = tokensFactory.presentation.createCredential("JWT", 2, "DNI", "71236152N")
+console.log('The credential3 is: ', credential3)
+
+//------------------------------------------------------------------------------
+console.log('\n ------ Example of creating a presentation ------ \n')
+
+// Some fake data
+
+// El DID del issuer que se almacenaria en el campo "iss"
+let didIssuer = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
+// El DID del subject que se almacenaria en el campo "sub"
+let didSubject = "did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb"
+// Un array de credentials que sigan el formato del método createCredential
+let credentials = [credential1, credential2, credential3]
+// (parametro opcional) Una medida en millis de cuanto tiempo sera valido el token. Este numero se sumara desde timestampo de "iat" para crear el "exp"
+let timeExp = 2030735444
+// (parametro opcional) Una medida en millis de en que momento comienza a ser valido el token que sera un timestamp que se copiará en el campo "nbf"
+let timeNbf = 1525465044
+// (parametro opcional) Un identificador único para este token "jti"
+let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
+
+const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
+console.log('The presentation is: ', presentation)
+

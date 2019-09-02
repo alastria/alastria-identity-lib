@@ -19,13 +19,21 @@ export class UserIdentity {
      * @param _address
      * @param _privateKey get from keythereum.recover(password, JSON.parse(fs.readFileSync(keyStorePath, 'utf8'))),
      */
-    public constructor(_endPoint, _address, _privateKey, _startingNonce=0) {
+    public constructor(_endPoint, _address, _privateKey, _initialNonce) {
         this.endPoint = _endPoint;
         this.address = _address;
         this.privateKey = _privateKey;
-        this.nonce = _startingNonce;
+        this.nonce = _initialNonce;
     }
 
+    /**
+     * @Dev Add an anonimous transaction to the user, signed but not sended
+     * @param transaction
+     */
+    public addTransaction(transaction) {
+        this.transactions.push(this.customize(transaction));
+    }
+/*
     public addTransaction(transaction, nonceType) {
         return new Promise((resolve, reject) => {
             nonceType = 'web3'
@@ -40,10 +48,14 @@ export class UserIdentity {
                 reject(error)
             })
         })
-    }
+    }*/
 
+    /**
+     * @Dev Returns all the transactions signed for the user. Empty the stack
+     */
     public getSignedTransactions() {
         let processedTransactions = [];
+        //TODO: the function can be simplified with processedTransactions=this.transactions. Check.
         this.transactions.map(transaction => {
             processedTransactions.push(this.signTransaction(transaction, this.privateKey));
         });
@@ -51,14 +63,22 @@ export class UserIdentity {
         return processedTransactions;
     }
 
+
+    /**
+    * @Dev Returns a known transaction from an anonimous transaction
+    */
+    public getKnownTransaction(transaction) {
+       return this.signTransaction(this.customize(transaction),this.privateKey);
+    }
+
+
     /**
     * Customize the transaction with the user data
     * @param transaction
-    * @param user  //TODO quitar
     */
-    private async customize(transaction, nonceType) {
+    private async customize(transaction) {
         return new Promise((resolve, reject) => {
-            this.getUserNonce(this.endPoint, nonceType, this.address)
+            this.getUserNonce(this.endPoint, this.address)
             .then(mynonce => {
                 transaction.nonce = mynonce
                 transaction.gasprice = 0;
@@ -97,40 +117,18 @@ export class UserIdentity {
     *   @param {string} type web3, selfManaged or others..
     *   @param {address} address user
     */
-    private getUserNonce(endPoint, type, address) {
+    private getUserNonce(endPoint, address) {
         return new Promise((resolve, reject) => {
             let nonce
-            switch (type) {
-                case 'web3': {
-                    endPoint.eth.getTransactionCount(address)
-                    .then(mynonce => {
-                        nonce = mynonce
-                        resolve(nonce)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        reject(error)
-                    })
-                    break;
-                }
-                case 'selfManaged': {
-                    nonce = this.nonce;
-                    this.nonce += 1;
-                    resolve(nonce)
-                    break;
-                }
-                default: {
-                    endPoint.getTransactionCount(address)
-                    .then(mynonce => {
-                        nonce = mynonce
-                        resolve(nonce)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        reject(error)
-                    })
-                }
-            }
+            endPoint.eth.getTransactionCount(address)
+            .then(mynonce => {
+                nonce = mynonce
+                resolve(nonce)
+            })
+            .catch(error => {
+                console.log(error)
+                reject(error)
+            })
         })
     }
 }

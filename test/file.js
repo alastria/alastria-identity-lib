@@ -29,7 +29,8 @@ try{
 	console.log("ERROR: ", error)
 }
 // Init a UserIdentity object with the previous values
-let identityForUse = new UserIdentity(web3, keyStore.address, userPrivateKey)
+// It is important to add '0x' before the address
+let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
 
 
 
@@ -37,24 +38,13 @@ let identityForUse = new UserIdentity(web3, keyStore.address, userPrivateKey)
 console.log('\n ------ Example of creating, signing and sending a transaction ------ \n')
 
 // Some fake data to use as parameters
-let subjectPresentationHash = 'subject-presentation-hash'
+let subjectPresentationHash = '0x951e8035e1971634d1e63e18678e87d1ad4ee116a0c317e23546c80759be1527'
 let uri = 'presentation-identifier-in-repository'
 // Step 1, create the transaction
-let tx = transactionFactory.identityManager.addSubjectPresentation(subjectPresentationHash,uri)
-// Step 2, Add the transaction to your existing identity
-identityForUse.addTransaction(tx)
-.then(() => {
-	// Step 3, sign the queue of transactions
-	let signedTransactionStack = identityForUse.getSignedTransactions()
-	// Step 4, send them to the blockchain
-	// let signedTx = signedTransactionStack
-	// web3.eth.sendSignedTransaction(signedTx)
-	// .then(sendSigned => {
-	// 	console.log('SEND -> ', sendSigned)
-	// })
-	// .catch(error => {
-	// 	console.log(error)
-	// })
+let tx = identityForUse.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash,uri))
+// Step 2, send a transaction to the blockchain
+web3.eth.sendSignedTransaction(tx, (e, hash) => {
+	console.log("SignedTx: ", hash);
 })
 
 
@@ -193,7 +183,9 @@ let timeExp = 2030735444
 // (optional parameter) milli seconds when the token starts to be valid that will be a timestamp that will be copied in the "nbf" field
 let timeNbf = 1525465044
 // (optional parameter) A unique token identifier "jti"
+
 let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)
+

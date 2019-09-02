@@ -1,3 +1,3 @@
-export {transactionFactory} from './factory/transactionFactory'
-export {UserIdentity} from './transactionProcess'
-export {tokensFactory} from './factory/tokensFactory'
+export {transactionFactory} from './txFactory/transactionFactory'
+export {UserIdentity} from './UserIdentity'
+export {tokensFactory} from './tokenFactory/tokensFactory'

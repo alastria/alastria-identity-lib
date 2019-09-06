@@ -43,12 +43,33 @@ let uri = 'presentation-identifier-in-repository'
 // Step 1, create the transaction
 let tx = identityForUse.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash,uri))
 // Step 2, send a transaction to the blockchain
+//let signedTx = identityForUse.sendSignedTransaction(web3, tx);
+//console.log("SignedTx: ", signedTx);
+
 web3.eth.sendSignedTransaction(tx, (e, hash) => {
-	console.log("SignedTx: ", hash);
+	console.log("SignedTx2: ", hash);
 })
 
+// Some fake data to test
+const rawPublicKey = '03fdd57adec3d438ea237fe46b33ee1e016eda6b585c3e27ea66686c2ea5358479'
+const rawPrivateKey = '278a5de700e29faae8e40e366ec5012b5ec63d36ec77e8a2417154cc1d25383f'
+const tokenPayload = {
+ "iss": "joe",
+ "exp": 1300819380,
+ "http://example.com/is_root": true
+}
 
+// Signing a JWT
+const signedJWT = tokensFactory.presentation.signJWT(tokenPayload, rawPrivateKey)
+console.log('The signed token is: ', signedJWT)
 
+//did
+let didIsssuer = "did:ala:quor:telsius:0x12345"
+
+let psmHash = tokensFactory.presentation.PSMHash(web3, signedJWT, didIsssuer);
+console.log("The hash is:", psmHash);
+
+/*
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a Service Provider identity ------ \n')
 
@@ -188,4 +209,4 @@ let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)
-
+*/

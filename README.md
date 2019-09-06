@@ -56,7 +56,7 @@ npm install --save github:alastria/alastria-identity-lib.git
 ```
 6. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command:
 ```
-cp -r  node_modules/alastria-identity-lib/dist/ ../alastria-identity-lib/dist/`
+cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/
 ```
 7. Run your file to test in your example directory
 ```
@@ -76,7 +76,7 @@ cp ../alastria-identity-lib/test/file.js .
 ```
 4. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command:
 ```
-cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/`
+cp -r ../alastria-identity-lib/dist/ node_modules/alastria-identity-lib/dist/
 ```
 5. Run your file to test in your example directory
 ```

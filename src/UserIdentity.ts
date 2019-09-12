@@ -67,8 +67,21 @@ export class UserIdentity {
     /**
     * @Dev Returns a known transaction from an anonimous transaction
     */
-    public getKnownTransaction(transaction) {
-       return this.signTransaction(this.customize(transaction),this.privateKey);
+    public async getKnownTransaction(transaction) {
+      return new Promise((resolve, reject) => {
+          console.log("transaction", transaction)
+          this.customize(transaction)
+          .then(customizedTransaction => {
+            console.log("customizedTransaction", customizedTransaction)
+            var signedTx = this.signTransaction(customizedTransaction,this.privateKey)
+            console.log("signedTx", signedTx)
+            resolve(signedTx);
+          })
+          .catch(error => {
+              console.log(error)
+              reject(error)
+          })
+      })
     }
 
 
@@ -78,7 +91,7 @@ export class UserIdentity {
     */
     private async customize(transaction) {
         return new Promise((resolve, reject) => {
-            this.getUserNonce(this.endPoint, this.address)
+            this.getUserNonce(this.endPoint, transaction.from)
             .then(mynonce => {
                 transaction.nonce = mynonce
                 transaction.gasprice = 0;
@@ -96,19 +109,18 @@ export class UserIdentity {
      * @param {object} transaction transaction to be signed
      * @return {string} tx hash
      */
-    public signTransaction(transaction, privateKey) {
-        try {
-            const tx = new EthereumTxAll(transaction);
-            let privKeyBuffered = Buffer.from(privateKey, 'hex')
-            tx.sign(privKeyBuffered);
-            const signedTx = `0x${tx.serialize().toString('hex')}`;
-            return signedTx;
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
-    }
-
+     public signTransaction(transaction, privateKey) {
+         try {
+             const tx = new EthereumTxAll(transaction);
+             let privKeyBuffered = Buffer.from(privateKey, 'hex')
+             tx.sign(privKeyBuffered);
+             const signedTx = `0x${tx.serialize().toString('hex')}`;
+             return signedTx;
+         } catch (err) {
+             console.log(err);
+             throw err;
+         }
+     }
     /**
     *   Calculate the user nonce.
     *   It is async to ask Web3 bust it is sync to set it manually

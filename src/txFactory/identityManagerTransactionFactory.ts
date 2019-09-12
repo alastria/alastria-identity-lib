@@ -105,7 +105,7 @@ export function getEidasLevel(web3, identityIssuer) {
 export function addIdentityServiceProvider(web3, identityServiceProvider) {
   return new Promise((resolve, reject) => {
     let transaction = config.basicTransaction;
-    transaction.from = `0x${identityServiceProvider}`
+    transaction.from = '0xcc08cb64f42cacfa0e74375128147aae39105115';
     web3.eth.getTransactionCount(transaction.from)
     .then(mynonce => {
       transaction.nonce = mynonce

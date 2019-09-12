@@ -18,7 +18,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of instantiating an identity ------ \n')
-
+/*
 // Save the key store in a variable. You can read it from a file
 let keyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
 // Recover the private key from the keyStore
@@ -31,59 +31,64 @@ try{
 // Init a UserIdentity object with the previous values
 // It is important to add '0x' before the address
 let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
+*/
 
-
-
-//------------------------------------------------------------------------------
-console.log('\n ------ Example of creating, signing and sending a transaction ------ \n')
-
-// Some fake data to use as parameters
-let subjectPresentationHash = '0x951e8035e1971634d1e63e18678e87d1ad4ee116a0c317e23546c80759be1527'
-let uri = 'presentation-identifier-in-repository'
-// Step 1, create the transaction
-let tx = identityForUse.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash,uri))
-// Step 2, send a transaction to the blockchain
-web3.eth.sendSignedTransaction(tx, (e, hash) => {
-	console.log("SignedTx: ", hash);
-})
-
-
+// Esta es la cuenta que ha desplegado los smart contracts, la accounts[0] de ganache
+let ganacheAdminIdentity = new UserIdentity(web3, '0xcc08cb64f42cacfa0e74375128147aae39105115', '7e989b0a74a5d74f3454104b76fd1f3d068196282bf753b66f0d9f2d34f6db31')
 
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a Service Provider identity ------ \n')
 
-// You need an existing Service Provider which generates an access token to your new identity,
-// Firstly, we get the keyStore of the existing SP and recover its private key
-let SPkeyStore = {"address":"643266eb3105f4bf8b4f4fec50886e453f0da9ad","crypto":{"cipher":"aes-128-ctr","ciphertext":"019b915ddee1172f8475fb201bf9995cf3aac1b9fe22b438667def44a5537152","cipherparams":{"iv":"f8dd7c0eaa7a2b7c87991fe30dc9d632"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"966a16bff9a4b14df58a462ba3c49364d42f2804b9eb47daf241f08950af8bdb"},"mac":"924356fbaa036d416fd9ab8c48dec451634f47dd093af4ce1fa682e8bf6753b3"},"id":"3073c62d-2dc1-4c1e-aa1c-ca089b69de16","version":3}
-let SPPrivateKey;
-try{
-	SPPrivateKey = keythereum.recover('Passw0rd', SPkeyStore)
-}catch(error){
-	console.log("ERROR: ", error)
-}
-// Secondly, we instantiate the existing Service Provider identity
-let existingSPIdentity = new UserIdentity(web3, SPkeyStore.address, SPPrivateKey)
-// Next, we get the keyStore of the new identity that you want to create
+
 let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
-// Step 1, we create the transaction addIdentityServiceProvider
-let txAddIdentityServiceProvider = transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address, web3)
-// Step 2, we add the transaction to the existingSPIdentity
-existingSPIdentity.addTransaction(txAddIdentityServiceProvider)
-.then(() => {
-	// Step 3, sign the transactions in the queue
-	let signedTransactionStack = existingSPIdentity.getSignedTransactions()
-	// Step 4, send the transaction to the blockchain!!
-	// web3.eth.sendSignedTransaction(signedTx)
-	// .then(sendSigned => {
-	// 	console.log('SEND -> ', sendSigned)
-	// })
-	// .catch(error => {
-	// 	console.log(error)
-	// })
+
+transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address)
+.then(tx1 => {
+    console.log("tx1", tx1)
+    ganacheAdminIdentity.getKnownTransaction(tx1)
+		.then(txAddIdentityServiceProvider => {
+			console.log("txAddIdentityServiceProvider", txAddIdentityServiceProvider)
+
+	    // Step 2, we add the transaction to the existingSPIdentity
+	    web3.eth.sendSignedTransaction(txAddIdentityServiceProvider)
+	    .then(sendSigned => {
+	    console.log('SendSignedTX ----> ', sendSigned)
+	    })
+	    .catch(error => {
+	        console.log('Error -----> ', error)
+	    })
+		})
+		.catch(error2 => {
+				console.log('Error2 -----> ', error2)
+		})
 })
+.catch(error3 => {
+		console.log('Error3 -----> ', error3)
+})
+// Step 1, we create the transaction addIdentityServiceProvider
+/*
+transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address).then(tx => {
+	console.log('tx', tx)
+	var txAddIdentityServiceProvider = ganacheAdminIdentity.getKnownTransaction(tx)
+	console.log('txAddIdentityServiceProvider', txAddIdentityServiceProvider)
+		// Step 2, we add the transaction to the existingSPIdentity
+		web3.eth.sendSignedTransaction(txAddIdentityServiceProvider)
+		.then(hash => {
+			console.log("web3.eth.sendSignedTransaction HASH", hash);
+		})
+		.cath(error =>{
+			console.log("web3.eth.sendSignedTransaction ERROR", error)
+		})
+}).catch(error2 =>{
+	console.log("error2", error2)
+})
+*/
 
 
 
+
+
+/*
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of sign, verify and decode JWT functions (not interact with the blockchain) ------ \n')
 
@@ -188,4 +193,4 @@ let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)
-
+*/

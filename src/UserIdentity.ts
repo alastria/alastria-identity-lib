@@ -34,10 +34,10 @@ export class UserIdentity {
         this.transactions.push(this.customize(transaction));
     }
 /*
-    public addTransaction(transaction, nonceType) {
+    public addTransaction(transaction) {
         return new Promise((resolve, reject) => {
             nonceType = 'web3'
-            this.customize(transaction, nonceType)
+            this.customize(transaction)
             .then(tx => {
                 console.log("ADD TRANSACTION ", tx);
                 this.transactions.push(tx)

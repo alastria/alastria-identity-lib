@@ -69,12 +69,9 @@ export class UserIdentity {
     */
     public async getKnownTransaction(transaction) {
       return new Promise((resolve, reject) => {
-          console.log("transaction", transaction)
           this.customize(transaction)
           .then(customizedTransaction => {
-            console.log("customizedTransaction", customizedTransaction)
             var signedTx = this.signTransaction(customizedTransaction,this.privateKey)
-            console.log("signedTx", signedTx)
             resolve(signedTx);
           })
           .catch(error => {

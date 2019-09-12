@@ -34,59 +34,36 @@ let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivate
 */
 
 // Esta es la cuenta que ha desplegado los smart contracts, la accounts[0] de ganache
-let ganacheAdminIdentity = new UserIdentity(web3, '0xcc08cb64f42cacfa0e74375128147aae39105115', '7e989b0a74a5d74f3454104b76fd1f3d068196282bf753b66f0d9f2d34f6db31')
+let ganacheAdminIdentity = new UserIdentity(web3, '0xfe5f07475936930d5611a9e0f98adb3cf4f938cd', '7aa45c5835f5bd5c89cc47db86af44d5732d3e7c68941545bda6a0e3d9cb40f2')
 
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a Service Provider identity ------ \n')
 
 
-let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
+let newSPKeyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
 
-transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address)
+// Step 1, we create the transaction addIdentityServiceProvider
+transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address, ganacheAdminIdentity.address)
 .then(tx1 => {
-    console.log("tx1", tx1)
+    console.log('tx1 ---->', tx1)
     ganacheAdminIdentity.getKnownTransaction(tx1)
-		.then(txAddIdentityServiceProvider => {
-			console.log("txAddIdentityServiceProvider", txAddIdentityServiceProvider)
+	.then(txAddIdentityServiceProvider => {
+		console.log('txAddIdentityServiceProvider ---->', txAddIdentityServiceProvider)
 
-	    // Step 2, we add the transaction to the existingSPIdentity
-	    web3.eth.sendSignedTransaction(txAddIdentityServiceProvider)
-	    .then(sendSigned => {
-	    console.log('SendSignedTX ----> ', sendSigned)
-	    })
-	    .catch(error => {
-	        console.log('Error -----> ', error)
-	    })
+	// Step 2, we add the transaction to the existingSPIdentity
+		web3.eth.sendSignedTransaction(txAddIdentityServiceProvider, (err, sendSignedHash) => {
+			if (err) { console.log(err); return; }
+			console.log('sendSignedHash ---->', sendSignedHash)
 		})
-		.catch(error2 => {
-				console.log('Error2 -----> ', error2)
-		})
+		
+	})
+	.catch(error2 => {
+		console.log('Error2 -----> ', error2)
+	})
 })
 .catch(error3 => {
-		console.log('Error3 -----> ', error3)
+	console.log('Error3 -----> ', error3)
 })
-// Step 1, we create the transaction addIdentityServiceProvider
-/*
-transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address).then(tx => {
-	console.log('tx', tx)
-	var txAddIdentityServiceProvider = ganacheAdminIdentity.getKnownTransaction(tx)
-	console.log('txAddIdentityServiceProvider', txAddIdentityServiceProvider)
-		// Step 2, we add the transaction to the existingSPIdentity
-		web3.eth.sendSignedTransaction(txAddIdentityServiceProvider)
-		.then(hash => {
-			console.log("web3.eth.sendSignedTransaction HASH", hash);
-		})
-		.cath(error =>{
-			console.log("web3.eth.sendSignedTransaction ERROR", error)
-		})
-}).catch(error2 =>{
-	console.log("error2", error2)
-})
-*/
-
-
-
-
 
 /*
 //------------------------------------------------------------------------------

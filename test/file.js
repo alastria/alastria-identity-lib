@@ -50,12 +50,8 @@ transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStor
 	.then(txAddIdentityServiceProvider => {
 		console.log('txAddIdentityServiceProvider ---->', txAddIdentityServiceProvider)
 
-	// Step 2, we add the transaction to the existingSPIdentity
-		web3.eth.sendSignedTransaction(txAddIdentityServiceProvider, (err, sendSignedHash) => {
-			if (err) { console.log(err); return; }
-			console.log('sendSignedHash ---->', sendSignedHash)
-		})
-		
+		let signedTx = identityManager.sendSignedTransaction(web3, txAddIdentityServiceProvider);
+		console.log("SignedTx: ", signedTx);	
 	})
 	.catch(error2 => {
 		console.log('Error2 -----> ', error2)
@@ -90,6 +86,9 @@ console.log('The decoded token is: ', decodedJWT)
 let verifyJWT = tokensFactory.presentation.verifyJWT(signedJWT, rawPublicKey)
 console.log('The signedToken is verified?: ', verifyJWT)
 
+console.log('\n ------ Example of PSMHash ------ \n')
+let psmHash = tokensFactory.presentation.PSMHash(web3, signedJWT, didIsssuer);
+console.log("The PSMHash is:", psmHash);
 
 
 //------------------------------------------------------------------------------
@@ -171,3 +170,4 @@ let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)
 */
+

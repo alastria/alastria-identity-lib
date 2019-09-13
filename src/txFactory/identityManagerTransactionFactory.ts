@@ -102,12 +102,23 @@ export function getEidasLevel(web3, identityIssuer) {
  * @param web3
  * @param identityServiceProvider
  */
-export function addIdentityServiceProvider(web3, identityServiceProvider) {
-  let transaction = config.basicTransaction;
-  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["addIdentityServiceProvider"], [identityServiceProvider]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+export function addIdentityServiceProvider(web3, identityServiceProvider, adminIdentityAddress) {
+  return new Promise((resolve, reject) => {
+    let transaction = config.basicTransaction;
+    transaction.from = adminIdentityAddress;
+    web3.eth.getTransactionCount(transaction.from)
+    .then(mynonce => {
+      transaction.nonce = mynonce
+      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["addIdentityServiceProvider"], [identityServiceProvider]);
+      transaction.to = config.alastriaIdentityManager;
+      transaction.gasLimit = 600000;
+      resolve(transaction)
+    })
+    .catch(error => {
+      console.log('Error ----> ', error)
+      reject(error)
+    })
+  })
 }
 
 /**

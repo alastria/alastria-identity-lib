@@ -68,8 +68,13 @@ export class UserIdentity {
      *   @param {web3} web3 object
      *   @param {tx} transaction
      */
-    public sendSignedTransaction(web3, tx) {
-        return web3.eth.sendSignedTransaction(tx);
+    public async sendSignedTransaction(web3, tx) {
+	return new Promise((resolve, reject) => {
+		web3.eth.sendSignedTransaction(tx, (err, sendSignedHash) => {
+			if (err) { console.log(err); return; }
+			resolve(sendSignedHash);
+		});
+	});	
     }
 
     /**

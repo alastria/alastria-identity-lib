@@ -11,7 +11,7 @@ let keythereum = require('keythereum')
 
 // Init your blockchain provider
 //let myBlockchainServiceIp = 'http://yourIP:RPCPort'
-let myBlockchainServiceIp = 'http://127.0.0.1:8545'
+let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 
 
@@ -31,58 +31,6 @@ try{
 // Init a UserIdentity object with the previous values
 // It is important to add '0x' before the address
 let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
-
-
-
-//------------------------------------------------------------------------------
-console.log('\n ------ Example of creating, signing and sending a transaction ------ \n')
-
-// Some fake data to use as parameters
-let subjectPresentationHash = '0x951e8035e1971634d1e63e18678e87d1ad4ee116a0c317e23546c80759be1527'
-let uri = 'presentation-identifier-in-repository'
-// Step 1, create the transaction
-let tx = identityForUse.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash,uri))
-// Step 2, send a transaction to the blockchain
-web3.eth.sendSignedTransaction(tx, (e, hash) => {
-	console.log("SignedTx: ", hash);
-})
-
-
-
-//------------------------------------------------------------------------------
-console.log('\n ------ Example of creating a Service Provider identity ------ \n')
-
-// You need an existing Service Provider which generates an access token to your new identity,
-// Firstly, we get the keyStore of the existing SP and recover its private key
-let SPkeyStore = {"address":"643266eb3105f4bf8b4f4fec50886e453f0da9ad","crypto":{"cipher":"aes-128-ctr","ciphertext":"019b915ddee1172f8475fb201bf9995cf3aac1b9fe22b438667def44a5537152","cipherparams":{"iv":"f8dd7c0eaa7a2b7c87991fe30dc9d632"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"966a16bff9a4b14df58a462ba3c49364d42f2804b9eb47daf241f08950af8bdb"},"mac":"924356fbaa036d416fd9ab8c48dec451634f47dd093af4ce1fa682e8bf6753b3"},"id":"3073c62d-2dc1-4c1e-aa1c-ca089b69de16","version":3}
-let SPPrivateKey;
-try{
-	SPPrivateKey = keythereum.recover('Passw0rd', SPkeyStore)
-}catch(error){
-	console.log("ERROR: ", error)
-}
-// Secondly, we instantiate the existing Service Provider identity
-let existingSPIdentity = new UserIdentity(web3, SPkeyStore.address, SPPrivateKey)
-// Next, we get the keyStore of the new identity that you want to create
-let newSPKeyStore = {"address":"da80820ade1f39fea17acdb0531e2bb3bd29bf72","crypto":{"cipher":"aes-128-ctr","ciphertext":"dcd1fa9399361c3b3dc1159d5e203c9ec823afb220f86c9c2d1d21d587b7d54a","cipherparams":{"iv":"097471b53645c92a66d082be0bdc3015"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"f0b6f108c60db715678b574f7807265b82b48b811b863496670287f1fee135c0"},"mac":"de93caf38eb66db86b95fec190cbfd101840e32b93529acdb315a8734f62c389"},"id":"744e725d-3968-4de4-ad8d-de53d912a0b6","version":3}
-// Step 1, we create the transaction addIdentityServiceProvider
-let txAddIdentityServiceProvider = transactionFactory.identityManager.addIdentityServiceProvider(newSPKeyStore.address, web3)
-// Step 2, we add the transaction to the existingSPIdentity
-existingSPIdentity.addTransaction(txAddIdentityServiceProvider)
-.then(() => {
-	// Step 3, sign the transactions in the queue
-	let signedTransactionStack = existingSPIdentity.getSignedTransactions()
-	// Step 4, send the transaction to the blockchain!!
-	// web3.eth.sendSignedTransaction(signedTx)
-	// .then(sendSigned => {
-	// 	console.log('SEND -> ', sendSigned)
-	// })
-	// .catch(error => {
-	// 	console.log(error)
-	// })
-})
-
-
 
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of sign, verify and decode JWT functions (not interact with the blockchain) ------ \n')
@@ -108,14 +56,9 @@ console.log('The decoded token is: ', decodedJWT)
 let verifyJWT = tokensFactory.presentation.verifyJWT(signedJWT, rawPublicKey)
 console.log('The signedToken is verified?: ', verifyJWT)
 
-
-
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of AlastriaToken and AlastriaSession ------ \n')
-
 //Some fake data
-
-
 //The context of the jwt
 let context = "https://w3id.org/did/v1"
 //The user wallet public key
@@ -150,10 +93,13 @@ const alastriaSession = tokensFactory.presentation.createAlastriaSession(context
 console.log('The Alastria session is: ', alastriaSession)
 
 
+console.log('\n ------ Example of PSMHash ------ \n')
+let psmHash = tokensFactory.presentation.PSMHash(web3, signedJWT, didIsssuer);
+console.log("The PSMHash is:", psmHash);
 
+/* ------------------- WORK IN PROGRESS ---------------
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a credential ------ \n')
-
 // Some fake data
 let credentialKey ="StudentID"
 let credentialValue ="11235813"
@@ -188,4 +134,37 @@ let jti =  "https://www.metrovacesa.com/alastria/credentials/3732"
 
 const presentation = tokensFactory.presentation.createPresentation(didIssuer, didSubject, credentials, timeExp, timeNbf, jti)
 console.log('The presentation is: ', presentation)
+*/
+
+console.log('\n ------ Example of sending a transaction to the blockchain (for example creating a Service Provider identity) ------ \n')
+// This is the account thtat deployed all the smart contracts (accounts[0])
+// These values must be changed with the ones that ganache provides 
+// *IMPORTANT!* Take a look that the Private Key has no '0x'. Dont forget to remove it!
+let ganacheAdminIdentity = new UserIdentity(web3, '0xC3B8c4af278b40813Cd841F6892E72e961eba1E5', '8be8e97988b013cffb352865b81c5b33341a10ec2ea9c9acec1857350b9d5c32')
+
+// The new Service Provider
+let newSPKeyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
+
+// Step 1, we call the function addIdentityServiceProvider which is in AlastriaIdentityManager.sol contract
+transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address, ganacheAdminIdentity.address)
+.then(tx1 => {
+	console.log('The transaction is: ', tx1)
+	// Step 2, we customize and sign the transaction by calling the function getKnownTransaction
+	ganacheAdminIdentity.getKnownTransaction(tx1)
+	.then(txAddIdentityServiceProvider => {
+		console.log('The transaction bytes data is: ', txAddIdentityServiceProvider)
+		// Step 3, we send the signed transaction to the blockchain
+		ganacheAdminIdentity.sendSignedTransaction(web3, txAddIdentityServiceProvider)
+		.then(signedTx => {
+			console.log("The transaction hash is: ", signedTx);	
+		})
+		.catch (error => { console.log("Error ---->", error)})
+	})
+	.catch(error2 => {
+		console.log('Error -----> ', error)
+	})
+})
+.catch(error3 => {
+	console.log('Error -----> ', error)
+})
 

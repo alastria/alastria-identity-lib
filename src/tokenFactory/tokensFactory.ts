@@ -10,6 +10,7 @@ export const tokensFactory = {
     'createCredential': createCredential,
     'createPresentation': createPresentation,
     //'createPresentationRequest': createPresentationRequest
+    'PSMHash': PSMHash
   }
 }
 
@@ -120,6 +121,11 @@ function createPresentation(didIssuer, didSubject, credentials, timeExp?: number
   return jwt
 }
 
+function PSMHash(web3, jwt, did){
+	let json = jwt.concat(did);
+	return web3.utils.sha3(json); // ALIAS -> web3.utils.keccak256(json) 
+
+}
 /*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject
 }*/

@@ -2,11 +2,12 @@
 ## What it does
 This library interacts with the Alastria Identity smart contracts which are in the alastria-identity repository (https://github.com/alastria/alastria-identity).
 
-This library has two different modules:
-- User Functions: It helps to manage the wallet and the identity user.
+This library has three different modules:
+- User Functions: It helps to manage the wallet and the identity user
 - Blockchain Functions: It encapsulates Alastria Identity Smart Contracts
 - Tokens Functions: It manages JWTs, AlastriaSession...
 
+If you want to deploy Alastria Identity Smart Contracts on a local network and try this library, please follow the steps describe [here](#ganache)
 ## How to use it
 In your working directory init npm with
 ```
@@ -14,7 +15,7 @@ npm init -y
 ```
 Consume this library by running:
 ```
-npm install --save github:alastria/alastria-identity-lib.git
+npm install --save github:alastria/alastria-identity-lib.git#develop
 ```
 Now, you can use it from any JavaScript file in your workiing directory. You can copy an example from `test/file.js`.
 
@@ -131,7 +132,8 @@ node file.js
 
 If you make any changes in file.js, please comment them and copy the file to `node-modules/alastria-identity-lib/test/file.js` and push. Thanks!
 
-
+<a name="ganache"></a>
+## Connecting with ganache
 
 ## Dependencies
 This library is using functionality from others.

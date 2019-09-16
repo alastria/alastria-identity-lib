@@ -90,7 +90,7 @@ node file.js
 ## How to collaborate
 We recommend you to create a `example` directory to test the lib while changing it.
 
-Steps for your first time:
+### A. Steps for your first time:
 
 1. Create a working directory `example` where you will have your JavaScript file `file.js`
 ```bash
@@ -118,7 +118,7 @@ cp node-modules/alastria-identity/test/file.js .
 node file.js
 ```
 
-Steps for your following times:
+### B.Steps for your following times:
 1. Make your changes in `example/node-modules/alastria-identity-lib` directory.
 2. From the root directory alastria-identity-lib , transpile with
 ```

@@ -38,7 +38,7 @@ let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivate
 
 Then you can build and send transactions to the blockchain. Please mind the promises!
 ```javascript
-transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStore.address, ganacheAdminIdentity.address)
+transactionFactory.identityManager.addIdentityServiceProvider(web3, aNewSPaddress, identityForUse.address)
 .then(tx1 => {
 	console.log('The transaction is: ', tx1)
 	// Step 2, we customize and sign the transaction by calling the function getKnownTransaction

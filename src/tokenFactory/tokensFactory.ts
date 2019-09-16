@@ -66,13 +66,30 @@ function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId,
 }*/
 
 // It builds a JWT with credential info
-export function createCredential(context, levelOfAssurance, credentialKey: string, credentialValue) {
-  let jwt = {}
-  jwt["@context"] = context
-  jwt["levelOfAssurance"] = levelOfAssurance
-  jwt[credentialKey] = credentialValue
-  return jwt;
+export function createCredential(kid, didIssuer, didSubject, context, credentialSubject, timeExp?: number, timeNbf?: number, jti?: number) {
+     const jwt = {
+    "header": {
+      "typ": "JWT",
+      "alg": "ES256K",
+      "kid": kid
+    },
+    "payload": {
+      "jti": jti,
+      "iss": didIssuer,
+      "sub": didSubject,
+      "iat": timeNbf, // ?? Como se calcula
+      "exp": timeExp,
+      "nbf": timeNbf,
+      "vc":{
+    	"@context": [context,"JWT"],
+        "type": ["VerifiableCredential", "AlastriaExampleCredential"],
+        "credentialSubject":credentialSubject
+    	   }
+      }
+   }
+  return jwt
 }
+
 
 /**
 * This function creates a presentation with the jwt format

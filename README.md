@@ -7,7 +7,7 @@ This library has three different modules:
 - Blockchain Functions: It encapsulates Alastria Identity Smart Contracts
 - Tokens Functions: It manages JWTs, AlastriaSession...
 
-If you want to deploy Alastria Identity Smart Contracts on a local network and try this library, please follow the steps describe [here](#ganache)
+If you want to deploy Alastria Identity Smart Contracts on a local network and try this library, please follow the steps described [here](#ganache)
 ## How to use it
 In your working directory init npm with
 ```

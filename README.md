@@ -119,12 +119,11 @@ node file.js
 ```
 
 ### B.Steps for your following times:
-1. Make your changes in `example/node-modules/alastria-identity-lib` directory.
-2. From the root directory alastria-identity-lib , transpile with
+1. Make your changes in `example/node-modules/alastria-identity-lib` directory and transpile:
 ```
 tsc
 ```
-3. Now, change to the root of your working directory `example` where you have your JavaScript file and try it!
+3. Now, move to the root of your working directory `example` where you have your JavaScript file and try it!
 ```
 cd ../../
 node file.js

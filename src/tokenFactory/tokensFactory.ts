@@ -32,12 +32,12 @@ function verifyJWT(jwt, rawPublicKey) {
   return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
 }
 
-function createAlastriaSession(context, iss, pku, verifiedAT, iat, exp?: string, nbf?: string, jti?: string) {
+function createAlastriaSession(context, iss, pku, verifiedAT, exp?: string, nbf?: string, jti?: string) {
   const jwt = {
     "@context": context,
     "iss": iss,
     "pku": pku,
-    "iat": iat,
+    "iat": Math.round(Date.now()/1000),
     "exp": exp,
     "nbf": nbf,
     "data": verifiedAT,
@@ -46,12 +46,12 @@ function createAlastriaSession(context, iss, pku, verifiedAT, iat, exp?: string,
   return jwt
 }
 
-function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId, tokenBroadcastDate, tokenExpTime, nbf?: string, jti?: string) {
+function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId, tokenExpTime, nbf?: string, jti?: string) {
   const jwt = {
     "iss": didIssuer,
     "gwu": providerURL,
     "cbu": callbackURL,
-    "iat": tokenBroadcastDate,
+    "iat": Math.round(Date.now()/1000),
     "ani": alastriaNetId,
     "nbf": nbf,
     "exp": tokenExpTime,
@@ -78,7 +78,7 @@ export function createCredential(kid, didIssuer, didSubject, context, credential
       "jti": jti,
       "iss": didIssuer,
       "sub": didSubject,
-      "iat": timeNbf, // ?? Como se calcula
+      "iat": Math.round(Date.now()/1000), // ?? Como se calcula
       "exp": timeExp,
       "nbf": timeNbf,
       "vc":{
@@ -90,7 +90,6 @@ export function createCredential(kid, didIssuer, didSubject, context, credential
    }
   return jwt
 }
-
 
 /**
 * This function creates a presentation with the jwt format
@@ -112,7 +111,7 @@ function createPresentation(didIssuer, didSubject, credentials, timeExp?: number
       "jti": jti,
       "iss": didIssuer,
       "sub": didSubject,
-      "iat": timeNbf, // ?? Como se calcula
+      "iat": Math.round(Date.now()/1000), // ?? Como se calcula
       "exp": timeExp,
       "nbf": timeNbf,
       "credentials": credentials // TODO que ponga el contenido de cada credencial
@@ -123,7 +122,7 @@ function createPresentation(didIssuer, didSubject, credentials, timeExp?: number
 
 function PSMHash(web3, jwt, did){
 	let json = jwt.concat(did);
-	return web3.utils.sha3(json); // ALIAS -> web3.utils.keccak256(json) 
+	return web3.utils.sha3(json); // ALIAS -> web3.utils.keccak256(json)
 
 }
 /*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {

@@ -81,7 +81,7 @@ let tokenActivationDate = 1563782792
 let jsonTokenId = "ze298y42sba"
 
 // Creating an AlastriaToken
-const alastriaToken = tokensFactory.presentation.createAlastriaToken(didIsssuer, providerURL, callbackURL, alastriaNetId, tokenBroadcastDate, tokenExpTime, tokenActivationDate, jsonTokenId)
+const alastriaToken = tokensFactory.presentation.createAlastriaToken(didIsssuer, providerURL, callbackURL, alastriaNetId, tokenExpTime, tokenActivationDate, jsonTokenId)
 console.log('The Alastria token is: ', alastriaToken)
 
 // Signing the AlastriaToken
@@ -89,7 +89,7 @@ let signedAT = tokensFactory.presentation.signJWT(alastriaToken, rawPrivateKey)
 console.log('The signed Alastria token is: ', signedAT)
 
 // Creating an AlastriaSession using the signed AlastriaToken
-const alastriaSession = tokensFactory.presentation.createAlastriaSession(context, didIsssuer, userPublicKey, signedAT, tokenBroadcastDate, tokenExpTime, tokenActivationDate, jsonTokenId)
+const alastriaSession = tokensFactory.presentation.createAlastriaSession(context, didIsssuer, userPublicKey, signedAT, tokenExpTime, tokenActivationDate, jsonTokenId)
 console.log('The Alastria session is: ', alastriaSession)
 
 
@@ -97,22 +97,39 @@ console.log('\n ------ Example of PSMHash ------ \n')
 let psmHash = tokensFactory.presentation.PSMHash(web3, signedJWT, didIsssuer);
 console.log("The PSMHash is:", psmHash);
 
-/* ------------------- WORK IN PROGRESS ---------------
+
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a credential ------ \n')
 // Some fake data
 let credentialKey ="StudentID"
 let credentialValue ="11235813"
+let jti = "https://www.metrovacesa.com/alastria/credentials/3734";
 
-const credential1 = tokensFactory.presentation.createCredential("JWT", 2, credentialKey, credentialValue)
+let kidCredential1 = "did:ala:quor:redt:QmeeasCZ9jLbXueBJ7d7csxhb#keys-1";
+let subCredential1 = "did:alastria:quorum:redt:QmeeasCZ9jLbXueBJ7d7csxhb";
+let credentialSubject = {};
+credentialSubject[credentialKey]=credentialValue;
+credentialSubject["levelOfAssurance"]="basic";
+
+let kidCredential2 = "did:ala:quor:redt:QmeeasCZ9jLbXueBJ7d7csxhb#keys-2";
+let subCredential2 = "did:alastria:quorum:redt:QmeeasCZ9jLbXueBJ7d7csxkm";
+
+let kidCredential3 = "did:ala:quor:redt:QmeeasCZ9jLbXueBJ7d7csxhb#keys-3";
+let subCredential3 = "did:alastria:quorum:redt:QmeeasCZ9jLbXueBJ7d7csxlb";
+
+const credential1 = tokensFactory.presentation.createCredential(kidCredential1, didIsssuer, subCredential1, context, credentialSubject, tokenExpTime, tokenActivationDate, jti)
 console.log('The credential1 is: ', credential1)
 
-const credential2 = tokensFactory.presentation.createCredential("JWT", 2, "Email", "agp@gmail.com")
+credentialSubject[credentialKey]="65487962";
+credentialSubject["name"]="Kevin";
+const credential2 = tokensFactory.presentation.createCredential(kidCredential2, didIsssuer, subCredential2, context, credentialSubject, tokenExpTime, tokenActivationDate, jti)
 console.log('The credential2 is: ', credential2)
 
-const credential3 = tokensFactory.presentation.createCredential("JWT", 2, "DNI", "71236152N")
+credentialSubject[credentialKey]="98562317";
+credentialSubject["phone_number"]="9191919194";
+const credential3 = tokensFactory.presentation.createCredential(kidCredential3, didIsssuer, subCredential3, context, credentialSubject, tokenExpTime, tokenActivationDate, jti)
 console.log('The credential3 is: ', credential3)
-
+/* ------------------- WORK IN PROGRESS ---------------
 //------------------------------------------------------------------------------
 console.log('\n ------ Example of creating a presentation ------ \n')
 
@@ -138,7 +155,7 @@ console.log('The presentation is: ', presentation)
 
 console.log('\n ------ Example of sending a transaction to the blockchain (for example creating a Service Provider identity) ------ \n')
 // This is the account thtat deployed all the smart contracts (accounts[0])
-// These values must be changed with the ones that ganache provides 
+// These values must be changed with the ones that ganache provides
 // *IMPORTANT!* Take a look that the Private Key has no '0x'. Dont forget to remove it!
 let ganacheAdminIdentity = new UserIdentity(web3, '0xC3B8c4af278b40813Cd841F6892E72e961eba1E5', '8be8e97988b013cffb352865b81c5b33341a10ec2ea9c9acec1857350b9d5c32')
 
@@ -156,7 +173,7 @@ transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStor
 		// Step 3, we send the signed transaction to the blockchain
 		ganacheAdminIdentity.sendSignedTransaction(web3, txAddIdentityServiceProvider)
 		.then(signedTx => {
-			console.log("The transaction hash is: ", signedTx);	
+			console.log("The transaction hash is: ", signedTx);
 		})
 		.catch (error => { console.log("Error ---->", error)})
 	})
@@ -167,4 +184,3 @@ transactionFactory.identityManager.addIdentityServiceProvider(web3, newSPKeyStor
 .catch(error3 => {
 	console.log('Error -----> ', error)
 })
-

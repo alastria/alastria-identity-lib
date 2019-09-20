@@ -1,7 +1,7 @@
 //import { default as _ } from 'jsontokens'
 const _: any = require('jsontokens');
 export const tokensFactory = {
-  presentation: {
+  tokens: {
     'decodeJWT': decodeJWT,
     'signJWT': signJWT,
     'verifyJWT': verifyJWT,

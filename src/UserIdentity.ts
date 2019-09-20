@@ -69,12 +69,12 @@ export class UserIdentity {
      *   @param {tx} transaction
      */
     public async sendSignedTransaction(web3, tx) {
-	return new Promise((resolve, reject) => {
-		web3.eth.sendSignedTransaction(tx, (err, sendSignedHash) => {
-			if (err) { console.log(err); return; }
-			resolve(sendSignedHash);
+	     return new Promise((resolve, reject) => {
+		       web3.eth.sendSignedTransaction(tx, (err, sendSignedHash) => {
+			      if (err) { console.log(err); return; }
+			      resolve(sendSignedHash);
 		});
-	});	
+	});
     }
 
     /**
@@ -131,6 +131,21 @@ export class UserIdentity {
              throw err;
          }
      }
+
+     // public signTransaction(web3, transaction, privateKey){
+     //   return new Promise((resolve, reject) => {
+     //       web3.eth.accounts.signTransaction(transaction, privateKey)
+     //       .then(result => {
+     //         console.log("RESULT ---------------->",result)
+     //         resolve(result);
+     //       })
+     //       .catch(error => {
+     //           console.log(error)
+     //           reject(error)
+     //       })
+     //   })
+     // }
+
     /**
     *   Calculate the user nonce.
     *   It is async to ask Web3 bust it is sync to set it manually

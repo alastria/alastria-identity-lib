@@ -13,6 +13,8 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   return transaction;
 }
 
+
+
 /**
  * Subject functions
  * function updateSubjectPresentation(bytes32 subjectPresentationHash, Status status) public validStatus(status)

@@ -21,10 +21,10 @@ fs.readdirSync(path.join(__dirname, contractsPath)).forEach(file => {
 
 // WARNING TODO getting from GitHub URL repository or update these address with your new ones!!
 export const config = {
-    alastriaIdentityManager: '0xe9dc6bce74e1ee0ccd7aa461c0c7c3ea0014aa4c',
-    alastriaCredentialRegistry: '0x9f1b26710eff584f017507ad1a7424cc49f1b930',
-    alastriaPresentationRegistry: '0x75d2d6505ce8f8c225d840da42dc33c8e8143501',
-    alastriaPublicKeyRegistry: '0x16e99506009a9bdcbc8546bc629c3d52d8f8264f',
+    alastriaIdentityManager: '0x70e7e63928b8f274f018160207d4275fd8ea5bbe',
+    alastriaCredentialRegistry: '0x465EACeAc60c8FCc8988F6dAE17873D2EbF64588',
+    alastriaPresentationRegistry: '0xf71A93f0D08728A99A44d73238427C26ce63ceC1',
+    alastriaPublicKeyRegistry: '0xc9f8407C5bb0aBAF01fa7aa9e56533780c4eA590',
     basicTransaction: {
         from: '',
         to: '0x0000000000000000000000000000000000000000',

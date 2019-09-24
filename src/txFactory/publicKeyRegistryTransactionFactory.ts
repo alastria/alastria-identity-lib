@@ -10,14 +10,12 @@ export function addKey(web3, publicKey) {
     return new Promise((resolve, reject) => {
       let transaction = config.basicTransaction;
       web3.eth.getTransactionCount(transaction.from)
-      .then(mynonce => {        
+      .then(mynonce => {
         transaction.nonce = mynonce;
         transaction.gasLimit = 600000;
         let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"],[publicKey]);
-        console.log("****************************************",transaction.data);
         transaction.data = delegated(web3, delegatedData);
-        console.log("****************************************",transaction.data);
-        transaction.to = config.alastriaIdentityManager;
+        transaction.to = config.alastriaPublicKeyRegistry;
         resolve(transaction)
       })
       .catch(error => {

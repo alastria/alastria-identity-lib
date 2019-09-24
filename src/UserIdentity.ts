@@ -73,9 +73,24 @@ export class UserIdentity {
 		       web3.eth.sendSignedTransaction(tx, (err, sendSignedHash) => {
 			      if (err) { console.log(err); return; }
 			      resolve(sendSignedHash);
-		});
-	});
+    		});
+    	});
     }
+
+    /**
+     * @Dev Returns a signed transaction
+     *   @param {web3} web3 object
+     *   @param {tx} transaction
+     */
+    public async call(web3, tx) {
+	     return new Promise((resolve, reject) => {
+		       web3.eth.call(tx, (err, outputTx) => {
+			      if (err) { console.log(err); return; }
+			      resolve(outputTx);
+    		});
+    	});
+    }
+
 
     /**
     * @Dev Returns a known transaction from an anonimous transaction
@@ -104,7 +119,7 @@ export class UserIdentity {
             this.getUserNonce(this.endPoint, transaction.from)
             .then(mynonce => {
                 transaction.nonce = mynonce
-                transaction.gasprice = 0;
+                transaction.gasPrice = 0;
                 resolve(transaction)
             })
             .catch(error => {

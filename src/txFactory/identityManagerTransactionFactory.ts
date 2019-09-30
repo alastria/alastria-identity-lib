@@ -20,24 +20,12 @@ export function delegateCall(web3, _destination, _value, _data) {
  * @param web3
  * @param signAddress
  */
-export function prepareAlastriaID(web3, signAddress, from) {
-  return new Promise((resolve, reject) => {
-    let transaction = config.basicTransaction;
-    transaction.from = from;
-    web3.eth.getTransactionCount(transaction.from)
-    .then(mynonce => {
-      transaction.nonce = mynonce
-      transaction.gasLimit = 600000;
-      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["prepareAlastriaID"], [signAddress]);
-      transaction.to = config.alastriaIdentityManager;
-      //console.log("----------------> to", transaction.to)
-      resolve(transaction)
-    })
-    .catch(error => {
-      console.log('Error ----> ', error)
-      reject(error)
-    })
-  })
+export function prepareAlastriaID(web3, signAddress) {
+  let transaction = config.basicTransaction;
+  transaction.to = config.alastriaIdentityManager;
+  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["prepareAlastriaID"], [signAddress]);
+  transaction.gasLimit = 600000;
+  return transaction
 }
 
 /**
@@ -46,23 +34,11 @@ export function prepareAlastriaID(web3, signAddress, from) {
  * @param publicKeyData
  */
 export function createAlastriaIdentity(web3, addPublicKeyCallData) {
-  return new Promise((resolve, reject) => {
-    let transaction = config.basicTransaction;
-    web3.eth.getTransactionCount(transaction.from)
-    .then(mynonce => {
-      transaction.nonce = mynonce
-      transaction.gasLimit = 600000;
-      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [addPublicKeyCallData]);
-      transaction.to = config.alastriaIdentityManager;
-    //  console.log("----------------> to", transaction.to)
-      resolve(transaction)
-    })
-    .catch(error => {
-      console.log('Error ----> ', error)
-      reject(error)
-    })
-  })
-
+  let transaction = config.basicTransaction;
+  transaction.to = config.alastriaIdentityManager;
+  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [addPublicKeyCallData]);
+  transaction.gasLimit = 600000;
+  return transaction
 }
 
 // AlastriaIdentityIssuer.sol
@@ -127,22 +103,11 @@ export function getEidasLevel(web3, identityIssuer) {
  * @param identityServiceProvider
  */
 export function addIdentityServiceProvider(web3, identityServiceProvider, from) {
-  return new Promise((resolve, reject) => {
-    let transaction = config.basicTransaction;
-    transaction.from = from;
-    web3.eth.getTransactionCount(transaction.from)
-    .then(mynonce => {
-      transaction.nonce = mynonce;
-      transaction.gasLimit = 600000;
-      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["addIdentityServiceProvider"], [identityServiceProvider]);
-      transaction.to = config.alastriaIdentityManager;
-      resolve(transaction)
-    })
-    .catch(error => {
-      console.log('Error ----> ', error)
-      reject(error)
-    })
-  })
+  let transaction = config.basicTransaction;
+  transaction.to = config.alastriaIdentityManager;
+  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["addIdentityServiceProvider"], [identityServiceProvider]);
+  transaction.gasLimit = 600000;
+  return transaction
 }
 
 /**

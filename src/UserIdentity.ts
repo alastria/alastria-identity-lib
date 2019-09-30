@@ -33,22 +33,6 @@ export class UserIdentity {
     public addTransaction(transaction) {
         this.transactions.push(this.customize(transaction));
     }
-/*
-    public addTransaction(transaction) {
-        return new Promise((resolve, reject) => {
-            nonceType = 'web3'
-            this.customize(transaction)
-            .then(tx => {
-                console.log("ADD TRANSACTION ", tx);
-                this.transactions.push(tx)
-                resolve(this.transactions)
-            })
-            .catch(error => {
-                console.log('ERROR -> ', error)
-                reject(error)
-            })
-        })
-    }*/
 
     /**
      * @Dev Returns all the transactions signed for the user. Empty the stack
@@ -84,11 +68,19 @@ export class UserIdentity {
      */
     public async call(web3, tx) {
 	     return new Promise((resolve, reject) => {
-		       web3.eth.call(tx, (err, outputTx) => {
-			      if (err) { console.log(err); return; }
-			      resolve(outputTx);
-    		});
-    	});
+            web3.eth.call(tx)
+            .then(output => {
+                let outputDecoded = web3.eth.abi.decodeParameters(['bool', 'uint8'], output)
+                let result = {
+                    exists: outputDecoded[0],
+                    status: outputDecoded[1]
+                }
+                resolve(result)
+            })
+            .catch(error => {
+                reject(error)
+            })
+    	})
     }
 
 

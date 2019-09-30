@@ -26,7 +26,6 @@ export const config = {
     alastriaPresentationRegistry: '0xf71A93f0D08728A99A44d73238427C26ce63ceC1',
     alastriaPublicKeyRegistry: '0xc9f8407C5bb0aBAF01fa7aa9e56533780c4eA590',
     basicTransaction: {
-        from: '',
         to: '0x0000000000000000000000000000000000000000',
         data: '0x0',
         gasLimit: 0,

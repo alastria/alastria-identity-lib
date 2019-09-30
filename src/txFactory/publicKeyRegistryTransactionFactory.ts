@@ -7,23 +7,12 @@ import { config } from '../config';
  * @param subject
  */
 export function addKey(web3, publicKey) {
-    return new Promise((resolve, reject) => {
-      let transaction = config.basicTransaction;
-      web3.eth.getTransactionCount(transaction.from)
-      .then(mynonce => {
-        transaction.nonce = mynonce;
-        transaction.gasLimit = 600000;
-        let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"],[publicKey]);
-        transaction.data = delegated(web3, delegatedData);
-        transaction.to = config.alastriaPublicKeyRegistry;
-        resolve(transaction)
-      })
-      .catch(error => {
-        console.log('Error ----> ', error)
-        reject(error)
-      })
-    })
-
+  let transaction = config.basicTransaction;
+  let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], [publicKey]);
+  transaction.data = delegated(web3, delegatedData);
+  transaction.to = config.alastriaPublicKeyRegistry;
+  transaction.gasLimit = 600000;
+  return transaction
 }
 
 /**
@@ -32,13 +21,13 @@ export function addKey(web3, publicKey) {
  * @param publicKey
  */
 export function revokePublicKey(web3, publicKey) {
-    let transaction = config.basicTransaction;
-    let delegatedData = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaPublicKeyRegistry"]["revokePublicKey"],[publicKey]);
-    transaction.data = delegated(web3, delegatedData);
-    transaction.to = config.alastriaIdentityManager;
-    transaction.gasLimit = 600000;
-    return transaction;
+  let transaction = config.basicTransaction;
+  let delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaPublicKeyRegistry"]["revokePublicKey"], [publicKey]);
+  transaction.data = delegated(web3, delegatedData);
+  transaction.to = config.alastriaIdentityManager;
+  transaction.gasLimit = 600000;
+  return transaction;
 }
 
 /**
@@ -47,14 +36,14 @@ export function revokePublicKey(web3, publicKey) {
  * @param publicKey
  */
 export function deletePublicKey(web3, publicKey) {
-    let transaction = config.basicTransaction;
-    let delegatedData = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaPublicKeyRegistry"]["deletePublicKey"],
-        [publicKey]);
-    transaction.data = delegated(web3, delegatedData);
-    transaction.to = config.alastriaIdentityManager;
-    transaction.gasLimit = 600000;
-    return transaction;
+  let transaction = config.basicTransaction;
+  let delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaPublicKeyRegistry"]["deletePublicKey"],
+    [publicKey]);
+  transaction.data = delegated(web3, delegatedData);
+  transaction.to = config.alastriaIdentityManager;
+  transaction.gasLimit = 600000;
+  return transaction;
 }
 
 /**
@@ -63,13 +52,13 @@ export function deletePublicKey(web3, publicKey) {
  * @param subject
  */
 export function getCurrentPublicKey(web3, subject) {
-    let transaction = config.basicTransaction;
-    transaction.data = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
-        [subject]);
-    transaction.to = config.alastriaPublicKeyRegistry;
-    transaction.gasLimit = 600000;
-    return transaction;
+  let transaction = config.basicTransaction;
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
+    [subject]);
+  transaction.to = config.alastriaPublicKeyRegistry;
+  transaction.gasLimit = 600000;
+  return transaction;
 }
 
 /**
@@ -79,18 +68,18 @@ export function getCurrentPublicKey(web3, subject) {
  * @param publicKey
  */
 export function getPublicKeyStatus(web3, subject, publicKey) {
-    let transaction = config.basicTransaction;
-    transaction.data = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],
-        [subject, publicKey]);
-    transaction.to = config.alastriaPublicKeyRegistry;
-    transaction.gasLimit = 600000;
-    return transaction;
+  let transaction = config.basicTransaction;
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],
+    [subject, publicKey]);
+  transaction.to = config.alastriaPublicKeyRegistry;
+  transaction.gasLimit = 600000;
+  return transaction;
 }
 
 
 function delegated(web3, delegatedData) {
-    return web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
-        [config.alastriaPublicKeyRegistry, 0, delegatedData])
-  }
+  return web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
+    [config.alastriaPublicKeyRegistry, 0, delegatedData])
+}

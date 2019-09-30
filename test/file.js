@@ -366,21 +366,12 @@ let sendCreate;
 
 console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
 
-let p3 = new Promise((resolve, reject) => {
-	transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, `0x${identity1Keystore.address}`, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862", adminIdentity.address)
-	.then(txgetSubjectCredential => {
-		console.log('(txgetSubjectCredential)The transaction is: ', txgetSubjectCredential)
-		adminIdentity.getKnownTransaction(txgetSubjectCredential)
-		.then(txgetSubjectCredentialKnown => {
-			console.log('(txgetSubjectCredentialKnown)The transaction is: ', txgetSubjectCredentialKnown)
-			adminIdentity.call(web3, txgetSubjectCredentialKnown)
-			.then(outputTx => {
-    		console.log("(outputTx)The transaction hash is: ", outputTx);
-				resolve(outputTx)
-			})
-		})
-	})
-}).catch(error => {
-		console.log('(txgetSubjectCredential)Error -----> ', error)
-		reject(error)
+let subjectCredentialTransaction = transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, identity1Keystore.address, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862")
+console.log('(subjectCredentialTransaction) -------->', subjectCredentialTransaction)
+adminIdentity.call(web3, subjectCredentialTransaction)
+.then(outputTx => {
+	console.log("(outputTx)The transaction result is: ", outputTx);
+})
+.catch(error => {
+	console.log('(CALL) ERROR ------->', error)
 })

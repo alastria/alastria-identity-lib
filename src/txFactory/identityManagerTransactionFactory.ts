@@ -43,26 +43,22 @@ export function prepareAlastriaID(web3, signAddress, from) {
 /**
  * function createAlastriaIdentity(bytes publicKeyData) public validAddress(msg.sender) isOnTimeToLiveAndIsFromCaller(msg.sender)
  * @param web3
- * @param publicKeyData
+ * publicKey is a String
+ * @param publicKey
  */
-export function createAlastriaIdentity(web3, addPublicKeyCallData) {
-  return new Promise((resolve, reject) => {
+export function createAlastriaIdentity(web3, publicKey) {
     let transaction = config.basicTransaction;
-    web3.eth.getTransactionCount(transaction.from)
-    .then(mynonce => {
-      transaction.nonce = mynonce
       transaction.gasLimit = 600000;
-      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [addPublicKeyCallData]);
+      let publicKeyCallData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], [publicKey])
+      // var utf8 = unescape(encodeURIComponent(publicKey));
+      // var arr = [];
+      // for (var i = 0; i < utf8.length; i++) {
+      //    arr.push(utf8.charCodeAt(i));
+      // }
+      console.log(publicKeyCallData, ">------------Z")
+      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [publicKeyCallData]);
       transaction.to = config.alastriaIdentityManager;
-    //  console.log("----------------> to", transaction.to)
-      resolve(transaction)
-    })
-    .catch(error => {
-      console.log('Error ----> ', error)
-      reject(error)
-    })
-  })
-
+      return transaction;
 }
 
 // AlastriaIdentityIssuer.sol

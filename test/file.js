@@ -304,83 +304,86 @@ let sendCreate;
 // 		})
 // })
 // .catch(error => { console.log('(createAlastriaIdentity)Error -----> ', error)})
-// var today = new Date();
-//
-// let p1 = new Promise((resolve, reject) => {
-//
-// 	transactionFactory.identityManager.prepareAlastriaID(web3, `0x${identity2Keystore.address}`, adminIdentity.address)
-// 	.then(txPrepareAlastriaID => {
-// 		console.log('(txPrepareAlastriaID)The transaction is: ', txPrepareAlastriaID)
-// 		adminIdentity.getKnownTransaction(txPrepareAlastriaID)
-// 		.then(txPrepareAlastriaIDSigned => {
-// 			console.log('(txPrepareAlastriaIDSigned)The transaction bytes data is: ', txPrepareAlastriaIDSigned)
-// 			adminIdentity.sendSignedTransaction(web3, txPrepareAlastriaIDSigned)
-// 			.then(hasTxPrepareAlastriaID => {
-// 				console.log("(hasTxPrepareAlastriaID)The transaction hash is: ", hasTxPrepareAlastriaID);
-// 				resolve(hasTxPrepareAlastriaID)
-// 				console.log("--------------------------------------------------------------",today.getMilliseconds());
-// 			})
-// 		})
-// 	}).catch(error => {
-// 		console.log('(prepareAlastriaID)Error -----> ', error)
-// 		reject(error)
-// 		})
-// })
-//
-// let p2 = new Promise((resolve, reject) => {
-//
-// 	transactionFactory.publicKeyRegistry.addKey(web3, `0x${identity2Keystore.address}`)
-// 	.then(txAddkey => {
-// 	  console.log('(txAddkey)The transaction is: ', txAddkey)
-// 		subjectIdentity.getKnownTransaction(txAddkey)
-// 		.then(txaddKeySigned => {
-// 			console.log('(txaddKeySigned)The transaction is: ', txaddKeySigned)
-// 				transactionFactory.identityManager.createAlastriaIdentity(web3, txaddKeySigned)
-// 				.then(txCreateAlastriaID =>{
-// 					console.log('(txCreateAlastriaID)The transaction is: ', txCreateAlastriaID)
-// 					subjectIdentity.getKnownTransaction(txCreateAlastriaID)
-// 					.then(txCreateAlastriaIDSigned => {
-// 						console.log('(txCreateAlastriaIDSigned)The transaction bytes data is: ', txCreateAlastriaIDSigned)
-// 						adminIdentity.sendSignedTransaction(web3, txCreateAlastriaIDSigned)
-// 						.then(hashTxCreateAlastriaID => {
-// 							console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
-// 							resolve(hashTxCreateAlastriaID)
-// 								console.log("--------------------------------------------------------------",today.getMilliseconds());
-// 						})
-// 					})
-// 				})
-// 			})
-// 	}).catch(error => {
-// 		console.log('(prepareAlastriaID)Error -----> ', error)
-// 		reject(error)
-// 		})
-// })
-//
-//
-// Promise.all([p1, p2]).then(values => {
-// 	console.log("---------------------------------------------------------------------",values);
-// // }).catch(error => {
-// // 	console.log("ERROR PROMISE ALL",error);
-// })
 
+let p1 = new Promise((resolve, reject) => {
 
-console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
-
-let p3 = new Promise((resolve, reject) => {
-	transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, `0x${identity1Keystore.address}`, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862", adminIdentity.address)
-	.then(txgetSubjectCredential => {
-		console.log('(txgetSubjectCredential)The transaction is: ', txgetSubjectCredential)
-		adminIdentity.getKnownTransaction(txgetSubjectCredential)
-		.then(txgetSubjectCredentialKnown => {
-			console.log('(txgetSubjectCredentialKnown)The transaction is: ', txgetSubjectCredentialKnown)
-			adminIdentity.call(web3, txgetSubjectCredentialKnown)
-			.then(outputTx => {
-    		console.log("(outputTx)The transaction hash is: ", outputTx);
-				resolve(outputTx)
-			})
+	transactionFactory.identityManager.prepareAlastriaID(web3, `0x${identity2Keystore.address}`, adminIdentity.address)
+	.then(txPrepareAlastriaID => {
+		console.log('(txPrepareAlastriaID)The transaction is: ', txPrepareAlastriaID)
+		adminIdentity.getKnownTransaction(txPrepareAlastriaID)
+		.then(txPrepareAlastriaIDSigned => {
+			console.log('(txPrepareAlastriaIDSigned)The transaction bytes data is: ', txPrepareAlastriaIDSigned)
+				resolve(txPrepareAlastriaIDSigned)
 		})
-	})
-}).catch(error => {
-		console.log('(txgetSubjectCredential)Error -----> ', error)
+	}).catch(error => {
+		console.log('(prepareAlastriaID)Error -----> ', error)
 		reject(error)
+		})
 })
+
+let p2 = new Promise((resolve, reject) => {
+
+	transactionFactory.publicKeyRegistry.addKey(web3, `0x${identity2Keystore.address}`)
+	.then(txAddkey => {
+	  console.log('(txAddkey)The transaction is: ', txAddkey)
+			console.log('(txaddKeySigned)The transaction is: ', txAddkey.data)
+				// let arrayByte = new Uint8Array([30 78 63 33 74 68 6c 36 6f 74 33 71 35 72 74 32 75 31 39 33 6b 74 32 6f 36 76 79 68 35 36 35 76 79 6f 6b 35 72 6a 6d 64 78 6b 79 31 33 64 39 33 62 6f 64 31 74 73 6b 76 75 70 73 6c 6a 32 6c 6c 6f 64 72 64 61 7a 69 67 63 69 38 30 34 32 6a 63 36 77 35 31 6a 75 6b 79 63 6b 6a 32 69 6f 67 6f 79 31 79 36 33 6c 39 6f 6c 35 69 78 69 62 63 35 6f 6c 62 63 61 7a 70 72 31 6e 6b 77 73 69 77 66 78 72 34 76 79 65 77 73 39 65 70 78 76 38 38 38 68 6b 6d 68 63 35 74 7a 74 36 78 74 6f 6f 75 39 7a 65 6e 79 32 62 34 6d 74 33 71 7a 78 33 6e 39 62 78 61 6d 35 66 79 38 38 7a 67])
+				var txCreateAlastriaID = transactionFactory.identityManager.createAlastriaIdentity(web3,  'c3thl6ot3q5rt2u193kt2o6vyh565vyok5rjmdxky13d93bod1tskvupslj2llodrdazigci8042jc6w51jukyckj2iogoy1y63l9ol5ixibc5olbcazpr1nkwsiwfxr4vyews9epxv888hkmhc5tzt6xtoou9zeny2b4mt3qzx3n9bxam5fy88zg')
+					console.log('(txCreateAlastriaID)The transaction is: ', txCreateAlastriaID)
+					subjectIdentity.getKnownTransaction(txCreateAlastriaID)
+					.then(txCreateAlastriaIDSigned => {
+						console.log('(txCreateAlastriaIDSigned)The transaction bytes data is: ', txCreateAlastriaIDSigned)
+							resolve(txCreateAlastriaIDSigned)
+			})
+	}).catch(error => {
+		console.log('(addKey)Error -----> ', error)
+		reject(error)
+		})
+})
+var version = web3.version;
+console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVS',version);
+Promise.all([p1, p2]).then(values => {
+	console.log("---------------------------------------------------------------------",values);
+	new Promise((resolve, reject) => {
+		console.log('+++++++++++++++++++++++++++++++',p1);
+		adminIdentity.sendSignedTransaction(web3, values[0])
+		.on('receipt',hasTxPrepareAlastriaID => {
+			//.then(hasTxPrepareAlastriaID => {
+			console.log("(hasTxPrepareAlastriaID)The transaction hash is: ", hasTxPrepareAlastriaID);
+			adminIdentity.sendSignedTransaction(web3, values[1])
+			.then(hashTxCreateAlastriaID => {
+				console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
+	})
+	//resolve()
+}).catch(error =>{
+	console.log('-+-+--+-+-+-+-+',error)
+})
+})
+})
+
+
+
+
+
+
+
+// console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
+//
+// let p3 = new Promise((resolve, reject) => {
+// 	transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, `0x${identity1Keystore.address}`, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862", adminIdentity.address)
+// 	.then(txgetSubjectCredential => {
+// 		console.log('(txgetSubjectCredential)The transaction is: ', txgetSubjectCredential)
+// 		adminIdentity.getKnownTransaction(txgetSubjectCredential)
+// 		.then(txgetSubjectCredentialKnown => {
+// 			console.log('(txgetSubjectCredentialKnown)The transaction is: ', txgetSubjectCredentialKnown)
+// 			adminIdentity.call(web3, txgetSubjectCredentialKnown)
+// 			.then(outputTx => {
+//     		console.log("(outputTx)The transaction hash is: ", outputTx);
+// 				resolve(outputTx)
+// 			})
+// 		})
+// 	})
+// }).catch(error => {
+// 		console.log('(txgetSubjectCredential)Error -----> ', error)
+// 		reject(error)
+// })

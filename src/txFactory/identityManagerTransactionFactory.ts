@@ -31,14 +31,22 @@ export function prepareAlastriaID(web3, signAddress) {
 /**
  * function createAlastriaIdentity(bytes publicKeyData) public validAddress(msg.sender) isOnTimeToLiveAndIsFromCaller(msg.sender)
  * @param web3
- * @param publicKeyData
+ * publicKey is a String
+ * @param publicKey
  */
-export function createAlastriaIdentity(web3, addPublicKeyCallData) {
-  let transaction = config.basicTransaction;
-  transaction.to = config.alastriaIdentityManager;
-  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [addPublicKeyCallData]);
-  transaction.gasLimit = 600000;
-  return transaction
+export function createAlastriaIdentity(web3, publicKey) {
+    let transaction = config.basicTransaction;
+      transaction.gasLimit = 600000;
+      let publicKeyCallData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], [publicKey])
+      // var utf8 = unescape(encodeURIComponent(publicKey));
+      // var arr = [];
+      // for (var i = 0; i < utf8.length; i++) {
+      //    arr.push(utf8.charCodeAt(i));
+      // }
+      console.log(publicKeyCallData, ">------------Z")
+      transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"], [publicKeyCallData]);
+      transaction.to = config.alastriaIdentityManager;
+      return transaction;
 }
 
 // AlastriaIdentityIssuer.sol

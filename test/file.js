@@ -349,14 +349,20 @@ Promise.all([p1, p2]).then(values => {
 		adminIdentity.sendSignedTransaction(web3, values[0])
 		.on('receipt',hasTxPrepareAlastriaID => {
 			//.then(hasTxPrepareAlastriaID => {
-			console.log("(hasTxPrepareAlastriaID)The transaction hash is: ", hasTxPrepareAlastriaID);
-			adminIdentity.sendSignedTransaction(web3, values[1])
-			.then(hashTxCreateAlastriaID => {
-				console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
+				adminIdentity.sendSignedTransaction(web3, values[1])
+				.then(hashTxCreateAlastriaID => {
+					console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
+				})
+		// })
+		})
 	})
-	//resolve()
-}).catch(error =>{
+})
+.catch(error =>{
 	console.log('-+-+--+-+-+-+-+',error)
+})
+
+
+// console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
 let subjectCredentialTransaction = transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, identity1Keystore.address, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862")
 console.log('(subjectCredentialTransaction) -------->', subjectCredentialTransaction)
 adminIdentity.call(web3, subjectCredentialTransaction)
@@ -366,30 +372,3 @@ adminIdentity.call(web3, subjectCredentialTransaction)
 .catch(error => {
 	console.log('(CALL) ERROR ------->', error)
 })
-
-
-
-
-
-
-
-// console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
-//
-// let p3 = new Promise((resolve, reject) => {
-// 	transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, `0x${identity1Keystore.address}`, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862", adminIdentity.address)
-// 	.then(txgetSubjectCredential => {
-// 		console.log('(txgetSubjectCredential)The transaction is: ', txgetSubjectCredential)
-// 		adminIdentity.getKnownTransaction(txgetSubjectCredential)
-// 		.then(txgetSubjectCredentialKnown => {
-// 			console.log('(txgetSubjectCredentialKnown)The transaction is: ', txgetSubjectCredentialKnown)
-// 			adminIdentity.call(web3, txgetSubjectCredentialKnown)
-// 			.then(outputTx => {
-//     		console.log("(outputTx)The transaction hash is: ", outputTx);
-// 				resolve(outputTx)
-// 			})
-// 		})
-// 	})
-// }).catch(error => {
-// 		console.log('(txgetSubjectCredential)Error -----> ', error)
-// 		reject(error)
-// })

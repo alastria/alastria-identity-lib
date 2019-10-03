@@ -13,6 +13,7 @@ let keythereum = require('keythereum')
 let myBlockchainServiceIp = 'http://63.33.206.111/rpc'
 //let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
+console.log('VERSION: ', web3.version)
 
 
 
@@ -248,127 +249,68 @@ web3.eth.personal.unlockAccount(adminIdentity.address,"Passw0rd", 500)
 
 console.log('\n ------ Example of prepare Alastria ID, addKey and createAlastrisID ------ \n')
 
-let identity1Keystore = {"address":"a9728125c573924b2b1ad6a8a8cd9bf6858ced49","crypto":{"cipher":"aes-128-ctr","ciphertext":"a38f4475ef7cdeb77f262cc03369061e28e37415269cc41977ddecd04d9d8429","cipherparams":{"iv":"d9be09d3895821995ca234502950ad39"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"c2c813066974631abe6cd325f904ea28c3a01b3c39a006a75f0e3fa7e390484d"},"mac":"a90b79da477cbad7e3817bcdad7d921306174da490e1ae1732cc90f4805e2459"},"id":"8f0eda33-ace1-4aec-a26b-510d924f920c","version":3};
-let identity2Keystore = {"address":"ad88f1a89cf02a32010b971d8c8af3a2c7b3bd94","crypto":{"cipher":"aes-128-ctr","ciphertext":"bcef56807596862208759d1a0c4d46ab2be8aeff23b3f194f581e760e075a43b","cipherparams":{"iv":"4451c563d1efc0ab04d23e09cf9de9f5"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"13a33892beb9dd9b7e6290c900696ff0b542eda8735b0342a1bb26f22d07f863"},"mac":"fd10bdfca443cf86e443eb5c2800f292851e1e32e9af843a20f6efc582380316"},"id":"e4daad64-e96d-4120-9268-1d45bca4ad85","version":3};
+let identityKeystore = {"address":"de7ab34219563ac50ccc7b51d23b9a61d22a383e","crypto":{"cipher":"aes-128-ctr","ciphertext":"f066be0beb82e68322631c4f0f40281c66e960703db2c6594e4ce0d78939b746","cipherparams":{"iv":"bc51f4f3cbbf2f96309cf9bd5a064ddc"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"dd8ddb3fd111c7a8d3087d6f893f6035a04231db7fa35945c68f9f9f0701201b"},"mac":"bb7004ae356e468bd500921ae43e47edc0a96cc4a0ce71b45d85f808eaa7d58d"},"id":"f9b634c0-d151-4751-ac0f-9686761aec03","version":3};
 
 let subjectPrivateKey
 try{
-	subjectPrivateKey = keythereum.recover('Passw0rd', identity1Keystore)
+	subjectPrivateKey = keythereum.recover('Passw0rd', identityKeystore)
 }catch(error){
 	console.log("ERROR: ", error)
 }
 
-let subject2PrivateKey
-try{
-	subjectPrivateKey = keythereum.recover('Passw0rd', identity2Keystore)
-}catch(error){
-	console.log("ERROR: ", error)
-}
+let subjectIdentity = new UserIdentity(web3, `0x${identityKeystore.address}`, subjectPrivateKey)
 
-let subjectIdentity = new UserIdentity(web3, `0x${identity1Keystore.address}`, subjectPrivateKey)
-let subject2Identity = new UserIdentity(web3, `0x${identity2Keystore.address}`, subject2PrivateKey)
-let sendPrepareAlastria;
-let sendAddKey;
-let sendCreate;
-// transactionFactory.identityManager.prepareAlastriaID(web3, `0x${identity1Keystore.address}`, adminIdentity.address)
-// .then(txPrepareAlastriaID => {
-// 	console.log('(txPrepareAlastriaID)The transaction is: ', txPrepareAlastriaID)
-// 	adminIdentity.getKnownTransaction(txPrepareAlastriaID)
-// 	.then(txPrepareAlastriaIDSigned => {
-// 		console.log('(txPrepareAlastriaIDSigned)The transaction bytes data is: ', txPrepareAlastriaIDSigned)
-// 		sendPrepareAlastria = adminIdentity.sendSignedTransaction(web3, txPrepareAlastriaIDSigned)
-// 		.then(hasTxPrepareAlastriaID => {
-// 			console.log("(hasTxPrepareAlastriaID)The transaction hash is: ", hasTxPrepareAlastriaID);
-// 		})
-// 	})
-// }).catch(error => { console.log('(prepareAlastriaID)Error -----> ', error)})
-//
-// transactionFactory.publicKeyRegistry.addKey(web3, `0x${identity1Keystore.address}`)
-// .then(txAddkey => {
-//   console.log('(txAddkey)The transaction is: ', txAddkey)
-// 	subjectIdentity.getKnownTransaction(txAddkey)
-// 	.then(txaddKeySigned => {
-// 		console.log('(txaddKeySigned)The transaction is: ', txaddKeySigned)
-// 			transactionFactory.identityManager.createAlastriaIdentity(web3, txaddKeySigned)
-// 			.then(txCreateAlastriaID =>{
-// 				console.log('(txCreateAlastriaID)The transaction is: ', txCreateAlastriaID)
-// 				subjectIdentity.getKnownTransaction(txCreateAlastriaID)
-// 				.then(txCreateAlastriaIDSigned => {
-// 					console.log('(txCreateAlastriaIDSigned)The transaction bytes data is: ', txCreateAlastriaIDSigned)
-// 					sendCreate = adminIdentity.sendSignedTransaction(web3, txCreateAlastriaIDSigned)
-// 					.then(hashTxCreateAlastriaID => {
-// 						console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
-// 					})
-// 				})
-// 			})
-// 		})
-// })
-// .catch(error => { console.log('(createAlastriaIdentity)Error -----> ', error)})
+// let preparedId = transactionFactory.identityManager.prepareAlastriaID(web3, identityKeystore.address)
+// let txCreateAlastriaID = transactionFactory.identityManager.createAlastriaIdentity(web3, rawPublicKey)
 
-let p1 = new Promise((resolve, reject) => {
-
-	transactionFactory.identityManager.prepareAlastriaID(web3, `0x${identity2Keystore.address}`, adminIdentity.address)
-	.then(txPrepareAlastriaID => {
-		console.log('(txPrepareAlastriaID)The transaction is: ', txPrepareAlastriaID)
-		adminIdentity.getKnownTransaction(txPrepareAlastriaID)
-		.then(txPrepareAlastriaIDSigned => {
-			console.log('(txPrepareAlastriaIDSigned)The transaction bytes data is: ', txPrepareAlastriaIDSigned)
-				resolve(txPrepareAlastriaIDSigned)
-		})
-	}).catch(error => {
-		console.log('(prepareAlastriaID)Error -----> ', error)
-		reject(error)
-		})
+let p1 = new Promise (async(resolve, reject) => {
+	let preparedId = await transactionFactory.identityManager.prepareAlastriaID(web3, identityKeystore.address)
+	resolve(preparedId)
 })
 
-let p2 = new Promise((resolve, reject) => {
-
-	transactionFactory.publicKeyRegistry.addKey(web3, `0x${identity2Keystore.address}`)
-	.then(txAddkey => {
-	  console.log('(txAddkey)The transaction is: ', txAddkey)
-			console.log('(txaddKeySigned)The transaction is: ', txAddkey.data)
-				// let arrayByte = new Uint8Array([30 78 63 33 74 68 6c 36 6f 74 33 71 35 72 74 32 75 31 39 33 6b 74 32 6f 36 76 79 68 35 36 35 76 79 6f 6b 35 72 6a 6d 64 78 6b 79 31 33 64 39 33 62 6f 64 31 74 73 6b 76 75 70 73 6c 6a 32 6c 6c 6f 64 72 64 61 7a 69 67 63 69 38 30 34 32 6a 63 36 77 35 31 6a 75 6b 79 63 6b 6a 32 69 6f 67 6f 79 31 79 36 33 6c 39 6f 6c 35 69 78 69 62 63 35 6f 6c 62 63 61 7a 70 72 31 6e 6b 77 73 69 77 66 78 72 34 76 79 65 77 73 39 65 70 78 76 38 38 38 68 6b 6d 68 63 35 74 7a 74 36 78 74 6f 6f 75 39 7a 65 6e 79 32 62 34 6d 74 33 71 7a 78 33 6e 39 62 78 61 6d 35 66 79 38 38 7a 67])
-				var txCreateAlastriaID = transactionFactory.identityManager.createAlastriaIdentity(web3,  'c3thl6ot3q5rt2u193kt2o6vyh565vyok5rjmdxky13d93bod1tskvupslj2llodrdazigci8042jc6w51jukyckj2iogoy1y63l9ol5ixibc5olbcazpr1nkwsiwfxr4vyews9epxv888hkmhc5tzt6xtoou9zeny2b4mt3qzx3n9bxam5fy88zg')
-					console.log('(txCreateAlastriaID)The transaction is: ', txCreateAlastriaID)
-					subjectIdentity.getKnownTransaction(txCreateAlastriaID)
-					.then(txCreateAlastriaIDSigned => {
-						console.log('(txCreateAlastriaIDSigned)The transaction bytes data is: ', txCreateAlastriaIDSigned)
-							resolve(txCreateAlastriaIDSigned)
-			})
-	}).catch(error => {
-		console.log('(addKey)Error -----> ', error)
-		reject(error)
-		})
+let p2 = new Promise(async(resolve, reject) => {
+	let txCreateAlastriaID = await transactionFactory.identityManager.createAlastriaIdentity(web3, rawPublicKey)
+	resolve(txCreateAlastriaID)
 })
-var version = web3.version;
-console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVS',version);
-Promise.all([p1, p2]).then(values => {
-	console.log("---------------------------------------------------------------------",values);
-	new Promise((resolve, reject) => {
-		console.log('+++++++++++++++++++++++++++++++',p1);
-		adminIdentity.sendSignedTransaction(web3, values[0])
-		.on('receipt',hasTxPrepareAlastriaID => {
-			//.then(hasTxPrepareAlastriaID => {
-				adminIdentity.sendSignedTransaction(web3, values[1])
-				.then(hashTxCreateAlastriaID => {
-					console.log("(hashTxCreateAlastriaID)The transaction hash is: ", hashTxCreateAlastriaID);
-				})
-		// })
-		})
+
+Promise.all([p1, p2])
+.then(async values => {
+	let signedCreateTransaction =	await subjectIdentity.getKnownTransaction(values[1])
+	let signedPreparedTransaction = await adminIdentity.getKnownTransaction(values[0])
+	web3.eth.sendSignedTransaction(signedPreparedTransaction)
+	.on('transactionHash', function (hash) {
+		console.log("HASH: ", hash)
 	})
+	.on('receipt', function (receipt) {
+		console.log("RECEIPT: ", receipt)
+		web3.eth.sendSignedTransaction(signedCreateTransaction)
+		.on('transactionHash', function (hash) {
+				console.log("HASH: ", hash)
+		})
+		.on('receipt', function (receipt) {
+				console.log("RECEIPT: ", receipt)
+				web3.eth.call({
+					to: '0x70e7e63928b8f274f018160207d4275fd8ea5bbe',				       
+					data: '0x0c91465e000000000000000000000000de7ab34219563ac50ccc7b51d23b9a61d22a383e'
+				})
+				.then (AlastriaIdentity => {
+					console.log(AlastriaIdentity)
+				})
+		})
+		.on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+	})
+	.on('error', console.error); // If a out of gas error, the second parameter is the receipt.
 })
-.catch(error =>{
-	console.log('-+-+--+-+-+-+-+',error)
-})
+
 
 
 // console.log('\n ------ Example of getSubjectCredentialStatus ------ \n')
-let subjectCredentialTransaction = transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, identity1Keystore.address, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862")
-console.log('(subjectCredentialTransaction) -------->', subjectCredentialTransaction)
-adminIdentity.call(web3, subjectCredentialTransaction)
-.then(outputTx => {
-	console.log("(outputTx)The transaction result is: ", outputTx);
-})
-.catch(error => {
-	console.log('(CALL) ERROR ------->', error)
-})
+
+// let subjectCredentialTransaction = transactionFactory.credentialRegistry.getSubjectCredentialStatus(web3, identityKeystore.address, "0x8efee390f577aeb8bd77d3969ea2480a86cef8030250849c2b55315092992862")
+// web3.eth.call(subjectCredentialTransaction)
+// .then(SubjectCredentialStatus => {
+// 	console.log("(SubjectCredentialStatus) -----> ", SubjectCredentialStatus);
+// })
+// .catch(error => {
+// 	console.log('(CALL) ERROR -------> ', error)
+// })

@@ -7,7 +7,7 @@ import { config } from '../config';
  * @param subject
  */
 export function addKey(web3, publicKey) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], [publicKey]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaPublicKeyRegistry;
@@ -21,7 +21,7 @@ export function addKey(web3, publicKey) {
  * @param publicKey
  */
 export function revokePublicKey(web3, publicKey) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["revokePublicKey"], [publicKey]);
   transaction.data = delegated(web3, delegatedData);
@@ -36,7 +36,7 @@ export function revokePublicKey(web3, publicKey) {
  * @param publicKey
  */
 export function deletePublicKey(web3, publicKey) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["deletePublicKey"],
     [publicKey]);
@@ -52,7 +52,7 @@ export function deletePublicKey(web3, publicKey) {
  * @param subject
  */
 export function getCurrentPublicKey(web3, subject) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
     [subject]);
@@ -68,7 +68,7 @@ export function getCurrentPublicKey(web3, subject) {
  * @param publicKey
  */
 export function getPublicKeyStatus(web3, subject, publicKey) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],
     [subject, publicKey]);

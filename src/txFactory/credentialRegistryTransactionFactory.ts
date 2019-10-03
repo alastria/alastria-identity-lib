@@ -9,7 +9,7 @@ import { config } from '../config';
  */
 
 export function addSubjectCredential(web3, subjectCredentialHash, URI) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["addSubjectCredential"], [subjectCredentialHash, URI]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaCredentialRegistry;
@@ -24,7 +24,7 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
  * @param subjectCredentialHash should have 32 bytes
  */
 export function deleteSubjectCredential(web3, subjectCredentialHash) {
-    let transaction = config.basicTransaction;
+    let transaction = Object.assign({}, config.basicTransaction)
     let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["deleteSubjectCredential"], [subjectCredentialHash]);
     transaction.data = delegated(web3, delegatedData);
     transaction.to = config.alastriaIdentityManager;
@@ -40,7 +40,7 @@ export function deleteSubjectCredential(web3, subjectCredentialHash) {
  * @param subjectCredentialHash should have 32 bytes
  */
 export function getSubjectCredentialStatus(web3, subject, subjectCredentialHash) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialStatus"], [subject, subjectCredentialHash]);
   transaction.to = config.alastriaCredentialRegistry;
   transaction.gasLimit = 600000;
@@ -54,7 +54,7 @@ export function getSubjectCredentialStatus(web3, subject, subjectCredentialHash)
  * @param subject subject to reover credenital list
  */
 export function getSubjectCredentialList(web3, subject) {
-    let transaction = config.basicTransaction;
+    let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialList"], [subject]);
     transaction.to = config.alastriaCredentialRegistry;
     transaction.gasLimit = 600000;
@@ -68,7 +68,7 @@ export function getSubjectCredentialList(web3, subject) {
  * @param status
  */
 export function updateCredentialStatus(web3, issuerCredentialHash, status) {
-    let transaction = config.basicTransaction;
+    let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getIssuerCredentialStatus"],
         [issuerCredentialHash, status]);
@@ -85,7 +85,7 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
  * @param issuerCredentialHash
  */
 export function getIssuerCredentialStatus(web3, issuer, issuerCredentialHash) {
-    let transaction = config.basicTransaction;
+    let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getIssuerCredentialStatus"],
         [issuer, issuerCredentialHash]);
@@ -101,7 +101,7 @@ export function getIssuerCredentialStatus(web3, issuer, issuerCredentialHash) {
  * @param issuerStatus
  */
 export function getCredentialStatus(web3, subjectStatus, issuerStatus) {
-    let transaction = config.basicTransaction;
+    let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getCredentialStatus"],
         [subjectStatus, issuerStatus]);

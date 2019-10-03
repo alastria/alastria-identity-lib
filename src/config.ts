@@ -1,8 +1,9 @@
+console.log(__dirname)
 import * as fs from 'fs';
 import * as path from 'path';
 
 //TODO getting from GitHub URL repository
-const contractsPath = '../../../../alastria-identity/contracts/abi/'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+const contractsPath = '../../../../alastria-identity/contracts/abi'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
 var _contractsAbi = {};
 
 //Process the abi dir for getting an object with all the abi functions
@@ -11,7 +12,7 @@ fs.readdirSync(path.join(__dirname, contractsPath)).forEach(file => {
     let abiFile = JSON.parse(fs.readFileSync(path.join(__dirname, `${contractsPath}/`, file), 'utf8'));
     abiFile.forEach(element => {
         if(element.type == 'constructor') {
-            abi['constrcutor'] = element;
+            abi['constructor'] = element;
         } else {
             abi[element.name] = element;
         }

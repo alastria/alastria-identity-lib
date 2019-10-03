@@ -57,43 +57,12 @@ export class UserIdentity {
     }
 
     /**
-     * @Dev Returns a signed transaction
-     *   @param {web3} web3 object
-     *   @param {tx} transaction
-     */
-    public async call(web3, tx) {
-	     return new Promise((resolve, reject) => {
-            web3.eth.call(tx)
-            .then(output => {
-                let outputDecoded = web3.eth.abi.decodeParameters(['bool', 'uint8'], output)
-                let result = {
-                    exists: outputDecoded[0],
-                    status: outputDecoded[1]
-                }
-                resolve(result)
-            })
-            .catch(error => {
-                reject(error)
-            })
-    	})
-    }
-
-
-    /**
     * @Dev Returns a known transaction from an anonimous transaction
     */
     public async getKnownTransaction(transaction) {
-      return new Promise((resolve, reject) => {
-          this.customize(transaction)
-          .then(customizedTransaction => {
-            var signedTx = this.signTransaction(customizedTransaction,this.privateKey)
-            resolve(signedTx);
-          })
-          .catch(error => {
-              console.log(error)
-              reject(error)
-          })
-      })
+        let customizedTransaction = await this.customize(transaction)
+        var signedTx = await this.signTransaction(customizedTransaction, this.privateKey)
+        return signedTx
     }
 
 
@@ -102,18 +71,10 @@ export class UserIdentity {
     * @param transaction
     */
     private async customize(transaction) {
-        return new Promise((resolve, reject) => {
-            this.getUserNonce(this.endPoint, transaction.from)
-            .then(mynonce => {
-                transaction.nonce = mynonce
-                transaction.gasPrice = 0;
-                resolve(transaction)
-            })
-            .catch(error => {
-                console.log(error)
-                reject(error)
-            })
-        })
+        let mynonce = await this.getUserNonce(this.endPoint, this.address)
+        transaction.nonce = mynonce
+        transaction.gasPrice = 0;
+        return transaction
     }
 
     /**
@@ -134,20 +95,6 @@ export class UserIdentity {
          }
      }
 
-     // public signTransaction(web3, transaction, privateKey){
-     //   return new Promise((resolve, reject) => {
-     //       web3.eth.accounts.signTransaction(transaction, privateKey)
-     //       .then(result => {
-     //         console.log("RESULT ---------------->",result)
-     //         resolve(result);
-     //       })
-     //       .catch(error => {
-     //           console.log(error)
-     //           reject(error)
-     //       })
-     //   })
-     // }
-
     /**
     *   Calculate the user nonce.
     *   It is async to ask Web3 bust it is sync to set it manually
@@ -156,18 +103,9 @@ export class UserIdentity {
     *   @param {string} type web3, selfManaged or others..
     *   @param {address} address user
     */
-    private getUserNonce(endPoint, address) {
-        return new Promise((resolve, reject) => {
-            let nonce
-            endPoint.eth.getTransactionCount(address)
-            .then(mynonce => {
-                nonce = mynonce
-                resolve(nonce)
-            })
-            .catch(error => {
-                console.log(error)
-                reject(error)
-            })
-        })
+    private async getUserNonce(endPoint, address) {
+        let nonce
+        nonce = await endPoint.eth.getTransactionCount(address)
+        return nonce
     }
 }

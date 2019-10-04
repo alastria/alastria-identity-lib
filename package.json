@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "run-s build",
     "compile": "tsc",
-    "import": "git clone https://github.com/alastria/alastria-identity.git && git checkout develop",
+    "clone:git": "git clone https://github.com/alastria/alastria-identity.git && git checkout develop",
     "clean": "rimraf dist",
     "build": "run-s clean compile"
   },

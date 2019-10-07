@@ -5,13 +5,13 @@
 */
 
 let any = require('jsontokens')
-const {transactionFactory, UserIdentity, tokensFactory} = require('alastria-identity-lib')
+const {transactionFactory, UserIdentity, tokensFactory, configLib} = require('alastria-identity-lib')
 let Web3 = require('web3')
 let keythereum = require('keythereum')
 
 // Init your blockchain provider
 let myBlockchainServiceIp = 'http://63.33.206.111/rpc'
-//let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
+// let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 console.log('VERSION: ', web3.version)
 
@@ -290,8 +290,8 @@ Promise.all([p1, p2])
 		.on('receipt', function (receipt) {
 				console.log("RECEIPT: ", receipt)
 				web3.eth.call({
-					to: '0x70e7e63928b8f274f018160207d4275fd8ea5bbe',				       
-					data: '0x0c91465e000000000000000000000000de7ab34219563ac50ccc7b51d23b9a61d22a383e'
+					to: configLib.alastriaIdentityManager,				       
+					data: web3.eth.abi.encodeFunctionCall(configLib.contractsAbi["AlastriaIdentityManager"]["identityKeys"], [identityKeystore.address])
 				})
 				.then (AlastriaIdentity => {
 					console.log(AlastriaIdentity)

@@ -3,7 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 //TODO getting from GitHub URL repository
-const contractsPath = '../../../../alastria-identity/contracts/abi'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+// const contractsPath = '../../../../alastria-identity/contracts/abi'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+const contractsPath = '../alastria-identity/contracts/abi'
 var _contractsAbi = {};
 
 //Process the abi dir for getting an object with all the abi functions

@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 //TODO getting from GitHub URL repository
-// const contractsPath = '../../../../alastria-identity/contracts/abi'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
-const contractsPath = '../alastria-identity/contracts/abi'
+const contractsPath = '../../../../alastria-identity/contracts/abi'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+//const contractsPath = '../alastria-identity/contracts/abi'
 var _contractsAbi = {};
 
 //Process the abi dir for getting an object with all the abi functions
@@ -23,10 +23,10 @@ fs.readdirSync(path.join(__dirname, contractsPath)).forEach(file => {
 
 // WARNING TODO getting from GitHub URL repository or update these address with your new ones!!
 export const config = {
-    alastriaIdentityManager: '0x70e7e63928b8f274f018160207d4275fd8ea5bbe',
-    alastriaCredentialRegistry: '0x465EACeAc60c8FCc8988F6dAE17873D2EbF64588',
-    alastriaPresentationRegistry: '0xf71A93f0D08728A99A44d73238427C26ce63ceC1',
-    alastriaPublicKeyRegistry: '0xc9f8407C5bb0aBAF01fa7aa9e56533780c4eA590',
+    alastriaIdentityManager: '0x5ea489540c5a5d8cf95b48940d6f54afa48ee6f5',
+    alastriaCredentialRegistry: '0xf52a1198aa78364a0921e374ad351e34b4550cb5',
+    alastriaPresentationRegistry: '0x2b5343c56b0591c6aef15665a83c334afa368405',
+    alastriaPublicKeyRegistry: '0x761831f1233b578ff5b7b374dcd7f2b353b18d2d',
     basicTransaction: {
         to: '0x0000000000000000000000000000000000000000',
         data: '0x0',

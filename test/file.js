@@ -5,13 +5,13 @@
 */
 
 let any = require('jsontokens')
-const {transactionFactory, UserIdentity, tokensFactory, configLib} = require('alastria-identity-lib')
+const {transactionFactory, UserIdentity, tokensFactory} = require('alastria-identity-lib')
 let Web3 = require('web3')
 let keythereum = require('keythereum')
 
 // Init your blockchain provider
 let myBlockchainServiceIp = 'http://63.33.206.111/rpc'
-// let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
+//let myBlockchainServiceIp = 'http://127.0.0.1:8545' //Ganache
 const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp))
 console.log('VERSION: ', web3.version)
 
@@ -247,7 +247,7 @@ web3.eth.personal.unlockAccount(adminIdentity.address,"Passw0rd", 500)
 // 		console.log('Error -----> ', error3)
 // })
 
-console.log('\n ------ Example of prepare Alastria ID, addKey and createAlastrisID ------ \n')
+console.log('\n ------ Example of prepare Alastria ID, addKey and createAlastrisID necessary to have an Alastria ID ------ \n')
 
 let identityKeystore = {"address":"de7ab34219563ac50ccc7b51d23b9a61d22a383e","crypto":{"cipher":"aes-128-ctr","ciphertext":"f066be0beb82e68322631c4f0f40281c66e960703db2c6594e4ce0d78939b746","cipherparams":{"iv":"bc51f4f3cbbf2f96309cf9bd5a064ddc"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"dd8ddb3fd111c7a8d3087d6f893f6035a04231db7fa35945c68f9f9f0701201b"},"mac":"bb7004ae356e468bd500921ae43e47edc0a96cc4a0ce71b45d85f808eaa7d58d"},"id":"f9b634c0-d151-4751-ac0f-9686761aec03","version":3};
 
@@ -259,20 +259,17 @@ try{
 }
 
 let subjectIdentity = new UserIdentity(web3, `0x${identityKeystore.address}`, subjectPrivateKey)
-
-// let preparedId = transactionFactory.identityManager.prepareAlastriaID(web3, identityKeystore.address)
-// let txCreateAlastriaID = transactionFactory.identityManager.createAlastriaIdentity(web3, rawPublicKey)
-
+console.log('\n ------ Step one---> prepareAlastriaID inside a Promise ------ \n')
 let p1 = new Promise (async(resolve, reject) => {
 	let preparedId = await transactionFactory.identityManager.prepareAlastriaID(web3, identityKeystore.address)
 	resolve(preparedId)
 })
-
+console.log('\n ------ Step two---> createAlsatriaID inside a second Promise ------ \n')
 let p2 = new Promise(async(resolve, reject) => {
 	let txCreateAlastriaID = await transactionFactory.identityManager.createAlastriaIdentity(web3, rawPublicKey)
 	resolve(txCreateAlastriaID)
 })
-
+console.log('\n ------ Step three---> A promise all where prepareAlastriaID and createAlsatriaID transactions are signed and sent ------ \n')
 Promise.all([p1, p2])
 .then(async values => {
 	let signedCreateTransaction =	await subjectIdentity.getKnownTransaction(values[1])
@@ -290,8 +287,8 @@ Promise.all([p1, p2])
 		.on('receipt', function (receipt) {
 				console.log("RECEIPT: ", receipt)
 				web3.eth.call({
-					to: configLib.alastriaIdentityManager,				       
-					data: web3.eth.abi.encodeFunctionCall(configLib.contractsAbi["AlastriaIdentityManager"]["identityKeys"], [identityKeystore.address])
+					to: '0x70e7e63928b8f274f018160207d4275fd8ea5bbe',				       
+					data: '0x0c91465e000000000000000000000000de7ab34219563ac50ccc7b51d23b9a61d22a383e'
 				})
 				.then (AlastriaIdentity => {
 					console.log(AlastriaIdentity)

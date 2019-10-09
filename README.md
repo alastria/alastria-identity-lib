@@ -2,6 +2,12 @@
 ## What it does
 This library interacts with the Alastria Identity smart contracts which are in the alastria-identity repository (https://github.com/alastria/alastria-identity).
 
+This library has three different modules:
+- User Functions: It helps to manage the wallet and the identity user
+- Blockchain Functions: It encapsulates Alastria Identity Smart Contracts
+- Tokens Functions: It manages JWTs, AlastriaSession...
+
+If you want to deploy Alastria Identity Smart Contracts on a local network and try this library, please follow the steps described [here](#ganache)
 ## How to use it
 In your working directory init npm with
 ```
@@ -9,115 +15,54 @@ npm init -y
 ```
 Consume this library by running:
 ```
-npm install --save github:alastria/alastria-identity-lib.git
+npm install --save github:alastria/alastria-identity-lib.git#develop
 ```
-Now, you can use it from any JavaScript file in your workiing directory. You can copy an example from `test/file.js` such as:
+Now, you can use it from any JavaScript file in your workiing directory. You can copy an example from `test/file.js`.
+
+First you need to instantiate an identity:
+
 ```javascript
-const {transactionFactory, transactionProcess} = require('alastria-id-lib');
-const identityForUse = new UserIdentity('myBlockchainServiceIp','walletAddress','privateKeyFromKeyStore');
-
-identityForUse.addTransaction(transactionFactory.identityManager.addSubjectCredential(hash,uri));
-let transactionStack = identityForUSe.getSignedTransactions();
-
-doStuffWith(transactionStack);
-```
-Run it to check it works:
-```
-node file.js
-```
-## How to collaborate
-You will work with two different directories:
-- alastria-identity-lib : main folder of this lib that you get by clonning this repository where make your changes.
-- example : an empty folder in the same path for testing your changing.
-
-Steps for your first time:
-1. Install dependencies in alastria-identity-lib directory. Then, make your changes.
-```
-npm install
-```
-2. Now, create a working directory `example` where you have your JavaScript file. You can copy paste the content of `alastria-identity-lib/test/file.js` doing:
-```bash
-cd ..
-mkdir example
-cd example
-cp ../alastria-identity-lib/test/file.js .
-```
-3. Init npm with
-```
-npm init -y
-```
-4. Install the lib with
-```
-npm install --save github:alastria/alastria-identity-lib.git
-```
-5. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command:
-```
-cp -r ../alastria-identity-lib/dist/* node_modules/alastria-identity-lib/dist/
-```
-6. Run your file to test in your example directory
-```
-node file.js
+const {transactionFactory, transactionProcess} = require('alastria-identity-lib');
+// Save the key store in a variable. You can read it from a file
+let keyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
+// Recover the private key from the keyStore
+let userPrivateKey
+try{
+	userPrivateKey = keythereum.recover('Passw0rd', keyStore)
+}catch(error){
+	console.log("ERROR: ", error)
+}
+// Init a UserIdentity object with the previous values
+// It is important to add '0x' before the address
+let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
 ```
 
-Steps for your following times:
-1. Make your changes in alastria-identity-lib directory.
-2. From the root directory alastria-identity-lib , transpile with
-```
-tsc
-```
-3. Now, change to your working directory `example` where you have your JavaScript file (you can copy paste the content of `alastria-identity-lib/test/file.js`) doing:
-```bash
-cd ../example
-cp ../alastria-identity-lib/test/file.js .
-```
-4. Replace in your example directory `example/node-modules/alastria-identity-lib/dist` the folder `dist` with `alastria-identity-lib/dist` using the command:
-```
-cp -r ../alastria-identity-lib/dist/* node_modules/alastria-identity-lib/dist/
-```
-5. Run your file to test in your example directory
-```
-node file.js
-```
-
-If you make any changes in file.js, please comment and copy them to alastria-identity-lib/test/file.js and push. Thanks!
-
-### How to use the Alastria Identity smart contracts
+Then you can build and send transactions to the blockchain. Please mind the promises!
 ```javascript
-// Import the main class and the anonimous transaction factory
-const {transactionFactory, UserIdentity} = require('alastria-id-lib');
-
-// Import the keyStore for the users
-let keythereum = require('keythereum');
-let keyStore //Import from your project
-let privateKey = keythereum.recover('password', keyStore);
-
-//Create the identity object
-let Web3 = require('web3')
-let myBlockchainServiceIp = 'http://yourIP:RPCPort' //dont forget to change it
-const web3 = new Web3(new Web3.providers.HttpProvider(myBlockchainServiceIp));
-let nonce = web3.eth.getTransactionCount(`0x${keyStore.address}`);
-let userIdentity = new UserIdentity(web3,`0x${keyStore.address}`,privateKey,nonce);
-
-//Create an identity in blockchain
-//Remember that the dependancy of web3 is injected in the transaction factory
-let transaction1 = serviceProviderIdentity.getKnownTransaction(transactionFactory.identityManager.generateAccessToken(web3, userIdentity.address));
-let transaction2 = userIdentity.getKnownTransaction(transactionFactory.identityManager.createAlastriaIdentity(web3, publicKey));
-
-//Use a Dapp with an Alastria Identity
-let transaction3 = userIdentity.getKnownTransaction(tansactionFactory.identityManager.delegateCall(web3,dappAddress,valueInWei,dataForDapp));
-
-//Use registry contracts
-let transaction4 = userIdentity.getKnownTransaction(transactionFactory.credentialRegistry.addSubjectCredential(web3, subjectCredentialHash, URI))
-let transaction5 = userIdentity.getKnownTransaction(transactionFactory.presentationRegistry.addSubjectPresentation(web3, subjectPresentationHash, URI))
-
-//Send a transaction to the blockchain
-web3.eth.sendSignedTransaction(transaction, (e, hash) => {
-	console.log(hash);
+transactionFactory.identityManager.addIdentityServiceProvider(web3, aNewSPaddress, identityForUse.address)
+.then(tx1 => {
+	console.log('The transaction is: ', tx1)
+	// Step 2, we customize and sign the transaction by calling the function getKnownTransaction
+	identityForUse.getKnownTransaction(tx1)
+	.then(txAddIdentityServiceProvider => {
+		console.log('The transaction bytes data is: ', txAddIdentityServiceProvider)
+		// Step 3, we send the signed transaction to the blockchain
+		identityForUse.sendSignedTransaction(web3, txAddIdentityServiceProvider)
+		.then(signedTx => {
+			console.log("The transaction hash is: ", signedTx);	
+		})
+		.catch (error => { console.log("Error ---->", error)})
+	})
+	.catch(error2 => {
+		console.log('Error -----> ', error)
+	})
+})
+.catch(error3 => {
+	console.log('Error -----> ', error)
 })
 ```
 
-
-### How to use functions that do not change the blockchain state
+There are some functions that do not change the blockchain state but are useful (and recommendable) to manage tokens:
 ```javascript
 // Import tokensFactory to sign and verify
 const {tokensFactory} = require('alastria-identity-lib')
@@ -138,6 +83,57 @@ console.log('The signed jwt is: ', signedjwt)
 jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
 console.log('The verified token is:', jwt)
 ```
+
+Run it to check it works:
+```
+node file.js
+```
+## How to collaborate
+We recommend you to create a `example` directory to test the lib while changing it.
+
+### A. Steps for your first time:
+
+1. Create a working directory `example` where you will have your JavaScript file `file.js`
+```bash
+cd ..
+mkdir example
+cd example
+```
+3. Init npm with
+```
+npm init -y
+```
+4. Clone the lib inside the `node-modules` directory and install the dependencies
+```
+git clone https://github.com/alastria/alastria-identity-lib.git
+git checkout develop
+npm install
+```
+5. Copy in your example directory `example/file.js` the file `example/node-modules/alastria-identity-lib/file.js` using the command:
+```
+cd example
+cp node-modules/alastria-identity/test/file.js .
+```
+6. Run it to test in your example directory
+```
+node file.js
+```
+
+### B.Steps for your following times:
+1. Make your changes in `example/node-modules/alastria-identity-lib` directory and transpile:
+```
+tsc
+```
+3. Now, move to the root of your working directory `example` where you have your JavaScript file and try it!
+```
+cd ../../
+node file.js
+```
+
+If you make any changes in file.js, please comment them and copy the file to `node-modules/alastria-identity-lib/test/file.js` and push. Thanks!
+
+<a name="ganache"></a>
+## Connecting with ganache
 
 ## Dependencies
 This library is using functionality from others.

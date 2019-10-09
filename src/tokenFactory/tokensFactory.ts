@@ -10,7 +10,8 @@ export const tokensFactory = {
     'createCredential': createCredential,
     'createPresentation': createPresentation,
     //'createPresentationRequest': createPresentationRequest
-    'PSMHash': PSMHash
+    'PSMHash': PSMHash,
+    'createAIC': createAIC 
   }
 }
 
@@ -128,3 +129,19 @@ function PSMHash(web3, jwt, did){
 /*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {
   return jsonObject
 }*/
+
+
+  /**
+    * Create a JSON with the three params
+    * @param createAlastriaTX
+    * @param alastriaToken
+    * @param publicKey
+    */
+  function createAIC(createAlastriaTX, alastriaToken, publicKey){
+    const aic = {
+        "createAlastriaTX":createAlastriaTX,
+        "alastriaToken":alastriaToken,
+        "publicKey":publicKey
+    };
+    return aic;
+}

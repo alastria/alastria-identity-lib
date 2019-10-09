@@ -26,10 +26,10 @@ let contractsInfo = fs.readFileSync(path.join(__dirname, `${contractsPath}/`, 'C
 let contractInfoRow = contractsInfo.split('\n')
 
 export const config = {
-    alastriaIdentityManager: contractInfoRow[5].split('| ')[2],
-    alastriaCredentialRegistry: contractInfoRow[6].split('| ')[2],
-    alastriaPresentationRegistry: contractInfoRow[7].split('| ')[2],
-    alastriaPublicKeyRegistry: contractInfoRow[8].split('| ')[2],
+    alastriaIdentityManager: contractInfoRow[5].split(' | ')[1],
+    alastriaCredentialRegistry: contractInfoRow[6].split(' | ')[1],
+    alastriaPresentationRegistry: contractInfoRow[7].split(' | ')[1],
+    alastriaPublicKeyRegistry: contractInfoRow[8].split(' | ')[1],
     basicTransaction: {
         to: '0x0000000000000000000000000000000000000000',
         data: '0x0',

@@ -2,8 +2,7 @@ import { config } from '../config';
 
 
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
-  console.log(subjectPresentationHash);
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["addSubjectPresentation"],
     [subjectPresentationHash, URI]);
@@ -13,6 +12,8 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   return transaction;
 }
 
+
+
 /**
  * Subject functions
  * function updateSubjectPresentation(bytes32 subjectPresentationHash, Status status) public validStatus(status)
@@ -20,7 +21,7 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
  * @param subjectPresentationHash
  */
 export function updateSubjectPresentation(web3, subjectPresentationHash) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["updateSubjectPresentation"],
     [subjectPresentationHash]);
@@ -39,7 +40,7 @@ export function updateSubjectPresentation(web3, subjectPresentationHash) {
  * @param subsubjectPresentationHashject
  */
 export function getSubjectPresentationStatus(web3, subject, subsubjectPresentationHashject) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
     [subject, subsubjectPresentationHashject]);
@@ -54,7 +55,7 @@ export function getSubjectPresentationStatus(web3, subject, subsubjectPresentati
  * @param subject
  */
 export function getSubjectPresentationList(web3, subject) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationList"],
     [subject]);
@@ -71,7 +72,7 @@ export function getSubjectPresentationList(web3, subject) {
  * @param status
  */
 export function updateReceiverPresentation(web3, receiverPresentationHash, status) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["updateReceiverPresentation"],
     [receiverPresentationHash, status]);
@@ -91,7 +92,7 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
  * @param receiverPresentationHash
  */
 export function getReceiverPresentationStatus(web3, receiver, receiverPresentationHash) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getReceiverPresentationStatus"],
     [receiver, receiverPresentationHash]);
@@ -110,7 +111,7 @@ export function getReceiverPresentationStatus(web3, receiver, receiverPresentati
  * @param receiverStatus
  */
 export function getPresentationStatus(web3, subjectStatus, receiverStatus) {
-  let transaction = config.basicTransaction;
+  let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getPresentationStatus"],
     [subjectStatus, receiverStatus]);

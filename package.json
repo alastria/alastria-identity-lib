@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "run-s build",
-    "compile": "tsc",
+    "compile": "tsc && git clone https://github.com/alastria/alastria-identity.git",
     "clean": "rimraf dist",
     "build": "run-s clean compile"
   },
@@ -34,7 +34,7 @@
   "dependencies": {
     "ethereumjs-tx": "1.3.3",
     "jsontokens": "2.0.2",
-    "web3": "1.0.0-beta.55",
+    "web3": "1.2.1",
     "web3-utils": "1.0.0-beta.55",
     "npm-run-all": "4.1.5",
     "rimraf": "2.6.3",

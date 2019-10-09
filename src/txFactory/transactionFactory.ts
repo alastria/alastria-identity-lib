@@ -11,7 +11,7 @@ import {
 
 import {
     delegateCall,
-    generateAccessToken,
+    prepareAlastriaID,
     createAlastriaIdentity,
     addIdentityIssuer,
     updateIdentityIssuerEidasLevel,
@@ -52,7 +52,7 @@ export const transactionFactory = {
     },
     identityManager: {
         "delegateCall": delegateCall,
-        "generateAccessToken": generateAccessToken,
+        "prepareAlastriaID": prepareAlastriaID,
         "createAlastriaIdentity": createAlastriaIdentity,
         "addIdentityIssuer": addIdentityIssuer,
         "updateIdentityIssuerEidasLevel": updateIdentityIssuerEidasLevel,

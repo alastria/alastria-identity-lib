@@ -1,17 +1,19 @@
+console.log(__dirname)
 import * as fs from 'fs';
 import * as path from 'path';
 
 //TODO getting from GitHub URL repository
-const contractsPath = '../../../../alastria-identity/contracts/abi/'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+const contractsPath = '../alastria-identity/contracts'; // supposing alastria-identity is cloned at the same level as alastria-identity-lib
+//const contractsPath = '../alastria-identity/contracts/abi'
 var _contractsAbi = {};
 
 //Process the abi dir for getting an object with all the abi functions
-fs.readdirSync(path.join(__dirname, contractsPath)).forEach(file => {
+fs.readdirSync(path.join(__dirname, `${contractsPath}/abi`)).forEach(file => {
     let abi = {};
-    let abiFile = JSON.parse(fs.readFileSync(path.join(__dirname, `${contractsPath}/`, file), 'utf8'));
+    let abiFile = JSON.parse(fs.readFileSync(path.join(__dirname, `${contractsPath}/abi`, file), 'utf8'));
     abiFile.forEach(element => {
         if(element.type == 'constructor') {
-            abi['constrcutor'] = element;
+            abi['constructor'] = element;
         } else {
             abi[element.name] = element;
         }
@@ -19,14 +21,16 @@ fs.readdirSync(path.join(__dirname, contractsPath)).forEach(file => {
     _contractsAbi[file.match(/sol_(.*)\.abi/)[1]] = abi;
 });
 
-// WARNING TODO getting from GitHub URL repository or update these address with your new ones!!
+// Read file ContractInfo.md and take rows to aobtain the addres of each contract
+let contractsInfo = fs.readFileSync(path.join(__dirname, `${contractsPath}/`, 'ContractInfo.md'), 'utf8')
+let contractInfoRow = contractsInfo.split('\n')
+
 export const config = {
-    alastriaIdentityManager: '0x5ea489540c5a5d8cf95b48940d6f54afa48ee6f5',
-    alastriaCredentialRegistry: '0xf52a1198aa78364a0921e374ad351e34b4550cb5',
-    alastriaPresentationRegistry: '0x2b5343c56b0591c6aef15665a83c334afa368405',
-    alastriaPublicKeyRegistry: '0x761831f1233b578ff5b7b374dcd7f2b353b18d2d',
+    alastriaIdentityManager: contractInfoRow[5].split(' | ')[1],
+    alastriaCredentialRegistry: contractInfoRow[6].split(' | ')[1],
+    alastriaPresentationRegistry: contractInfoRow[7].split(' | ')[1],
+    alastriaPublicKeyRegistry: contractInfoRow[8].split(' | ')[1],
     basicTransaction: {
-        from: '',
         to: '0x0000000000000000000000000000000000000000',
         data: '0x0',
         gasLimit: 0,

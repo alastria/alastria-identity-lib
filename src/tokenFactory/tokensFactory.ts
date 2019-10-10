@@ -11,10 +11,16 @@ export const tokensFactory = {
     'createPresentation': createPresentation,
     //'createPresentationRequest': createPresentationRequest
     'PSMHash': PSMHash,
-    'createAIC': createAIC 
+    'createAIC': createAIC,
+    'createDID': createDID
   }
 }
 
+function createDID(network, proxyAddress){
+  // network -> "quor" / "fabr" 
+  // no siempre es redT, hay que conseguirlo mediante el archivo config
+  return "did:ala:" + network + ":redT:" + proxyAddress;
+}
 
 // Used by Service Provider or Subject Wallet
 export function decodeJWT(jwt) {

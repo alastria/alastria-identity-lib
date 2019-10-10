@@ -9,85 +9,9 @@ This library has three different modules:
 
 If you want to deploy Alastria Identity Smart Contracts on a local network and try this library, please follow the steps described [here](#ganache)
 ## How to use it
-In your working directory init npm with
-```
-npm init -y
-```
-Consume this library by running:
-```
-npm install --save github:alastria/alastria-identity-lib.git#develop
-```
-Now, you can use it from any JavaScript file in your workiing directory. You can copy an example from `test/file.js`.
 
-First you need to instantiate an identity:
+If yoy want to use the library, you must go to the wiki of [Alastria-identity-example](https://github.com/alastria/alastria-identity-example)
 
-```javascript
-const {transactionFactory, transactionProcess} = require('alastria-identity-lib');
-// Save the key store in a variable. You can read it from a file
-let keyStore = {"address":"6e3976aeaa3a59e4af51783cc46ee0ffabc5dc11","crypto":{"cipher":"aes-128-ctr","ciphertext":"463a0bc2146023ac4b85f4e3675c338facb0a09c4f83f5f067e2d36c87a0c35e","cipherparams":{"iv":"d731f9793e33b3574303a863c7e68520"},"kdf":"scrypt","kdfparams":{"dklen":32,"n":262144,"p":1,"r":8,"salt":"876f3ca79af1ec9b77f181cbefc45a2f392cb8eb99fe8b3a19c79d62e12ed173"},"mac":"230bf3451a7057ae6cf77399e6530a88d60a8f27f4089cf0c07319f1bf9844b3"},"id":"9277b6ec-6c04-4356-9e1c-dee015f459c5","version":3}
-// Recover the private key from the keyStore
-let userPrivateKey
-try{
-	userPrivateKey = keythereum.recover('Passw0rd', keyStore)
-}catch(error){
-	console.log("ERROR: ", error)
-}
-// Init a UserIdentity object with the previous values
-// It is important to add '0x' before the address
-let identityForUse = new UserIdentity(web3, `0x${keyStore.address}`, userPrivateKey)
-```
-
-Then you can build and send transactions to the blockchain. Please mind the promises!
-```javascript
-transactionFactory.identityManager.addIdentityServiceProvider(web3, aNewSPaddress, identityForUse.address)
-.then(tx1 => {
-	console.log('The transaction is: ', tx1)
-	// Step 2, we customize and sign the transaction by calling the function getKnownTransaction
-	identityForUse.getKnownTransaction(tx1)
-	.then(txAddIdentityServiceProvider => {
-		console.log('The transaction bytes data is: ', txAddIdentityServiceProvider)
-		// Step 3, we send the signed transaction to the blockchain
-		identityForUse.sendSignedTransaction(web3, txAddIdentityServiceProvider)
-		.then(signedTx => {
-			console.log("The transaction hash is: ", signedTx);	
-		})
-		.catch (error => { console.log("Error ---->", error)})
-	})
-	.catch(error2 => {
-		console.log('Error -----> ', error)
-	})
-})
-.catch(error3 => {
-	console.log('Error -----> ', error)
-})
-```
-
-There are some functions that do not change the blockchain state but are useful (and recommendable) to manage tokens:
-```javascript
-// Import tokensFactory to sign and verify
-const {tokensFactory} = require('alastria-identity-lib')
-
-//Sign a presentation request
-let signedjwt = tokensFactory.presentation.signPresentationRequest(tokenPayload, rawPrivateKey)
-console.log('The signed jwt is: ', signedjwt)
-
-//Verify the signed presentation request and get the decoded token
-let jwt = tokensFactory.presentation.verifyPresentationRequest(signedjwt, rawPublicKey)
-console.log('The verified token is:', jwt)
-
-//Sign a presentation
-signedjwt = tokensFactory.presentation.signPresentation(tokenPayload, rawPrivateKey)
-console.log('The signed jwt is: ', signedjwt)
-
-//Verify the signed presentation and get the decoded token
-jwt = tokensFactory.presentation.verifyPresentation(signedjwt, rawPublicKey)
-console.log('The verified token is:', jwt)
-```
-
-Run it to check it works:
-```
-node file.js
-```
 ## How to collaborate
 We recommend you to create a `example` directory to test the lib while changing it.
 

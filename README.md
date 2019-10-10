@@ -27,7 +27,7 @@ git clone https://github.com/alastria/alastria-identity-lib.git
 Then, you must go to the alastria-identity-example's folder and run the following command
 ```
 npm install --save github:alastria/alastria-identity-lib.git#develop
-
+```
 This command creates the node_module´s folder. 
 
 Now `cd  node_modules/alastria-identity-lib/src`
@@ -36,7 +36,8 @@ You can modify the library and go back to the directory  _"node_modules/alastria
 
 Transpile the library
 ```
-tsc  
+tsc 
+```
 Once you have finished you must go to _alastria-identity-example_´s directory.
 
 Now, you can use it from any JavaScript file in your working directory.

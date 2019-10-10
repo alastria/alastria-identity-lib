@@ -14,67 +14,38 @@ If you want to deploy Alastria Identity Smart Contracts on a local network and t
 
 ## How to use it
 
-If yoy want to use the library, you must go to the wiki of [Alastria-identity-example](https://github.com/alastria/alastria-identity-example)
+If you want to use the library, you must follow the steps of the README.md in [Alastria-identity-example](https://github.com/alastria/alastria-identity-example)
 
 ## How to collaborate
 
-We recommend you to create a `example` directory to test the lib while changing it.
-
-### A. Steps for your first time
-
-1. Create a working directory `example` where you will have your JavaScript file `file.js`
-
-```bash
-cd ..
-mkdir example
-cd example
+We recommend you to clone both repositories in your working directory.
 ```
+git clone https://github.com/alastria/alastria-identity-example.git
 
-2. Init npm with
-
-``` bash
-npm init -y
-```
-
-3. Clone the lib inside the `node-modules` directory and install the dependencies
-
-``` bash
 git clone https://github.com/alastria/alastria-identity-lib.git
-git checkout develop
-npm install
 ```
-
-4. Copy in your example directory `example/file.js` the file `example/node-modules/alastria-identity-lib/file.js` using the command:
-
-``` bash
-cd example
-cp node-modules/alastria-identity/test/file.js .
+Then, you must go to the alastria-identity-example's folder and run the following command
 ```
+npm install --save github:alastria/alastria-identity-lib.git#develop
 
-5. Run it to test in your example directory
+This command creates the node_module´s folder. 
 
-```bash
-node file.js
+Now `cd  node_modules/alastria-identity-lib/src`
+
+You can modify the library and go back to the directory  _"node_modules/alastria-identity-lib"_ once you are done.
+
+Transpile the library
 ```
+tsc  
+Once you have finished you must go to _alastria-identity-example_´s directory.
 
-### B.Steps for your following times
+Now, you can use it from any JavaScript file in your working directory.
 
-1. Make your changes in `example/node-modules/alastria-identity-lib` directory and transpile:
-
-```bash
-tsc
+You can execute some of our examples by running:
 ```
-
-2. Now, move to the root of your working directory `example` where you have your JavaScript file and try it!
-
-```bash
-cd ../../
-node file.js
+node file_name.js 
 ```
-
-If you make any changes in file.js, please comment them and copy the file to `node-modules/alastria-identity-lib/test/file.js` and push. Thanks!
-
-## Connecting with ganache
+Or create yours.
 
 ## Dependencies
 

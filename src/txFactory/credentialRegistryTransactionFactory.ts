@@ -12,7 +12,7 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
   let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["addSubjectCredential"], [subjectCredentialHash, URI]);
   transaction.data = delegated(web3, delegatedData);
-  transaction.to = config.alastriaCredentialRegistry;
+  transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;
   return transaction;
 }

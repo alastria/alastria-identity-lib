@@ -104,10 +104,10 @@ export function getEidasLevel(web3, identityIssuer) {
  * @param web3
  * @param identityServiceProvider
  */
-export function addIdentityServiceProvider(web3, identityServiceProvider, from) {
+export function addIdentityServiceProvider(web3, identityServiceProvider) {
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.to = config.alastriaIdentityManager;
-  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["addIdentityServiceProvider"], [identityServiceProvider]);
+  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["addIdentityServiceProvider"], [identityServiceProvider]);
   transaction.gasLimit = 600000;
   return transaction
 }
@@ -119,7 +119,7 @@ export function addIdentityServiceProvider(web3, identityServiceProvider, from) 
  */
 export function deleteIdentityServiceProvider(web3, identityServiceProvider) {
   let transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityServiceProvider"]["deleteIdentityServiceProvider"], [identityServiceProvider]);
+  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["deleteIdentityServiceProvider"], [identityServiceProvider]);
   transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;
   return transaction;

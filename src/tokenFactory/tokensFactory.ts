@@ -9,7 +9,7 @@ export const tokensFactory = {
     'createAlastriaToken': createAlastriaToken,
     'createCredential': createCredential,
     'createPresentation': createPresentation,
-    //'createPresentationRequest': createPresentationRequest
+    'createPresentationRequest': createPresentationRequest,
     'PSMHash': PSMHash,
     'createAIC': createAIC,
     'createDID': createDID
@@ -107,23 +107,58 @@ export function createCredential(kid, didIssuer, didSubject, context, credential
 * @param timeNbf (optional) "nbf". This parameter shows, in miliseconds, when the token starts to be valid.
 * @param jti (optional) Unique token identifier
 */
-function createPresentation(didIssuer, didSubject, credentials, timeExp?: number, timeNbf?: number, jti?: number) {
+function createPresentation(kid, didIssuer, didSubject, context, credentials, procUrl, procHash, timeExp?: number, timeNbf?: number, jti?: String) {
   const jwt = {
     "header": {
-      "typ": "JWT",
-      "alg": "ES256K"
+        "alg": "ES256K",
+        "typ": "JWT",
+        "kid": kid
     },
     "Payload": {
-      "@context": "https://w3id.org/credentials/v1",
-      "jti": jti,
-      "iss": didIssuer,
-      "sub": didSubject,
-      "iat": Math.round(Date.now()/1000), // ?? Como se calcula
-      "exp": timeExp,
-      "nbf": timeNbf,
-      "credentials": credentials // TODO que ponga el contenido de cada credencial
+        "jti": jti,
+        "iss": didIssuer,
+        "aud": didSubject,
+        "iat": Math.round(Date.now()/1000),
+        "exp": timeExp,
+        "nbf": timeNbf,
+        "vp": {
+          "@context": [context,"JWT"],
+          "type": ["VerifiablePresentation"],
+          "procUrl": procUrl,
+          "procHash": procHash,
+          "verifiableCredential": credentials
+        }
     }
   }
+  return jwt
+}
+
+function createPresentationRequest(kid, didIssuer, didSubject, context, credentials, procUrl, procHash, data, timeExp?: number, timeNbf?: number, jti?: String) {
+  const jwt = {
+    "header": {
+        "alg": "ES256K",
+        "typ": "JWT",
+        "kid": kid
+    },
+    "Payload": {
+        "jti": jti,
+        "iss": didIssuer,
+        "iat": Math.round(Date.now()/1000),
+        "exp": timeExp,
+        "nbf": timeNbf,
+
+        "pr": {
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "JWT"
+          ],
+          "type": ["VerifiablePresentationRequest"],
+          "procUrl": procUrl,
+      	  "procHash": procHash,
+          "data": data
+        }
+      }
+    }
   return jwt
 }
 
@@ -132,10 +167,6 @@ function PSMHash(web3, jwt, did){
 	return web3.utils.sha3(json); // ALIAS -> web3.utils.keccak256(json)
 
 }
-/*function createPresentationRequest(issuerDID, subjectDID, objects, tokenValidTime, setUpTokenTime, tokenId) {
-  return jsonObject
-}*/
-
 
   /**
     * Create a JSON with the three params

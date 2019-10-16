@@ -114,7 +114,7 @@ function createPresentation(kid, didIssuer, didSubject, context, credentials, pr
         "typ": "JWT",
         "kid": kid
     },
-    "Payload": {
+    "payload": {
         "jti": jti,
         "iss": didIssuer,
         "aud": didSubject,
@@ -140,7 +140,7 @@ function createPresentationRequest(kid, didIssuer, didSubject, context, credenti
         "typ": "JWT",
         "kid": kid
     },
-    "Payload": {
+    "payload": {
         "jti": jti,
         "iss": didIssuer,
         "iat": Math.round(Date.now()/1000),

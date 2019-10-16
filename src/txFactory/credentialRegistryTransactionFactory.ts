@@ -11,8 +11,8 @@ import { config } from '../config';
 export function addSubjectCredential(web3, subjectCredentialHash, URI) {
   let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["addSubjectCredential"], [subjectCredentialHash, URI]);
-  transaction.data = delegated(web3, delegatedData);
-  transaction.to = config.alastriaIdentityManager;
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager;  // When delegated, target is alastriaIdentityManager
   transaction.gasLimit = 600000;
   return transaction;
 }
@@ -26,8 +26,8 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
 export function deleteSubjectCredential(web3, subjectCredentialHash) {
     let transaction = Object.assign({}, config.basicTransaction)
     let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["deleteSubjectCredential"], [subjectCredentialHash]);
-    transaction.data = delegated(web3, delegatedData);
-    transaction.to = config.alastriaIdentityManager;
+    transaction.data = delegated(web3, delegatedData)
+    transaction.to = config.alastriaIdentityManager;  // When delegated, target is alastriaIdentityManager
     transaction.gasLimit = 600000;
     return transaction;
 }

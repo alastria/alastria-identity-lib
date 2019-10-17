@@ -67,12 +67,6 @@ function createAlastriaToken(didIssuer, providerURL, callbackURL, alastriaNetId,
   return jwt
 }
 
-/*let jwt = {
-  "@context": context,
-  "levelOfAssurance": levelOfAssurance,
-  credentialKey: credentialValue //TODO que ponga el nombre del parametro
-}*/
-
 // It builds a JWT with credential info
 export function createCredential(kid, didIssuer, didSubject, context, credentialSubject, timeExp?: number, timeNbf?: number, jti?: number) {
      const jwt = {
@@ -85,7 +79,7 @@ export function createCredential(kid, didIssuer, didSubject, context, credential
       "jti": jti,
       "iss": didIssuer,
       "sub": didSubject,
-      "iat": Math.round(Date.now()/1000), // ?? Como se calcula
+      "iat": Math.round(Date.now()/1000),
       "exp": timeExp,
       "nbf": timeNbf,
       "vc":{
@@ -100,9 +94,9 @@ export function createCredential(kid, didIssuer, didSubject, context, credential
 
 /**
 * This function creates a presentation with the jwt format
-* @param didIssuer "iss". This is the issuer did
-* @param didSubject "sub". This is de subject didIssuer
-* @param credentials This is an array that contains some credentials taht follows the "createCredential" format
+* @param didIssuer "iss". DID representing the Alastria.ID of the entity that issued the presentation
+* @param didSubject "sub".  identifies the recipient that the JWT is intended for
+* @param credentials An array of verifiable credentials in JWT format, that is, signed JWTs where each verifiable credential is base64url encoded.
 * @param timeExp (optional) "exp". This parameter shows, in miliseconds, how much time will the token be valid. This number will be calculated from the "iat"
 * @param timeNbf (optional) "nbf". This parameter shows, in miliseconds, when the token starts to be valid.
 * @param jti (optional) Unique token identifier
@@ -122,7 +116,7 @@ function createPresentation(kid, didIssuer, didSubject, context, credentials, pr
         "exp": timeExp,
         "nbf": timeNbf,
         "vp": {
-          "@context": [context,"JWT"],
+          "@context": context,
           "type": ["VerifiablePresentation"],
           "procUrl": procUrl,
           "procHash": procHash,
@@ -132,8 +126,11 @@ function createPresentation(kid, didIssuer, didSubject, context, credentials, pr
   }
   return jwt
 }
-
-function createPresentationRequest(kid, didIssuer, didSubject, context, credentials, procUrl, procHash, data, timeExp?: number, timeNbf?: number, jti?: String) {
+/** Creates a presentation Request
+ *  @param issDID "iss". DID representing the Alastria.ID of the entity that issued the presentation
+ *  @param credentialsRequest "data". JSON Array that contains the actual Presentation Request data items.
+*/
+function createPresentationRequest(kid, issDID, context, procUrl, procHash, credentialsRequest, timeExp?: number, timeNbf?: number, jti?: String) {
   const jwt = {
     "header": {
         "alg": "ES256K",
@@ -142,20 +139,17 @@ function createPresentationRequest(kid, didIssuer, didSubject, context, credenti
     },
     "payload": {
         "jti": jti,
-        "iss": didIssuer,
+        "iss": issDID,
         "iat": Math.round(Date.now()/1000),
         "exp": timeExp,
         "nbf": timeNbf,
 
         "pr": {
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "JWT"
-          ],
+          "@context": context,
           "type": ["VerifiablePresentationRequest"],
           "procUrl": procUrl,
       	  "procHash": procHash,
-          "data": data
+          "data": credentialsRequest
         }
       }
     }
@@ -164,7 +158,7 @@ function createPresentationRequest(kid, didIssuer, didSubject, context, credenti
 
 function PSMHash(web3, jwt, did){
 	let json = jwt.concat(did);
-	return web3.utils.sha3(json); // ALIAS -> web3.utils.keccak256(json)
+	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
 
 }
 

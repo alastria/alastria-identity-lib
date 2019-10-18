@@ -44,7 +44,7 @@ export function getSubjectPresentationStatus(web3, subject, subsubjectPresentati
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
     [subject, subsubjectPresentationHashject]);
-  transaction.to = config.alastriaIdentityManager;
+  transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;
 }
@@ -59,7 +59,7 @@ export function getSubjectPresentationList(web3, subject) {
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationList"],
     [subject]);
-  transaction.to = config.alastriaIdentityManager;
+  transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;
 }

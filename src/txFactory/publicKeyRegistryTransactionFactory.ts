@@ -8,9 +8,11 @@ import { config } from '../config';
  */
 export function addKey(web3, publicKey) {
   let transaction = Object.assign({}, config.basicTransaction)
-  let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], [publicKey]);
+  let delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"], 
+    [publicKey]);
   transaction.data = delegated(web3, delegatedData);
-  transaction.to = config.alastriaPublicKeyRegistry;
+  transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;
   return transaction
 }

@@ -20,11 +20,11 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
  * @param web3
  * @param subjectPresentationHash
  */
-export function updateSubjectPresentation(web3, subjectPresentationHash) {
+export function updateSubjectPresentation(web3, subjectPresentationHash, status) {
   let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["updateSubjectPresentation"],
-    [subjectPresentationHash]);
+    [subjectPresentationHash, status]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;

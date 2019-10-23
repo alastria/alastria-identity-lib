@@ -1,4 +1,4 @@
-import * as fs from 'fs-web';
+import * as fs from 'fs';
 import * as path from 'path';
 
 //TODO getting from GitHub URL repository
@@ -7,9 +7,9 @@ const contractsPath = '../alastria-identity/contracts'; // supposing alastria-id
 var _contractsAbi = {};
 
 //Process the abi dir for getting an object with all the abi functions
-fs.readdir(path.join(__dirname, `${contractsPath}/abi`)).forEach(file => {
+fs.readdirSync(path.join(__dirname, `${contractsPath}/abi`)).forEach(file => {
     let abi = {};
-    let abiFile = JSON.parse(fs.readFile(path.join(__dirname, `${contractsPath}/abi`, file), 'utf8'));
+    let abiFile = JSON.parse(fs.readFileSync(path.join(__dirname, `${contractsPath}/abi`, file), 'utf8'));
     abiFile.forEach(element => {
         if(element.type == 'constructor') {
             abi['constructor'] = element;
@@ -21,7 +21,7 @@ fs.readdir(path.join(__dirname, `${contractsPath}/abi`)).forEach(file => {
 });
 
 // Read file ContractInfo.md and take rows to aobtain the addres of each contract
-let contractsInfo = fs.readFile(path.join(__dirname, `${contractsPath}/`, 'ContractInfo.md'), 'utf8')
+let contractsInfo = fs.readFileSync(path.join(__dirname, `${contractsPath}/`, 'ContractInfo.md'), 'utf8')
 let contractInfoRow = contractsInfo.split('\n')
 
 export const config = {

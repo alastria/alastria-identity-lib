@@ -45,7 +45,7 @@ const config = {
 }
 
 function getConfig() {
-    fs.writeFileSync('configFile.js', `export const ${config}`)
+    fs.writeFileSync('configFile.js', `export const ${JSON.stringify(config)}`)
 }
 
 getConfig()

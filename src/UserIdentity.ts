@@ -48,15 +48,6 @@ export class UserIdentity {
     }
 
     /**
-     * @Dev Returns a signed transaction
-     *   @param {web3} web3 object
-     *   @param {tx} transaction
-     */
-    public sendSignedTransaction(web3, tx) {
-		       return web3.eth.sendSignedTransaction(tx);
-    }
-
-    /**
     * @Dev Returns a known transaction from an anonimous transaction
     */
     public async getKnownTransaction(transaction) {

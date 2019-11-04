@@ -1,39 +1,41 @@
 import { config } from '../config';
 
-
-//function addSubjectCredential(web3, subjectCredentialHash, URI)
 /**
+ * function addSubjectCredential(web3, subjectCredentialHash, URI)
  * Dev: get delegated invoke addSubjectCredential transaction object
  * @param web3 ethereum connection
  * @param subjectCredentialHash should have 32 bytes, credential identification
  */
-
 export function addSubjectCredential(web3, subjectCredentialHash, URI) {
   let transaction = Object.assign({}, config.basicTransaction)
-  let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["addSubjectCredential"], [subjectCredentialHash, URI]);
+  let delegatedData = web3.eth.abi.encodeFunctionCall(
+      config.contractsAbi["AlastriaCredentialRegistry"]["addSubjectCredential"],
+      [subjectCredentialHash, URI]);
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager;  // When delegated, target is alastriaIdentityManager
   transaction.gasLimit = 600000;
   return transaction;
 }
 
-//function deleteSubjectCredential(web3, subjectCredentialHash)
 /**
+ * function deleteSubjectCredential(web3, subjectCredentialHash)
  * Dev: get delegated invoke deleteSubjectCredential transaction object
  * @param web3 ethereum connection
  * @param subjectCredentialHash should have 32 bytes
  */
 export function deleteSubjectCredential(web3, subjectCredentialHash) {
     let transaction = Object.assign({}, config.basicTransaction)
-    let delegatedData = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["deleteSubjectCredential"], [subjectCredentialHash]);
+    let delegatedData = web3.eth.abi.encodeFunctionCall(
+        config.contractsAbi["AlastriaCredentialRegistry"]["deleteSubjectCredential"],
+        [subjectCredentialHash]);
     transaction.data = delegated(web3, delegatedData)
     transaction.to = config.alastriaIdentityManager;  // When delegated, target is alastriaIdentityManager
     transaction.gasLimit = 600000;
     return transaction;
 }
 
-//function getSubjectCredentialStatus(web3, subject, subjectCredentialHash)
 /**
+ * function getSubjectCredentialStatus(web3, subject, subjectCredentialHash)
  * Dev: get invoke getSubjectCredentialStatus transaction object
  * @param web3 ethereum connection
  * @param subject alastria Id
@@ -41,21 +43,25 @@ export function deleteSubjectCredential(web3, subjectCredentialHash) {
  */
 export function getSubjectCredentialStatus(web3, subject, subjectCredentialHash) {
   let transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialStatus"], [subject, subjectCredentialHash]);
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+      config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialStatus"],
+      [subject, subjectCredentialHash]);
   transaction.to = config.alastriaCredentialRegistry;
   transaction.gasLimit = 600000;
   return transaction
 }
 
-//function getSubjectCredentialList(web3, subject)
 /**
+ * function getSubjectCredentialList(web3, subject)
  * Dev: get invoke getSubjectCredentialList transaction object
  * @param web3 ethereum connection
  * @param subject subject to reover credenital list
  */
 export function getSubjectCredentialList(web3, subject) {
     let transaction = Object.assign({}, config.basicTransaction)
-    transaction.data = web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialList"], [subject]);
+    transaction.data = web3.eth.abi.encodeFunctionCall(
+        config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialList"],
+        [subject]);
     transaction.to = config.alastriaCredentialRegistry;
     transaction.gasLimit = 600000;
     return transaction;
@@ -111,5 +117,7 @@ export function getCredentialStatus(web3, subjectStatus, issuerStatus) {
 }
 
 function delegated(web3, delegatedData) {
-    return web3.eth.abi.encodeFunctionCall(config.contractsAbi["AlastriaIdentityManager"]["delegateCall"], [config.alastriaCredentialRegistry, 0, delegatedData])
+    return web3.eth.abi.encodeFunctionCall(
+        config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
+        [config.alastriaCredentialRegistry, 0, delegatedData])
   }

@@ -39,15 +39,15 @@ export function prepareAlastriaID(web3, signAddress) {
  */
 export function createAlastriaIdentity(web3, publicKey) {
     let transaction = Object.assign({}, config.basicTransaction)
-      transaction.gasLimit = 600000;
-      let publicKeyCallData = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"],
-        [publicKey])
-      transaction.data = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"],
-        [publicKeyCallData]);
-      transaction.to = config.alastriaIdentityManager;
-      return transaction;
+    transaction.gasLimit = 600000;
+    let publicKeyCallData = web3.eth.abi.encodeFunctionCall(
+      config.contractsAbi["AlastriaPublicKeyRegistry"]["addKey"],
+      [publicKey])
+    transaction.data = web3.eth.abi.encodeFunctionCall(
+      config.contractsAbi["AlastriaIdentityManager"]["createAlastriaIdentity"],
+      [publicKeyCallData]);
+    transaction.to = config.alastriaIdentityManager;
+    return transaction;
 }
 
 /**

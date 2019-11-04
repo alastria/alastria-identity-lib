@@ -1,6 +1,5 @@
 import { config } from '../config';
 
-
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   let transaction = Object.assign({}, config.basicTransaction)
   let delegatedData = web3.eth.abi.encodeFunctionCall(
@@ -82,11 +81,10 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
   return transaction;
 }
 
-// If the Presentation does not exists the return is a void Presentation
-// If we want a log, should we add an event?
-//function getReceiverPresentationStatus(address receiver, bytes32 receiverPresentationHash) view public validAddress(receiver) returns(bool exists, Status status) {
 /**
- *
+ * If the Presentation does not exists the return is a void Presentation
+ * If we want a log, should we add an event?
+ * function getReceiverPresentationStatus(address receiver, bytes32 receiverPresentationHash) view public validAddress(receiver) returns(bool exists, Status status) {
  * @param web3
  * @param receiver
  * @param receiverPresentationHash
@@ -101,11 +99,10 @@ export function getReceiverPresentationStatus(web3, receiver, receiverPresentati
   return transaction;
 }
 
-// Utility function
-// Defining three status functions avoids linking the Subject to the Receiver or the corresponding hashes
-//function getPresentationStatus(Status subjectStatus, Status receiverStatus) pure public validStatus(subjectStatus) validStatus(receiverStatus) returns(Status){
 /**
- *
+ * Utility function
+ * Defining three status functions avoids linking the Subject to the Receiver or the corresponding hashes
+ * function getPresentationStatus(Status subjectStatus, Status receiverStatus) pure public validStatus(subjectStatus) validStatus(receiverStatus) returns(Status){
  * @param web3
  * @param subjectStatus
  * @param receiverStatus

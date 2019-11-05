@@ -1,10 +1,6 @@
 //With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 //TODO: change encoding when v1.0.0 releases stable version
 import * as EthereumTxAll from 'ethereumjs-tx';
-// import Web3 from 'web3';
-
-//TODO not hardcoded, import from config file
-const alastriaIdentityManager = '0xf18bd0f5a4f3944f3074453ce2015e8af12ed196';
 
 export class UserIdentity {
     public endPoint: any;
@@ -39,7 +35,6 @@ export class UserIdentity {
      */
     public getSignedTransactions() {
         let processedTransactions = [];
-        //TODO: the function can be simplified with processedTransactions=this.transactions. Check.
         this.transactions.map(transaction => {
             processedTransactions.push(this.signTransaction(transaction, this.privateKey));
         });
@@ -95,8 +90,13 @@ export class UserIdentity {
     *   @param {address} address user
     */
     private async getUserNonce(endPoint, address) {
-        let nonce
-        nonce = await endPoint.eth.getTransactionCount(address)
-        return nonce
+        try {
+            let nonce
+            nonce = await endPoint.eth.getTransactionCount(address)
+            return nonce
+        } catch(err) {
+            console.log(err)
+            throw err;
+        }
     }
 }

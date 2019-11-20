@@ -48,7 +48,7 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaSession(context, iss, pku, data, exp?: string, nbf?: string, jti?: string) {
+function createAlastriaSession(context, iss, pku, data, exp?: number, nbf?: number, jti?: string) {
   const jwt = {
     "@context": context,
     "iss": iss,
@@ -71,7 +71,7 @@ function createAlastriaSession(context, iss, pku, data, exp?: string, nbf?: stri
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: string, jti?: string) {
+function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: number, jti?: string) {
   const jwt = {
     "iss": iss,
     "gwu": gwu,
@@ -95,7 +95,7 @@ function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: string, jti?: string
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific credential (it is NOT the identifier of the holder or of any other actor)
  */
-export function createCredential(kid, iss, sub, context, credentialSubject, exp?: number, nbf?: number, jti?: number) {
+export function createCredential(kid, iss, sub, context, credentialSubject, exp?: number, nbf?: number, jti?: String) {
      const jwt = {
     "header": {
       "typ": "JWT",

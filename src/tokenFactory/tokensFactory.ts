@@ -16,6 +16,9 @@ export const tokensFactory = {
   }
 }
 
+// TODO: Remove when MVP is over
+const MVP_CREDENTIAL_LIMIT = 2
+
 function createDID(network, proxyAddress){
   // network -> "quor" / "fabr" 
   // no siempre es redT, hay que conseguirlo mediante el archivo config
@@ -132,6 +135,10 @@ export function createCredential(kid, iss, sub, context, credentialSubject, exp?
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentation(kid, iss, aud, context, verifiableCredential, procUrl, procHash, exp?: number, nbf?: number, jti?: String) {
+  // TODO: Remove when MVP is over
+  if (Object.keys(verifiableCredential).length > MVP_CREDENTIAL_LIMIT){
+    throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
+  }
   const jwt = {
     "header": {
         "alg": "ES256K",
@@ -169,6 +176,10 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentationRequest(kid, iss, context, procUrl, procHash, data, exp?: number, nbf?: number, jti?: String) {
+  // TODO: Remove when MVP is over
+  if (Object.keys(data).length > MVP_CREDENTIAL_LIMIT){
+    throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
+  }
   const jwt = {
     "header": {
         "alg": "ES256K",

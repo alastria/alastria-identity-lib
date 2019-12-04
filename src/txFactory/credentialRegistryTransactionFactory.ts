@@ -18,6 +18,23 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
 }
 
 /**
+ * function addIssuerCredential(web3, issuerCredentialHash)
+ * Dev: get delegated invoke addIssuerCredential transaction object
+ * @param web3 ethereum connection
+ * @param issuerCredentialHash should have 32 bytes, credential identification
+ */
+export function addIssuerCredential(web3, issuerCredentialHash) {
+    let transaction = Object.assign({}, config.basicTransaction)
+    let delegatedData = web3.eth.abi.encodeFunctionCall(
+        config.contractsAbi["AlastriaCredentialRegistry"]["addIssuerCredential"],
+        [issuerCredentialHash]);
+    transaction.data = delegated(web3, delegatedData)
+    transaction.to = config.alastriaIdentityManager;  // When delegated, target is alastriaIdentityManager
+    transaction.gasLimit = 600000;
+    return transaction;
+  }
+
+/**
  * function deleteSubjectCredential(web3, subjectCredentialHash)
  * Dev: get delegated invoke deleteSubjectCredential transaction object
  * @param web3 ethereum connection

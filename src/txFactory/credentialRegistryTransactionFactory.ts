@@ -92,10 +92,11 @@ export function getSubjectCredentialList(web3, subject) {
  */
 export function updateCredentialStatus(web3, issuerCredentialHash, status) {
     let transaction = Object.assign({}, config.basicTransaction)
-    transaction.data = web3.eth.abi.encodeFunctionCall(
-        config.contractsAbi["AlastriaCredentialRegistry"]["getIssuerCredentialStatus"],
+    let delegatedData = web3.eth.abi.encodeFunctionCall(
+        config.contractsAbi["AlastriaCredentialRegistry"]["updateCredentialStatus"],
         [issuerCredentialHash, status]);
-    transaction.to = config.alastriaCredentialRegistry;
+    transaction.data = delegated(web3, delegatedData);
+    transaction.to = config.alastriaIdentityManager;
     transaction.gasLimit = 600000;
     return transaction;
 }

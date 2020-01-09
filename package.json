@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "run-s build",
-    "compile": "git clone https://github.com/alastria/alastria-identity.git; pwd && ls /src && ./src/configFile.js; tsc",
+    "compile": "git clone https://github.com/alastria/alastria-identity.git; pwd && ls src && ./src/configFile.js; tsc",
     "clean": "rimraf dist",
     "build": "run-s clean compile"
   },

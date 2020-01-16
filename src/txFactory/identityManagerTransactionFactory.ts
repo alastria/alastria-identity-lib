@@ -158,3 +158,13 @@ export function isIdentityServiceProvider(web3, identityServiceProvider) {
   transaction.gasLimit = 600000;
   return transaction;
 }
+
+export function isIdentityIssuer(web3, identityIssuer) {
+  let transaction = Object.assign({}, config.basicTransaction)
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaIdentityIssuer"]["isIdentityIssuer"],
+    [identityIssuer]);
+  transaction.to = config.alastriaIdentityManager;
+  transaction.gasLimit = 600000;
+  return transaction;
+}

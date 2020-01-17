@@ -294,14 +294,13 @@ export function getEntity(web3, addressEntity) {
 /**
  * function entitiesList() public view returns(address[])
  * @param web3
- * @param addressEntity
  */
-export function entitiesList(web3, addressEntity) {
+export function entitiesList(web3) {
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaIdentityEntity"]["entitiesList"],
-    [addressEntity]);
-  transaction.to = config.alastriaPresentationRegistry;
+    []);
+  transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;
   return transaction;
 }

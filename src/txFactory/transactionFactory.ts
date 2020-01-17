@@ -20,7 +20,9 @@ import {
     getEidasLevel,
     addIdentityServiceProvider,
     deleteIdentityServiceProvider,
-    isIdentityServiceProvider
+    isIdentityServiceProvider,
+    isIdentityIssuer,
+    addEntity
 } from "./identityManagerTransactionFactory";
 
 import {
@@ -62,7 +64,9 @@ export const transactionFactory = {
         "getEidasLevel": getEidasLevel,
         "addIdentityServiceProvider": addIdentityServiceProvider,
         "deleteIdentityServiceProvider": deleteIdentityServiceProvider,
-        "isIdentityServiceProvider": isIdentityServiceProvider
+        "isIdentityServiceProvider": isIdentityServiceProvider,
+        "isIdentityIssuer": isIdentityIssuer,
+        "addEntity":addEntity
     },
     presentationRegistry: {
         "addSubjectPresentation": addSubjectPresentation,

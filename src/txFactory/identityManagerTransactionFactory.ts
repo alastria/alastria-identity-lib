@@ -159,11 +159,37 @@ export function isIdentityServiceProvider(web3, identityServiceProvider) {
   return transaction;
 }
 
+/**
+ * function isIdentityIssuer(address _identityIssuer) public constant returns (bool)
+ * @param web3
+ * @param identityIssuer
+ */
 export function isIdentityIssuer(web3, identityIssuer) {
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaIdentityIssuer"]["isIdentityIssuer"],
     [identityIssuer]);
+  transaction.to = config.alastriaIdentityManager;
+  transaction.gasLimit = 600000;
+  return transaction;
+}
+
+/**
+ * function addEntity(address _addressEntity, string _name, string _cif, string _url_logo, string _url_createAID, string _url_AOA, bool _active) public onlyIdentityEntity(msg.sender)
+ * @param web3
+ * @param addressEntity
+ * @param name
+ * @param cif
+ * @param urlLogo
+ * @param urlCreateAID
+ * @param urlAOA
+ * @param status
+ */
+export function addEntity(web3, addressEntity, name, cif, urlLogo, urlCreateAID, urlAOA, status) {
+  let transaction = Object.assign({}, config.basicTransaction)
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi["AlastriaIdentityEntity"]["addEntity"],
+    [addressEntity, name, cif, urlLogo, urlCreateAID, urlAOA, status]);
   transaction.to = config.alastriaIdentityManager;
   transaction.gasLimit = 600000;
   return transaction;

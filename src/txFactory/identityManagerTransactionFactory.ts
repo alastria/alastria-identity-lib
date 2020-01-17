@@ -229,7 +229,7 @@ export function setCifEntity(web3, addressEntity, cif) {
 }
 
 /**
- * function setNameEntity(address _addressEntity, string _name) public
+ * function setUrlLogo(address _addressEntity, string _url_logo) public
  * @param web3
  * @param addressEntity
  * @param urlLogo 
@@ -245,7 +245,7 @@ export function setUrlLogo(web3, addressEntity, urlLogo) {
 }
 
 /**
- * function setNameEntity(address _addressEntity, string _name) public
+ * function setUrlCreateAID(address _addressEntity, string _url_createAID) public
  * @param web3
  * @param addressEntity
  * @param urlCreateAID 
@@ -261,7 +261,7 @@ export function setUrlCreateAID(web3, addressEntity, urlCreateAID) {
 }
 
 /**
- * function setNameEntity(address _addressEntity, string _name) public
+ * function setUrlAOA(address _addressEntity, string _url_AOA) public
  * @param web3
  * @param addressEntity
  * @param urlAOA 
@@ -277,7 +277,7 @@ export function setUrlAOA(web3, addressEntity, urlAOA) {
 }
 
 /**
- * function getEidasLevel(address _identityIssuer) public constant onlyIdentityIssuer(_identityIssuer) returns (Eidas.EidasLevel)
+ * function getEntity(address _addressEntity) public view returns(string _name, string _cif, string _url_logo, string _url_createAID, string _url_AOA, bool _active)
  * @param web3
  * @param addressEntity
  */
@@ -292,7 +292,7 @@ export function getEntity(web3, addressEntity) {
 }
 
 /**
- * function getEidasLevel(address _identityIssuer) public constant onlyIdentityIssuer(_identityIssuer) returns (Eidas.EidasLevel)
+ * function entitiesList() public view returns(address[])
  * @param web3
  * @param addressEntity
  */

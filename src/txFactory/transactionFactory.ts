@@ -22,7 +22,14 @@ import {
     deleteIdentityServiceProvider,
     isIdentityServiceProvider,
     isIdentityIssuer,
-    addEntity
+    addEntity,
+    setNameEntity,
+    setCifEntity,
+    setUrlLogo,
+    setUrlCreateAID,
+    setUrlAOA,
+    getEntity,
+    entitiesList
 } from "./identityManagerTransactionFactory";
 
 import {
@@ -66,7 +73,14 @@ export const transactionFactory = {
         "deleteIdentityServiceProvider": deleteIdentityServiceProvider,
         "isIdentityServiceProvider": isIdentityServiceProvider,
         "isIdentityIssuer": isIdentityIssuer,
-        "addEntity":addEntity
+        "addEntity":addEntity,
+        "setNameEntity":setNameEntity,
+        "setCifEntity":setCifEntity,
+        "setUrlLogo":setUrlLogo,
+        "setUrlCreateAID":setUrlCreateAID,
+        "setUrlAOA":setUrlAOA,
+        "getEntity":getEntity,
+        "entitiesList":entitiesList
     },
     presentationRegistry: {
         "addSubjectPresentation": addSubjectPresentation,

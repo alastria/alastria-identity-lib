@@ -35,7 +35,12 @@ export function decodeJWT(jwt) {
 }
 
 function signJWT(jwt, rawPrivateKey) {
-  return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
+  if (jwt.header && jwt.payload){
+  	return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt.payload, false, jwt.header);
+  }
+  else {
+        return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
+  }
 }
 
 function verifyJWT(jwt, rawPublicKey) {

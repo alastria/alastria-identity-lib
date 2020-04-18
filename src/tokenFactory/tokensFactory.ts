@@ -12,21 +12,16 @@ export const tokensFactory = {
     'createPresentationRequest': createPresentationRequest,
     'PSMHash': PSMHash,
     'createAIC': createAIC,
-    'createDID': createDID,
-    'createDIDWithCustomNetworkID': createDIDWithCustomNetworkID
+    'createDID': createDID
   }
 }
 
 // TODO: Remove when MVP is over
 const MVP_CREDENTIAL_LIMIT = 2
 
-function createDID(network, proxyAddress) {
-  return createDIDWithCustomNetworkID(network, proxyAddress, 'redT');
-}
-
-function createDIDWithCustomNetworkID(network, proxyAddress, networkID){
+function createDID(network, proxyAddress, networkID) {
   // network -> "quor" / "fabr" 
-  // no siempre es redT, hay que conseguirlo mediante el archivo config
+  // networkID -> redT,...
   return "did:ala:" + network + ":" + networkID + ":" + proxyAddress;
 }
 

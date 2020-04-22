@@ -39,11 +39,11 @@ export function updateSubjectPresentation(web3, subjectPresentationHash, status)
  * @param subsubjectPresentationHashject
  */
 export function getSubjectPresentationStatus(web3, subject, subsubjectPresentationHashject) {
-  let proxyAddress = subject.split(':')[4]
+  let subjectAddr = subject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
-    [proxyAddress, subsubjectPresentationHashject]);
+    [subjectAddr, subsubjectPresentationHashject]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;
@@ -91,11 +91,11 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
  * @param receiverPresentationHash
  */
 export function getReceiverPresentationStatus(web3, receiver, receiverPresentationHash) {
-  let proxyAddress = receiver.split(':')[4]
+  let receiverAddr = receiver.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getReceiverPresentationStatus"],
-    [proxyAddress, receiverPresentationHash]);
+    [receiverAddr, receiverPresentationHash]);
     transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;

@@ -54,11 +54,11 @@ export function deletePublicKey(web3, publicKey) {
  * @param subject
  */
 export function getCurrentPublicKey(web3, subject) {
-  let proxyAddress = subject.split(':')[4]
+  let subjectAddr = subject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
-    [proxyAddress]);
+    [subjectAddr]);
   transaction.to = config.alastriaPublicKeyRegistry;
   transaction.gasLimit = 600000;
   return transaction;

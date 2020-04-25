@@ -79,6 +79,28 @@ export function getPublicKeyStatus(web3, subject, publicKey) {
   return transaction;
 }
 
+/**
+ * function isPublicKeyValidForDate(address subject, string memory publicKey, date as int8)
+ * @param web3
+ * @param subject
+ * @param publicKey
+ * @param date in milliseconds
+ */
+export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
+  let publicKeyStatus = getPublicKeyStatus(web3, subject, publicKey);
+  web3.eth.call(publicKeyStatus)
+		.then(PublicKeyStatus => {
+      let decodedPublicKeyStatus = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], PublicKeyStatus)
+      let existsPublicKey = decodedPublicKeyStatus[0];
+
+      return(existsPublicKey) ? _isUserDateBetweeenDates(date, decodedPublicKeyStatus[2], decodedPublicKeyStatus[3]) : false;
+	});
+}
+
+function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {
+  return (userDate >= publicKeyStartDate && userDate <= publicKeyEndDate);
+}
+
 
 function delegated(web3, delegatedData) {
   return web3.eth.abi.encodeFunctionCall(

@@ -80,6 +80,27 @@ export function getPublicKeyStatus(web3, subject, publicKey) {
 }
 
 /**
+ * function getPublicKeyStatusDecoded(address subject, string memory publicKey)
+ * @param web3
+ * @param subject
+ * @param publicKey
+ */
+export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
+  let publicKeyStatus = getPublicKeyStatus(web3, subject, publicKey);
+  web3.eth.call(publicKeyStatus)
+    .then(PublicKeyStatusResponse => {
+      let publicKeyStatusDecoded = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], PublicKeyStatusResponse)
+      let publicKeyStatusDecodedAsJSON = { 
+        "exists": publicKeyStatusDecoded[0],
+        "status":publicKeyStatusDecoded[1],
+        "startDate": publicKeyStatusDecoded[2],
+        "endDate": publicKeyStatusDecoded[3]
+      }
+      return publicKeyStatusDecodedAsJSON;
+    });
+}
+
+/**
  * function isPublicKeyValidForDate(address subject, string memory publicKey, date as int8)
  * @param web3
  * @param subject
@@ -87,14 +108,9 @@ export function getPublicKeyStatus(web3, subject, publicKey) {
  * @param date in milliseconds
  */
 export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
-  let publicKeyStatus = getPublicKeyStatus(web3, subject, publicKey);
-  web3.eth.call(publicKeyStatus)
-		.then(PublicKeyStatus => {
-      let decodedPublicKeyStatus = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], PublicKeyStatus)
-      let existsPublicKey = decodedPublicKeyStatus[0];
-
-      return(existsPublicKey) ? _isUserDateBetweeenDates(date, decodedPublicKeyStatus[2], decodedPublicKeyStatus[3]) : false;
-	});
+  let publicKeyStatusAsJSON = getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey);
+  let existsPublicKey = publicKeyStatusAsJSON[0];
+  return(existsPublicKey) ? _isUserDateBetweeenDates(date, publicKeyStatusAsJSON[2], publicKeyStatusAsJSON[3]) : false;
 }
 
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {

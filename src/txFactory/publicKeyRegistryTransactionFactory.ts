@@ -1,4 +1,5 @@
 import { config } from '../config';
+import { transactionFactory } from './transactionFactory'
 
 /**
  * function addKey(string memory publicKey, address subject) public
@@ -108,7 +109,7 @@ export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
  * @param date in milliseconds
  */
 export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
-  let publicKeyStatusAsJSON = getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey);
+  let publicKeyStatusAsJSON = transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey);
   let existsPublicKey = publicKeyStatusAsJSON[0];
   return(existsPublicKey) ? _isUserDateBetweeenDates(date, publicKeyStatusAsJSON[2], publicKeyStatusAsJSON[3]) : false;
 }

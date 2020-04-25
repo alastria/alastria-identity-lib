@@ -2,6 +2,7 @@ import 'mocha'
 import { expect } from 'chai'
 import * as demo from '../../src/txFactory/transactionFactory'
 
+const web3 = require('web3')
 const sinon = require('sinon')
 
 describe('validate public key in several situations with dates', function () {
@@ -18,7 +19,9 @@ describe('validate public key in several situations with dates', function () {
     });
 
     it('should return false if the public key is not found', () => {
-        console.log(demo.transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(1,1,1));
-        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(1, 1, 1, 1)).to.be.false;
+        const fakePublicKey = "0x00000000000000000000000000000000";
+        const date = 1587815151740;
+        const fakeSubject = "0x00000000000000000000000000000000";
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, date)).to.be.false;
     })
 });

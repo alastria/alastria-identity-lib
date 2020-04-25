@@ -41,4 +41,76 @@ describe('validate public key in several situations with dates', function () {
 
         sinon.restore();
     });
+
+    it('should return true if the date sent by the user is the same as the startDate of validity', () => {
+        const startDate = new Date('December 17, 1995 03:24:00').getTime();
+        sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
+            .callsFake(function fakeFn() {
+                return {
+                    "exists": true,
+                    "status": 0,
+                    "startDate": startDate,
+                    "endDate": new Date('December 17, 1996 03:24:00').getTime()
+                }
+            });
+        const fakePublicKey = "0x00000000000000000000000000000000";
+        const fakeSubject = "0x00000000000000000000000000000000";
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, startDate)).to.be.true;
+
+        sinon.restore();
+    });
+
+    it('should return true if the date sent by the user is the same as the endDate of validity', () => {
+        const endDate = new Date('December 17, 1996 03:24:00').getTime();
+        sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
+            .callsFake(function fakeFn() {
+                return {
+                    "exists": true,
+                    "status": 0,
+                    "startDate": new Date('December 17, 1995 03:24:00').getTime(),
+                    "endDate": endDate
+                }
+            });
+        const fakePublicKey = "0x00000000000000000000000000000000";
+        const fakeSubject = "0x00000000000000000000000000000000";
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, endDate)).to.be.true;
+
+        sinon.restore();
+    });
+
+    it('should return false if the date sent by the user is prior to validity', () => {
+        sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
+            .callsFake(function fakeFn() {
+                return {
+                    "exists": true,
+                    "status": 0,
+                    "startDate": new Date('December 17, 1995 03:24:00').getTime(),
+                    "endDate": new Date('December 17, 1996 03:24:00').getTime()
+                }
+            });
+        const fakePublicKey = "0x00000000000000000000000000000000";
+        const fakeSubject = "0x00000000000000000000000000000000";
+        const priorDate = new Date('December 17, 1990 03:24:00').getTime();
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, priorDate)).to.be.false;
+
+        sinon.restore();
+    });
+
+    it('should return false if the date sent by the user is after validity has passed', () => {
+        sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
+            .callsFake(function fakeFn() {
+                return {
+                    "exists": true,
+                    "status": 0,
+                    "startDate": new Date('December 17, 1995 03:24:00').getTime(),
+                    "endDate": new Date('December 17, 1996 03:24:00').getTime()
+                }
+            });
+        const fakePublicKey = "0x00000000000000000000000000000000";
+        const fakeSubject = "0x00000000000000000000000000000000";
+        const passedDate = new Date('December 17, 2000 03:24:00').getTime();
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, passedDate)).to.be.false;
+
+        sinon.restore();
+    });
 });

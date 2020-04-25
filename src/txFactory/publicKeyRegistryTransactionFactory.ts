@@ -110,8 +110,8 @@ export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
  */
 export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
   let publicKeyStatusAsJSON = transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey);
-  let existsPublicKey = publicKeyStatusAsJSON[0];
-  return(existsPublicKey) ? _isUserDateBetweeenDates(date, publicKeyStatusAsJSON[2], publicKeyStatusAsJSON[3]) : false;
+  let existsPublicKey = publicKeyStatusAsJSON['exists'];
+  return(existsPublicKey) ? _isUserDateBetweeenDates(date, publicKeyStatusAsJSON['startDate'], publicKeyStatusAsJSON['endDate']) : false;
 }
 
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {

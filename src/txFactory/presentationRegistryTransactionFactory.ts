@@ -35,11 +35,11 @@ export function updateSubjectPresentation(web3, subjectPresentationHash, status)
  * If we want a log, should we add an event?
  * function getSubjectPresentationStatus(address subject, bytes32 subjectPresentationHash) view public validAddress(subject) returns(bool exists, Status status)
  * @param web3
- * @param subject
+ * @param didSubject
  * @param subsubjectPresentationHashject
  */
-export function getSubjectPresentationStatus(web3, subject, subsubjectPresentationHashject) {
-  let subjectAddr = subject.split(':')[4]
+export function getSubjectPresentationStatus(web3, didSubject, subsubjectPresentationHashject) {
+  let subjectAddr = didSubject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
@@ -52,13 +52,14 @@ export function getSubjectPresentationStatus(web3, subject, subsubjectPresentati
 /**
  * function getSubjectPresentationList(address subject) public view returns(uint, bytes32[])
  * @param web3
- * @param subject
+ * @param didSubject
  */
-export function getSubjectPresentationList(web3, subject) {
+export function getSubjectPresentationList(web3, didSubject) {
+  let subjectAddr = didSubject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationList"],
-    [subject]);
+    [subjectAddr]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;
@@ -87,16 +88,16 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
  * If we want a log, should we add an event?
  * function getReceiverPresentationStatus(address receiver, bytes32 receiverPresentationHash) view public validAddress(receiver) returns(bool exists, Status status) {
  * @param web3
- * @param receiver
+ * @param didReceiver
  * @param receiverPresentationHash
  */
-export function getReceiverPresentationStatus(web3, receiver, receiverPresentationHash) {
-  let receiverAddr = receiver.split(':')[4]
+export function getReceiverPresentationStatus(web3, didReceiver, receiverPresentationHash) {
+  let receiverAddr = didReceiver.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getReceiverPresentationStatus"],
     [receiverAddr, receiverPresentationHash]);
-    transaction.to = config.alastriaPresentationRegistry;
+  transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
   return transaction;
 }

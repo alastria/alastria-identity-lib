@@ -210,7 +210,7 @@ function createPresentationRequest(kid, iss, context, procUrl, procHash, data, e
 }
 
 function PSMHash(web3, jwt, did){
-  let proxyAddress = did.split(':')[4]
+  let proxyAddress = did.split(':')[4];
 	let json = jwt.concat(proxyAddress);
 	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
 }

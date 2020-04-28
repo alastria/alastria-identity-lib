@@ -179,8 +179,9 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
  * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
+ * @param cbu Callbacku url from the user
  */
-function createPresentationRequest(kid, iss, context, procUrl, procHash, data, exp?: number, nbf?: number, jti?: String) {
+function createPresentationRequest(kid, iss, context, procUrl, procHash, data, cbu, exp?: number, nbf?: number, jti?: String) {
   // TODO: Remove when MVP is over
   if (Object.keys(data).length > MVP_CREDENTIAL_LIMIT){
     throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
@@ -197,6 +198,7 @@ function createPresentationRequest(kid, iss, context, procUrl, procHash, data, e
         "iat": Math.round(Date.now()/1000),
         "exp": exp,
         "nbf": nbf,
+	"cbu": cbu,
         "pr": {
           "@context": context,
           "type": ["VerifiablePresentationRequest"],

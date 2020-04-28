@@ -19,10 +19,10 @@ export const tokensFactory = {
 // TODO: Remove when MVP is over
 const MVP_CREDENTIAL_LIMIT = 2
 
-function createDID(network, proxyAddress){
+function createDID(network, proxyAddress, networkID) {
   // network -> "quor" / "fabr" 
-  // no siempre es redT, hay que conseguirlo mediante el archivo config
-  return "did:ala:" + network + ":redT:" + proxyAddress;
+  // networkID -> redT,...
+  return "did:ala:" + network + ":" + networkID + ":" + proxyAddress;
 }
 
 // Used by Service Provider or Subject Wallet

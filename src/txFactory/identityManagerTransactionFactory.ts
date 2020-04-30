@@ -20,15 +20,14 @@ export function delegateCall(web3, _destination, _value, _data) {
 /**
  * function generateAccessToken(address _signAddress) public onlyIdentityServiceProvider(msg.sender)
  * @param web3
- * @param did
+ * @param signAddress
  */
-export function prepareAlastriaID(web3, did) {
-  let addr = did.split(':')[4]
+export function prepareAlastriaID(web3, signAddress) {
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.to = config.alastriaIdentityManager;
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaIdentityManager"]["prepareAlastriaID"],
-    [addr]);
+    [signAddress]);
   transaction.gasLimit = 600000;
   return transaction
 }

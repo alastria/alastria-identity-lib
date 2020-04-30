@@ -4,7 +4,6 @@ import { config } from '../config';
  * function addKey(string memory publicKey, address subject) public
  * @param web3
  * @param publicKey
- * @param subject
  */
 export function addKey(web3, publicKey) {
   let transaction = Object.assign({}, config.basicTransaction)
@@ -51,13 +50,14 @@ export function deletePublicKey(web3, publicKey) {
 /**
  * function getCurrentPublicKey(address subject) view public validAddress(subject) returns (string)
  * @param web3
- * @param subject
+ * @param subjdidSubjectect
  */
-export function getCurrentPublicKey(web3, subject) {
+export function getCurrentPublicKey(web3, didSubject) {
+  let subjectAddr = didSubject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
-    [subject]);
+    [subjectAddr]);
   transaction.to = config.alastriaPublicKeyRegistry;
   transaction.gasLimit = 600000;
   return transaction;
@@ -66,14 +66,15 @@ export function getCurrentPublicKey(web3, subject) {
 /**
  * function getPublicKeyStatus(address subject, string memory publicKey) view public validAddress(subject)
  * @param web3
- * @param subject
+ * @param didSubject
  * @param publicKey
  */
-export function getPublicKeyStatus(web3, subject, publicKey) {
+export function getPublicKeyStatus(web3, didSubject, publicKey) {
+  let subjectAddr = didSubject.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],
-    [subject, publicKey]);
+    [subjectAddr, publicKey]);
   transaction.to = config.alastriaPublicKeyRegistry;
   transaction.gasLimit = 600000;
   return transaction;

@@ -87,18 +87,21 @@ export function getPublicKeyStatus(web3, subject, publicKey) {
  * @param publicKey
  */
 export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
-  let publicKeyStatus = getPublicKeyStatus(web3, subject, publicKey);
-  web3.eth.call(publicKeyStatus)
-    .then(PublicKeyStatusResponse => {
-      let publicKeyStatusDecoded = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], PublicKeyStatusResponse)
-      let publicKeyStatusDecodedAsJSON = { 
-        "exists": publicKeyStatusDecoded[0],
-        "status":publicKeyStatusDecoded[1],
-        "startDate": publicKeyStatusDecoded[2],
-        "endDate": publicKeyStatusDecoded[3]
-      }
-      return publicKeyStatusDecodedAsJSON;
-    });
+  let publicKeyStatusTx = getPublicKeyStatus(web3, subject, publicKey);
+  
+  return new Promise((resolve, reject) => {
+    web3.eth.call(publicKeyStatusTx)
+      .then(data => {
+        let publicKeyStatusDecoded = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], data)
+        let publicKeyStatusDecodedAsJSON = { 
+          "exists": publicKeyStatusDecoded['0'],
+          "status":publicKeyStatusDecoded['1'],
+          "startDate": parseInt(publicKeyStatusDecoded['2']),
+          "endDate": parseInt(publicKeyStatusDecoded['3'])
+        }
+        resolve(publicKeyStatusDecodedAsJSON)
+      })
+    })
 }
 
 /**
@@ -109,11 +112,27 @@ export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
  * @param date in milliseconds
  */
 export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
-  let publicKeyStatusAsJSON = transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey);
-  let existsPublicKey = publicKeyStatusAsJSON['exists'];
-  return(existsPublicKey) ? _isUserDateBetweeenDates(date, publicKeyStatusAsJSON['startDate'], publicKeyStatusAsJSON['endDate']) : false;
+  return new Promise((resolve, reject) => {
+    transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey)
+      .then(publicKeyStatusAsJSON => {
+        let existsPublicKey = publicKeyStatusAsJSON['exists'];
+
+        if (existsPublicKey) {
+          let isUserDateBetweenDates = _isUserDateBetweeenDates(date, publicKeyStatusAsJSON['startDate'], publicKeyStatusAsJSON['endDate'])
+          resolve(isUserDateBetweenDates)
+        } else {
+          reject(new Error("Public key does not exist"));
+        }
+      })
+    })
 }
 
+/**
+ * function _isUserDateBetweeenDates(int userDate, int publicKeyStartDate, int publicKeyEnddate)
+ * @param userDate in milliseconds
+ * @param publicKeyStartDate in milliseconds
+ * @param publicKeyEndDate in milliseconds. If equals to 0, there is no enddate
+ */
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {
   return (userDate >= publicKeyStartDate && userDate <= publicKeyEndDate);
 }

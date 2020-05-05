@@ -60,25 +60,23 @@ describe('validate public key in several situations with dates', function () {
         sinon.restore();
     });
 
-    /*it('should return true if the date sent by the user is the same as the endDate of validity', () => {
+    it('should return true if the date sent by the user is the same as the endDate of validity', () => {
         const endDate = new Date('December 17, 1996 03:24:00').getTime();
         sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
-            .callsFake(function fakeFn() {
-                return {
-                    "exists": true,
-                    "status": 0,
-                    "startDate": new Date('December 17, 1995 03:24:00').getTime(),
-                    "endDate": endDate
-                }
-            });
+            .resolves({
+                "exists": true,
+                "status": 0,
+                "startDate": new Date('December 17, 1995 03:24:00').getTime(),
+                "endDate": endDate
+            })
         const fakePublicKey = "0x00000000000000000000000000000000";
         const fakeSubject = "0x00000000000000000000000000000000";
-        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, endDate)).to.be.true;
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, endDate)).to.eventually.be.true;
 
         sinon.restore();
     });
 
-    it('should return false if the date sent by the user is prior to validity', () => {
+    /*it('should return false if the date sent by the user is prior to validity', () => {
         sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
             .callsFake(function fakeFn() {
                 return {

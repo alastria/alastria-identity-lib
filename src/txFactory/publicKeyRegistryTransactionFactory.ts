@@ -134,7 +134,10 @@ export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
  * @param publicKeyEndDate in milliseconds. If equals to 0, there is no enddate
  */
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {
-  return (userDate >= publicKeyStartDate && userDate <= publicKeyEndDate);
+  if (publicKeyStartDate && publicKeyEndDate == 0)
+    return true
+  else
+    return (userDate >= publicKeyStartDate && userDate <= publicKeyEndDate);
 }
 
 

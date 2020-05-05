@@ -1,26 +1,30 @@
 import 'mocha'
-import { expect } from 'chai'
 import * as demo from '../../src/txFactory/transactionFactory'
 
 const web3 = require('web3')
 const sinon = require('sinon')
+var chai = require('chai')
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+
+var expect = chai.expect;
 
 describe('validate public key in several situations with dates', function () {
-    it('should return false if the public key is not found', () => {
+    it('should return error if the public key is not found', () => {
         sinon.stub(demo.transactionFactory.publicKeyRegistry, 'getPublicKeyStatusDecodedAsJSON')
-            .callsFake(function fakeFn() {
-                return {
+            .resolves({
                     "exists": false,
                     "status": 0,
                     "startDate": 0,
                     "endDate": 0
-                }
-            });
+                })
+
         const fakePublicKey = "0x00000000000000000000000000000000";
         const date = new Date('January 17, 1996 03:24:00').getTime();
         const fakeSubject = "0x00000000000000000000000000000000";
-        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, date)).to.be.false;
-
+        expect(demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(web3, fakeSubject, fakePublicKey, date)).to.eventually
+        .be.rejectedWith("Public key does not exist")
+        .and.be.an.instanceOf(Error);
         sinon.restore();
     });
 

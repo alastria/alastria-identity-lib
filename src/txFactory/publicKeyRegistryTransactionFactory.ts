@@ -124,6 +124,9 @@ export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
           reject(new Error("Public key does not exist"));
         }
       })
+      .catch(error => {
+        reject(new Error("Unresolved error"))
+      })
     })
 }
 

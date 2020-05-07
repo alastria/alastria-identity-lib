@@ -51,10 +51,10 @@ export function deletePublicKey(web3, publicKey) {
 /**
  * function getCurrentPublicKey(address subject) view public validAddress(subject) returns (string)
  * @param web3
- * @param subjdidSubjectect
+ * @param did
  */
-export function getCurrentPublicKey(web3, didSubject) {
-  let subjectAddr = didSubject.split(':')[4]
+export function getCurrentPublicKey(web3, did) {
+  let subjectAddr = did.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
@@ -67,11 +67,11 @@ export function getCurrentPublicKey(web3, didSubject) {
 /**
  * function getPublicKeyStatus(address subject, string memory publicKey) view public validAddress(subject)
  * @param web3
- * @param didSubject
+ * @param did
  * @param publicKey
  */
-export function getPublicKeyStatus(web3, didSubject, publicKey) {
-  let subjectAddr = didSubject.split(':')[4]
+export function getPublicKeyStatus(web3, did, publicKey) {
+  let subjectAddr = did.split(':')[4]
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],
@@ -84,11 +84,11 @@ export function getPublicKeyStatus(web3, didSubject, publicKey) {
 /**
  * function getPublicKeyStatusDecoded(address subject, string memory publicKey)
  * @param web3
- * @param didSubject
+ * @param did
  * @param publicKey
  */
-export function getPublicKeyStatusDecodedAsJSON(web3, didSubject, publicKey) {
-  let publicKeyStatusTx = getPublicKeyStatus(web3, didSubject, publicKey);
+export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey) {
+  let publicKeyStatusTx = getPublicKeyStatus(web3, did, publicKey);
   
   return new Promise((resolve, reject) => {
     web3.eth.call(publicKeyStatusTx)
@@ -108,13 +108,13 @@ export function getPublicKeyStatusDecodedAsJSON(web3, didSubject, publicKey) {
 /**
  * function isPublicKeyValidForDate(address subject, string memory publicKey, date as int8)
  * @param web3
- * @param didSubject
+ * @param did
  * @param publicKey
  * @param date in milliseconds
  */
-export function isPublicKeyValidForDate(web3, didSubject, publicKey, date) {
+export function isPublicKeyValidForDate(web3, did, publicKey, date) {
   return new Promise((resolve, reject) => {
-    transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, didSubject, publicKey)
+    transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, did, publicKey)
       .then(publicKeyStatusAsJSON => {
         let existsPublicKey = publicKeyStatusAsJSON['exists'];
 

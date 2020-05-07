@@ -19,10 +19,10 @@ export const tokensFactory = {
 // TODO: Remove when MVP is over
 const MVP_CREDENTIAL_LIMIT = 2
 
-function createDID(network, proxyAddress){
+function createDID(network, proxyAddress, networkID) {
   // network -> "quor" / "fabr" 
-  // no siempre es redT, hay que conseguirlo mediante el archivo config
-  return "did:ala:" + network + ":redT:" + proxyAddress;
+  // networkID -> redT,...
+  return "did:ala:" + network + ":" + networkID + ":" + proxyAddress;
 }
 
 // Used by Service Provider or Subject Wallet
@@ -179,8 +179,9 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
  * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
+ * @param cbu Callbacku url from the user
  */
-function createPresentationRequest(kid, iss, context, procUrl, procHash, data, exp?: number, nbf?: number, jti?: String) {
+function createPresentationRequest(kid, iss, context, procUrl, procHash, data, cbu, exp?: number, nbf?: number, jti?: String) {
   // TODO: Remove when MVP is over
   if (Object.keys(data).length > MVP_CREDENTIAL_LIMIT){
     throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
@@ -197,6 +198,7 @@ function createPresentationRequest(kid, iss, context, procUrl, procHash, data, e
         "iat": Math.round(Date.now()/1000),
         "exp": exp,
         "nbf": nbf,
+	"cbu": cbu,
         "pr": {
           "@context": context,
           "type": ["VerifiablePresentationRequest"],
@@ -210,7 +212,8 @@ function createPresentationRequest(kid, iss, context, procUrl, procHash, data, e
 }
 
 function PSMHash(web3, jwt, did){
-	let json = jwt.concat(did);
+  let proxyAddress = did;
+	let json = jwt.concat(proxyAddress);
 	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
 }
   /**

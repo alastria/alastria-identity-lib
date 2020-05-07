@@ -84,11 +84,11 @@ export function getPublicKeyStatus(web3, didSubject, publicKey) {
 /**
  * function getPublicKeyStatusDecoded(address subject, string memory publicKey)
  * @param web3
- * @param subject
+ * @param didSubject
  * @param publicKey
  */
-export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
-  let publicKeyStatusTx = getPublicKeyStatus(web3, subject, publicKey);
+export function getPublicKeyStatusDecodedAsJSON(web3, didSubject, publicKey) {
+  let publicKeyStatusTx = getPublicKeyStatus(web3, didSubject, publicKey);
   
   return new Promise((resolve, reject) => {
     web3.eth.call(publicKeyStatusTx)
@@ -108,13 +108,13 @@ export function getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey) {
 /**
  * function isPublicKeyValidForDate(address subject, string memory publicKey, date as int8)
  * @param web3
- * @param subject
+ * @param didSubject
  * @param publicKey
  * @param date in milliseconds
  */
-export function isPublicKeyValidForDate(web3, subject, publicKey, date) {
+export function isPublicKeyValidForDate(web3, didSubject, publicKey, date) {
   return new Promise((resolve, reject) => {
-    transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, subject, publicKey)
+    transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, didSubject, publicKey)
       .then(publicKeyStatusAsJSON => {
         let existsPublicKey = publicKeyStatusAsJSON['exists'];
 

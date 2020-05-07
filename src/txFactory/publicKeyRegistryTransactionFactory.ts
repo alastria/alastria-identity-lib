@@ -65,7 +65,6 @@ export function getCurrentPublicKey(web3, did) {
 }
 
 /**
- * function getPublicKeyStatus(address subject, string memory publicKey) view public validAddress(subject)
  * @param web3
  * @param did
  * @param publicKey
@@ -81,6 +80,11 @@ export function getPublicKeyStatus(web3, did, publicKey) {
   return transaction;
 }
 
+/**
+ * @param web3
+ * @param did
+ * @param publicKey
+ */
 export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey) {
   let publicKeyStatusTx = getPublicKeyStatus(web3, did, publicKey);
   
@@ -99,6 +103,12 @@ export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey) {
     })
 }
 
+/**
+ * @param web3
+ * @param did
+ * @param publicKey
+ * @param date in milliseconds
+ */
 export function isPublicKeyValidForDate(web3, did, publicKey, date) {
   return new Promise((resolve, reject) => {
     transactionFactory.publicKeyRegistry.getPublicKeyStatusDecodedAsJSON(web3, did, publicKey)
@@ -118,6 +128,11 @@ export function isPublicKeyValidForDate(web3, did, publicKey, date) {
     })
 }
 
+/**
+ * @param userDate in milliseconds
+ * @param publicKeyStartDate in milliseconds
+ * @param publicKeyEndDate in milliseconds. If equals to 0, there is no enddate
+ */
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {
   if (publicKeyStartDate && publicKeyEndDate == 0)
     return true

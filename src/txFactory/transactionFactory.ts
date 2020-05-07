@@ -48,6 +48,8 @@ import {
     deletePublicKey,
     getCurrentPublicKey,
     getPublicKeyStatus,
+    getPublicKeyStatusDecodedAsJSON,
+    isPublicKeyValidForDate
 } from "./publicKeyRegistryTransactionFactory";
 
 export const transactionFactory = {
@@ -97,5 +99,7 @@ export const transactionFactory = {
         "deletePublicKey": deletePublicKey,
         "getCurrentPublicKey": getCurrentPublicKey,
         "getPublicKeyStatus": getPublicKeyStatus,
+        "getPublicKeyStatusDecodedAsJSON" : getPublicKeyStatusDecodedAsJSON,
+        "isPublicKeyValidForDate": isPublicKeyValidForDate
     }
 };

@@ -1,4 +1,4 @@
-export class didUtils {
+export class AIdUtils {
     /**
      * function getNetwork(did)
      * @param did Alastria ID

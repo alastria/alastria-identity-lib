@@ -1,5 +1,5 @@
 import { config } from '../config';
-import { didUtils } from '../utils/didUtils';
+import { AIdUtils } from '../utils/AIdUtils';
 
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   let transaction = Object.assign({}, config.basicTransaction)
@@ -40,7 +40,7 @@ export function updateSubjectPresentation(web3, subjectPresentationHash, status)
  * @param subsubjectPresentationHashject
  */
 export function getSubjectPresentationStatus(web3, didSubject, subsubjectPresentationHashject) {
-  let subjectAddr = didUtils.getProxyAddress(didSubject)
+  let subjectAddr = AIdUtils.getProxyAddress(didSubject)
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
@@ -56,7 +56,7 @@ export function getSubjectPresentationStatus(web3, didSubject, subsubjectPresent
  * @param didSubject
  */
 export function getSubjectPresentationList(web3, didSubject) {
-  let subjectAddr = didUtils.getProxyAddress(didSubject)
+  let subjectAddr = AIdUtils.getProxyAddress(didSubject)
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationList"],
@@ -93,7 +93,7 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
  * @param receiverPresentationHash
  */
 export function getReceiverPresentationStatus(web3, didReceiver, receiverPresentationHash) {
-  let receiverAddr = didUtils.getProxyAddress(didReceiver)
+  let receiverAddr = AIdUtils.getProxyAddress(didReceiver)
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPresentationRegistry"]["getReceiverPresentationStatus"],

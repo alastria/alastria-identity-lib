@@ -1,6 +1,6 @@
 import { config } from '../config';
 import { transactionFactory } from './transactionFactory';
-import { didUtils } from '../utils/didUtils';
+import { AIdUtils } from '../utils/AIdUtils';
 
 /**
  * function addKey(string memory publicKey, address subject) public
@@ -55,7 +55,7 @@ export function deletePublicKey(web3, publicKey) {
  * @param did
  */
 export function getCurrentPublicKey(web3, did) {
-  let subjectAddr = didUtils.getProxyAddress(did)
+  let subjectAddr = AIdUtils.getProxyAddress(did)
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getCurrentPublicKey"],
@@ -71,7 +71,7 @@ export function getCurrentPublicKey(web3, did) {
  * @param publicKey
  */
 export function getPublicKeyStatus(web3, did, publicKey) {
-  let subjectAddr = didUtils.getProxyAddress(did)
+  let subjectAddr = AIdUtils.getProxyAddress(did)
   let transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi["AlastriaPublicKeyRegistry"]["getPublicKeyStatus"],

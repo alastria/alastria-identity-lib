@@ -25,7 +25,7 @@ describe('AIdUtils parse DID token correctly', () => {
     expect(parsedNetworkId).equal(networkID)
   })
 
-  it('should get proxy address   from valid DID correclty', function () {
+  it('should get proxy address from valid DID correclty', function () {
     const parsedProxyAddres = AIdUtils.getProxyAddress(validDID)
 
     expect(parsedProxyAddres).equal(proxyAddress)

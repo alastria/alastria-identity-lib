@@ -38,7 +38,7 @@ Transpile the library
 ```
 tsc 
 ```
-Once you have finished you must go to _alastria-identity-example_´s directory.
+Once you have finished you must go to _alastria-identity-example_'s directory.
 
 Now, you can use it from any JavaScript file in your working directory.
 

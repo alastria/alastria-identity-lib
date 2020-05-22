@@ -19,44 +19,58 @@ If you want to use the library, you must follow the steps of the README.md in [A
 ## How to collaborate
 
 We recommend you to clone both repositories in your working directory.
+
 ```
 git clone https://github.com/alastria/alastria-identity-example.git
 
 git clone https://github.com/alastria/alastria-identity-lib.git
 ```
+
 Then, you must go to the alastria-identity-example's folder and run the following command
+
 ```
 npm install --save github:alastria/alastria-identity-lib.git#develop
 ```
-This command creates the node_module´s folder. 
 
-Now `cd  node_modules/alastria-identity-lib/src`
+This command creates the node_module´s folder.
 
-You can modify the library and go back to the directory  _"node_modules/alastria-identity-lib"_ once you are done.
+Now `cd node_modules/alastria-identity-lib/src`
+
+You can modify the library and go back to the directory _"node_modules/alastria-identity-lib"_ once you are done.
 
 Transpile the library
+
 ```
-tsc 
+tsc
 ```
+
 Once you have finished you must go to _alastria-identity-example_'s directory.
 
 Now, you can use it from any JavaScript file in your working directory.
 
 You can execute some of our examples by running:
+
 ```
-node file_name.js 
+node file_name.js
 ```
+
 Or create yours.
+
+## Run test suite
+
+```bash
+npm test
+```
 
 ## Dependencies
 
 This library is using functionality from others.
 
-| Lib | URL |
-|:------------- |:-------------|
-| web3     | [https://www.npmjs.com/package/web3](https://www.npmjs.com/package/web3) |
-| web3-utils | [https://www.npmjs.com/package/web3-utils](https://www.npmjs.com/package/web3-utils) |
-| ethereumjs-tx   | [https://www.npmjs.com/package/ethereumjs-tx](https://www.npmjs.com/package/ethereumjs-tx) |
-| jsontokens-npm   | [https://www.npmjs.com/package/jsontokens](https://www.npmjs.com/package/jsontokens) |
+| Lib            | URL                                                                                        |
+| :------------- | :----------------------------------------------------------------------------------------- |
+| web3           | [https://www.npmjs.com/package/web3](https://www.npmjs.com/package/web3)                   |
+| web3-utils     | [https://www.npmjs.com/package/web3-utils](https://www.npmjs.com/package/web3-utils)       |
+| ethereumjs-tx  | [https://www.npmjs.com/package/ethereumjs-tx](https://www.npmjs.com/package/ethereumjs-tx) |
+| jsontokens-npm | [https://www.npmjs.com/package/jsontokens](https://www.npmjs.com/package/jsontokens)       |
 
 Enjoy and contribute!

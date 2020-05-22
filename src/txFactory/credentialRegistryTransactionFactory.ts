@@ -1,4 +1,5 @@
 import { config } from '../config';
+import { AIdUtils } from '../utils/AIdUtils';
 
 /**
  * function addSubjectCredential(web3, subjectCredentialHash, URI)
@@ -59,7 +60,7 @@ export function deleteSubjectCredential(web3, subjectCredentialHash) {
  * @param subjectCredentialHash should have 32 bytes
  */
 export function getSubjectCredentialStatus(web3, didSubject, subjectCredentialHash) {
-    let subjectAddr = didSubject.split(':')[4]
+    let subjectAddr = AIdUtils.getProxyAddress(didSubject)
     let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialStatus"],
@@ -76,7 +77,7 @@ export function getSubjectCredentialStatus(web3, didSubject, subjectCredentialHa
  * @param didSubject subject to recover credential list
  */
 export function getSubjectCredentialList(web3, didSubject) {
-    let subjectAddr = didSubject.split(':')[4]
+    let subjectAddr = AIdUtils.getProxyAddress(didSubject)
     let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getSubjectCredentialList"],
@@ -111,7 +112,7 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
  * @param issuerCredentialHash
  */
 export function getIssuerCredentialStatus(web3, didIssuer, issuerCredentialHash) {
-    let issuerAddr = didIssuer.split(':')[4]
+    let issuerAddr = AIdUtils.getProxyAddress(didIssuer)
     let transaction = Object.assign({}, config.basicTransaction)
     transaction.data = web3.eth.abi.encodeFunctionCall(
         config.contractsAbi["AlastriaCredentialRegistry"]["getIssuerCredentialStatus"],

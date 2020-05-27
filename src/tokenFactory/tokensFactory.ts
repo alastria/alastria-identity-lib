@@ -1,4 +1,4 @@
-//import { default as _ } from 'jsontokens'
+// import { default as _ } from 'jsontokens'
 const _: any = require('jsontokens');
 export const tokensFactory = {
   tokens: {
@@ -16,11 +16,8 @@ export const tokensFactory = {
   }
 }
 
-// TODO: Remove when MVP is over
-const MVP_CREDENTIAL_LIMIT = 2
-
 function createDID(network, proxyAddress, networkID) {
-  // network -> "quor" / "fabr" 
+  // network -> "quor" / "fabr"
   // networkID -> redT,...
   return "did:ala:" + network + ":" + networkID + ":" + proxyAddress;
 }
@@ -47,8 +44,8 @@ function verifyJWT(jwt, rawPublicKey) {
   return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
 }
 
-/** Creates an Alastria Session 
- * @param context 
+/** Creates an Alastria Session
+ * @param context
  * @param iss DID representing the AlastriaID of the entity that issued the Alastria Session
  * @param pku Users public key
  * @param data Verified Alastria Token
@@ -70,7 +67,7 @@ function createAlastriaSession(context, iss, pku, data, exp?: number, nbf?: numb
   return jwt
 }
 
-/**Creates the AlastriaToken
+/** Creates the AlastriaToken
  * @param iss DID representing the AlastriaID of the entity that issued the Alastria Token
  * @param gwu Provider gateway url
  * @param cbu Callbacku url from the user
@@ -93,11 +90,11 @@ function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: number, jti?: string
   return jwt
 }
 
-/**Creates an unsigned credential
+/** Creates an unsigned credential
  * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the AlastriaID of the entity that issued the credential
  * @param sub DID representing the AlastriaID of the subject to which the credential refers to
- * @param context 
+ * @param context
  * @param credentialSubject JSON array of credentials
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
@@ -127,11 +124,11 @@ export function createCredential(kid, iss, sub, context, credentialSubject, exp?
   return jwt
 }
 
-/**Creates an unsigned presentation
+/** Creates an unsigned presentation
  * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the Alastria.ID of the entity that issued the presentation (normally the citizen)
  * @param aud identifies the recipient that the JWT is intended for
- * @param context 
+ * @param context
  * @param verifiableCredential An array of verifiable credentials in JWT format, that is, signed JWTs where each verifiable credential is base64url encoded
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is receiving
@@ -140,10 +137,6 @@ export function createCredential(kid, iss, sub, context, credentialSubject, exp?
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentation(kid, iss, aud, context, verifiableCredential, procUrl, procHash, exp?: number, nbf?: number, jti?: String) {
-  // TODO: Remove when MVP is over
-  if (Object.keys(verifiableCredential).length > MVP_CREDENTIAL_LIMIT){
-    throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
-  }
   const jwt = {
     "header": {
         "alg": "ES256K",
@@ -169,10 +162,10 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
   return jwt
 }
 
-/**Creates a presentation request
+/** Creates a presentation request
  * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
  * @param iss DID representing the Alastria.ID of the entity that sent the Presentation Request
- * @param context 
+ * @param context
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is requesting
  * @param data It is the structure (JSON Array) that contains the actual Presentation Request data items
@@ -182,10 +175,6 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
  * @param cbu Callbacku url from the user
  */
 function createPresentationRequest(kid, iss, context, procUrl, procHash, data, cbu, exp?: number, nbf?: number, jti?: String) {
-  // TODO: Remove when MVP is over
-  if (Object.keys(data).length > MVP_CREDENTIAL_LIMIT){
-    throw new Error("You have exceeded the credential limit. Actual limit: " + MVP_CREDENTIAL_LIMIT)
-  }
   const jwt = {
     "header": {
         "alg": "ES256K",
@@ -212,7 +201,7 @@ function createPresentationRequest(kid, iss, context, procUrl, procHash, data, c
 }
 
 function PSMHash(web3, jwt, did){
-	let json = jwt.concat(did);
+	const json = jwt.concat(did);
 	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
 }
   /**

@@ -35,7 +35,9 @@ build/Release
 
 # Dependency directories
 node_modules/
+alastria-identity
 jspm_packages/
+package-lock.json
 
 # Typescript v1 declaration files
 typings/
@@ -57,3 +59,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# typescript generated files
+dist/

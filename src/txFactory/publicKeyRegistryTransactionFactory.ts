@@ -1,6 +1,7 @@
 import { config } from '../config';
 import { transactionFactory } from './transactionFactory';
 import { AIdUtils } from '../utils/AIdUtils';
+import { PublicKeyStatus } from '../interfaces';
 
 /**
  * function addKey(string memory publicKey, address subject) public
@@ -86,18 +87,18 @@ export function getPublicKeyStatus(web3, did, publicKey) {
  * @param did
  * @param publicKey
  */
-export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey) {
+export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey): Promise<PublicKeyStatus> {
   const publicKeyStatusTx = getPublicKeyStatus(web3, did, publicKey);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     web3.eth.call(publicKeyStatusTx)
       .then(data => {
         const publicKeyStatusDecoded = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], data)
         const publicKeyStatusDecodedAsJSON = {
-          "exists": publicKeyStatusDecoded['0'],
-          "status":publicKeyStatusDecoded['1'],
-          "startDate": parseInt(publicKeyStatusDecoded['2']),
-          "endDate": parseInt(publicKeyStatusDecoded['3'])
+          exists: publicKeyStatusDecoded['0'],
+          status: publicKeyStatusDecoded['1'],
+          startDate: parseInt(publicKeyStatusDecoded['2']),
+          endDate: parseInt(publicKeyStatusDecoded['3'])
         }
         resolve(publicKeyStatusDecodedAsJSON)
       })

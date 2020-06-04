@@ -10,7 +10,7 @@ import { AIdUtils } from '../utils/AIdUtils';
 export function addKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPublicKeyRegistry.addKey, 
+    config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
     [publicKey]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaIdentityManager;
@@ -88,12 +88,12 @@ export function getPublicKeyStatus(web3, did, publicKey) {
  */
 export function getPublicKeyStatusDecodedAsJSON(web3, did, publicKey) {
   const publicKeyStatusTx = getPublicKeyStatus(web3, did, publicKey);
-  
+
   return new Promise((resolve, reject) => {
     web3.eth.call(publicKeyStatusTx)
       .then(data => {
         const publicKeyStatusDecoded = web3.eth.abi.decodeParameters(["bool","uint8", 'uint', 'uint'], data)
-        const publicKeyStatusDecodedAsJSON = { 
+        const publicKeyStatusDecodedAsJSON = {
           "exists": publicKeyStatusDecoded['0'],
           "status":publicKeyStatusDecoded['1'],
           "startDate": parseInt(publicKeyStatusDecoded['2']),
@@ -123,7 +123,7 @@ export function isPublicKeyValidForDate(web3, did, publicKey, date) {
           reject(new Error("Public key does not exist"));
         }
       })
-      .catch(error => {
+      .catch(() => {
         reject(new Error("Unresolved error"))
       })
     })
@@ -135,7 +135,7 @@ export function isPublicKeyValidForDate(web3, did, publicKey, date) {
  * @param publicKeyEndDate in milliseconds. If equals to 0, there is no enddate
  */
 function _isUserDateBetweeenDates(userDate, publicKeyStartDate, publicKeyEndDate) {
-  if (publicKeyStartDate && publicKeyEndDate == 0)
+  if (publicKeyStartDate && publicKeyEndDate === 0)
     return true
   else
     return (userDate >= publicKeyStartDate && userDate <= publicKeyEndDate);

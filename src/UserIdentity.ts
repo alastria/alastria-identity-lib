@@ -6,7 +6,7 @@ export class UserIdentity {
     public endPoint: any;
     public address: string;
     private privateKey: any;
-    public transactions = new Array<any>();
+    public transactions: any[];
     public nonce: number;
 
     /**
@@ -91,9 +91,7 @@ export class UserIdentity {
     */
     private async getUserNonce(endPoint, address) {
         try {
-            let nonce
-            nonce = await endPoint.eth.getTransactionCount(address)
-            return nonce
+            return await endPoint.eth.getTransactionCount(address)
         } catch(err) {
             console.log(err)
             throw err;

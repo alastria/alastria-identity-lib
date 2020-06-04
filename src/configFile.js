@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const contractsPath = '../alastria-identity/contracts'; 
+const contractsPath = '../alastria-identity/contracts';
 var _contractsAbi = {};
 
 // Process the abi dir for getting an object with all the abi functions
@@ -10,7 +10,7 @@ fs.readdirSync(path.join(__dirname, `${contractsPath}/abi`)).forEach(file => {
     const abi = {};
     const abiFile = JSON.parse(fs.readFileSync(path.join(__dirname, `${contractsPath}/abi`, file), 'utf8'));
     abiFile.forEach(element => {
-        if(element.type == 'constructor') {
+        if(element.type === 'constructor') {
             abi.constructor = element;
         } else {
             abi[element.name] = element;

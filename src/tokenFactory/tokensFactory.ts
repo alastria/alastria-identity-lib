@@ -19,7 +19,7 @@ export const tokensFactory = {
 function createDID(network, proxyAddress, networkID) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
-  return 'did:ala:' + network + ':' + networkID + ':' + proxyAddress
+  return `did:ala:${network}:${networkID}:${proxyAddress}`
 }
 
 // Used by Service Provider or Subject Wallet

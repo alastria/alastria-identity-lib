@@ -1,6 +1,5 @@
-import { config } from '../config';
-import { AIdUtils } from '../utils/AIdUtils';
-
+import { config } from '../config'
+import { AIdUtils } from '../utils/AIdUtils'
 
 /**
  * function delegateCall(address _destination, uint256 _value, bytes _data) public
@@ -13,10 +12,11 @@ export function delegateCall(web3, _destination, _value, _data) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.delegateCall,
-    [_destination, _value, _data]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 5000000;
-  return transaction;
+    [_destination, _value, _data]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 5000000
+  return transaction
 }
 
 /**
@@ -26,11 +26,12 @@ export function delegateCall(web3, _destination, _value, _data) {
  */
 export function prepareAlastriaID(web3, signAddress) {
   const transaction = Object.assign({}, config.basicTransaction)
-  transaction.to = config.alastriaIdentityManager;
+  transaction.to = config.alastriaIdentityManager
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.prepareAlastriaID,
-    [signAddress]);
-  transaction.gasLimit = 600000;
+    [signAddress]
+  )
+  transaction.gasLimit = 600000
   return transaction
 }
 
@@ -40,16 +41,18 @@ export function prepareAlastriaID(web3, signAddress) {
  * @param publicKey publicKey is a String
  */
 export function createAlastriaIdentity(web3, publicKey) {
-    const transaction = Object.assign({}, config.basicTransaction)
-    transaction.gasLimit = 600000;
-    const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
-      config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
-      [publicKey])
-    transaction.data = web3.eth.abi.encodeFunctionCall(
-      config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,
-      [publicKeyCallData]);
-    transaction.to = config.alastriaIdentityManager;
-    return transaction;
+  const transaction = Object.assign({}, config.basicTransaction)
+  transaction.gasLimit = 600000
+  const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
+    [publicKey]
+  )
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,
+    [publicKeyCallData]
+  )
+  transaction.to = config.alastriaIdentityManager
+  return transaction
 }
 
 /**
@@ -64,10 +67,11 @@ export function addIdentityIssuer(web3, didIssuer, level) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.addIdentityIssuer,
-    [issuerAddr, level]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [issuerAddr, level]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -81,10 +85,11 @@ export function updateIdentityIssuerEidasLevel(web3, didIssuer, level) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.updateIdentityIssuerEidasLevel,
-    [issuerAddr, level]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [issuerAddr, level]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -97,10 +102,11 @@ export function deleteIdentityIssuer(web3, didIssuer) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.deleteIdentityIssuer,
-    [issuerAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [issuerAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -113,10 +119,11 @@ export function getEidasLevel(web3, didIssuer) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.getEidasLevel,
-    [issuerAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [issuerAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -128,11 +135,12 @@ export function getEidasLevel(web3, didIssuer) {
 export function addIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
   const transaction = Object.assign({}, config.basicTransaction)
-  transaction.to = config.alastriaIdentityManager;
+  transaction.to = config.alastriaIdentityManager
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.addIdentityServiceProvider,
-    [providerAddr]);
-  transaction.gasLimit = 600000;
+    [providerAddr]
+  )
+  transaction.gasLimit = 600000
   return transaction
 }
 
@@ -146,10 +154,11 @@ export function deleteIdentityServiceProvider(web3, didServiceProvider) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.deleteIdentityServiceProvider,
-    [providerAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [providerAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -161,13 +170,14 @@ export function isIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaIdentityServiceProvider.isIdentityServiceProvider,
-    [providerAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    config.contractsAbi.AlastriaIdentityServiceProvider
+      .isIdentityServiceProvider,
+    [providerAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
-
 
 /**
  * function isIdentityIssuer(address _identityIssuer) public constant returns (bool)
@@ -179,10 +189,11 @@ export function isIdentityIssuer(web3, didIssuer) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.isIdentityIssuer,
-    [issuerAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [issuerAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -196,100 +207,115 @@ export function isIdentityIssuer(web3, didIssuer) {
  * @param urlAOA
  * @param status
  */
-export function addEntity(web3, didEntity, name, cif, urlLogo, urlCreateAID, urlAOA, status) {
+export function addEntity(
+  web3,
+  didEntity,
+  name,
+  cif,
+  urlLogo,
+  urlCreateAID,
+  urlAOA,
+  status
+) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.addEntity,
-    [entityAddr, name, cif, urlLogo, urlCreateAID, urlAOA, status]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, name, cif, urlLogo, urlCreateAID, urlAOA, status]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
  * function setNameEntity(address _addressEntity, string _name) public
  * @param web3
  * @param didEntity
- * @param name 
+ * @param name
  */
 export function setNameEntity(web3, didEntity, name) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setNameEntity,
-    [entityAddr, name]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, name]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
  * function setCifEntity(address _addressEntity, string _cif) public
  * @param web3
  * @param didEntity
- * @param cif 
+ * @param cif
  */
 export function setCifEntity(web3, didEntity, cif) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setCifEntity,
-    [entityAddr, cif]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, cif]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
  * function setUrlLogo(address _addressEntity, string _url_logo) public
  * @param web3
  * @param didEntity
- * @param urlLogo 
+ * @param urlLogo
  */
 export function setUrlLogo(web3, didEntity, urlLogo) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlLogo,
-    [entityAddr, urlLogo]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, urlLogo]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
  * function setUrlCreateAID(address _addressEntity, string _url_createAID) public
  * @param web3
  * @param didEntity
- * @param urlCreateAID 
+ * @param urlCreateAID
  */
 export function setUrlCreateAID(web3, didEntity, urlCreateAID) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlCreateAID,
-    [entityAddr, urlCreateAID]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, urlCreateAID]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
  * function setUrlAOA(address _addressEntity, string _url_AOA) public
  * @param web3
  * @param didEntity
- * @param urlAOA 
+ * @param urlAOA
  */
 export function setUrlAOA(web3, didEntity, urlAOA) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlAOA,
-    [entityAddr, urlAOA]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr, urlAOA]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -302,10 +328,11 @@ export function getEntity(web3, didEntity) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.getEntity,
-    [entityAddr]);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    [entityAddr]
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }
 
 /**
@@ -316,8 +343,9 @@ export function entitiesList(web3) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.entitiesList,
-    []);
-  transaction.to = config.alastriaIdentityManager;
-  transaction.gasLimit = 600000;
-  return transaction;
+    []
+  )
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
 }

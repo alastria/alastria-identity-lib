@@ -2,9 +2,9 @@ import { config } from '../config';
 import { AIdUtils } from '../utils/AIdUtils';
 
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
-  let transaction = Object.assign({}, config.basicTransaction)
-  let delegatedData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["addSubjectPresentation"],
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPresentationRegistry.addSubjectPresentation,
     [subjectPresentationHash, URI]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaIdentityManager;
@@ -21,9 +21,9 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
  * @param subjectPresentationHash
  */
 export function updateSubjectPresentation(web3, subjectPresentationHash, status) {
-  let transaction = Object.assign({}, config.basicTransaction)
-  let delegatedData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["updateSubjectPresentation"],
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPresentationRegistry.updateSubjectPresentation,
     [subjectPresentationHash, status]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaIdentityManager;
@@ -40,10 +40,10 @@ export function updateSubjectPresentation(web3, subjectPresentationHash, status)
  * @param subsubjectPresentationHashject
  */
 export function getSubjectPresentationStatus(web3, didSubject, subsubjectPresentationHashject) {
-  let subjectAddr = AIdUtils.getProxyAddress(didSubject)
-  let transaction = Object.assign({}, config.basicTransaction)
+  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
+  const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationStatus"],
+    config.contractsAbi.AlastriaPresentationRegistry.getSubjectPresentationStatus,
     [subjectAddr, subsubjectPresentationHashject]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
@@ -56,10 +56,10 @@ export function getSubjectPresentationStatus(web3, didSubject, subsubjectPresent
  * @param didSubject
  */
 export function getSubjectPresentationList(web3, didSubject) {
-  let subjectAddr = AIdUtils.getProxyAddress(didSubject)
-  let transaction = Object.assign({}, config.basicTransaction)
+  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
+  const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["getSubjectPresentationList"],
+    config.contractsAbi.AlastriaPresentationRegistry.getSubjectPresentationList,
     [subjectAddr]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
@@ -74,9 +74,9 @@ export function getSubjectPresentationList(web3, didSubject) {
  * @param status
  */
 export function updateReceiverPresentation(web3, receiverPresentationHash, status) {
-  let transaction = Object.assign({}, config.basicTransaction)
-  let delegatedData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["updateReceiverPresentation"],
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPresentationRegistry.updateReceiverPresentation,
     [receiverPresentationHash, status]);
   transaction.data = delegated(web3, delegatedData);
   transaction.to = config.alastriaIdentityManager;
@@ -93,10 +93,10 @@ export function updateReceiverPresentation(web3, receiverPresentationHash, statu
  * @param receiverPresentationHash
  */
 export function getReceiverPresentationStatus(web3, didReceiver, receiverPresentationHash) {
-  let receiverAddr = AIdUtils.getProxyAddress(didReceiver)
-  let transaction = Object.assign({}, config.basicTransaction)
+  const receiverAddr = AIdUtils.getProxyAddress(didReceiver)
+  const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["getReceiverPresentationStatus"],
+    config.contractsAbi.AlastriaPresentationRegistry.getReceiverPresentationStatus,
     [receiverAddr, receiverPresentationHash]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
@@ -112,9 +112,9 @@ export function getReceiverPresentationStatus(web3, didReceiver, receiverPresent
  * @param receiverStatus
  */
 export function getPresentationStatus(web3, subjectStatus, receiverStatus) {
-  let transaction = Object.assign({}, config.basicTransaction)
+  const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaPresentationRegistry"]["getPresentationStatus"],
+    config.contractsAbi.AlastriaPresentationRegistry.getPresentationStatus,
     [subjectStatus, receiverStatus]);
   transaction.to = config.alastriaPresentationRegistry;
   transaction.gasLimit = 600000;
@@ -123,6 +123,6 @@ export function getPresentationStatus(web3, subjectStatus, receiverStatus) {
 
 function delegated(web3, delegatedData) {
   return web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi["AlastriaIdentityManager"]["delegateCall"],
+    config.contractsAbi.AlastriaIdentityManager.delegateCall,
     [config.alastriaPresentationRegistry, 0, delegatedData])
 }

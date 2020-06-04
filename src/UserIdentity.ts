@@ -1,5 +1,5 @@
-//With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
-//TODO: change encoding when v1.0.0 releases stable version
+// With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
+// TODO: change encoding when v1.0.0 releases stable version
 import * as EthereumTxAll from 'ethereumjs-tx';
 
 export class UserIdentity {
@@ -34,7 +34,7 @@ export class UserIdentity {
      * @Dev Returns all the transactions signed for the user. Empty the stack
      */
     public getSignedTransactions() {
-        let processedTransactions = [];
+        const processedTransactions = [];
         this.transactions.map(transaction => {
             processedTransactions.push(this.signTransaction(transaction, this.privateKey));
         });
@@ -46,7 +46,7 @@ export class UserIdentity {
     * @Dev Returns a known transaction from an anonimous transaction
     */
     public async getKnownTransaction(transaction) {
-        let customizedTransaction = await this.customize(transaction)
+        const customizedTransaction = await this.customize(transaction)
         var signedTx = await this.signTransaction(customizedTransaction, this.privateKey)
         return signedTx
     }
@@ -57,7 +57,7 @@ export class UserIdentity {
     * @param transaction
     */
     private async customize(transaction) {
-        let mynonce = await this.getUserNonce(this.endPoint, this.address)
+        const mynonce = await this.getUserNonce(this.endPoint, this.address)
         transaction.nonce = mynonce
         transaction.gasPrice = 0;
         return transaction
@@ -71,7 +71,7 @@ export class UserIdentity {
      public signTransaction(transaction, privateKey) {
          try {
              const tx = new EthereumTxAll(transaction);
-             let privKeyBuffered = Buffer.from(privateKey, 'hex')
+             const privKeyBuffered = Buffer.from(privateKey, 'hex')
              tx.sign(privKeyBuffered);
              const signedTx = `0x${tx.serialize().toString('hex')}`;
              return signedTx;

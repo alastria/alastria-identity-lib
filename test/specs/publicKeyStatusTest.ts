@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import 'mocha'
 import * as demo from '../../src/txFactory/transactionFactory'
 
@@ -22,20 +23,21 @@ describe('validate public key in several situations with dates', function () {
         startDate: 0,
         endDate: 0
       })
-
     const fakePublicKey = '0x00000000000000000000000000000000'
     const date = new Date('January 17, 1996 03:24:00').getTime()
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        date
-      )
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      date
     )
+
+    expect(isPublicKeyValidForDate)
       .to.eventually.be.rejectedWith('Public key does not exist')
       .and.be.an.instanceOf(Error)
+
     sinon.restore()
   })
 
@@ -54,14 +56,15 @@ describe('validate public key in several situations with dates', function () {
     const fakePublicKey = '0x00000000000000000000000000000000'
     const date = new Date('January 17, 1996 03:24:00').getTime()
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        date
-      )
-    ).to.eventually.be.true
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      date
+    )
+
+    expect(isPublicKeyValidForDate).to.eventually.be.true
 
     sinon.restore()
   })
@@ -81,14 +84,15 @@ describe('validate public key in several situations with dates', function () {
       })
     const fakePublicKey = '0x00000000000000000000000000000000'
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        startDate
-      )
-    ).to.eventually.be.true
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      startDate
+    )
+
+    expect(isPublicKeyValidForDate).to.eventually.be.true
 
     sinon.restore()
   })
@@ -108,14 +112,14 @@ describe('validate public key in several situations with dates', function () {
       })
     const fakePublicKey = '0x00000000000000000000000000000000'
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        endDate
-      )
-    ).to.eventually.be.true
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      endDate
+    )
+    expect(isPublicKeyValidForDate).to.eventually.be.true
 
     sinon.restore()
   })
@@ -135,14 +139,15 @@ describe('validate public key in several situations with dates', function () {
     const fakePublicKey = '0x00000000000000000000000000000000'
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
     const priorDate = new Date('December 17, 1990 03:24:00').getTime()
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        priorDate
-      )
-    ).to.eventually.be.false
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      priorDate
+    )
+
+    expect(isPublicKeyValidForDate).to.eventually.be.false
 
     sinon.restore()
   })
@@ -162,14 +167,15 @@ describe('validate public key in several situations with dates', function () {
     const fakePublicKey = '0x00000000000000000000000000000000'
     const fakeDID = 'did:ala:quor:redT:00000000000000000000000000000000'
     const passedDate = new Date('December 17, 2000 03:24:00').getTime()
-    expect(
-      demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
-        web3,
-        fakeDID,
-        fakePublicKey,
-        passedDate
-      )
-    ).to.eventually.be.false
+
+    const isPublicKeyValidForDate = demo.transactionFactory.publicKeyRegistry.isPublicKeyValidForDate(
+      web3,
+      fakeDID,
+      fakePublicKey,
+      passedDate
+    )
+
+    expect(isPublicKeyValidForDate).to.eventually.be.false
 
     sinon.restore()
   })

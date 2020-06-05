@@ -116,4 +116,65 @@ describe('validate createAlastriaSession', function () {
         JSON.stringify(expectedAlastriaSession)
       )
     });
+
+    it('should create a valid presentationRequest', () => {
+        const kid = 'kiss'
+        const iss = 'iss'
+        const context = []
+        const procUrl = 'url'
+        const procHash = 'url'
+        const data = 'data'
+        const jwk = '0x12345'
+        const exp = 0
+        const nbf = 0
+        const jti = 'jwi'
+        const cbu = 'url'
+        const expectedPresentationRequest = {
+          header: {
+            alg: 'ES256K',
+            typ: 'JWT',
+            kid: kid,
+            jwk
+          },
+          payload: {
+            jti: jti,
+            iss: iss,
+            iat: Math.round(Date.now() / 1000),
+            exp: exp,
+            nbf: nbf,
+            cbu: cbu,
+            pr: {
+              '@context': [
+                'https://www.w3.org/2018/credentials/v1',
+                'https://alastria.github.io/identity/credentials/v1'
+              ].concat(context),
+              type: [
+                'VerifiablePresentationRequest',
+                'AlastriaVerifiablePresentationRequest'
+              ],
+              procUrl: procUrl,
+              procHash: procHash,
+              data: data
+            }
+          }
+        }
+
+        const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+          kid,
+          iss,
+          context,
+          procUrl,
+          procHash,
+          data,
+          cbu,
+          jwk,
+          exp,
+          nbf,
+          jti
+        )
+
+        expect(JSON.stringify(presentationRequest)).equal(
+          JSON.stringify(expectedPresentationRequest)
+        )
+      })
 });

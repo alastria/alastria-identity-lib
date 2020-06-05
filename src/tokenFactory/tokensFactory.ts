@@ -214,6 +214,7 @@ function createPresentation(
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  * @param cbu Callbacku url from the user
+ * @param jwk Public key
  */
 function createPresentationRequest(
   kid,
@@ -223,6 +224,7 @@ function createPresentationRequest(
   procHash,
   data,
   cbu,
+  jwk: String,
   exp?: number,
   nbf?: number,
   jti?: String
@@ -231,7 +233,8 @@ function createPresentationRequest(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid
+      kid: kid,
+      jwk
     },
     payload: {
       jti: jti,
@@ -241,8 +244,14 @@ function createPresentationRequest(
       nbf: nbf,
       cbu: cbu,
       pr: {
-        '@context': context,
-        type: ['VerifiablePresentationRequest'],
+        '@context': [
+          'https://www.w3.org/2018/credentials/v1',
+          'https://alastria.github.io/identity/credentials/v1'
+        ].concat(context),
+        type: [
+          'VerifiablePresentationRequest',
+          'AlastriaVerifiablePresentationRequest'
+        ],
         procUrl: procUrl,
         procHash: procHash,
         data: data

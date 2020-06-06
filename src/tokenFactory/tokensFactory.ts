@@ -118,6 +118,7 @@ function createAlastriaToken(
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific credential (it is NOT the identifier of the holder or of any other actor)
+ * @param jwk optional field with the public key used to sign the JWT Header
  */
 export function createCredential(
   kid,
@@ -127,13 +128,15 @@ export function createCredential(
   credentialSubject,
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: String,
+  jwk?: String
 ) {
   const jwt = {
     header: {
       typ: 'JWT',
       alg: 'ES256K',
-      kid: kid
+      kid: kid,
+      jwk: jwk
     },
     payload: {
       jti: jti,

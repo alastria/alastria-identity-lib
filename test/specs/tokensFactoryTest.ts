@@ -127,6 +127,7 @@ describe('validate createAlastriaSession', function () {
     const nbf = 0
     const jti = 'jwi'
     const cbu = 'url'
+    const type = ['CustomType']
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',
@@ -149,7 +150,7 @@ describe('validate createAlastriaSession', function () {
           type: [
             'VerifiablePresentationRequest',
             'AlastriaVerifiablePresentationRequest'
-          ],
+          ].concat(type),
           procUrl: procUrl,
           procHash: procHash,
           data: data
@@ -166,6 +167,7 @@ describe('validate createAlastriaSession', function () {
       data,
       cbu,
       jwk,
+      type,
       exp,
       nbf,
       jti

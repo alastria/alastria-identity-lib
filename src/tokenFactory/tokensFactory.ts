@@ -45,12 +45,12 @@ function verifyJWT(jwt, rawPublicKey) {
 }
 
 /** Creates an Alastria Session
- * @param context
+ * @param context aditional urls to "https://alastria.github.io/identity/artifacts/v1"
  * @param iss DID representing the AlastriaID of the entity that issued the Alastria Session
  * @param pku Users public key
  * @param alastriaToken Verified Alastria Token
  * @param kid indicates which key was used to secure (digitally sign) the JWT
- * @param type
+ * @param type aditional types to "AlastriaSession"
  * @param exp expiration time
  * @param nbf not before
  * @param jti Unique token identifier

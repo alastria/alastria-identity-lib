@@ -118,7 +118,7 @@ describe('validate createAlastriaSession', function () {
   it('should create a valid presentationRequest', () => {
     const kid = 'kiss'
     const iss = 'iss'
-    const context = []
+    const context = ['CustomContext1', 'CustomContext2']
     const procUrl = 'url'
     const procHash = 'url'
     const data = 'data'
@@ -127,7 +127,7 @@ describe('validate createAlastriaSession', function () {
     const nbf = 0
     const jti = 'jwi'
     const cbu = 'url'
-    const type = ['CustomType']
+    const type = ['CustomType1', 'CustomType2']
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',

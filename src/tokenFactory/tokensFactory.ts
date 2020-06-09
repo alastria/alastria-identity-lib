@@ -1,3 +1,5 @@
+import { isContext } from "vm";
+
 // import { default as _ } from 'jsontokens'
 const _: any = require('jsontokens');
 export const tokensFactory = {
@@ -204,17 +206,41 @@ function PSMHash(web3, jwt, did){
 	const json = jwt.concat(did);
 	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
 }
-  /**
-    * Create a JSON with the three params
-    * @param createAlastriaTX
-    * @param alastriaToken
-    * @param publicKey
-    */
-  function createAIC(createAlastriaTX, alastriaToken, publicKey){
-    const aic = {
-        "createAlastriaTX":createAlastriaTX,
-        "alastriaToken":alastriaToken,
-        "publicKey":publicKey
-    };
-    return aic;
+/**
+  * Create a JSON with the three params
+  * @param kid indicates which key was used to secure (digitally sign) the JWT
+  * @param jwk
+  * @param context
+  * @param type
+  * @param createAlastriaTX
+  * @param alastriaToken
+  * @param publicKey
+  * @param jti unique aic identifier
+  * @param iat
+  * @param exp expiration time
+  * @param nbf not before
+  * 
+  */
+function createAIC(kid, jwk, context: Array<string>, type: Array<string>, createAlastriaTX, alastriaToken, publicKey, jti?: string, iat?: number, exp?: number, nbf?: number){
+
+  const jwt = {
+    "header": {
+      "alg": "ES256K",
+      "typ": "JWT",
+      "kid": kid,
+      "jwk": jwk
+    },
+    "payload": {
+      "@context": ["https://alastria.github.io/identity/artifacts/v1"].concat(context),
+      "type": ["AlastriaIdentityCreation"].concat(type),
+      "createAlastriaTX":createAlastriaTX,
+      "alastriaToken":alastriaToken,
+      "publicKey":publicKey,
+      "jti": jti,
+      "iat": iat,
+      "exp": exp,
+      "nbf": nbf
+    }
+  }
+  return jwt
 }

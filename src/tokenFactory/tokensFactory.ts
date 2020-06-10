@@ -48,32 +48,34 @@ function verifyJWT(jwt, rawPublicKey) {
 }
 
 /** Creates an Alastria Session
- * @param context
+ * @param context aditional urls to "https://alastria.github.io/identity/artifacts/v1"
  * @param iss DID representing the AlastriaID of the entity that issued the Alastria Session
  * @param pku Users public key
- * @param data Verified Alastria Token
+ * @param alastriaToken Verified Alastria Token
+ * @param kid indicates which key was used to secure (digitally sign) the JWT
+ * @param type aditional types to "AlastriaSession"
  * @param exp expiration time
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaSession(
-  context,
-  iss,
-  pku,
-  data,
-  exp?: number,
-  nbf?: number,
-  jti?: string
-) {
+function createAlastriaSession(context: Array<string>, iss, kid, type: Array<string>, alastriaToken, exp: number, pku?: string, nbf?: number, jti?: string) {
   const jwt = {
-    '@context': context,
-    iss: iss,
-    pku: pku,
-    iat: Math.round(Date.now() / 1000),
-    exp: exp,
-    nbf: nbf,
-    data: data,
-    jti: jti
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      jwk: pku,
+      kid: kid
+    },
+    payload: {
+      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
+      type:['AlastriaSession'].concat(type),
+      iss: iss,
+      iat: Math.round(Date.now()/1000),
+      exp: exp,
+      nbf: nbf,
+      alastriaToken: alastriaToken,
+      jti: jti
+    }
   }
   return jwt
 }

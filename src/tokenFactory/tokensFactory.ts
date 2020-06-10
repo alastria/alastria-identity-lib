@@ -1,5 +1,5 @@
-// import { default as _ } from 'jsontokens'
-const _: any = require('jsontokens')
+import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
+
 export const tokensFactory = {
   tokens: {
     decodeJWT: decodeJWT,
@@ -26,25 +26,25 @@ function createDID(network, proxyAddress, networkID) {
 export function decodeJWT(jwt) {
   var tokenData = null
   if (jwt) {
-    tokenData = _.decodeToken(jwt)
+    tokenData = decodeToken(jwt)
   }
   return tokenData
 }
 
 function signJWT(jwt, rawPrivateKey) {
   if (jwt.header && jwt.payload) {
-    return new _.TokenSigner('ES256K', rawPrivateKey).sign(
+    return new TokenSigner('ES256K', rawPrivateKey).sign(
       jwt.payload,
       false,
       jwt.header
     )
   } else {
-    return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt)
+    return new TokenSigner('ES256K', rawPrivateKey).sign(jwt)
   }
 }
 
 function verifyJWT(jwt, rawPublicKey) {
-  return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt)
+  return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 
 /** Creates an Alastria Session

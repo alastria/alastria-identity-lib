@@ -114,7 +114,9 @@ describe('validate createAlastriaSession', function () {
       JSON.stringify(expectedAlastriaSession)
     )
   })
+})
 
+describe('validate createPresentationRequest', function () {
   it('should create a valid presentationRequest', () => {
     const kid = 'kiss'
     const iss = 'iss'
@@ -175,6 +177,89 @@ describe('validate createAlastriaSession', function () {
 
     expect(JSON.stringify(presentationRequest)).equal(
       JSON.stringify(expectedPresentationRequest)
+    )
+  })
+})
+
+describe('validate createAlastriaToken', function () {
+  const kid =
+    'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'
+  const jwk = '0x12345'
+  const nbf = 1590567640136
+  const gwu = 'http://0.0.0.0/rpc'
+  const cbu = 'http://0.0.0.0:1234/alastria/did'
+  const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+  const exp = 1590654040136
+  const ani = 'redT'
+  const jti = 'FooBar/alastriaToken/1590567641603'
+
+  it('should create a valid AlastriaToken with required params', () => {
+    const expectedAlastriaToken = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
+      },
+      payload: {
+        iss: iss,
+        gwu: gwu,
+        cbu: cbu,
+        iat: Math.round(Date.now() / 1000),
+        ani: ani,
+        exp: exp
+      }
+    }
+
+    const alastriaToken = tokensFactory.tokens.createAlastriaToken(
+      iss,
+      gwu,
+      cbu,
+      ani,
+      exp,
+      kid,
+      jwk
+    )
+
+    expect(JSON.stringify(alastriaToken)).equal(
+      JSON.stringify(expectedAlastriaToken)
+    )
+  })
+
+  it('should create a valid AlastriaToken with all params', () => {
+    const expectedAlastriaToken = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
+      },
+      payload: {
+        iss: iss,
+        gwu: gwu,
+        cbu: cbu,
+        iat: Math.round(Date.now() / 1000),
+        ani: ani,
+        nbf: nbf,
+        exp: exp,
+        jti: jti
+      }
+    }
+
+    const alastriaToken = tokensFactory.tokens.createAlastriaToken(
+      iss,
+      gwu,
+      cbu,
+      ani,
+      exp,
+      kid,
+      jwk,
+      nbf,
+      jti
+    )
+
+    expect(JSON.stringify(alastriaToken)).equal(
+      JSON.stringify(expectedAlastriaToken)
     )
   })
 })

@@ -98,27 +98,39 @@ function createAlastriaSession(
  * @param cbu Callbacku url from the user
  * @param ani Alastria Network ID
  * @param exp expiration time
+ * @param kid indicates which key was used to secure (digitally sign) the JWT
+ * @param jwk Users public key
  * @param nbf not before
  * @param jti Unique token identifier
  */
 function createAlastriaToken(
-  iss,
-  gwu,
-  cbu,
-  ani,
-  exp,
+  iss: string,
+  gwu: string,
+  cbu: string,
+  ani: string,
+  exp: number,
+  kid: string,
+  jwk: string,
   nbf?: number,
   jti?: string
 ) {
   const jwt = {
-    iss: iss,
-    gwu: gwu,
-    cbu: cbu,
-    iat: Math.round(Date.now() / 1000),
-    ani: ani,
-    nbf: nbf,
-    exp: exp,
-    jti: jti
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      kid,
+      jwk
+    },
+    payload: {
+      iss: iss,
+      gwu: gwu,
+      cbu: cbu,
+      iat: Math.round(Date.now() / 1000),
+      ani: ani,
+      nbf: nbf,
+      exp: exp,
+      jti: jti
+    }
   }
   return jwt
 }

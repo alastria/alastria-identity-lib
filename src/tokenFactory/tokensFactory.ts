@@ -271,25 +271,36 @@ function PSMHash(web3, jwt, did) {
   * @param nbf not before
   * 
   */
-function createAIC(kid, jwk, context: Array<string>, type: Array<string>, createAlastriaTX, alastriaToken, publicKey, jti?: string, iat?: number, exp?: number, nbf?: number){
+function createAIC(
+  kid,
+  context: Array<string>, 
+  type: Array<string>, 
+  createAlastriaTX, 
+  alastriaToken, 
+  publicKey, 
+  jwk?: string,
+  jti?: string, 
+  iat?: number, 
+  exp?: number, 
+  nbf?: number){
 
   const jwt = {
-    "header": {
-      "alg": "ES256K",
-      "typ": "JWT",
-      "kid": kid,
-      "jwk": jwk
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      kid: kid,
+      jwk: jwk
     },
-    "payload": {
-      "@context": ["https://alastria.github.io/identity/artifacts/v1"].concat(context),
-      "type": ["AlastriaIdentityCreation"].concat(type),
-      "createAlastriaTX":createAlastriaTX,
-      "alastriaToken":alastriaToken,
-      "publicKey":publicKey,
-      "jti": jti,
-      "iat": iat,
-      "exp": exp,
-      "nbf": nbf
+    payload: {
+      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
+      type: ['AlastriaIdentityCreation'].concat(type),
+      createAlastriaTX:createAlastriaTX,
+      alastriaToken:alastriaToken,
+      publicKey:publicKey,
+      jti: jti,
+      iat: iat,
+      exp: exp,
+      nbf: nbf
     }
   }
   return jwt

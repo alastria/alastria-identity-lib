@@ -122,14 +122,14 @@ function createAlastriaToken(
       jwk
     },
     payload: {
-      iss: iss,
-      gwu: gwu,
-      cbu: cbu,
+      iss,
+      gwu,
+      cbu,
       iat: Math.round(Date.now() / 1000),
-      ani: ani,
-      nbf: nbf,
-      exp: exp,
-      jti: jti
+      ani,
+      nbf,
+      exp,
+      jti
     }
   }
   return jwt

@@ -48,20 +48,20 @@ describe('validate createAlastriaSession', function () {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
-        jwk: jwk,
-        kid: kid
+        jwk,
+        kid
       },
       payload: {
         '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
           context
         ),
         type: ['AlastriaSession'].concat(type),
-        iss: iss,
+        iss,
         iat: Math.round(Date.now() / 1000),
-        exp: exp,
-        nbf: nbf,
-        alastriaToken: alastriaToken,
-        jti: jti
+        exp,
+        nbf,
+        alastriaToken,
+        jti
       }
     }
 
@@ -87,17 +87,17 @@ describe('validate createAlastriaSession', function () {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
-        kid: kid
+        kid
       },
       payload: {
         '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
           context
         ),
         type: ['AlastriaSession'].concat(type),
-        iss: iss,
+        iss,
         iat: Math.round(Date.now() / 1000),
-        exp: exp,
-        alastriaToken: alastriaToken
+        exp,
+        alastriaToken
       }
     }
 
@@ -134,16 +134,16 @@ describe('validate createPresentationRequest', function () {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
-        kid: kid,
+        kid,
         jwk
       },
       payload: {
-        jti: jti,
-        iss: iss,
+        jti,
+        iss,
         iat: Math.round(Date.now() / 1000),
-        exp: exp,
-        nbf: nbf,
-        cbu: cbu,
+        exp,
+        nbf,
+        cbu,
         pr: {
           '@context': [
             'https://www.w3.org/2018/credentials/v1',
@@ -153,9 +153,9 @@ describe('validate createPresentationRequest', function () {
             'VerifiablePresentationRequest',
             'AlastriaVerifiablePresentationRequest'
           ].concat(type),
-          procUrl: procUrl,
-          procHash: procHash,
-          data: data
+          procUrl,
+          procHash,
+          data
         }
       }
     }
@@ -202,12 +202,12 @@ describe('validate createAlastriaToken', function () {
         jwk
       },
       payload: {
-        iss: iss,
-        gwu: gwu,
-        cbu: cbu,
+        iss,
+        gwu,
+        cbu,
         iat: Math.round(Date.now() / 1000),
-        ani: ani,
-        exp: exp
+        ani,
+        exp
       }
     }
 
@@ -235,14 +235,14 @@ describe('validate createAlastriaToken', function () {
         jwk
       },
       payload: {
-        iss: iss,
-        gwu: gwu,
-        cbu: cbu,
+        iss,
+        gwu,
+        cbu,
         iat: Math.round(Date.now() / 1000),
-        ani: ani,
-        nbf: nbf,
-        exp: exp,
-        jti: jti
+        ani,
+        nbf,
+        exp,
+        jti
       }
     }
 

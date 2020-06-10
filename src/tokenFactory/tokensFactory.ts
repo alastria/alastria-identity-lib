@@ -1,49 +1,52 @@
 import { isContext } from "vm";
 
 // import { default as _ } from 'jsontokens'
-const _: any = require('jsontokens');
+const _: any = require('jsontokens')
 export const tokensFactory = {
   tokens: {
-    'decodeJWT': decodeJWT,
-    'signJWT': signJWT,
-    'verifyJWT': verifyJWT,
-    'createAlastriaSession': createAlastriaSession,
-    'createAlastriaToken': createAlastriaToken,
-    'createCredential': createCredential,
-    'createPresentation': createPresentation,
-    'createPresentationRequest': createPresentationRequest,
-    'PSMHash': PSMHash,
-    'createAIC': createAIC,
-    'createDID': createDID
+    decodeJWT: decodeJWT,
+    signJWT: signJWT,
+    verifyJWT: verifyJWT,
+    createAlastriaSession: createAlastriaSession,
+    createAlastriaToken: createAlastriaToken,
+    createCredential: createCredential,
+    createPresentation: createPresentation,
+    createPresentationRequest: createPresentationRequest,
+    PSMHash: PSMHash,
+    createAIC: createAIC,
+    createDID: createDID
   }
 }
 
 function createDID(network, proxyAddress, networkID) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
-  return "did:ala:" + network + ":" + networkID + ":" + proxyAddress;
+  return `did:ala:${network}:${networkID}:${proxyAddress}`
 }
 
 // Used by Service Provider or Subject Wallet
 export function decodeJWT(jwt) {
   var tokenData = null
-  if(jwt){
+  if (jwt) {
     tokenData = _.decodeToken(jwt)
   }
   return tokenData
 }
 
 function signJWT(jwt, rawPrivateKey) {
-  if (jwt.header && jwt.payload){
-  	return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt.payload, false, jwt.header);
-  }
-  else {
-        return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt);
+  if (jwt.header && jwt.payload) {
+    return new _.TokenSigner('ES256K', rawPrivateKey).sign(
+      jwt.payload,
+      false,
+      jwt.header
+    )
+  } else {
+    return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt)
   }
 }
 
 function verifyJWT(jwt, rawPublicKey) {
-  return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt);
+  return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 
 /** Creates an Alastria Session
@@ -55,16 +58,24 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaSession(context, iss, pku, data, exp?: number, nbf?: number, jti?: string) {
+function createAlastriaSession(
+  context,
+  iss,
+  pku,
+  data,
+  exp?: number,
+  nbf?: number,
+  jti?: string
+) {
   const jwt = {
-    "@context": context,
-    "iss": iss,
-    "pku": pku,
-    "iat": Math.round(Date.now()/1000),
-    "exp": exp,
-    "nbf": nbf,
-    "data": data,
-    "jti": jti
+    '@context': context,
+    iss: iss,
+    pku: pku,
+    iat: Math.round(Date.now() / 1000),
+    exp: exp,
+    nbf: nbf,
+    data: data,
+    jti: jti
   }
   return jwt
 }
@@ -78,16 +89,24 @@ function createAlastriaSession(context, iss, pku, data, exp?: number, nbf?: numb
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: number, jti?: string) {
+function createAlastriaToken(
+  iss,
+  gwu,
+  cbu,
+  ani,
+  exp,
+  nbf?: number,
+  jti?: string
+) {
   const jwt = {
-    "iss": iss,
-    "gwu": gwu,
-    "cbu": cbu,
-    "iat": Math.round(Date.now()/1000),
-    "ani": ani,
-    "nbf": nbf,
-    "exp": exp,
-    "jti": jti
+    iss: iss,
+    gwu: gwu,
+    cbu: cbu,
+    iat: Math.round(Date.now() / 1000),
+    ani: ani,
+    nbf: nbf,
+    exp: exp,
+    jti: jti
   }
   return jwt
 }
@@ -102,27 +121,36 @@ function createAlastriaToken(iss, gwu, cbu, ani, exp, nbf?: number, jti?: string
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific credential (it is NOT the identifier of the holder or of any other actor)
  */
-export function createCredential(kid, iss, sub, context, credentialSubject, exp?: number, nbf?: number, jti?: String) {
-     const jwt = {
-    "header": {
-      "typ": "JWT",
-      "alg": "ES256K",
-      "kid": kid
+export function createCredential(
+  kid,
+  iss,
+  sub,
+  context,
+  credentialSubject,
+  exp?: number,
+  nbf?: number,
+  jti?: String
+) {
+  const jwt = {
+    header: {
+      typ: 'JWT',
+      alg: 'ES256K',
+      kid: kid
     },
-    "payload": {
-      "jti": jti,
-      "iss": iss,
-      "sub": sub,
-      "iat": Math.round(Date.now()/1000),
-      "exp": exp,
-      "nbf": nbf,
-      "vc":{
-    	"@context": context,
-        "type": ["VerifiableCredential", "AlastriaExampleCredential"],
-        "credentialSubject":credentialSubject
-    	   }
+    payload: {
+      jti: jti,
+      iss: iss,
+      sub: sub,
+      iat: Math.round(Date.now() / 1000),
+      exp: exp,
+      nbf: nbf,
+      vc: {
+        '@context': context,
+        type: ['VerifiableCredential', 'AlastriaExampleCredential'],
+        credentialSubject: credentialSubject
       }
-   }
+    }
+  }
   return jwt
 }
 
@@ -138,27 +166,38 @@ export function createCredential(kid, iss, sub, context, credentialSubject, exp?
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
-function createPresentation(kid, iss, aud, context, verifiableCredential, procUrl, procHash, exp?: number, nbf?: number, jti?: String) {
+function createPresentation(
+  kid,
+  iss,
+  aud,
+  context,
+  verifiableCredential,
+  procUrl,
+  procHash,
+  exp?: number,
+  nbf?: number,
+  jti?: String
+) {
   const jwt = {
-    "header": {
-        "alg": "ES256K",
-        "typ": "JWT",
-        "kid": kid
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      kid: kid
     },
-    "payload": {
-        "jti": jti,
-        "iss": iss,
-        "aud": aud,
-        "iat": Math.round(Date.now()/1000),
-        "exp": exp,
-        "nbf": nbf,
-        "vp": {
-          "@context": context,
-          "type": ["VerifiablePresentation"],
-          "procUrl": procUrl,
-          "procHash": procHash,
-          "verifiableCredential": verifiableCredential
-        }
+    payload: {
+      jti: jti,
+      iss: iss,
+      aud: aud,
+      iat: Math.round(Date.now() / 1000),
+      exp: exp,
+      nbf: nbf,
+      vp: {
+        '@context': context,
+        type: ['VerifiablePresentation'],
+        procUrl: procUrl,
+        procHash: procHash,
+        verifiableCredential: verifiableCredential
+      }
     }
   }
   return jwt
@@ -176,35 +215,46 @@ function createPresentation(kid, iss, aud, context, verifiableCredential, procUr
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  * @param cbu Callbacku url from the user
  */
-function createPresentationRequest(kid, iss, context, procUrl, procHash, data, cbu, exp?: number, nbf?: number, jti?: String) {
+function createPresentationRequest(
+  kid,
+  iss,
+  context,
+  procUrl,
+  procHash,
+  data,
+  cbu,
+  exp?: number,
+  nbf?: number,
+  jti?: String
+) {
   const jwt = {
-    "header": {
-        "alg": "ES256K",
-        "typ": "JWT",
-        "kid": kid
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      kid: kid
     },
-    "payload": {
-        "jti": jti,
-        "iss": iss,
-        "iat": Math.round(Date.now()/1000),
-        "exp": exp,
-        "nbf": nbf,
-	"cbu": cbu,
-        "pr": {
-          "@context": context,
-          "type": ["VerifiablePresentationRequest"],
-          "procUrl": procUrl,
-      	  "procHash": procHash,
-          "data": data
-        }
+    payload: {
+      jti: jti,
+      iss: iss,
+      iat: Math.round(Date.now() / 1000),
+      exp: exp,
+      nbf: nbf,
+      cbu: cbu,
+      pr: {
+        '@context': context,
+        type: ['VerifiablePresentationRequest'],
+        procUrl: procUrl,
+        procHash: procHash,
+        data: data
       }
     }
+  }
   return jwt
 }
 
-function PSMHash(web3, jwt, did){
-	const json = jwt.concat(did);
-	return web3.utils.sha3(json); // Same as -> web3.utils.keccak256(json)
+function PSMHash(web3, jwt, did) {
+  const json = jwt.concat(did)
+  return web3.utils.sha3(json) // Same as -> web3.utils.keccak256(json)
 }
 /**
   * Create a JSON with the three params

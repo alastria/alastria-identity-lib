@@ -58,7 +58,17 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaSession(context: Array<string>, iss, kid, type: Array<string>, alastriaToken, exp: number, pku?: string, nbf?: number, jti?: string) {
+function createAlastriaSession(
+  context: Array<string>,
+  iss,
+  kid,
+  type: Array<string>,
+  alastriaToken,
+  exp: number,
+  pku?: string,
+  nbf?: number,
+  jti?: string
+) {
   const jwt = {
     header: {
       alg: 'ES256K',
@@ -67,10 +77,12 @@ function createAlastriaSession(context: Array<string>, iss, kid, type: Array<str
       kid: kid
     },
     payload: {
-      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-      type:['AlastriaSession'].concat(type),
+      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+        context
+      ),
+      type: ['AlastriaSession'].concat(type),
       iss: iss,
-      iat: Math.round(Date.now()/1000),
+      iat: Math.round(Date.now() / 1000),
       exp: exp,
       nbf: nbf,
       alastriaToken: alastriaToken,

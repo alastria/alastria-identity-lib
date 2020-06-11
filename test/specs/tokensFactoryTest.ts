@@ -181,6 +181,71 @@ describe('validate createPresentationRequest', function () {
   })
 })
 
+describe('validate createPresentation', function () {
+  it('should create a valid presentationRequest', () => {
+    const kid = 'kiss'
+    const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+    const aud = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+    const context = ['CustomContext1', 'CustomContext2']
+    const verificableCredential = ['eyJ0eXAi']
+    const procUrl = 'url'
+    const procHash = 'url'
+    const jwk = '0x12345'
+    const exp = 0
+    const nbf = 0
+    const jti = 'jwi'
+    const type = ['CustomType1', 'CustomType2']
+    const expectedPresentation = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
+      },
+      payload: {
+        jti: jti,
+        iss: iss,
+        aud: aud,
+        iat: Math.round(Date.now() / 1000),
+        exp: exp,
+        nbf: nbf,
+        vp: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentation',
+            'AlastriaVerifiablePresentation'
+          ].concat(type),
+          procUrl: procUrl,
+          procHash: procHash,
+          verifiableCredential: verificableCredential
+        }
+      }
+    }
+
+    const presentation = tokensFactory.tokens.createPresentation(
+      kid,
+      iss,
+      aud,
+      context,
+      verificableCredential,
+      procUrl,
+      procHash,
+      jwk,
+      type,
+      exp,
+      nbf,
+      jti
+    )
+
+    expect(JSON.stringify(presentation)).equal(
+      JSON.stringify(expectedPresentation)
+    )
+  })
+})
+
 describe('validate createAlastriaToken', function () {
   const kid =
     'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'

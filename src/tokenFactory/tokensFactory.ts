@@ -352,8 +352,8 @@ function createAIC(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid,
-      jwk: jwk
+      kid,
+      jwk
     },
     payload: {
       '@context': requiredContext.concat(context),

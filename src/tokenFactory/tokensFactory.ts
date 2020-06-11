@@ -1,5 +1,5 @@
-// import { default as _ } from 'jsontokens'
-const _: any = require('jsontokens')
+import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
+
 export const tokensFactory = {
   tokens: {
     decodeJWT: decodeJWT,
@@ -26,25 +26,25 @@ function createDID(network, proxyAddress, networkID) {
 export function decodeJWT(jwt) {
   var tokenData = null
   if (jwt) {
-    tokenData = _.decodeToken(jwt)
+    tokenData = decodeToken(jwt)
   }
   return tokenData
 }
 
 function signJWT(jwt, rawPrivateKey) {
   if (jwt.header && jwt.payload) {
-    return new _.TokenSigner('ES256K', rawPrivateKey).sign(
+    return new TokenSigner('ES256K', rawPrivateKey).sign(
       jwt.payload,
       false,
       jwt.header
     )
   } else {
-    return new _.TokenSigner('ES256K', rawPrivateKey).sign(jwt)
+    return new TokenSigner('ES256K', rawPrivateKey).sign(jwt)
   }
 }
 
 function verifyJWT(jwt, rawPublicKey) {
-  return new _.TokenVerifier('ES256K', rawPublicKey).verify(jwt)
+  return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 
 /** Creates an Alastria Session
@@ -58,7 +58,17 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param nbf not before
  * @param jti Unique token identifier
  */
-function createAlastriaSession(context: Array<string>, iss, kid, type: Array<string>, alastriaToken, exp: number, pku?: string, nbf?: number, jti?: string) {
+function createAlastriaSession(
+  context: Array<string>,
+  iss,
+  kid,
+  type: Array<string>,
+  alastriaToken,
+  exp: number,
+  pku?: string,
+  nbf?: number,
+  jti?: string
+) {
   const jwt = {
     header: {
       alg: 'ES256K',
@@ -67,10 +77,12 @@ function createAlastriaSession(context: Array<string>, iss, kid, type: Array<str
       kid: kid
     },
     payload: {
-      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-      type:['AlastriaSession'].concat(type),
+      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+        context
+      ),
+      type: ['AlastriaSession'].concat(type),
       iss: iss,
-      iat: Math.round(Date.now()/1000),
+      iat: Math.round(Date.now() / 1000),
       exp: exp,
       nbf: nbf,
       alastriaToken: alastriaToken,
@@ -177,12 +189,22 @@ function createPresentation(
   exp?: number,
   nbf?: number,
   jti?: String
-) {
-  const jwt = {
+  ) {
+    const requiredContext: String[] = [
+      'https://www.w3.org/2018/credentials/v1',
+      'https://alastria.github.io/identity/credentials/v1'
+    ]
+    const requiredTypes: String[] = [
+      'VerifiablePresentation',
+      'AlastriaVerifiablePresentation'
+    ]
+  
+    const jwt = {
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid
+      kid: kid,
+      jwk
     },
     payload: {
       jti: jti,
@@ -192,8 +214,8 @@ function createPresentation(
       exp: exp,
       nbf: nbf,
       vp: {
-        '@context': context,
-        type: ['VerifiablePresentation'],
+        '@context': requiredContext.concat(context),
+        type: requiredTypes.concat(type),
         procUrl: procUrl,
         procHash: procHash,
         verifiableCredential: verifiableCredential
@@ -206,7 +228,7 @@ function createPresentation(
 /** Creates a presentation request
  * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
  * @param iss DID representing the Alastria.ID of the entity that sent the Presentation Request
- * @param context
+ * @param context additional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is requesting
  * @param data It is the structure (JSON Array) that contains the actual Presentation Request data items
@@ -214,24 +236,38 @@ function createPresentation(
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  * @param cbu Callbacku url from the user
+ * @param jwk Public key
+ * @param type aditional types to "VerifiablePresentationRequest" and "AlastriaVerifiablePresentationRequest"
  */
 function createPresentationRequest(
   kid,
   iss,
-  context,
+  context: String[],
   procUrl,
   procHash,
   data,
   cbu,
+  jwk: String,
+  type: String[],
   exp?: number,
   nbf?: number,
   jti?: String
 ) {
+  const requiredContext: String[] = [
+    'https://www.w3.org/2018/credentials/v1',
+    'https://alastria.github.io/identity/credentials/v1'
+  ]
+  const requiredTypes: String[] = [
+    'VerifiablePresentationRequest',
+    'AlastriaVerifiablePresentationRequest'
+  ]
+
   const jwt = {
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid
+      kid: kid,
+      jwk
     },
     payload: {
       jti: jti,
@@ -241,8 +277,8 @@ function createPresentationRequest(
       nbf: nbf,
       cbu: cbu,
       pr: {
-        '@context': context,
-        type: ['VerifiablePresentationRequest'],
+        '@context': requiredContext.concat(context),
+        type: requiredTypes.concat(type),
         procUrl: procUrl,
         procHash: procHash,
         data: data

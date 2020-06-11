@@ -320,6 +320,13 @@ function createAIC(
   exp?: number, 
   nbf?: number
 ){
+  const requiredContext: String[] = [
+    'https://alastria.github.io/identity/artifacts/v1'
+  ]
+  const requiredTypes: String[] = [
+    'AlastriaIdentityCreation'
+  ]
+
   const jwt = {
     header: {
       alg: 'ES256K',
@@ -328,8 +335,8 @@ function createAIC(
       jwk: jwk
     },
     payload: {
-      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-      type: ['AlastriaIdentityCreation'].concat(type),
+      '@context': requiredContext.concat(context),
+      type: requiredTypes.concat(type),
       createAlastriaTX:createAlastriaTX,
       alastriaToken:alastriaToken,
       publicKey:publicKey,

@@ -191,6 +191,8 @@ export function createCredential(
  * @param verifiableCredential An array of verifiable credentials in JWT format, that is, signed JWTs where each verifiable credential is base64url encoded
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is receiving
+ * @param jwk Public key
+ * @param type aditional types to "VerifiablePresentation" and "AlastriaVerifiablePresentation"
  * @param exp identifies the expiration time on or after which the JWT (presentation) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
@@ -203,6 +205,8 @@ function createPresentation(
   verifiableCredential,
   procUrl,
   procHash,
+  jwk: String,
+  type: String[],
   exp?: number,
   nbf?: number,
   jti?: String
@@ -215,7 +219,7 @@ function createPresentation(
       'VerifiablePresentation',
       'AlastriaVerifiablePresentation'
     ]
-  
+
     const jwt = {
     header: {
       alg: 'ES256K',

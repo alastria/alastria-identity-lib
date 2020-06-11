@@ -144,7 +144,7 @@ function createAlastriaToken(
  * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the AlastriaID of the entity that issued the credential
  * @param sub DID representing the AlastriaID of the subject to which the credential refers to
- * @param context
+ * @param context aditional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param credentialSubject JSON array of credentials
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
@@ -155,13 +155,21 @@ export function createCredential(
   kid,
   iss,
   sub,
-  context,
+  context: Array<string>,
   credentialSubject,
   exp?: number,
   nbf?: number,
   jti?: String,
   jwk?: String
 ) {
+  const requiredContext: String[] = [
+    'https://www.w3.org/2018/credentials/v1',
+    'https://alastria.github.io/identity/credentials/v1'
+  ]
+  const requiredTypes: String[] = [
+    'VerifiableCredential', 'AlastriaVerifiableCredential'
+  ]
+
   const jwt = {
     header: {
       typ: 'JWT',
@@ -177,8 +185,8 @@ export function createCredential(
       exp: exp,
       nbf: nbf,
       vc: {
-        '@context': context,
-        type: ['VerifiableCredential', 'AlastriaExampleCredential'],
+        '@context': requiredContext.concat(context),
+        type: requiredTypes,
         credentialSubject: credentialSubject
       }
     }

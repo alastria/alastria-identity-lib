@@ -358,9 +358,9 @@ function createAIC(
     payload: {
       '@context': requiredContext.concat(context),
       type: requiredTypes.concat(type),
-      createAlastriaTX:createAlastriaTX,
-      alastriaToken:alastriaToken,
-      publicKey:publicKey,
+      createAlastriaTX,
+      alastriaToken,
+      publicKey,
       jti: jti,
       iat: iat,
       exp: exp,

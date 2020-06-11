@@ -69,6 +69,13 @@ function createAlastriaSession(
   nbf?: number,
   jti?: string
 ) {
+  const requiredContext: String[] = [
+    'https://alastria.github.io/identity/artifacts/v1'
+  ]
+  const requiredTypes: String[] = [
+    'AlastriaSession'
+  ]
+
   const jwt = {
     header: {
       alg: 'ES256K',
@@ -77,10 +84,8 @@ function createAlastriaSession(
       kid: kid
     },
     payload: {
-      '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
-        context
-      ),
-      type: ['AlastriaSession'].concat(type),
+      '@context': requiredContext.concat(context),
+      type: requiredTypes.concat(type),
       iss: iss,
       iat: Math.round(Date.now() / 1000),
       exp: exp,

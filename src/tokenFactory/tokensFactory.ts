@@ -189,12 +189,22 @@ function createPresentation(
   exp?: number,
   nbf?: number,
   jti?: String
-) {
-  const jwt = {
+  ) {
+    const requiredContext: String[] = [
+      'https://www.w3.org/2018/credentials/v1',
+      'https://alastria.github.io/identity/credentials/v1'
+    ]
+    const requiredTypes: String[] = [
+      'VerifiablePresentation',
+      'AlastriaVerifiablePresentation'
+    ]
+  
+    const jwt = {
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid
+      kid: kid,
+      jwk
     },
     payload: {
       jti: jti,
@@ -204,8 +214,8 @@ function createPresentation(
       exp: exp,
       nbf: nbf,
       vp: {
-        '@context': context,
-        type: ['VerifiablePresentation'],
+        '@context': requiredContext.concat(context),
+        type: requiredTypes.concat(type),
         procUrl: procUrl,
         procHash: procHash,
         verifiableCredential: verifiableCredential

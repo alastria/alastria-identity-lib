@@ -143,9 +143,9 @@ function createAlastriaToken(
 /** Creates an unsigned credential
  * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the AlastriaID of the entity that issued the credential
- * @param sub DID representing the AlastriaID of the subject to which the credential refers to
  * @param context aditional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param credentialSubject JSON array of credentials
+ * @param sub DID representing the AlastriaID of the subject to which the credential refers to
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific credential (it is NOT the identifier of the holder or of any other actor)
@@ -154,9 +154,9 @@ function createAlastriaToken(
 export function createCredential(
   kid,
   iss,
-  sub,
-  context: Array<string>,
   credentialSubject,
+  context: Array<string>,
+  sub?: String,
   exp?: number,
   nbf?: number,
   jti?: String,

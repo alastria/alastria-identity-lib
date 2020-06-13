@@ -154,8 +154,8 @@ function createAlastriaToken(
 export function createCredential(
   kid,
   iss,
-  credentialSubject,
   context: Array<string>,
+  credentialSubject,
   sub?: String,
   exp?: number,
   nbf?: number,

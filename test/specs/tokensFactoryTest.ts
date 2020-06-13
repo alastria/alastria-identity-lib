@@ -365,8 +365,8 @@ describe('validate createAlastriaToken', function () {
       const credential = tokensFactory.tokens.createCredential(
         kid,
         iss,
-        credentialSubject,
-        []
+        [],
+        credentialSubject
       )
   
       expect(JSON.stringify(credential)).equal(
@@ -407,8 +407,8 @@ describe('validate createAlastriaToken', function () {
       const credential = tokensFactory.tokens.createCredential(
         kid,
         iss,
-        credentialSubject,
         ['https://example.org/example'],
+        credentialSubject,
         sub,
         exp,
         nbf,

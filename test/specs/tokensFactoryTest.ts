@@ -327,4 +327,46 @@ describe('validate createAlastriaToken', function () {
       JSON.stringify(expectedAlastriaToken)
     )
   })
+
+  describe('validate createCredential', function () {
+    const kid =
+      'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'
+    const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+    const credentialSubject = { 'levelOfAssurance': 1}
+  
+    it('should create a valid credential with required params', () => {
+      const expectedCredencial = {
+        header: {
+          typ: 'JWT',
+          alg: 'ES256K',
+          kid
+        },
+        payload: {
+          iss,
+          iat: Math.round(Date.now() / 1000),
+          vc: {
+            '@context': [
+              'https://www.w3.org/2018/credentials/v1',
+              'https://alastria.github.io/identity/credentials/v1'
+            ],
+            type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
+            credentialSubject: {
+              'levelOfAssurance': 1
+            }
+          }
+        }
+      }
+  
+      const credential = tokensFactory.tokens.createCredential(
+        kid,
+        iss,
+        credentialSubject,
+        []
+      )
+  
+      expect(JSON.stringify(credential)).equal(
+        JSON.stringify(expectedCredencial)
+      )
+    })
+  })
 })

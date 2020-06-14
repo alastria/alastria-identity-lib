@@ -275,24 +275,24 @@ function createPresentation(
  * @param type aditional types to "VerifiablePresentationRequest" and "AlastriaVerifiablePresentationRequest"
  */
 function createPresentationRequest(
-  kid,
-  iss,
-  context: String[],
-  procUrl,
-  procHash,
-  data,
-  cbu,
-  jwk: String,
-  type: String[],
+  kid: string,
+  iss: string,
+  context: string[],
+  procUrl: string,
+  procHash: string,
+  data: object[],
+  cbu: string,
+  jwk: string,
+  type: string[],
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
+  const requiredTypes: string[] = [
     'VerifiablePresentationRequest',
     'AlastriaVerifiablePresentationRequest'
   ]
@@ -301,22 +301,22 @@ function createPresentationRequest(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid,
+      kid,
       jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
+      jti,
+      iss,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
-      cbu: cbu,
+      exp,
+      nbf,
+      cbu,
       pr: {
         '@context': requiredContext.concat(context),
         type: requiredTypes.concat(type),
-        procUrl: procUrl,
-        procHash: procHash,
-        data: data
+        procHash,
+        procUrl,
+        data
       }
     }
   }

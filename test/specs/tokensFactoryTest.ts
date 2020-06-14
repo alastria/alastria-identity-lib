@@ -117,32 +117,78 @@ describe('validate createAlastriaSession', function () {
 })
 
 describe('validate createPresentationRequest', function () {
-  it('should create a valid presentationRequest', () => {
-    const kid = 'did:ala:quor:redt:QmeeasCZ9jLbX...ueBJ7d7csxhb#keys-1'
-    const jwk = '0x12345'
-    const jti = 'empresa/alastria/presentationrequest/7864'
-    const iss = 'did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb'
-    const context = ['CustomContext1', 'CustomContext2']
-    const procUrl = 'url'
-    const procHash = 'url'
-    const data = [
-      {
-        '@context': 'https://alastria.github.io/identity/covid/v1',
-        levelOfAssurance: 3,
-        required: true,
-        field_name: 'covid_test'
+  const kid = 'did:ala:quor:redt:QmeeasCZ9jLbX...ueBJ7d7csxhb#keys-1'
+  const jwk = '0x12345'
+  const jti = 'empresa/alastria/presentationrequest/7864'
+  const iss = 'did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb'
+  const context = ['CustomContext1', 'CustomContext2']
+  const procUrl = 'url'
+  const procHash = 'url'
+  const data = [
+    {
+      '@context': 'https://alastria.github.io/identity/covid/v1',
+      levelOfAssurance: 3,
+      required: true,
+      field_name: 'covid_test'
+    },
+    {
+      '@context': 'https://alastria.github.io/identity/examples/v1',
+      levelOfAssurance: 2,
+      required: true,
+      field_name: 'phone_number'
+    }
+  ]
+  const exp = 1530735444
+  const nbf = 1525465044
+  const cbu = 'https://www.empresa.com/alastria/presentation?jtipr=7864'
+  const type = ['CustomType1', 'CustomType2']
+
+  it('should create a valid presentationRequest with required params', () => {
+    const expectedPresentationRequest = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
       },
-      {
-        '@context': 'https://alastria.github.io/identity/examples/v1',
-        levelOfAssurance: 2,
-        required: true,
-        field_name: 'phone_number'
+      payload: {
+        iss,
+        iat: Math.round(Date.now() / 1000),
+        cbu,
+        pr: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentationRequest',
+            'AlastriaVerifiablePresentationRequest'
+          ].concat(type),
+          procHash,
+          procUrl,
+          data
+        }
       }
-    ]
-    const exp = 1530735444
-    const nbf = 1525465044
-    const cbu = 'https://www.empresa.com/alastria/presentation?jtipr=7864'
-    const type = ['CustomType1', 'CustomType2']
+    }
+
+    const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+      kid,
+      iss,
+      context,
+      procUrl,
+      procHash,
+      data,
+      cbu,
+      jwk,
+      type
+    )
+
+    expect(JSON.stringify(presentationRequest)).equal(
+      JSON.stringify(expectedPresentationRequest)
+    )
+  })
+
+  it('should create a valid presentationRequest with all params', () => {
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',

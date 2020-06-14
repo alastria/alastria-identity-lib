@@ -212,24 +212,24 @@ export function createCredential(
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentation(
-  kid,
-  iss,
-  aud,
-  context,
-  verifiableCredential,
-  procUrl,
-  procHash,
-  jwk: String,
-  type: String[],
+  kid: string,
+  iss: string,
+  aud: string,
+  context: string[],
+  verifiableCredential: string[],
+  procUrl: string,
+  procHash: string,
+  jwk: string,
+  type: string[],
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
+  const requiredTypes: string[] = [
     'VerifiablePresentation',
     'AlastriaVerifiablePresentation'
   ]
@@ -238,22 +238,22 @@ function createPresentation(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid,
+      kid,
       jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
-      aud: aud,
+      jti,
+      iss,
+      aud,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
+      exp,
+      nbf,
       vp: {
         '@context': requiredContext.concat(context),
         type: requiredTypes.concat(type),
-        procUrl: procUrl,
-        procHash: procHash,
-        verifiableCredential: verifiableCredential
+        procHash,
+        procUrl,
+        verifiableCredential
       }
     }
   }

@@ -154,13 +154,14 @@ function createAlastriaToken(
 export function createCredential(
   kid: String,
   iss: String,
-  context: Array<string>,
+  context: String[],
   credentialSubject,
   sub?: String,
   exp?: number,
   nbf?: number,
   jti?: String,
-  jwk?: String
+  jwk?: String,
+  type?: String[]
 ) {
   const requiredContext: String[] = [
     'https://www.w3.org/2018/credentials/v1',
@@ -169,6 +170,10 @@ export function createCredential(
   const requiredTypes: String[] = [
     'VerifiableCredential', 'AlastriaVerifiableCredential'
   ]
+
+  context = (context != null) ? requiredContext.concat(context) : requiredContext
+  type = (type != null) ? requiredTypes.concat(type) : requiredTypes
+
 
   const jwt = {
     header: {
@@ -185,8 +190,8 @@ export function createCredential(
       exp,
       nbf,
       vc: {
-        '@context': requiredContext.concat(context),
-        type: requiredTypes,
+        '@context': context,
+        type,
         credentialSubject: credentialSubject
       }
     }

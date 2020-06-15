@@ -174,16 +174,16 @@ export function createCredential(
     header: {
       typ: 'JWT',
       alg: 'ES256K',
-      kid: kid,
-      jwk: jwk
+      kid,
+      jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
-      sub: sub,
+      jti,
+      iss,
+      sub,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
+      exp,
+      nbf,
       vc: {
         '@context': requiredContext.concat(context),
         type: requiredTypes,

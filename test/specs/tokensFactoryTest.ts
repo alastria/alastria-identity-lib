@@ -396,7 +396,7 @@ describe('validate createAlastriaToken', function () {
               'https://alastria.github.io/identity/credentials/v1',
               'https://example.org/example'
             ],
-            type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
+            type: ['VerifiableCredential', 'AlastriaVerifiableCredential', 'Test'],
             credentialSubject: {
               'levelOfAssurance': 1
             }
@@ -413,7 +413,8 @@ describe('validate createAlastriaToken', function () {
         exp,
         nbf,
         jti,
-        jwk
+        jwk,
+        ['Test']
       )
 
       expect(JSON.stringify(credential)).equal(

@@ -192,7 +192,7 @@ export function createCredential(
       vc: {
         '@context': context,
         type,
-        credentialSubject: credentialSubject
+        credentialSubject
       }
     }
   }

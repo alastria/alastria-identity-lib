@@ -152,8 +152,8 @@ function createAlastriaToken(
  * @param jwk optional field with the public key used to sign the JWT Header
  */
 export function createCredential(
-  kid,
-  iss,
+  kid: String,
+  iss: String,
   context: Array<string>,
   credentialSubject,
   sub?: String,

@@ -421,5 +421,50 @@ describe('validate createAlastriaToken', function () {
         JSON.stringify(expectedCredencial)
       )
     })
+
+    it('should create a valid credential when context and type are nulls or not present', () => {
+      const expectedCredencial = {
+        header: {
+          typ: 'JWT',
+          alg: 'ES256K',
+          kid,
+          jwk
+        },
+        payload: {
+          jti,
+          iss,
+          sub,
+          iat: Math.round(Date.now() / 1000),
+          exp,
+          nbf,
+          vc: {
+            '@context': [
+              'https://www.w3.org/2018/credentials/v1',
+              'https://alastria.github.io/identity/credentials/v1'
+            ],
+            type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
+            credentialSubject: {
+              'levelOfAssurance': 1
+            }
+          }
+        }
+      }
+
+      const credential = tokensFactory.tokens.createCredential(
+        kid,
+        iss,
+        null,
+        credentialSubject,
+        sub,
+        exp,
+        nbf,
+        jti,
+        jwk
+      )
+
+      expect(JSON.stringify(credential)).equal(
+        JSON.stringify(expectedCredencial)
+      )
+    })
   })
 })

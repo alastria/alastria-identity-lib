@@ -143,40 +143,56 @@ function createAlastriaToken(
 /** Creates an unsigned credential
  * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the AlastriaID of the entity that issued the credential
- * @param sub DID representing the AlastriaID of the subject to which the credential refers to
- * @param context
+ * @param context aditional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param credentialSubject JSON array of credentials
+ * @param sub DID representing the AlastriaID of the subject to which the credential refers to
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific credential (it is NOT the identifier of the holder or of any other actor)
+ * @param jwk optional field with the public key used to sign the JWT Header
  */
 export function createCredential(
-  kid,
-  iss,
-  sub,
-  context,
+  kid: String,
+  iss: String,
+  context: String[],
   credentialSubject,
+  sub?: String,
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: String,
+  jwk?: String,
+  type?: String[]
 ) {
+  const requiredContext: String[] = [
+    'https://www.w3.org/2018/credentials/v1',
+    'https://alastria.github.io/identity/credentials/v1'
+  ]
+  const requiredTypes: String[] = [
+    'VerifiableCredential', 'AlastriaVerifiableCredential'
+  ]
+
+  context = (context != null) ? requiredContext.concat(context) : requiredContext
+  type = (type != null) ? requiredTypes.concat(type) : requiredTypes
+
+
   const jwt = {
     header: {
       typ: 'JWT',
       alg: 'ES256K',
-      kid: kid
+      kid,
+      jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
-      sub: sub,
+      jti,
+      iss,
+      sub,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
+      exp,
+      nbf,
       vc: {
         '@context': context,
-        type: ['VerifiableCredential', 'AlastriaExampleCredential'],
-        credentialSubject: credentialSubject
+        type,
+        credentialSubject
       }
     }
   }

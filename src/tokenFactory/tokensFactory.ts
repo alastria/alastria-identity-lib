@@ -314,12 +314,12 @@ function PSMHash(web3, jwt, did) {
 /**
  * Create a JSON with the three params
  * @param kid indicates which key was used to secure (digitally sign) the JWT
- * @param jwk Public key
  * @param context additional urls to "https://alastria.github.io/identity/artifacts/v1"
  * @param type aditional types to "AlastriaIdentityCreation"
  * @param createAlastriaTX
  * @param alastriaToken Verified Alastria Token
  * @param publicKey Public key
+ * @param jwk Public key
  * @param jti unique aic identifier
  * @param iat
  * @param exp expiration time

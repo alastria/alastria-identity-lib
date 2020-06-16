@@ -468,3 +468,87 @@ describe('validate createAlastriaToken', function () {
     })
   })
 })
+
+describe('validate createAIC', function () {
+  const kid = 'kiss'
+  const context = ["https://w3id.org/did/v1","JWT"]
+  const type = ["type1","type2"]
+  const alastriaToken = 'data'
+  const publicKey = '0xA1B2C3'
+  const jwk = '0x12345'
+  const createAlastriaTX = '0xABCDEF'
+  const exp = 12345
+  const nbf = 12345
+  const iat = 12345
+  const jti = 'jwi'
+  
+  it('should return a valid AlastriaIdentityCreation with all the fields', function () {
+      const expectedAIC = {
+          header: {
+              alg: 'ES256K',
+              typ: 'JWT',
+              kid: kid,
+              jwk: jwk
+          },
+          payload: {
+              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
+              type: ['AlastriaIdentityCreation'].concat(type),
+              createAlastriaTX:createAlastriaTX,
+              alastriaToken:alastriaToken,
+              publicKey:publicKey,
+              jti: jti,
+              iat: iat,
+              exp: exp,
+              nbf: nbf
+          }
+      }
+
+      const aic = tokensFactory.tokens.createAIC(
+          kid,
+          context, 
+          type, 
+          createAlastriaTX, 
+          alastriaToken, 
+          publicKey, 
+          jwk,
+          jti, 
+          iat, 
+          exp, 
+          nbf
+      )
+
+      expect(JSON.stringify(aic)).equal(
+          JSON.stringify(expectedAIC)
+      )
+  });
+
+  it('should return a valid AlastriaIdentityCreation with only the mandatory fields', function () {
+      const expectedAIC = {
+          header: {
+              alg: 'ES256K',
+              typ: 'JWT',
+              kid: kid
+          },
+          payload: {
+              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
+              type: ['AlastriaIdentityCreation'].concat(type),
+              createAlastriaTX:createAlastriaTX,
+              alastriaToken:alastriaToken,
+              publicKey:publicKey
+          }
+      }
+
+      const aic = tokensFactory.tokens.createAIC(
+          kid,
+          context, 
+          type, 
+          createAlastriaTX, 
+          alastriaToken, 
+          publicKey
+      )
+  
+      expect(JSON.stringify(aic)).equal(
+          JSON.stringify(expectedAIC)
+      )
+  });
+})

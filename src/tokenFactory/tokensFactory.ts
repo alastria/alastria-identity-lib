@@ -72,9 +72,7 @@ function createAlastriaSession(
   const requiredContext: String[] = [
     'https://alastria.github.io/identity/artifacts/v1'
   ]
-  const requiredTypes: String[] = [
-    'AlastriaSession'
-  ]
+  const requiredTypes: String[] = ['AlastriaSession']
 
   const jwt = {
     header: {
@@ -226,17 +224,17 @@ function createPresentation(
   exp?: number,
   nbf?: number,
   jti?: String
-  ) {
-    const requiredContext: String[] = [
-      'https://www.w3.org/2018/credentials/v1',
-      'https://alastria.github.io/identity/credentials/v1'
-    ]
-    const requiredTypes: String[] = [
-      'VerifiablePresentation',
-      'AlastriaVerifiablePresentation'
-    ]
+) {
+  const requiredContext: String[] = [
+    'https://www.w3.org/2018/credentials/v1',
+    'https://alastria.github.io/identity/credentials/v1'
+  ]
+  const requiredTypes: String[] = [
+    'VerifiablePresentation',
+    'AlastriaVerifiablePresentation'
+  ]
 
-    const jwt = {
+  const jwt = {
     header: {
       alg: 'ES256K',
       typ: 'JWT',
@@ -331,15 +329,54 @@ function PSMHash(web3, jwt, did) {
 }
 /**
  * Create a JSON with the three params
+ * @param kid indicates which key was used to secure (digitally sign) the JWT
+ * @param context additional urls to "https://alastria.github.io/identity/artifacts/v1"
+ * @param type aditional types to "AlastriaIdentityCreation"
  * @param createAlastriaTX
- * @param alastriaToken
- * @param publicKey
+ * @param alastriaToken Verified Alastria Token
+ * @param publicKey Public key
+ * @param jwk Public key
+ * @param jti unique aic identifier
+ * @param iat
+ * @param exp expiration time
+ * @param nbf not before
  */
-function createAIC(createAlastriaTX, alastriaToken, publicKey) {
-  const aic = {
-    createAlastriaTX: createAlastriaTX,
-    alastriaToken: alastriaToken,
-    publicKey: publicKey
+function createAIC(
+  kid: string,
+  context: Array<string>,
+  type: Array<string>,
+  createAlastriaTX: string,
+  alastriaToken: string,
+  publicKey: string,
+  jwk?: string,
+  jti?: string,
+  iat?: number,
+  exp?: number,
+  nbf?: number
+) {
+  const requiredContext: String[] = [
+    'https://alastria.github.io/identity/artifacts/v1'
+  ]
+  const requiredTypes: String[] = ['AlastriaIdentityCreation']
+
+  const jwt = {
+    header: {
+      alg: 'ES256K',
+      typ: 'JWT',
+      kid,
+      jwk
+    },
+    payload: {
+      '@context': requiredContext.concat(context),
+      type: requiredTypes.concat(type),
+      createAlastriaTX,
+      alastriaToken,
+      publicKey,
+      jti: jti,
+      iat: iat,
+      exp: exp,
+      nbf: nbf
+    }
   }
-  return aic
+  return jwt
 }

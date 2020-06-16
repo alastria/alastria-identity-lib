@@ -1,4 +1,5 @@
 import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
+import { SignedToken } from 'jsontokens/lib/signer'
 
 export const tokensFactory = {
   tokens: {
@@ -16,14 +17,14 @@ export const tokensFactory = {
   }
 }
 
-function createDID(network, proxyAddress, networkID) {
+function createDID(network: string, proxyAddress: string, networkID: string) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
   return `did:ala:${network}:${networkID}:${proxyAddress}`
 }
 
 // Used by Service Provider or Subject Wallet
-export function decodeJWT(jwt) {
+export function decodeJWT(jwt: string) {
   var tokenData = null
   if (jwt) {
     tokenData = decodeToken(jwt)
@@ -31,7 +32,7 @@ export function decodeJWT(jwt) {
   return tokenData
 }
 
-function signJWT(jwt, rawPrivateKey) {
+function signJWT(jwt: SignedToken, rawPrivateKey: string) {
   if (jwt.header && jwt.payload) {
     return new TokenSigner('ES256K', rawPrivateKey).sign(
       jwt.payload,
@@ -43,7 +44,7 @@ function signJWT(jwt, rawPrivateKey) {
   }
 }
 
-function verifyJWT(jwt, rawPublicKey) {
+function verifyJWT(jwt: SignedToken, rawPublicKey: string) {
   return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 
@@ -59,20 +60,20 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param jti Unique token identifier
  */
 function createAlastriaSession(
-  context: Array<string>,
-  iss,
-  kid,
-  type: Array<string>,
-  alastriaToken,
+  context: string[],
+  iss: string,
+  kid: string,
+  type: string[],
+  alastriaToken: string,
   exp: number,
   pku?: string,
   nbf?: number,
   jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://alastria.github.io/identity/artifacts/v1'
   ]
-  const requiredTypes: String[] = ['AlastriaSession']
+  const requiredTypes: string[] = ['AlastriaSession']
 
   const jwt = {
     header: {
@@ -150,28 +151,28 @@ function createAlastriaToken(
  * @param jwk optional field with the public key used to sign the JWT Header
  */
 export function createCredential(
-  kid: String,
-  iss: String,
-  context: String[],
-  credentialSubject,
-  sub?: String,
+  kid: string,
+  iss: string,
+  context: string[],
+  credentialSubject: object,
+  sub?: string,
   exp?: number,
   nbf?: number,
-  jti?: String,
-  jwk?: String,
-  type?: String[]
+  jti?: string,
+  jwk?: string,
+  type?: string[]
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
-    'VerifiableCredential', 'AlastriaVerifiableCredential'
+  const requiredTypes: string[] = [
+    'VerifiableCredential',
+    'AlastriaVerifiableCredential'
   ]
 
-  context = (context != null) ? requiredContext.concat(context) : requiredContext
-  type = (type != null) ? requiredTypes.concat(type) : requiredTypes
-
+  context = context ? requiredContext.concat(context) : requiredContext
+  type = type ? requiredTypes.concat(type) : requiredTypes
 
   const jwt = {
     header: {
@@ -342,8 +343,8 @@ function PSMHash(web3, jwt, did) {
  * @param nbf not before
  */
 function createAIC(
-  context: Array<string>,
-  type: Array<string>,
+  context: string[],
+  type: string[],
   createAlastriaTX: string,
   alastriaToken: string,
   publicKey: string,
@@ -354,10 +355,10 @@ function createAIC(
   exp?: number,
   nbf?: number
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://alastria.github.io/identity/artifacts/v1'
   ]
-  const requiredTypes: String[] = ['AlastriaIdentityCreation']
+  const requiredTypes: string[] = ['AlastriaIdentityCreation']
 
   const jwt = {
     header: {

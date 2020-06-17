@@ -26,11 +26,12 @@ export function delegateCall(web3, _destination, _value, _data) {
  */
 export function prepareAlastriaID(web3, signAddress) {
   const transaction = Object.assign({}, config.basicTransaction)
-  transaction.to = config.alastriaIdentityManager
-  transaction.data = web3.eth.abi.encodeFunctionCall(
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.prepareAlastriaID,
     [signAddress]
   )
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction
 }
@@ -348,4 +349,11 @@ export function entitiesList(web3) {
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction
+}
+
+function delegated(web3, delegatedData) {
+  return web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaIdentityManager.delegateCall,
+    [config.alastriaIdentityManager, 0, delegatedData]
+  )
 }

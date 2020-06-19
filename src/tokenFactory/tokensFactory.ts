@@ -342,12 +342,12 @@ function PSMHash(web3, jwt, did) {
  * @param nbf not before
  */
 function createAIC(
-  kid: string,
   context: Array<string>,
   type: Array<string>,
   createAlastriaTX: string,
   alastriaToken: string,
   publicKey: string,
+  kid?: string,
   jwk?: string,
   jti?: string,
   iat?: number,

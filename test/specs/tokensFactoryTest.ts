@@ -504,12 +504,12 @@ describe('validate createAIC', function () {
       }
 
       const aic = tokensFactory.tokens.createAIC(
-          kid,
           context, 
           type, 
           createAlastriaTX, 
           alastriaToken, 
-          publicKey, 
+          publicKey,
+          kid, 
           jwk,
           jti, 
           iat, 
@@ -526,8 +526,7 @@ describe('validate createAIC', function () {
       const expectedAIC = {
           header: {
               alg: 'ES256K',
-              typ: 'JWT',
-              kid: kid
+              typ: 'JWT'
           },
           payload: {
               '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
@@ -539,7 +538,6 @@ describe('validate createAIC', function () {
       }
 
       const aic = tokensFactory.tokens.createAIC(
-          kid,
           context, 
           type, 
           createAlastriaTX, 

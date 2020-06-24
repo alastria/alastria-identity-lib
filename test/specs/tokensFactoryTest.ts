@@ -117,19 +117,78 @@ describe('validate createAlastriaSession', function () {
 })
 
 describe('validate createPresentationRequest', function () {
-  it('should create a valid presentationRequest', () => {
-    const kid = 'kiss'
-    const iss = 'iss'
-    const context = ['CustomContext1', 'CustomContext2']
-    const procUrl = 'url'
-    const procHash = 'url'
-    const data = 'data'
-    const jwk = '0x12345'
-    const exp = 0
-    const nbf = 0
-    const jti = 'jwi'
-    const cbu = 'url'
-    const type = ['CustomType1', 'CustomType2']
+  const kid = 'did:ala:quor:redt:QmeeasCZ9jLbX...ueBJ7d7csxhb#keys-1'
+  const jwk = '0x12345'
+  const jti = 'empresa/alastria/presentationrequest/7864'
+  const iss = 'did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb'
+  const context = ['CustomContext1', 'CustomContext2']
+  const procUrl = 'url'
+  const procHash = 'url'
+  const data = [
+    {
+      '@context': 'https://alastria.github.io/identity/covid/v1',
+      levelOfAssurance: 3,
+      required: true,
+      field_name: 'covid_test'
+    },
+    {
+      '@context': 'https://alastria.github.io/identity/examples/v1',
+      levelOfAssurance: 2,
+      required: true,
+      field_name: 'phone_number'
+    }
+  ]
+  const exp = 1530735444
+  const nbf = 1525465044
+  const cbu = 'https://www.empresa.com/alastria/presentation?jtipr=7864'
+  const type = ['CustomType1', 'CustomType2']
+
+  it('should create a valid presentationRequest with required params', () => {
+    const expectedPresentationRequest = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
+      },
+      payload: {
+        iss,
+        iat: Math.round(Date.now() / 1000),
+        cbu,
+        pr: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentationRequest',
+            'AlastriaVerifiablePresentationRequest'
+          ].concat(type),
+          procHash,
+          procUrl,
+          data
+        }
+      }
+    }
+
+    const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+      kid,
+      iss,
+      context,
+      procUrl,
+      procHash,
+      data,
+      cbu,
+      jwk,
+      type
+    )
+
+    expect(JSON.stringify(presentationRequest)).equal(
+      JSON.stringify(expectedPresentationRequest)
+    )
+  })
+
+  it('should create a valid presentationRequest with all params', () => {
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',
@@ -153,8 +212,8 @@ describe('validate createPresentationRequest', function () {
             'VerifiablePresentationRequest',
             'AlastriaVerifiablePresentationRequest'
           ].concat(type),
-          procUrl,
           procHash,
+          procUrl,
           data
         }
       }
@@ -182,19 +241,20 @@ describe('validate createPresentationRequest', function () {
 })
 
 describe('validate createPresentation', function () {
-  it('should create a valid presentationRequest', () => {
-    const kid = 'kiss'
-    const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const aud = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const context = ['CustomContext1', 'CustomContext2']
-    const verificableCredential = ['eyJ0eXAi']
-    const procUrl = 'url'
-    const procHash = 'url'
-    const jwk = '0x12345'
-    const exp = 0
-    const nbf = 0
-    const jti = 'jwi'
-    const type = ['CustomType1', 'CustomType2']
+  const kid = 'kiss'
+  const jwk = '0x12345'
+  const jti = 'https://www.empresa.com/alastria/credentials/3732'
+  const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+  const aud = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+  const exp = 1530735444
+  const nbf = 1525465044
+  const context = ['CustomContext1', 'CustomContext2']
+  const type = ['CustomType1', 'CustomType2']
+  const procHash = 'H398sjHdkldjUYn475n'
+  const procUrl = 'https://www.empresa.com/alastria/businessprocess/4583'
+  const verifiableCredential = ['eyJ0eXAi', 'eyJ0eXAi']
+
+  it('should create a valid presentationRequest with required params', () => {
     const expectedPresentation = {
       header: {
         alg: 'ES256K',
@@ -203,12 +263,9 @@ describe('validate createPresentation', function () {
         jwk
       },
       payload: {
-        jti: jti,
-        iss: iss,
-        aud: aud,
+        iss,
+        aud,
         iat: Math.round(Date.now() / 1000),
-        exp: exp,
-        nbf: nbf,
         vp: {
           '@context': [
             'https://www.w3.org/2018/credentials/v1',
@@ -218,9 +275,9 @@ describe('validate createPresentation', function () {
             'VerifiablePresentation',
             'AlastriaVerifiablePresentation'
           ].concat(type),
-          procUrl: procUrl,
-          procHash: procHash,
-          verifiableCredential: verificableCredential
+          procHash,
+          procUrl,
+          verifiableCredential
         }
       }
     }
@@ -230,7 +287,55 @@ describe('validate createPresentation', function () {
       iss,
       aud,
       context,
-      verificableCredential,
+      verifiableCredential,
+      procUrl,
+      procHash,
+      jwk,
+      type
+    )
+
+    expect(JSON.stringify(presentation)).equal(
+      JSON.stringify(expectedPresentation)
+    )
+  })
+
+  it('should create a valid presentationRequest with all params', () => {
+    const expectedPresentation = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid,
+        jwk
+      },
+      payload: {
+        jti,
+        iss,
+        aud,
+        iat: Math.round(Date.now() / 1000),
+        exp,
+        nbf,
+        vp: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentation',
+            'AlastriaVerifiablePresentation'
+          ].concat(type),
+          procHash,
+          procUrl,
+          verifiableCredential
+        }
+      }
+    }
+
+    const presentation = tokensFactory.tokens.createPresentation(
+      kid,
+      iss,
+      aud,
+      context,
+      verifiableCredential,
       procUrl,
       procHash,
       jwk,

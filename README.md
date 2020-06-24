@@ -54,17 +54,6 @@ You can execute some of our examples by running:
 node file_name.js
 ```
 
-## Dependencies
-
-This library is using functionality from others.
-
-| Lib            | URL                                         |
-| :------------- | :------------------------------------------ |
-| web3           | https://www.npmjs.com/package/web3          |
-| web3-utils     | https://www.npmjs.com/package/web3-utils    |
-| ethereumjs-tx  | https://www.npmjs.com/package/ethereumjs-tx |
-| jsontokens-npm | https://www.npmjs.com/package/jsontokens    |
-
 Or create yours.
 
 ## Run test suite

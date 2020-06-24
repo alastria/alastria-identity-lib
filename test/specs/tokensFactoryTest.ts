@@ -198,9 +198,7 @@ describe('validate createPresentation', function () {
     const expectedPresentation = {
       header: {
         alg: 'ES256K',
-        typ: 'JWT',
-        kid,
-        jwk
+        typ: 'JWT'
       },
       payload: {
         jti: jti,

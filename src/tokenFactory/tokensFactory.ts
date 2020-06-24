@@ -262,21 +262,20 @@ function createPresentation(
 }
 
 /** Creates a presentation request
- * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
  * @param iss DID representing the Alastria.ID of the entity that sent the Presentation Request
  * @param context additional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is requesting
  * @param data It is the structure (JSON Array) that contains the actual Presentation Request data items
- * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
- * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
- * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  * @param cbu Callbacku url from the user
  * @param jwk Public key
  * @param type aditional types to "VerifiablePresentationRequest" and "AlastriaVerifiablePresentationRequest"
+ * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
+ * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
+ * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
+ * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentationRequest(
-  kid: string,
   iss: string,
   context: string[],
   procUrl: string,
@@ -285,6 +284,7 @@ function createPresentationRequest(
   cbu: string,
   jwk: string,
   type: string[],
+  kid?: string,
   exp?: number,
   nbf?: number,
   jti?: string

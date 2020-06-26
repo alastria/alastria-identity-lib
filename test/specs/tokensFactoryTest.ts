@@ -444,8 +444,7 @@ describe('validate createAlastriaToken', function () {
       const expectedCredencial = {
         header: {
           typ: 'JWT',
-          alg: 'ES256K',
-          kid
+          alg: 'ES256K'
         },
         payload: {
           iss,
@@ -466,8 +465,7 @@ describe('validate createAlastriaToken', function () {
       const credential = tokensFactory.tokens.createCredential(
         iss,
         [],
-        credentialSubject,
-        kid
+        credentialSubject
       )
 
       expect(JSON.stringify(credential)).equal(

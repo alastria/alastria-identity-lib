@@ -147,9 +147,7 @@ describe('validate createPresentationRequest', function () {
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',
-        typ: 'JWT',
-        kid,
-        jwk
+        typ: 'JWT'
       },
       payload: {
         iss,
@@ -172,14 +170,12 @@ describe('validate createPresentationRequest', function () {
     }
 
     const presentationRequest = tokensFactory.tokens.createPresentationRequest(
-      kid,
       iss,
       context,
       procUrl,
       procHash,
       data,
       cbu,
-      jwk,
       type
     )
 
@@ -220,15 +216,15 @@ describe('validate createPresentationRequest', function () {
     }
 
     const presentationRequest = tokensFactory.tokens.createPresentationRequest(
-      kid,
       iss,
       context,
       procUrl,
       procHash,
       data,
       cbu,
-      jwk,
       type,
+      kid,
+      jwk,
       exp,
       nbf,
       jti
@@ -437,13 +433,13 @@ describe('validate createAlastriaToken', function () {
     const kid =
       'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'
     const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const credentialSubject = { 'levelOfAssurance': 1}
+    const credentialSubject = { levelOfAssurance: 1 }
     const exp = 1000
     const nbf = 1000
     const jti = 'http://example.edu/credentials/3732'
     const jwk = 'lkdjeo2n2__23oisd'
     const sub = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-  
+
     it('should create a valid credential with required params', () => {
       const expectedCredencial = {
         header: {
@@ -461,24 +457,23 @@ describe('validate createAlastriaToken', function () {
             ],
             type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
       }
-  
+
       const credential = tokensFactory.tokens.createCredential(
         kid,
         iss,
         [],
         credentialSubject
       )
-  
+
       expect(JSON.stringify(credential)).equal(
         JSON.stringify(expectedCredencial)
       )
     })
-  
 
     it('should create a valid credential with all params', () => {
       const expectedCredencial = {
@@ -501,9 +496,13 @@ describe('validate createAlastriaToken', function () {
               'https://alastria.github.io/identity/credentials/v1',
               'https://example.org/example'
             ],
-            type: ['VerifiableCredential', 'AlastriaVerifiableCredential', 'Test'],
+            type: [
+              'VerifiableCredential',
+              'AlastriaVerifiableCredential',
+              'Test'
+            ],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
@@ -549,7 +548,7 @@ describe('validate createAlastriaToken', function () {
             ],
             type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
@@ -576,8 +575,8 @@ describe('validate createAlastriaToken', function () {
 
 describe('validate createAIC', function () {
   const kid = 'kiss'
-  const context = ["https://w3id.org/did/v1","JWT"]
-  const type = ["type1","type2"]
+  const context = ['https://w3id.org/did/v1', 'JWT']
+  const type = ['type1', 'type2']
   const alastriaToken = 'data'
   const publicKey = '0xA1B2C3'
   const jwk = '0x12345'
@@ -586,72 +585,72 @@ describe('validate createAIC', function () {
   const nbf = 12345
   const iat = 12345
   const jti = 'jwi'
-  
+
   it('should return a valid AlastriaIdentityCreation with all the fields', function () {
-      const expectedAIC = {
-          header: {
-              alg: 'ES256K',
-              typ: 'JWT',
-              kid: kid,
-              jwk: jwk
-          },
-          payload: {
-              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-              type: ['AlastriaIdentityCreation'].concat(type),
-              createAlastriaTX:createAlastriaTX,
-              alastriaToken:alastriaToken,
-              publicKey:publicKey,
-              jti: jti,
-              iat: iat,
-              exp: exp,
-              nbf: nbf
-          }
+    const expectedAIC = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid: kid,
+        jwk: jwk
+      },
+      payload: {
+        '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+          context
+        ),
+        type: ['AlastriaIdentityCreation'].concat(type),
+        createAlastriaTX: createAlastriaTX,
+        alastriaToken: alastriaToken,
+        publicKey: publicKey,
+        jti: jti,
+        iat: iat,
+        exp: exp,
+        nbf: nbf
       }
+    }
 
-      const aic = tokensFactory.tokens.createAIC(
-          context, 
-          type, 
-          createAlastriaTX, 
-          alastriaToken, 
-          publicKey,
-          kid, 
-          jwk,
-          jti, 
-          iat, 
-          exp, 
-          nbf
-      )
+    const aic = tokensFactory.tokens.createAIC(
+      context,
+      type,
+      createAlastriaTX,
+      alastriaToken,
+      publicKey,
+      kid,
+      jwk,
+      jti,
+      iat,
+      exp,
+      nbf
+    )
 
-      expect(JSON.stringify(aic)).equal(
-          JSON.stringify(expectedAIC)
-      )
-  });
+    expect(JSON.stringify(aic)).equal(JSON.stringify(expectedAIC))
+  })
 
   it('should return a valid AlastriaIdentityCreation with only the mandatory fields', function () {
-      const expectedAIC = {
-          header: {
-              alg: 'ES256K',
-              typ: 'JWT'
-          },
-          payload: {
-              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-              type: ['AlastriaIdentityCreation'].concat(type),
-              createAlastriaTX:createAlastriaTX,
-              alastriaToken:alastriaToken,
-              publicKey:publicKey
-          }
+    const expectedAIC = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT'
+      },
+      payload: {
+        '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+          context
+        ),
+        type: ['AlastriaIdentityCreation'].concat(type),
+        createAlastriaTX: createAlastriaTX,
+        alastriaToken: alastriaToken,
+        publicKey: publicKey
       }
+    }
 
-      const aic = tokensFactory.tokens.createAIC(
-          context, 
-          type, 
-          createAlastriaTX, 
-          alastriaToken, 
-          publicKey
-      )
-  
-      expect(JSON.stringify(aic)).equal(
-          JSON.stringify(expectedAIC)
-      )
-  });
+    const aic = tokensFactory.tokens.createAIC(
+      context,
+      type,
+      createAlastriaTX,
+      alastriaToken,
+      publicKey
+    )
+
+    expect(JSON.stringify(aic)).equal(JSON.stringify(expectedAIC))
+  })
 })

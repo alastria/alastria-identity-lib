@@ -444,8 +444,7 @@ describe('validate createAlastriaToken', function () {
       const expectedCredencial = {
         header: {
           typ: 'JWT',
-          alg: 'ES256K',
-          kid
+          alg: 'ES256K'
         },
         payload: {
           iss,
@@ -464,7 +463,6 @@ describe('validate createAlastriaToken', function () {
       }
 
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         [],
         credentialSubject
@@ -509,10 +507,10 @@ describe('validate createAlastriaToken', function () {
       }
 
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         ['https://example.org/example'],
         credentialSubject,
+        kid,
         sub,
         exp,
         nbf,
@@ -555,10 +553,10 @@ describe('validate createAlastriaToken', function () {
       }
 
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         null,
         credentialSubject,
+        kid,
         sub,
         exp,
         nbf,

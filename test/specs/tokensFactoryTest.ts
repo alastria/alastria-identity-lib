@@ -255,8 +255,7 @@ describe('validate createPresentation', function () {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
-        kid,
-        jwk
+        kid
       },
       payload: {
         iss,
@@ -286,7 +285,6 @@ describe('validate createPresentation', function () {
       verifiableCredential,
       procUrl,
       procHash,
-      jwk,
       type
     )
 
@@ -334,8 +332,8 @@ describe('validate createPresentation', function () {
       verifiableCredential,
       procUrl,
       procHash,
-      jwk,
       type,
+      jwk,
       exp,
       nbf,
       jti

@@ -213,7 +213,6 @@ export function createCredential(
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentation(
-  kid: string,
   iss: string,
   aud: string,
   context: string[],
@@ -221,6 +220,7 @@ function createPresentation(
   procUrl: string,
   procHash: string,
   type: string[],
+  kid?: string,
   jwk?: string,
   exp?: number,
   nbf?: number,

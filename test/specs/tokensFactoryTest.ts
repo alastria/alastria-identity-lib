@@ -254,8 +254,7 @@ describe('validate createPresentation', function () {
     const expectedPresentation = {
       header: {
         alg: 'ES256K',
-        typ: 'JWT',
-        kid
+        typ: 'JWT'
       },
       payload: {
         iss,
@@ -278,7 +277,6 @@ describe('validate createPresentation', function () {
     }
 
     const presentation = tokensFactory.tokens.createPresentation(
-      kid,
       iss,
       aud,
       context,
@@ -325,7 +323,6 @@ describe('validate createPresentation', function () {
     }
 
     const presentation = tokensFactory.tokens.createPresentation(
-      kid,
       iss,
       aud,
       context,
@@ -333,6 +330,7 @@ describe('validate createPresentation', function () {
       procUrl,
       procHash,
       type,
+      kid,
       jwk,
       exp,
       nbf,

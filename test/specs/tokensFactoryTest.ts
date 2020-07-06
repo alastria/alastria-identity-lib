@@ -117,19 +117,74 @@ describe('validate createAlastriaSession', function () {
 })
 
 describe('validate createPresentationRequest', function () {
-  it('should create a valid presentationRequest', () => {
-    const kid = 'kiss'
-    const iss = 'iss'
-    const context = ['CustomContext1', 'CustomContext2']
-    const procUrl = 'url'
-    const procHash = 'url'
-    const data = 'data'
-    const jwk = '0x12345'
-    const exp = 0
-    const nbf = 0
-    const jti = 'jwi'
-    const cbu = 'url'
-    const type = ['CustomType1', 'CustomType2']
+  const kid = 'did:ala:quor:redt:QmeeasCZ9jLbX...ueBJ7d7csxhb#keys-1'
+  const jwk = '0x12345'
+  const jti = 'empresa/alastria/presentationrequest/7864'
+  const iss = 'did:alastria:quorum:testnet1:QmeeasCZ9jLbX...ueBJ7d7csxhb'
+  const context = ['CustomContext1', 'CustomContext2']
+  const procUrl = 'url'
+  const procHash = 'url'
+  const data = [
+    {
+      '@context': 'https://alastria.github.io/identity/covid/v1',
+      levelOfAssurance: 3,
+      required: true,
+      field_name: 'covid_test'
+    },
+    {
+      '@context': 'https://alastria.github.io/identity/examples/v1',
+      levelOfAssurance: 2,
+      required: true,
+      field_name: 'phone_number'
+    }
+  ]
+  const exp = 1530735444
+  const nbf = 1525465044
+  const cbu = 'https://www.empresa.com/alastria/presentation?jtipr=7864'
+  const type = ['CustomType1', 'CustomType2']
+
+  it('should create a valid presentationRequest with required params', () => {
+    const expectedPresentationRequest = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT'
+      },
+      payload: {
+        iss,
+        iat: Math.round(Date.now() / 1000),
+        cbu,
+        pr: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentationRequest',
+            'AlastriaVerifiablePresentationRequest'
+          ].concat(type),
+          procHash,
+          procUrl,
+          data
+        }
+      }
+    }
+
+    const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+      iss,
+      context,
+      procUrl,
+      procHash,
+      data,
+      cbu,
+      type
+    )
+
+    expect(JSON.stringify(presentationRequest)).equal(
+      JSON.stringify(expectedPresentationRequest)
+    )
+  })
+
+  it('should create a valid presentationRequest with all params', () => {
     const expectedPresentationRequest = {
       header: {
         alg: 'ES256K',
@@ -153,23 +208,23 @@ describe('validate createPresentationRequest', function () {
             'VerifiablePresentationRequest',
             'AlastriaVerifiablePresentationRequest'
           ].concat(type),
-          procUrl,
           procHash,
+          procUrl,
           data
         }
       }
     }
 
     const presentationRequest = tokensFactory.tokens.createPresentationRequest(
-      kid,
       iss,
       context,
       procUrl,
       procHash,
       data,
       cbu,
-      jwk,
       type,
+      kid,
+      jwk,
       exp,
       nbf,
       jti
@@ -182,31 +237,30 @@ describe('validate createPresentationRequest', function () {
 })
 
 describe('validate createPresentation', function () {
-  it('should create a valid presentationRequest', () => {
-    const kid = 'kiss'
-    const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const aud = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const context = ['CustomContext1', 'CustomContext2']
-    const verificableCredential = ['eyJ0eXAi']
-    const procUrl = 'url'
-    const procHash = 'url'
-    const jwk = '0x12345'
-    const exp = 0
-    const nbf = 0
-    const jti = 'jwi'
-    const type = ['CustomType1', 'CustomType2']
+  const kid = 'kiss'
+  const jwk = '0x12345'
+  const jti = 'https://www.empresa.com/alastria/credentials/3732'
+  const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+  const aud = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
+  const exp = 1530735444
+  const nbf = 1525465044
+  const context = ['CustomContext1', 'CustomContext2']
+  const type = ['CustomType1', 'CustomType2']
+  const procHash = 'H398sjHdkldjUYn475n'
+  const procUrl = 'https://www.empresa.com/alastria/businessprocess/4583'
+  const verifiableCredential = ['eyJ0eXAi', 'eyJ0eXAi']
+
+  it('should create a valid presentationRequest with required params', () => {
     const expectedPresentation = {
       header: {
         alg: 'ES256K',
-        typ: 'JWT'
+        typ: 'JWT',
+        kid
       },
       payload: {
-        jti: jti,
-        iss: iss,
-        aud: aud,
+        iss,
+        aud,
         iat: Math.round(Date.now() / 1000),
-        exp: exp,
-        nbf: nbf,
         vp: {
           '@context': [
             'https://www.w3.org/2018/credentials/v1',
@@ -216,9 +270,9 @@ describe('validate createPresentation', function () {
             'VerifiablePresentation',
             'AlastriaVerifiablePresentation'
           ].concat(type),
-          procUrl: procUrl,
-          procHash: procHash,
-          verifiableCredential: verificableCredential
+          procHash,
+          procUrl,
+          verifiableCredential
         }
       }
     }
@@ -228,11 +282,56 @@ describe('validate createPresentation', function () {
       iss,
       aud,
       context,
-      verificableCredential,
+      verifiableCredential,
       procUrl,
       procHash,
-      jwk,
+      type
+    )
+
+    expect(JSON.stringify(presentation)).equal(
+      JSON.stringify(expectedPresentation)
+    )
+  })
+
+  it('should create a valid presentationRequest with all params', () => {
+    const expectedPresentation = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT'
+      },
+      payload: {
+        jti,
+        iss,
+        aud,
+        iat: Math.round(Date.now() / 1000),
+        exp,
+        nbf,
+        vp: {
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://alastria.github.io/identity/credentials/v1'
+          ].concat(context),
+          type: [
+            'VerifiablePresentation',
+            'AlastriaVerifiablePresentation'
+          ].concat(type),
+          procHash,
+          procUrl,
+          verifiableCredential
+        }
+      }
+    }
+
+    const presentation = tokensFactory.tokens.createPresentation(
+      kid,
+      iss,
+      aud,
+      context,
+      verifiableCredential,
+      procUrl,
+      procHash,
       type,
+      jwk,
       exp,
       nbf,
       jti
@@ -330,19 +429,18 @@ describe('validate createAlastriaToken', function () {
     const kid =
       'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'
     const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const credentialSubject = { 'levelOfAssurance': 1}
+    const credentialSubject = { levelOfAssurance: 1 }
     const exp = 1000
     const nbf = 1000
     const jti = 'http://example.edu/credentials/3732'
     const jwk = 'lkdjeo2n2__23oisd'
     const sub = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-  
+
     it('should create a valid credential with required params', () => {
       const expectedCredencial = {
         header: {
           typ: 'JWT',
-          alg: 'ES256K',
-          kid
+          alg: 'ES256K'
         },
         payload: {
           iss,
@@ -354,24 +452,22 @@ describe('validate createAlastriaToken', function () {
             ],
             type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
       }
-  
+
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         [],
         credentialSubject
       )
-  
+
       expect(JSON.stringify(credential)).equal(
         JSON.stringify(expectedCredencial)
       )
     })
-  
 
     it('should create a valid credential with all params', () => {
       const expectedCredencial = {
@@ -394,19 +490,23 @@ describe('validate createAlastriaToken', function () {
               'https://alastria.github.io/identity/credentials/v1',
               'https://example.org/example'
             ],
-            type: ['VerifiableCredential', 'AlastriaVerifiableCredential', 'Test'],
+            type: [
+              'VerifiableCredential',
+              'AlastriaVerifiableCredential',
+              'Test'
+            ],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
       }
 
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         ['https://example.org/example'],
         credentialSubject,
+        kid,
         sub,
         exp,
         nbf,
@@ -442,17 +542,17 @@ describe('validate createAlastriaToken', function () {
             ],
             type: ['VerifiableCredential', 'AlastriaVerifiableCredential'],
             credentialSubject: {
-              'levelOfAssurance': 1
+              levelOfAssurance: 1
             }
           }
         }
       }
 
       const credential = tokensFactory.tokens.createCredential(
-        kid,
         iss,
         null,
         credentialSubject,
+        kid,
         sub,
         exp,
         nbf,
@@ -469,8 +569,8 @@ describe('validate createAlastriaToken', function () {
 
 describe('validate createAIC', function () {
   const kid = 'kiss'
-  const context = ["https://w3id.org/did/v1","JWT"]
-  const type = ["type1","type2"]
+  const context = ['https://w3id.org/did/v1', 'JWT']
+  const type = ['type1', 'type2']
   const alastriaToken = 'data'
   const publicKey = '0xA1B2C3'
   const jwk = '0x12345'
@@ -479,72 +579,72 @@ describe('validate createAIC', function () {
   const nbf = 12345
   const iat = 12345
   const jti = 'jwi'
-  
+
   it('should return a valid AlastriaIdentityCreation with all the fields', function () {
-      const expectedAIC = {
-          header: {
-              alg: 'ES256K',
-              typ: 'JWT',
-              kid: kid,
-              jwk: jwk
-          },
-          payload: {
-              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-              type: ['AlastriaIdentityCreation'].concat(type),
-              createAlastriaTX:createAlastriaTX,
-              alastriaToken:alastriaToken,
-              publicKey:publicKey,
-              jti: jti,
-              iat: iat,
-              exp: exp,
-              nbf: nbf
-          }
+    const expectedAIC = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT',
+        kid: kid,
+        jwk: jwk
+      },
+      payload: {
+        '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+          context
+        ),
+        type: ['AlastriaIdentityCreation'].concat(type),
+        createAlastriaTX: createAlastriaTX,
+        alastriaToken: alastriaToken,
+        publicKey: publicKey,
+        jti: jti,
+        iat: iat,
+        exp: exp,
+        nbf: nbf
       }
+    }
 
-      const aic = tokensFactory.tokens.createAIC(
-          context, 
-          type, 
-          createAlastriaTX, 
-          alastriaToken, 
-          publicKey,
-          kid, 
-          jwk,
-          jti, 
-          iat, 
-          exp, 
-          nbf
-      )
+    const aic = tokensFactory.tokens.createAIC(
+      context,
+      type,
+      createAlastriaTX,
+      alastriaToken,
+      publicKey,
+      kid,
+      jwk,
+      jti,
+      iat,
+      exp,
+      nbf
+    )
 
-      expect(JSON.stringify(aic)).equal(
-          JSON.stringify(expectedAIC)
-      )
-  });
+    expect(JSON.stringify(aic)).equal(JSON.stringify(expectedAIC))
+  })
 
   it('should return a valid AlastriaIdentityCreation with only the mandatory fields', function () {
-      const expectedAIC = {
-          header: {
-              alg: 'ES256K',
-              typ: 'JWT'
-          },
-          payload: {
-              '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(context),
-              type: ['AlastriaIdentityCreation'].concat(type),
-              createAlastriaTX:createAlastriaTX,
-              alastriaToken:alastriaToken,
-              publicKey:publicKey
-          }
+    const expectedAIC = {
+      header: {
+        alg: 'ES256K',
+        typ: 'JWT'
+      },
+      payload: {
+        '@context': ['https://alastria.github.io/identity/artifacts/v1'].concat(
+          context
+        ),
+        type: ['AlastriaIdentityCreation'].concat(type),
+        createAlastriaTX: createAlastriaTX,
+        alastriaToken: alastriaToken,
+        publicKey: publicKey
       }
+    }
 
-      const aic = tokensFactory.tokens.createAIC(
-          context, 
-          type, 
-          createAlastriaTX, 
-          alastriaToken, 
-          publicKey
-      )
-  
-      expect(JSON.stringify(aic)).equal(
-          JSON.stringify(expectedAIC)
-      )
-  });
+    const aic = tokensFactory.tokens.createAIC(
+      context,
+      type,
+      createAlastriaTX,
+      alastriaToken,
+      publicKey
+    )
+
+    expect(JSON.stringify(aic)).equal(JSON.stringify(expectedAIC))
+  })
 })

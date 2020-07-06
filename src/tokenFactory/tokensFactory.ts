@@ -1,4 +1,5 @@
 import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
+import { SignedToken } from 'jsontokens/lib/signer'
 
 export const tokensFactory = {
   tokens: {
@@ -16,14 +17,14 @@ export const tokensFactory = {
   }
 }
 
-function createDID(network, proxyAddress, networkID) {
+function createDID(network: string, proxyAddress: string, networkID: string) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
   return `did:ala:${network}:${networkID}:${proxyAddress}`
 }
 
 // Used by Service Provider or Subject Wallet
-export function decodeJWT(jwt) {
+export function decodeJWT(jwt: string) {
   var tokenData = null
   if (jwt) {
     tokenData = decodeToken(jwt)
@@ -31,7 +32,7 @@ export function decodeJWT(jwt) {
   return tokenData
 }
 
-function signJWT(jwt, rawPrivateKey) {
+function signJWT(jwt: SignedToken, rawPrivateKey: string) {
   if (jwt.header && jwt.payload) {
     return new TokenSigner('ES256K', rawPrivateKey).sign(
       jwt.payload,
@@ -43,7 +44,7 @@ function signJWT(jwt, rawPrivateKey) {
   }
 }
 
-function verifyJWT(jwt, rawPublicKey) {
+function verifyJWT(jwt: SignedToken, rawPublicKey: string) {
   return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 
@@ -59,20 +60,20 @@ function verifyJWT(jwt, rawPublicKey) {
  * @param jti Unique token identifier
  */
 function createAlastriaSession(
-  context: Array<string>,
-  iss,
-  kid,
-  type: Array<string>,
-  alastriaToken,
+  context: string[],
+  iss: string,
+  kid: string,
+  type: string[],
+  alastriaToken: string,
   exp: number,
   pku?: string,
   nbf?: number,
   jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://alastria.github.io/identity/artifacts/v1'
   ]
-  const requiredTypes: String[] = ['AlastriaSession']
+  const requiredTypes: string[] = ['AlastriaSession']
 
   const jwt = {
     header: {
@@ -113,7 +114,7 @@ function createAlastriaToken(
   ani: string,
   exp: number,
   kid: string,
-  jwk: string,
+  jwk?: string,
   nbf?: number,
   jti?: string
 ) {
@@ -139,10 +140,10 @@ function createAlastriaToken(
 }
 
 /** Creates an unsigned credential
- * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param iss DID representing the AlastriaID of the entity that issued the credential
  * @param context aditional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param credentialSubject JSON array of credentials
+ * @param kid indicates which key was used to secure (digitally sign) the JWT
  * @param sub DID representing the AlastriaID of the subject to which the credential refers to
  * @param exp expiration time on or after which the JWT (credential) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (credential) MUST NOT be accepted for processing
@@ -150,28 +151,28 @@ function createAlastriaToken(
  * @param jwk optional field with the public key used to sign the JWT Header
  */
 export function createCredential(
-  kid: String,
-  iss: String,
-  context: String[],
-  credentialSubject,
-  sub?: String,
+  iss: string,
+  context: string[],
+  credentialSubject: object,
+  kid?: string,
+  sub?: string,
   exp?: number,
   nbf?: number,
-  jti?: String,
-  jwk?: String,
-  type?: String[]
+  jti?: string,
+  jwk?: string,
+  type?: string[]
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
-    'VerifiableCredential', 'AlastriaVerifiableCredential'
+  const requiredTypes: string[] = [
+    'VerifiableCredential',
+    'AlastriaVerifiableCredential'
   ]
 
-  context = (context != null) ? requiredContext.concat(context) : requiredContext
-  type = (type != null) ? requiredTypes.concat(type) : requiredTypes
-
+  context = context ? requiredContext.concat(context) : requiredContext
+  type = type ? requiredTypes.concat(type) : requiredTypes
 
   const jwt = {
     header: {
@@ -205,31 +206,31 @@ export function createCredential(
  * @param verifiableCredential An array of verifiable credentials in JWT format, that is, signed JWTs where each verifiable credential is base64url encoded
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is receiving
- * @param jwk Public key
  * @param type aditional types to "VerifiablePresentation" and "AlastriaVerifiablePresentation"
+ * @param jwk Public key
  * @param exp identifies the expiration time on or after which the JWT (presentation) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
  */
 function createPresentation(
-  kid,
-  iss,
-  aud,
-  context,
-  verifiableCredential,
-  procUrl,
-  procHash,
-  jwk: String,
-  type: String[],
+  kid: string,
+  iss: string,
+  aud: string,
+  context: string[],
+  verifiableCredential: string[],
+  procUrl: string,
+  procHash: string,
+  type: string[],
+  jwk?: string,
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
+  const requiredTypes: string[] = [
     'VerifiablePresentation',
     'AlastriaVerifiablePresentation'
   ]
@@ -238,22 +239,22 @@ function createPresentation(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid,
+      kid,
       jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
-      aud: aud,
+      jti,
+      iss,
+      aud,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
+      exp,
+      nbf,
       vp: {
         '@context': requiredContext.concat(context),
         type: requiredTypes.concat(type),
-        procUrl: procUrl,
-        procHash: procHash,
-        verifiableCredential: verifiableCredential
+        procHash,
+        procUrl,
+        verifiableCredential
       }
     }
   }
@@ -261,38 +262,38 @@ function createPresentation(
 }
 
 /** Creates a presentation request
- * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
  * @param iss DID representing the Alastria.ID of the entity that sent the Presentation Request
  * @param context additional urls to "https://www.w3.org/2018/credentials/v1" and "https://alastria.github.io/identity/credentials/v1"
  * @param procUrl The URL of an external document describing the intended purpose of the data that the service provider is receiving
  * @param procHash The hash of an external document describing the intended purpose of the data that the service provider is requesting
  * @param data It is the structure (JSON Array) that contains the actual Presentation Request data items
+ * @param cbu Callbacku url from the user
+ * @param type aditional types to "VerifiablePresentationRequest" and "AlastriaVerifiablePresentationRequest"
+ * @param kid  DID reference of the public key as it appears in the DID Document associated to the Alastria.ID of the entity sending the Presentation Request (normally the service provider)
+ * @param jwk Public key
  * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
- * @param cbu Callbacku url from the user
- * @param jwk Public key
- * @param type aditional types to "VerifiablePresentationRequest" and "AlastriaVerifiablePresentationRequest"
  */
 function createPresentationRequest(
-  kid,
-  iss,
-  context: String[],
-  procUrl,
-  procHash,
-  data,
-  cbu,
-  jwk: String,
-  type: String[],
+  iss: string,
+  context: string[],
+  procUrl: string,
+  procHash: string,
+  data: object[],
+  cbu: string,
+  type: string[],
+  kid?: string,
+  jwk?: string,
   exp?: number,
   nbf?: number,
-  jti?: String
+  jti?: string
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
     'https://alastria.github.io/identity/credentials/v1'
   ]
-  const requiredTypes: String[] = [
+  const requiredTypes: string[] = [
     'VerifiablePresentationRequest',
     'AlastriaVerifiablePresentationRequest'
   ]
@@ -301,22 +302,22 @@ function createPresentationRequest(
     header: {
       alg: 'ES256K',
       typ: 'JWT',
-      kid: kid,
+      kid,
       jwk
     },
     payload: {
-      jti: jti,
-      iss: iss,
+      jti,
+      iss,
       iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
-      cbu: cbu,
+      exp,
+      nbf,
+      cbu,
       pr: {
         '@context': requiredContext.concat(context),
         type: requiredTypes.concat(type),
-        procUrl: procUrl,
-        procHash: procHash,
-        data: data
+        procHash,
+        procUrl,
+        data
       }
     }
   }
@@ -342,8 +343,8 @@ function PSMHash(web3, jwt, did) {
  * @param nbf not before
  */
 function createAIC(
-  context: Array<string>,
-  type: Array<string>,
+  context: string[],
+  type: string[],
   createAlastriaTX: string,
   alastriaToken: string,
   publicKey: string,
@@ -354,10 +355,10 @@ function createAIC(
   exp?: number,
   nbf?: number
 ) {
-  const requiredContext: String[] = [
+  const requiredContext: string[] = [
     'https://alastria.github.io/identity/artifacts/v1'
   ]
-  const requiredTypes: String[] = ['AlastriaIdentityCreation']
+  const requiredTypes: string[] = ['AlastriaIdentityCreation']
 
   const jwt = {
     header: {

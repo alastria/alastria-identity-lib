@@ -4,3 +4,8 @@ export interface PublicKeyStatus {
   startDate: number
   endDate: number
 }
+
+export interface JwtToken {
+  header: object
+  payload: object
+}

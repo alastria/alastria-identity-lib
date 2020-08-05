@@ -1,5 +1,6 @@
 import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
 import { SignedToken } from 'jsontokens/lib/signer'
+import { JwtToken } from '../interfaces'
 
 export const tokensFactory = {
   tokens: {
@@ -32,7 +33,7 @@ export function decodeJWT(jwt: string) {
   return tokenData
 }
 
-function signJWT(jwt: SignedToken, rawPrivateKey: string) {
+function signJWT(jwt: JwtToken, rawPrivateKey: string) {
   if (jwt.header && jwt.payload) {
     return new TokenSigner('ES256K', rawPrivateKey).sign(
       jwt.payload,
@@ -44,7 +45,7 @@ function signJWT(jwt: SignedToken, rawPrivateKey: string) {
   }
 }
 
-function verifyJWT(jwt: SignedToken, rawPublicKey: string) {
+function verifyJWT(jwt: string | SignedToken, rawPublicKey: string) {
   return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
 }
 

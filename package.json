@@ -1,6 +1,6 @@
 {
   "name": "alastria-identity-lib",
-  "version": "1.5.0",
+  "version": "1.0.0",
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "src/index.js",
   "bin": {
@@ -28,12 +28,12 @@
     "blockchain",
     "quorum"
   ],
-  "author": "Alastria",
-  "license": "https://github.com/alastria/alastria-identity-lib/blob/master/LICENSE",
+  "author": "Informatica el Corte Ingles (IECISA)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/alastria/alastria-identity-lib/issues"
   },
-  "homepage": "https://github.com/alastria/alastria-identity-lib/blob/master/README.md",
+  "homepage": "https://github.com/alastria/alastria-identity-lib#readme",
   "dependencies": {
     "@types/node": "12.11.5",
     "chai-as-promised": "^7.1.1",

@@ -1,6 +1,6 @@
 {
   "name": "alastria-identity-lib",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "src/index.js",
   "bin": {
@@ -12,7 +12,9 @@
     "compile": "git clone --branch mvp0.1 https://github.com/alastria/alastria-identity.git; node src/configFile.js; tsc",
     "clean": "rimraf dist",
     "build": "run-s clean compile",
-    "test": "mocha -r ts-node/register test/**/*.ts"
+    "test": "mocha -r ts-node/register test/**/*.ts",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}'",
+    "lint-fix": "eslint 'src/**/*.{js,ts,tsx}' --fix"
   },
   "repository": {
     "type": "git",
@@ -26,7 +28,7 @@
     "blockchain",
     "quorum"
   ],
-  "author": "Informatica el Corte Ingles (IECISA)",
+  "author": "Alastria",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/alastria/alastria-identity-lib/issues"
@@ -47,7 +49,16 @@
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.1.0",
     "chai": "^4.2.0",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "mocha": "^7.1.1",
     "sinon": "^9.0.2",
     "ts-node": "^8.8.2"

@@ -1,13 +1,16 @@
 import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
 import { SignedToken } from 'jsontokens/lib/signer'
 import { JwtToken } from '../interfaces'
+// import * as JWT from '../../typings/tokens/jwt'
+
+import { createAlastriaSession } from './alastriaSession'
 
 export const tokensFactory = {
   tokens: {
     decodeJWT: decodeJWT,
     signJWT: signJWT,
     verifyJWT: verifyJWT,
-    createAlastriaSession: createAlastriaSession,
+    createAlastriaSession,
     createAlastriaToken: createAlastriaToken,
     createCredential: createCredential,
     createPresentation: createPresentation,
@@ -47,54 +50,6 @@ function signJWT(jwt: JwtToken, rawPrivateKey: string) {
 
 function verifyJWT(jwt: string | SignedToken, rawPublicKey: string) {
   return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
-}
-
-/** Creates an Alastria Session
- * @param context aditional urls to "https://alastria.github.io/identity/artifacts/v1"
- * @param iss DID representing the AlastriaID of the entity that issued the Alastria Session
- * @param pku Users public key
- * @param alastriaToken Verified Alastria Token
- * @param kid indicates which key was used to secure (digitally sign) the JWT
- * @param type aditional types to "AlastriaSession"
- * @param exp expiration time
- * @param nbf not before
- * @param jti Unique token identifier
- */
-function createAlastriaSession(
-  context: string[],
-  iss: string,
-  kid: string,
-  type: string[],
-  alastriaToken: string,
-  exp: number,
-  pku?: string,
-  nbf?: number,
-  jti?: string
-) {
-  const requiredContext: string[] = [
-    'https://alastria.github.io/identity/artifacts/v1'
-  ]
-  const requiredTypes: string[] = ['AlastriaSession']
-
-  const jwt = {
-    header: {
-      alg: 'ES256K',
-      typ: 'JWT',
-      jwk: pku,
-      kid: kid
-    },
-    payload: {
-      '@context': requiredContext.concat(context),
-      type: requiredTypes.concat(type),
-      iss: iss,
-      iat: Math.round(Date.now() / 1000),
-      exp: exp,
-      nbf: nbf,
-      alastriaToken: alastriaToken,
-      jti: jti
-    }
-  }
-  return jwt
 }
 
 /** Creates the AlastriaToken

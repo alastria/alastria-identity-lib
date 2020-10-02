@@ -1,98 +1,91 @@
 export interface AICPayload {
-  exp?: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  context: string[]
-  type: string[]
-  createAlastriaTX: string
-  alastriaToken: string
-  publicKey: string
+  readonly exp?: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly '@context': string[]
+  readonly type: string[]
+  readonly createAlastriaTX: string
+  readonly alastriaToken: string
+  readonly publicKey: string
 }
 
 export interface AlastriaSessionPayload {
-  exp?: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  iss: string
-  context: string[]
-  type: string[]
-  alastriaToken: string
+  readonly exp?: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly iss: string
+  readonly '@context': string[]
+  readonly type: string[]
+  readonly alastriaToken: string
 }
 
 export interface AlastriaTokenPayload {
-  exp: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  iss: string
-  gwu: string
-  cbu: string
-  ani: string
+  readonly exp: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly iss: string
+  readonly gwu: string
+  readonly cbu: string
+  readonly ani: string
 }
 
 export interface CredentialPayload {
-  exp: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  iss: string
-  sub: string
-  vc: {
-    context: string[]
-    type: string[]
-    credentialSubject: {
-      levelOfAssurance: number
-      [propName: string]: any // Any other property
+  readonly exp: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly iss: string
+  readonly sub: string
+  readonly vc: {
+    readonly '@context': string[]
+    readonly type: string[]
+    readonly credentialSubject: {
+      readonly levelOfAssurance: number
+      readonly [propName: string]: any // Any other property
     }
   }
 }
 
 interface PresentationBase {
-  context: string[]
-  type: string[]
-  procHash: string
-  procUrl: string
+  readonly '@context': string[]
+  readonly type: string[]
+  readonly procHash: string
+  readonly procUrl: string
 }
 
 interface PresentationPayloadVP extends PresentationBase {
-  verifiableCredential: string[]
+  readonly verifiableCredential: string[]
 }
 
 export interface PresentationPayload {
-  exp: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  iss: string
-  aud: string
-  vp: PresentationPayloadVP
+  readonly exp: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly iss: string
+  readonly aud: string
+  readonly vp: PresentationPayloadVP
 }
 
 interface PresentationRequestPayloadPR extends PresentationBase {
-  data: {
-    context: string[]
-    levelOfAssurance: number
-    required: boolean
+  readonly data: {
+    readonly '@context': string[]
+    readonly levelOfAssurance: number
+    readonly required: boolean
     // eslint-disable-next-line camelcase
-    field_name: string // This should be camelCase format like any other param in the JWT
+    readonly field_name: string // This should be camelCase format like any other param in the JWT
   }[]
 }
 
 export interface PresentationRequestPayload {
-  exp: number
-  nbf?: number
-  jti?: string
-  iat?: number
-  iss: string
-  cbu: string
-  pr: PresentationRequestPayloadPR
+  readonly exp: number
+  readonly nbf?: number
+  readonly jti?: string
+  readonly iat?: number
+  readonly iss: string
+  readonly cbu: string
+  readonly pr: PresentationRequestPayloadPR
 }
-
-/*
- _._     _,-'""`-._         -----------
-(,-.`._,'(       |\`-/|     |  MIAU!  |
-    `-.-' \ )-`( , o o)   < -----------
-          `-    \`_`"'- 
-*/

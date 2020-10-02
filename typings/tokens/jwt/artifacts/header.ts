@@ -1,6 +1,6 @@
 export interface Header {
-  alg: 'ES256K' // Add more if needed as follows "ES256K" | "HMAC256" | "otherALG"
-  typ: 'JWT'
-  jwt?: string
-  kid?: string
+  readonly alg: 'ES256K' // Add more if needed as follows "ES256K" | "HMAC256" | "otherALG"
+  readonly typ: 'JWT'
+  readonly jwk?: string
+  readonly kid?: string
 }

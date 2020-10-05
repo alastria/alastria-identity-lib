@@ -32,6 +32,12 @@ export interface AlastriaTokenPayload {
   readonly ani: string
 }
 
+export interface CredentialSubject {
+  readonly credentialSubject: {
+    readonly levelOfAssurance: number
+    readonly [propName: string]: any // Any other property
+  }
+}
 export interface CredentialPayload {
   readonly exp: number
   readonly nbf?: number
@@ -42,10 +48,7 @@ export interface CredentialPayload {
   readonly vc: {
     readonly '@context': string[]
     readonly type: string[]
-    readonly credentialSubject: {
-      readonly levelOfAssurance: number
-      readonly [propName: string]: any // Any other property
-    }
+    readonly credentialSubject: CredentialSubject
   }
 }
 
@@ -70,14 +73,15 @@ export interface PresentationPayload {
   readonly vp: PresentationPayloadVP
 }
 
+export interface PresentationRequestData {
+  readonly '@context': string[]
+  readonly levelOfAssurance: number
+  readonly required: boolean
+  // eslint-disable-next-line camelcase
+  readonly field_name: string // This should be camelCase format like any other param in the JWT
+}
 interface PresentationRequestPayloadPR extends PresentationBase {
-  readonly data: {
-    readonly '@context': string[]
-    readonly levelOfAssurance: number
-    readonly required: boolean
-    // eslint-disable-next-line camelcase
-    readonly field_name: string // This should be camelCase format like any other param in the JWT
-  }[]
+  readonly data: PresentationRequestData[]
 }
 
 export interface PresentationRequestPayload {

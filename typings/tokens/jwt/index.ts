@@ -8,7 +8,19 @@ import {
   PresentationRequestPayload
 } from './artifacts/payloads'
 
-export { createAlastriaSessionFn } from './functions'
+export {
+  CreateAICFn,
+  CreateAlastriaSessionFn,
+  CreateAlastriaTokenFn,
+  CreateCredentialFn,
+  CreatePresentationFn,
+  CreatePresentationRequestFn
+} from './functions'
+
+export {
+  CredentialSubject,
+  PresentationRequestData
+} from './artifacts/payloads'
 
 export interface AIC {
   readonly header: Header

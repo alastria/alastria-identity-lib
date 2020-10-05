@@ -1,17 +1,24 @@
 import * as JWT from './'
+import {
+  CredentialSubject,
+  PresentationRequestData
+} from './artifacts/payloads'
 
-/** Creates an Alastria Session
- * @param string[] context additional urls to "https://alastria.github.io/identity/artifacts/v1"
- * @param string iss DID representing the AlastriaID of the entity that issued the Alastria Session
- * @param string pku Users public key
- * @param string alastriaToken Verified Alastria Token
- * @param string kid indicates which key was used to secure (digitally sign) the JWT
- * @param string[] type additional types to "AlastriaSession"
- * @param number exp expiration time
- * @param number nbf not before
- * @param string jti Unique token identifier
- */
-export type createAlastriaSessionFn = (
+export type CreateAICFn = (
+  context: string[],
+  type: string[],
+  createAlastriaTX: string,
+  alastriaToken: string,
+  publicKey: string,
+  kid?: string,
+  jwk?: string,
+  jti?: string,
+  iat?: number,
+  exp?: number,
+  nbf?: number
+) => JWT.AIC
+
+export type CreateAlastriaSessionFn = (
   context: string[],
   iss: string,
   kid: string,
@@ -22,3 +29,58 @@ export type createAlastriaSessionFn = (
   nbf?: number,
   jti?: string
 ) => JWT.AlastriaSession
+
+export type CreateAlastriaTokenFn = (
+  iss: string,
+  gwu: string,
+  cbu: string,
+  ani: string,
+  exp: number,
+  kid: string,
+  jwk?: string,
+  nbf?: number,
+  jti?: string
+) => JWT.AlastriaToken
+
+export type CreateCredentialFn = (
+  iss: string,
+  context: string[],
+  credentialSubject: CredentialSubject,
+  kid?: string,
+  sub?: string,
+  exp?: number,
+  nbf?: number,
+  jti?: string,
+  jwk?: string,
+  type?: string[]
+) => JWT.Credential
+
+export type CreatePresentationFn = (
+  iss: string,
+  aud: string,
+  context: string[],
+  verifiableCredential: string[],
+  procUrl: string,
+  procHash: string,
+  type: string[],
+  kid?: string,
+  jwk?: string,
+  exp?: number,
+  nbf?: number,
+  jti?: string
+) => JWT.Presentation
+
+export type CreatePresentationRequestFn = (
+  iss: string,
+  context: string[],
+  procUrl: string,
+  procHash: string,
+  data: PresentationRequestData[],
+  cbu: string,
+  type: string[],
+  kid?: string,
+  jwk?: string,
+  exp?: number,
+  nbf?: number,
+  jti?: string
+) => JWT.PresentationRequest

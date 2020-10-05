@@ -22,6 +22,13 @@ export {
   PresentationRequestData
 } from './artifacts/payloads'
 
+export type AlastriaJWT =
+  | AIC
+  | AlastriaSession
+  | AlastriaToken
+  | Credential
+  | Presentation
+  | PresentationRequest
 export interface AIC {
   readonly header: Header
   readonly payload: AICPayload

@@ -1,0 +1,6 @@
+export { createAIC } from './aic'
+export { createAlastriaSession } from './alastriaSession'
+export { createAlastriaToken } from './alastriaToken'
+export { createCredential } from './credential'
+export { createPresentation } from './presentation'
+export { createPresentationRequest } from './presentationRequest'

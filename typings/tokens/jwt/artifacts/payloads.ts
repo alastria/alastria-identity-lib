@@ -33,13 +33,11 @@ export interface AlastriaTokenPayload {
 }
 
 export interface CredentialSubject {
-  readonly credentialSubject: {
-    readonly levelOfAssurance: number
-    readonly [propName: string]: any // Any other property
-  }
+  readonly levelOfAssurance: number
+  readonly [propName: string]: any // Any other property
 }
 export interface CredentialPayload {
-  readonly exp: number
+  readonly exp?: number
   readonly nbf?: number
   readonly jti?: string
   readonly iat?: number
@@ -64,7 +62,7 @@ interface PresentationPayloadVP extends PresentationBase {
 }
 
 export interface PresentationPayload {
-  readonly exp: number
+  readonly exp?: number
   readonly nbf?: number
   readonly jti?: string
   readonly iat?: number
@@ -85,7 +83,7 @@ interface PresentationRequestPayloadPR extends PresentationBase {
 }
 
 export interface PresentationRequestPayload {
-  readonly exp: number
+  readonly exp?: number
   readonly nbf?: number
   readonly jti?: string
   readonly iat?: number

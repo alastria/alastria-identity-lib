@@ -1,2 +1,2 @@
-export type Network = 'quor' | 'fabr'
+export type Network = 'quor' | 'fabr' | 'besu'
 export type NetworkID = 'redT' | 'testnet1'

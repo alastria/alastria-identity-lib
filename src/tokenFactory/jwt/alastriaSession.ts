@@ -15,7 +15,7 @@ import {
  * @param nbf? {number} - not before
  * @param jti? {string} - Unique token identifier
  *
- * @return AlastriaToken
+ * @return AlastriaSession
  */
 export const createAlastriaSession: CreateAlastriaSessionFn = function (
   context: string[],

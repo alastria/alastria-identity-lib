@@ -37,8 +37,7 @@ const config = {
     to: '0x0000000000000000000000000000000000000000',
     data: '0x0',
     gasLimit: 0,
-    gasPrice: 0,
-    nonce: '0x0'
+    gasPrice: 0
   },
   contractsAbi: _contractsAbi,
   zeroValue:

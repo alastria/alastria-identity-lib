@@ -338,11 +338,10 @@ export function setUrlAOA(web3, didEntity, urlAOA) {
 export function getEntity(web3, didEntity) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
-  const delegatedData = web3.eth.abi.encodeFunctionCall(
+  transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.getEntity,
     [entityAddr]
   )
-  transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction
@@ -354,11 +353,10 @@ export function getEntity(web3, didEntity) {
  */
 export function entitiesList(web3) {
   const transaction = Object.assign({}, config.basicTransaction)
-  const delegatedData = web3.eth.abi.encodeFunctionCall(
+  transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.entitiesList,
     []
   )
-  transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction

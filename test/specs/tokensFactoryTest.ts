@@ -1,34 +1,49 @@
 import 'mocha'
 import { expect } from 'chai'
-import { tokensFactory } from '../../src/tokenFactory/tokensFactory'
+import { Network, NetworkID } from '../../typings'
+import {
+  createAIC,
+  createAlastriaSession,
+  createAlastriaToken,
+  createCredential,
+  createDID,
+  createPresentation,
+  createPresentationRequest
+} from '../../src/tokenFactory/jwt'
+import {
+  AIC,
+  AlastriaSession,
+  AlastriaToken,
+  Credential,
+  CredentialSubject,
+  Presentation,
+  PresentationRequest,
+  PresentationRequestData
+} from '../../typings/tokens/jwt'
 
 describe('validate creatingDID results with custom networkID', function () {
   it('should return a valid DID with redT as a networkId', function () {
-    const network = 'net'
-    const proxyAddress = 'QmeeasCZ9jLbX...ueBJ7d7csxhb'
-    const networkID = 'redT'
+    const network: Network = 'quor'
+    const proxyAddress = 'a5ef4c9cbf1aee00f475d9f52acfe751ae99c8d4'
+    const networkID: NetworkID = 'redT'
 
-    const validDID = tokensFactory.tokens.createDID(
-      network,
-      proxyAddress,
-      networkID
+    const validDID = createDID(network, proxyAddress, networkID)
+
+    expect(validDID).equal(
+      'did:ala:quor:redT:a5ef4c9cbf1aee00f475d9f52acfe751ae99c8d4'
     )
-
-    expect(validDID).equal('did:ala:net:redT:QmeeasCZ9jLbX...ueBJ7d7csxhb')
   })
 
   it('should return a valid DID with redB as a networkId', function () {
-    const network = 'net'
-    const proxyAddress = 'QmeeasCZ9jLbX...ueBJ7d7csxhb'
-    const networkID = 'redB'
+    const network: Network = 'fabr'
+    const proxyAddress = 'a5ef4c9cbf1aee00f475d9f52acfe751ae99c8d4'
+    const networkID: NetworkID = 'testnet1'
 
-    const validDID = tokensFactory.tokens.createDID(
-      network,
-      proxyAddress,
-      networkID
+    const validDID = createDID(network, proxyAddress, networkID)
+
+    expect(validDID).equal(
+      'did:ala:fabr:testnet1:a5ef4c9cbf1aee00f475d9f52acfe751ae99c8d4'
     )
-
-    expect(validDID).equal('did:ala:net:redB:QmeeasCZ9jLbX...ueBJ7d7csxhb')
   })
 })
 
@@ -44,7 +59,7 @@ describe('validate createAlastriaSession', function () {
   const jti = 'jwi'
 
   it('should return a valid AlastriaSession with all the fields', function () {
-    const expectedAlastriaSession = {
+    const expectedAlastriaSession: AlastriaSession = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -64,8 +79,7 @@ describe('validate createAlastriaSession', function () {
         jti
       }
     }
-
-    const alastriaSession = tokensFactory.tokens.createAlastriaSession(
+    const alastriaSession = createAlastriaSession(
       context,
       iss,
       kid,
@@ -83,7 +97,7 @@ describe('validate createAlastriaSession', function () {
   })
 
   it('should return a valid AlastriaSession with only the mandatory fields', function () {
-    const expectedAlastriaSession = {
+    const expectedAlastriaSession: AlastriaSession = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -101,7 +115,7 @@ describe('validate createAlastriaSession', function () {
       }
     }
 
-    const alastriaSession = tokensFactory.tokens.createAlastriaSession(
+    const alastriaSession = createAlastriaSession(
       context,
       iss,
       kid,
@@ -124,15 +138,15 @@ describe('validate createPresentationRequest', function () {
   const context = ['CustomContext1', 'CustomContext2']
   const procUrl = 'url'
   const procHash = 'url'
-  const data = [
+  const data: PresentationRequestData[] = [
     {
-      '@context': 'https://alastria.github.io/identity/covid/v1',
+      '@context': ['https://alastria.github.io/identity/covid/v1'],
       levelOfAssurance: 3,
       required: true,
       field_name: 'covid_test'
     },
     {
-      '@context': 'https://alastria.github.io/identity/examples/v1',
+      '@context': ['https://alastria.github.io/identity/examples/v1'],
       levelOfAssurance: 2,
       required: true,
       field_name: 'phone_number'
@@ -144,7 +158,7 @@ describe('validate createPresentationRequest', function () {
   const type = ['CustomType1', 'CustomType2']
 
   it('should create a valid presentationRequest with required params', () => {
-    const expectedPresentationRequest = {
+    const expectedPresentationRequest: PresentationRequest = {
       header: {
         alg: 'ES256K',
         typ: 'JWT'
@@ -169,7 +183,7 @@ describe('validate createPresentationRequest', function () {
       }
     }
 
-    const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+    const presentationRequest = createPresentationRequest(
       iss,
       context,
       procUrl,
@@ -185,7 +199,7 @@ describe('validate createPresentationRequest', function () {
   })
 
   it('should create a valid presentationRequest with all params', () => {
-    const expectedPresentationRequest = {
+    const expectedPresentationRequest: PresentationRequest = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -215,7 +229,7 @@ describe('validate createPresentationRequest', function () {
       }
     }
 
-    const presentationRequest = tokensFactory.tokens.createPresentationRequest(
+    const presentationRequest = createPresentationRequest(
       iss,
       context,
       procUrl,
@@ -251,7 +265,7 @@ describe('validate createPresentation', function () {
   const verifiableCredential = ['eyJ0eXAi', 'eyJ0eXAi']
 
   it('should create a valid presentationRequest with required params', () => {
-    const expectedPresentation = {
+    const expectedPresentation: Presentation = {
       header: {
         alg: 'ES256K',
         typ: 'JWT'
@@ -276,7 +290,7 @@ describe('validate createPresentation', function () {
       }
     }
 
-    const presentation = tokensFactory.tokens.createPresentation(
+    const presentation = createPresentation(
       iss,
       aud,
       context,
@@ -292,7 +306,7 @@ describe('validate createPresentation', function () {
   })
 
   it('should create a valid presentationRequest with all params', () => {
-    const expectedPresentation = {
+    const expectedPresentation: Presentation = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -322,7 +336,7 @@ describe('validate createPresentation', function () {
       }
     }
 
-    const presentation = tokensFactory.tokens.createPresentation(
+    const presentation = createPresentation(
       iss,
       aud,
       context,
@@ -356,7 +370,7 @@ describe('validate createAlastriaToken', function () {
   const jti = 'FooBar/alastriaToken/1590567641603'
 
   it('should create a valid AlastriaToken with required params', () => {
-    const expectedAlastriaToken = {
+    const expectedAlastriaToken: AlastriaToken = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -373,15 +387,7 @@ describe('validate createAlastriaToken', function () {
       }
     }
 
-    const alastriaToken = tokensFactory.tokens.createAlastriaToken(
-      iss,
-      gwu,
-      cbu,
-      ani,
-      exp,
-      kid,
-      jwk
-    )
+    const alastriaToken = createAlastriaToken(iss, gwu, cbu, ani, exp, kid, jwk)
 
     expect(JSON.stringify(alastriaToken)).equal(
       JSON.stringify(expectedAlastriaToken)
@@ -389,7 +395,7 @@ describe('validate createAlastriaToken', function () {
   })
 
   it('should create a valid AlastriaToken with all params', () => {
-    const expectedAlastriaToken = {
+    const expectedAlastriaToken: AlastriaToken = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -408,7 +414,7 @@ describe('validate createAlastriaToken', function () {
       }
     }
 
-    const alastriaToken = tokensFactory.tokens.createAlastriaToken(
+    const alastriaToken = createAlastriaToken(
       iss,
       gwu,
       cbu,
@@ -429,7 +435,7 @@ describe('validate createAlastriaToken', function () {
     const kid =
       'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a#keys-1'
     const iss = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
-    const credentialSubject = { levelOfAssurance: 1 }
+    const credentialSubject: CredentialSubject = { levelOfAssurance: 1 }
     const exp = 1000
     const nbf = 1000
     const jti = 'http://example.edu/credentials/3732'
@@ -437,13 +443,14 @@ describe('validate createAlastriaToken', function () {
     const sub = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
 
     it('should create a valid credential with required params', () => {
-      const expectedCredencial = {
+      const expectedCredential: Credential = {
         header: {
           typ: 'JWT',
           alg: 'ES256K'
         },
         payload: {
           iss,
+          sub,
           iat: Math.round(Date.now() / 1000),
           vc: {
             '@context': [
@@ -458,19 +465,21 @@ describe('validate createAlastriaToken', function () {
         }
       }
 
-      const credential = tokensFactory.tokens.createCredential(
+      const credential = createCredential(
         iss,
         [],
-        credentialSubject
+        credentialSubject,
+        undefined,
+        sub
       )
 
       expect(JSON.stringify(credential)).equal(
-        JSON.stringify(expectedCredencial)
+        JSON.stringify(expectedCredential)
       )
     })
 
     it('should create a valid credential with all params', () => {
-      const expectedCredencial = {
+      const expectedCredential: Credential = {
         header: {
           typ: 'JWT',
           alg: 'ES256K',
@@ -502,7 +511,7 @@ describe('validate createAlastriaToken', function () {
         }
       }
 
-      const credential = tokensFactory.tokens.createCredential(
+      const credential = createCredential(
         iss,
         ['https://example.org/example'],
         credentialSubject,
@@ -516,12 +525,12 @@ describe('validate createAlastriaToken', function () {
       )
 
       expect(JSON.stringify(credential)).equal(
-        JSON.stringify(expectedCredencial)
+        JSON.stringify(expectedCredential)
       )
     })
 
     it('should create a valid credential when context and type are nulls or not present', () => {
-      const expectedCredencial = {
+      const expectedCredential: Credential = {
         header: {
           typ: 'JWT',
           alg: 'ES256K',
@@ -548,7 +557,7 @@ describe('validate createAlastriaToken', function () {
         }
       }
 
-      const credential = tokensFactory.tokens.createCredential(
+      const credential = createCredential(
         iss,
         null,
         credentialSubject,
@@ -561,7 +570,7 @@ describe('validate createAlastriaToken', function () {
       )
 
       expect(JSON.stringify(credential)).equal(
-        JSON.stringify(expectedCredencial)
+        JSON.stringify(expectedCredential)
       )
     })
   })
@@ -581,7 +590,7 @@ describe('validate createAIC', function () {
   const jti = 'jwi'
 
   it('should return a valid AlastriaIdentityCreation with all the fields', function () {
-    const expectedAIC = {
+    const expectedAIC: AIC = {
       header: {
         alg: 'ES256K',
         typ: 'JWT',
@@ -602,8 +611,7 @@ describe('validate createAIC', function () {
         nbf: nbf
       }
     }
-
-    const aic = tokensFactory.tokens.createAIC(
+    const aic = createAIC(
       context,
       type,
       createAlastriaTX,
@@ -621,7 +629,7 @@ describe('validate createAIC', function () {
   })
 
   it('should return a valid AlastriaIdentityCreation with only the mandatory fields', function () {
-    const expectedAIC = {
+    const expectedAIC: AIC = {
       header: {
         alg: 'ES256K',
         typ: 'JWT'
@@ -637,7 +645,7 @@ describe('validate createAIC', function () {
       }
     }
 
-    const aic = tokensFactory.tokens.createAIC(
+    const aic = createAIC(
       context,
       type,
       createAlastriaTX,

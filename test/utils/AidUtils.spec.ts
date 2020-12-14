@@ -1,16 +1,17 @@
 import 'mocha'
 import { expect } from 'chai'
-import { tokensFactory } from '../../src/tokenFactory/tokensFactory'
 import { AIdUtils } from '../../src/utils/AIdUtils'
+import { createDID } from '../../src/tokenFactory/jwt'
+import { Network, NetworkID } from '../../typings'
 
 describe('AIdUtils parse DID token correctly', () => {
-  const network = 'net'
-  const proxyAddress = 'QmeeasCZ9jLbX...ueBJ7d7csxhb'
-  const networkID = 'redT'
+  const network: Network = 'fabr'
+  const proxyAddress = 'a5ef4c9cbf1aee00f475d9f52acfe751ae99c8d4'
+  const networkID: NetworkID = 'testnet1'
   let validDID
 
   before(() => {
-    validDID = tokensFactory.tokens.createDID(network, proxyAddress, networkID)
+    validDID = createDID(network, proxyAddress, networkID)
   })
 
   it('should get network from valid DID correclty', function () {

@@ -139,11 +139,10 @@ export function getEidasLevel(web3, didIssuer) {
 export function addIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
   const transaction = Object.assign({}, config.basicTransaction)
-  const delegatedData = web3.eth.abi.encodeFunctionCall(
+  transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.addIdentityServiceProvider,
     [providerAddr]
   )
-  transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction
@@ -157,11 +156,10 @@ export function addIdentityServiceProvider(web3, didServiceProvider) {
 export function deleteIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
   const transaction = Object.assign({}, config.basicTransaction)
-  const delegatedData = web3.eth.abi.encodeFunctionCall(
+  transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.deleteIdentityServiceProvider,
     [providerAddr]
   )
-  transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction
@@ -225,11 +223,10 @@ export function addEntity(
 ) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
-  const delegatedData = web3.eth.abi.encodeFunctionCall(
+  transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.addEntity,
     [entityAddr, name, cif, urlLogo, urlCreateAID, urlAOA, status]
   )
-  transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
   transaction.gasLimit = 600000
   return transaction

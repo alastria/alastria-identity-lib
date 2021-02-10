@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 const contractsPath = '../alastria-identity/contracts'
-var _contractsAbi = {}
+const _contractsAbi = {}
 
 // Process the abi dir for getting an object with all the abi functions
 fs.readdirSync(path.join(__dirname, `${contractsPath}/abi`)).forEach((file) => {

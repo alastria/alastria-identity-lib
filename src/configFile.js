@@ -36,14 +36,14 @@ fs.readdirSync(path.join(__dirname, `${contractsABIPath}`)).forEach((file) => {
  */
 
 const contractsInfo = {
-  Eidas: '0x701dE44500364Fb7388EA8de96d87E4A5371bA96',
-  AlastriaServiceProvider: '0x9D5af64839e62d769abFAF1E11F75E4Bcd743D7C',
-  AlastriaIdentityIssuer: '0x543DE49ea42a23C7411f12611A27C6aDBcb55b8C',
-  AlastriaIdentityEntity: '0x10913e0c7400F9A7eC1bd01929203F6BDf6958Ce',
-  AlastriaCredentialRegistry: '0xbCeb94fe0D428Dbd35B91aa64fa11067EA6a0122',
-  AlastriaPresentationRegistry: '0xd2428F7023A059B3075564A1B2a0a8243E4aEb3B',
-  AlastriaPublicKeyRegistry: '0x4De1CEFb60B757316176F31659414a7f6376AEd0',
-  AlastriaIdentityManager: '0x948Cd4c7a26435b32C17e2Ea90C30cC7B3174EE5'
+  Eidas: '0x73238B556a3ebdD444e58cA67c70EE02423e7006',
+  AlastriaServiceProvider: '0x3edd539469d34BFacf77Ae0F271764594Cd1AF82',
+  AlastriaIdentityIssuer: '0xC3084402b7B87a218B19Ed7a8B9E963C370258c7',
+  AlastriaIdentityEntity: '0x1e7a94A63b04042B6302923f6AFA9Ccf1Ae0256C',
+  AlastriaCredentialRegistry: '0xe9B858A4b79fbAa0c6a7C69Ff56122639E4c1892',
+  AlastriaPresentationRegistry: '0x9FAdadE1734eFa76515BD49CBB4D26fa3d6C933c',
+  AlastriaPublicKeyRegistry: '0xfe611588Bb7699A38594B4f2E0AA5Ecb0E7a3641',
+  AlastriaIdentityManager: '0x6c60F15f4a30482Ba4769A21DF7727b9b69b2f90'
 }
 
 const config = {

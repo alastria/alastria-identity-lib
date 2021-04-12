@@ -53,25 +53,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"addIdentityServiceProvider\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"deleteIdentityServiceProvider\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"isIdentityServiceProvider\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol\":\"AlastriaIdentityServiceProvider\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol\":{\"keccak256\":\"0x317a56ae231534b2046ea1f3a74ff9d780da3967e4735ded4d85b51528d23440\",\"urls\":[\"bzz-raw://25239bc7981a69141811cf19ba1a7582ba0041dc3acf2831f2104401f2eba61b\",\"dweb:/ipfs/QmbEnfGyK8igSJV7ra9atg7V2g55EKr3wjTzf77fUW4ZSv\"]},\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol\":{\"keccak256\":\"0x16e45031d65c5b0634dfc8202d62b4a47a9bdfbba8c3c9168940ccdbbada3b80\",\"urls\":[\"bzz-raw://4f3bad8027241f4129e9e3906c57ee966aac2c7a2b59f71bc7ccc5bc83eb1213\",\"dweb:/ipfs/QmeLgD2azybRekL6GGYmRuZVP1byfpoESgx8XzukLyPcA1\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50610221806100206000396000f3fe608060405234801561001057600080fd5b506004361061005d577c010000000000000000000000000000000000000000000000000000000060003504630ebbbffc81146100625780633bf4721514610097578063d024d9a4146100ca575b600080fd5b6100956004803603602081101561007857600080fd5b503573ffffffffffffffffffffffffffffffffffffffff16610111565b005b610095600480360360208110156100ad57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661016b565b6100fd600480360360208110156100e057600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166101c1565b604080519115158252519081900360200190f35b3361011b816101c1565b61012457600080fd5b8161012e816101c1565b1561013857600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19166001179055565b80610175816101c1565b61017e57600080fd5b33610188816101c1565b61019157600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19169055565b73ffffffffffffffffffffffffffffffffffffffff1660009081526020819052604090205460ff169056fea265627a7a723158202346fd65f0d659cf0238688f63e23c8c993bb9761a362082b1956e630f961e5b64736f6c63430005110032",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005d577c010000000000000000000000000000000000000000000000000000000060003504630ebbbffc81146100625780633bf4721514610097578063d024d9a4146100ca575b600080fd5b6100956004803603602081101561007857600080fd5b503573ffffffffffffffffffffffffffffffffffffffff16610111565b005b610095600480360360208110156100ad57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661016b565b6100fd600480360360208110156100e057600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166101c1565b604080519115158252519081900360200190f35b3361011b816101c1565b61012457600080fd5b8161012e816101c1565b1561013857600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19166001179055565b80610175816101c1565b61017e57600080fd5b33610188816101c1565b61019157600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19169055565b73ffffffffffffffffffffffffffffffffffffffff1660009081526020819052604090205460ff169056fea265627a7a723158202346fd65f0d659cf0238688f63e23c8c993bb9761a362082b1956e630f961e5b64736f6c63430005110032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"addIdentityServiceProvider\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"deleteIdentityServiceProvider\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityServiceProvider\",\"type\":\"address\"}],\"name\":\"isIdentityServiceProvider\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol\":\"AlastriaIdentityServiceProvider\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol\":{\"keccak256\":\"0x317a56ae231534b2046ea1f3a74ff9d780da3967e4735ded4d85b51528d23440\",\"urls\":[\"bzz-raw://25239bc7981a69141811cf19ba1a7582ba0041dc3acf2831f2104401f2eba61b\",\"dweb:/ipfs/QmbEnfGyK8igSJV7ra9atg7V2g55EKr3wjTzf77fUW4ZSv\"]},\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol\":{\"keccak256\":\"0x16e45031d65c5b0634dfc8202d62b4a47a9bdfbba8c3c9168940ccdbbada3b80\",\"urls\":[\"bzz-raw://4f3bad8027241f4129e9e3906c57ee966aac2c7a2b59f71bc7ccc5bc83eb1213\",\"dweb:/ipfs/QmeLgD2azybRekL6GGYmRuZVP1byfpoESgx8XzukLyPcA1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610221806100206000396000f3fe608060405234801561001057600080fd5b506004361061005d577c010000000000000000000000000000000000000000000000000000000060003504630ebbbffc81146100625780633bf4721514610097578063d024d9a4146100ca575b600080fd5b6100956004803603602081101561007857600080fd5b503573ffffffffffffffffffffffffffffffffffffffff16610111565b005b610095600480360360208110156100ad57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661016b565b6100fd600480360360208110156100e057600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166101c1565b604080519115158252519081900360200190f35b3361011b816101c1565b61012457600080fd5b8161012e816101c1565b1561013857600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19166001179055565b80610175816101c1565b61017e57600080fd5b33610188816101c1565b61019157600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19169055565b73ffffffffffffffffffffffffffffffffffffffff1660009081526020819052604090205460ff169056fea265627a7a72315820826657aecdaf832c709e10a7381403b43bba5c689a085f3420a109099d56f15e64736f6c63430005110032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005d577c010000000000000000000000000000000000000000000000000000000060003504630ebbbffc81146100625780633bf4721514610097578063d024d9a4146100ca575b600080fd5b6100956004803603602081101561007857600080fd5b503573ffffffffffffffffffffffffffffffffffffffff16610111565b005b610095600480360360208110156100ad57600080fd5b503573ffffffffffffffffffffffffffffffffffffffff1661016b565b6100fd600480360360208110156100e057600080fd5b503573ffffffffffffffffffffffffffffffffffffffff166101c1565b604080519115158252519081900360200190f35b3361011b816101c1565b61012457600080fd5b8161012e816101c1565b1561013857600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19166001179055565b80610175816101c1565b61017e57600080fd5b33610188816101c1565b61019157600080fd5b505073ffffffffffffffffffffffffffffffffffffffff166000908152602081905260409020805460ff19169055565b73ffffffffffffffffffffffffffffffffffffffff1660009081526020819052604090205460ff169056fea265627a7a72315820826657aecdaf832c709e10a7381403b43bba5c689a085f3420a109099d56f15e64736f6c63430005110032",
   "sourceMap": "54:1211:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:1211:4;;;;;;;",
   "deployedSourceMap": "54:1211:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:1211:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;632:229;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;632:229:4;;;;:::i;:::-;;867:234;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;867:234:4;;;;:::i;1107:155::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1107:155:4;;;;:::i;:::-;;;;;;;;;;;;;;;;;;632:229;737:10;281:51;307:24;281:25;:51::i;:::-;272:61;;;;;;776:24;447:51;473:24;447:25;:51::i;:::-;446:52;437:62;;;;;;-1:-1:-1;;812:35:4;;:9;:35;;;;;;;;;;:42;;-1:-1:-1;;812:42:4;850:4;812:42;;;632:229::o;867:234::-;975:24;281:51;307:24;281:25;:51::i;:::-;272:61;;;;;;1029:10;281:51;307:24;281:25;:51::i;:::-;272:61;;;;;;-1:-1:-1;;1051:35:4;;1089:5;1051:35;;;;;;;;;;:43;;-1:-1:-1;;1051:43:4;;;867:234::o;1107:155::-;1220:35;;1197:4;1220:35;;;;;;;;;;;;;;1107:155::o",
   "source": "pragma solidity 0.5.17;\n\nimport \"../libs/Eidas.sol\";\n\ncontract AlastriaIdentityServiceProvider {\n\n    using Eidas for Eidas.EidasLevel;\n\n    mapping(address => bool) internal providers;\n\n    modifier onlyIdentityServiceProvider(address _identityServiceProvider) {\n        require (isIdentityServiceProvider(_identityServiceProvider));\n        _;\n    }\n\n    modifier notIdentityServiceProvider(address _identityServiceProvider) {\n        require (!isIdentityServiceProvider(_identityServiceProvider));\n        _;\n    }\n\n    function _initialize(address _firstIdentity) internal {\n        providers[_firstIdentity] = true;\n    }\n\n    function addIdentityServiceProvider(address _identityServiceProvider) public onlyIdentityServiceProvider(msg.sender) notIdentityServiceProvider(_identityServiceProvider) {\n        providers[_identityServiceProvider] = true;\n    }\n\n    function deleteIdentityServiceProvider(address _identityServiceProvider) public onlyIdentityServiceProvider(_identityServiceProvider) onlyIdentityServiceProvider(msg.sender) {\n        providers[_identityServiceProvider] = false;\n    }\n\n    function isIdentityServiceProvider(address _identityServiceProvider) public view returns (bool) {\n        return providers[_identityServiceProvider];\n    }\n\n}\n",
-  "sourcePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
+  "sourcePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
   "ast": {
-    "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
+    "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
     "exportedSymbols": {
       "AlastriaIdentityServiceProvider": [
-        937
+        944
       ]
     },
-    "id": 938,
+    "id": 945,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 841,
+        "id": 848,
         "literals": [
           "solidity",
           "0.5",
@@ -81,12 +81,12 @@
         "src": "0:23:4"
       },
       {
-        "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
+        "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
         "file": "../libs/Eidas.sol",
-        "id": 842,
+        "id": 849,
         "nodeType": "ImportDirective",
-        "scope": 938,
-        "sourceUnit": 1037,
+        "scope": 945,
+        "sourceUnit": 1049,
         "src": "25:27:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -97,24 +97,24 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 937,
+        "id": 944,
         "linearizedBaseContracts": [
-          937
+          944
         ],
         "name": "AlastriaIdentityServiceProvider",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 845,
+            "id": 852,
             "libraryName": {
               "contractScope": null,
-              "id": 843,
+              "id": 850,
               "name": "Eidas",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1036,
+              "referencedDeclaration": 1048,
               "src": "108:5:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Eidas_$1036",
+                "typeIdentifier": "t_contract$_Eidas_$1048",
                 "typeString": "library Eidas"
               }
             },
@@ -122,23 +122,23 @@
             "src": "102:33:4",
             "typeName": {
               "contractScope": null,
-              "id": 844,
+              "id": 851,
               "name": "Eidas.EidasLevel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1002,
+              "referencedDeclaration": 1014,
               "src": "118:16:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                "typeIdentifier": "t_enum$_EidasLevel_$1014",
                 "typeString": "enum Eidas.EidasLevel"
               }
             }
           },
           {
             "constant": false,
-            "id": 849,
+            "id": 856,
             "name": "providers",
             "nodeType": "VariableDeclaration",
-            "scope": 937,
+            "scope": 944,
             "src": "141:43:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -147,9 +147,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 848,
+              "id": 855,
               "keyType": {
-                "id": 846,
+                "id": 853,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "149:7:4",
@@ -165,7 +165,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 847,
+                "id": 854,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "160:4:4",
@@ -180,7 +180,7 @@
           },
           {
             "body": {
-              "id": 860,
+              "id": 867,
               "nodeType": "Block",
               "src": "262:89:4",
               "statements": [
@@ -193,11 +193,11 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 855,
+                            "id": 862,
                             "name": "_identityServiceProvider",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 851,
+                            "referencedDeclaration": 858,
                             "src": "307:24:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -212,18 +212,18 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 854,
+                          "id": 861,
                           "name": "isIdentityServiceProvider",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 936,
+                          "referencedDeclaration": 943,
                           "src": "281:25:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view returns (bool)"
                           }
                         },
-                        "id": 856,
+                        "id": 863,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -245,21 +245,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 853,
+                      "id": 860,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "272:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 857,
+                    "id": 864,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -273,31 +273,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 858,
+                  "id": 865,
                   "nodeType": "ExpressionStatement",
                   "src": "272:61:4"
                 },
                 {
-                  "id": 859,
+                  "id": 866,
                   "nodeType": "PlaceholderStatement",
                   "src": "343:1:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 861,
+            "id": 868,
             "name": "onlyIdentityServiceProvider",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 852,
+              "id": 859,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 851,
+                  "id": 858,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 861,
+                  "scope": 868,
                   "src": "228:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -306,7 +306,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 850,
+                    "id": 857,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "228:7:4",
@@ -327,7 +327,7 @@
           },
           {
             "body": {
-              "id": 873,
+              "id": 880,
               "nodeType": "Block",
               "src": "427:90:4",
               "statements": [
@@ -337,7 +337,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 869,
+                        "id": 876,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -351,11 +351,11 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 867,
+                              "id": 874,
                               "name": "_identityServiceProvider",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 863,
+                              "referencedDeclaration": 870,
                               "src": "473:24:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -370,18 +370,18 @@
                                 "typeString": "address"
                               }
                             ],
-                            "id": 866,
+                            "id": 873,
                             "name": "isIdentityServiceProvider",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 936,
+                            "referencedDeclaration": 943,
                             "src": "447:25:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                               "typeString": "function (address) view returns (bool)"
                             }
                           },
-                          "id": 868,
+                          "id": 875,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -408,21 +408,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 865,
+                      "id": 872,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "437:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 870,
+                    "id": 877,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -436,31 +436,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 871,
+                  "id": 878,
                   "nodeType": "ExpressionStatement",
                   "src": "437:62:4"
                 },
                 {
-                  "id": 872,
+                  "id": 879,
                   "nodeType": "PlaceholderStatement",
                   "src": "509:1:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 874,
+            "id": 881,
             "name": "notIdentityServiceProvider",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 864,
+              "id": 871,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 863,
+                  "id": 870,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 874,
+                  "scope": 881,
                   "src": "393:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -469,7 +469,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 862,
+                    "id": 869,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "393:7:4",
@@ -490,14 +490,14 @@
           },
           {
             "body": {
-              "id": 885,
+              "id": 892,
               "nodeType": "Block",
               "src": "577:49:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 883,
+                    "id": 890,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -506,25 +506,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 879,
+                        "id": 886,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "587:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 881,
+                      "id": 888,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 880,
+                        "id": 887,
                         "name": "_firstIdentity",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 876,
+                        "referencedDeclaration": 883,
                         "src": "597:14:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -547,7 +547,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 882,
+                      "id": 889,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -568,29 +568,29 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 884,
+                  "id": 891,
                   "nodeType": "ExpressionStatement",
                   "src": "587:32:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 886,
+            "id": 893,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 877,
+              "id": 884,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 876,
+                  "id": 883,
                   "name": "_firstIdentity",
                   "nodeType": "VariableDeclaration",
-                  "scope": 886,
+                  "scope": 893,
                   "src": "544:22:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -599,7 +599,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 875,
+                    "id": 882,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "544:7:4",
@@ -616,12 +616,12 @@
               "src": "543:24:4"
             },
             "returnParameters": {
-              "id": 878,
+              "id": 885,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "577:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "523:103:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -629,14 +629,14 @@
           },
           {
             "body": {
-              "id": 904,
+              "id": 911,
               "nodeType": "Block",
               "src": "802:59:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 902,
+                    "id": 909,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -645,25 +645,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 898,
+                        "id": 905,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "812:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 900,
+                      "id": 907,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 899,
+                        "id": 906,
                         "name": "_identityServiceProvider",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 888,
+                        "referencedDeclaration": 895,
                         "src": "822:24:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -686,7 +686,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 901,
+                      "id": 908,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -707,14 +707,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 903,
+                  "id": 910,
                   "nodeType": "ExpressionStatement",
                   "src": "812:42:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 905,
+            "id": 912,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -724,18 +724,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 891,
+                      "id": 898,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "737:3:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 892,
+                    "id": 899,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -750,14 +750,14 @@
                     }
                   }
                 ],
-                "id": 893,
+                "id": 900,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 890,
+                  "id": 897,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "709:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -771,11 +771,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 895,
+                    "id": 902,
                     "name": "_identityServiceProvider",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 888,
+                    "referencedDeclaration": 895,
                     "src": "776:24:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -783,14 +783,14 @@
                     }
                   }
                 ],
-                "id": 896,
+                "id": 903,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 894,
+                  "id": 901,
                   "name": "notIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 874,
+                  "referencedDeclaration": 881,
                   "src": "749:26:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -804,15 +804,15 @@
             "name": "addIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 889,
+              "id": 896,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 888,
+                  "id": 895,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 905,
+                  "scope": 912,
                   "src": "668:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -821,7 +821,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 887,
+                    "id": 894,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "668:7:4",
@@ -838,12 +838,12 @@
               "src": "667:34:4"
             },
             "returnParameters": {
-              "id": 897,
+              "id": 904,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "802:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "632:229:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -851,14 +851,14 @@
           },
           {
             "body": {
-              "id": 923,
+              "id": 930,
               "nodeType": "Block",
               "src": "1041:60:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 921,
+                    "id": 928,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -867,25 +867,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 917,
+                        "id": 924,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "1051:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 919,
+                      "id": 926,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 918,
+                        "id": 925,
                         "name": "_identityServiceProvider",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 907,
+                        "referencedDeclaration": 914,
                         "src": "1061:24:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -908,7 +908,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 920,
+                      "id": 927,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -929,14 +929,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 922,
+                  "id": 929,
                   "nodeType": "ExpressionStatement",
                   "src": "1051:43:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 924,
+            "id": 931,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -944,11 +944,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 910,
+                    "id": 917,
                     "name": "_identityServiceProvider",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 907,
+                    "referencedDeclaration": 914,
                     "src": "975:24:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -956,14 +956,14 @@
                     }
                   }
                 ],
-                "id": 911,
+                "id": 918,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 909,
+                  "id": 916,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "947:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -979,18 +979,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 913,
+                      "id": 920,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1029:3:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 914,
+                    "id": 921,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1005,14 +1005,14 @@
                     }
                   }
                 ],
-                "id": 915,
+                "id": 922,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 912,
+                  "id": 919,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "1001:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -1026,15 +1026,15 @@
             "name": "deleteIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 908,
+              "id": 915,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 907,
+                  "id": 914,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 924,
+                  "scope": 931,
                   "src": "906:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1043,7 +1043,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 906,
+                    "id": 913,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "906:7:4",
@@ -1060,12 +1060,12 @@
               "src": "905:34:4"
             },
             "returnParameters": {
-              "id": 916,
+              "id": 923,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1041:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "867:234:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1073,7 +1073,7 @@
           },
           {
             "body": {
-              "id": 935,
+              "id": 942,
               "nodeType": "Block",
               "src": "1203:59:4",
               "statements": [
@@ -1082,25 +1082,25 @@
                     "argumentTypes": null,
                     "baseExpression": {
                       "argumentTypes": null,
-                      "id": 931,
+                      "id": 938,
                       "name": "providers",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 849,
+                      "referencedDeclaration": 856,
                       "src": "1220:9:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                         "typeString": "mapping(address => bool)"
                       }
                     },
-                    "id": 933,
+                    "id": 940,
                     "indexExpression": {
                       "argumentTypes": null,
-                      "id": 932,
+                      "id": 939,
                       "name": "_identityServiceProvider",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 926,
+                      "referencedDeclaration": 933,
                       "src": "1230:24:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1118,30 +1118,30 @@
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 930,
-                  "id": 934,
+                  "functionReturnParameters": 937,
+                  "id": 941,
                   "nodeType": "Return",
                   "src": "1213:42:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 936,
+            "id": 943,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "isIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 927,
+              "id": 934,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 926,
+                  "id": 933,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 936,
+                  "scope": 943,
                   "src": "1142:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1150,7 +1150,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 925,
+                    "id": 932,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1142:7:4",
@@ -1167,15 +1167,15 @@
               "src": "1141:34:4"
             },
             "returnParameters": {
-              "id": 930,
+              "id": 937,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 929,
+                  "id": 936,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 936,
+                  "scope": 943,
                   "src": "1197:4:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1184,7 +1184,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 928,
+                    "id": 935,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1197:4:4",
@@ -1199,31 +1199,31 @@
               ],
               "src": "1196:6:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "1107:155:4",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 938,
+        "scope": 945,
         "src": "54:1211:4"
       }
     ],
     "src": "0:1266:4"
   },
   "legacyAST": {
-    "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
+    "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityServiceProvider.sol",
     "exportedSymbols": {
       "AlastriaIdentityServiceProvider": [
-        937
+        944
       ]
     },
-    "id": 938,
+    "id": 945,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 841,
+        "id": 848,
         "literals": [
           "solidity",
           "0.5",
@@ -1233,12 +1233,12 @@
         "src": "0:23:4"
       },
       {
-        "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
+        "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
         "file": "../libs/Eidas.sol",
-        "id": 842,
+        "id": 849,
         "nodeType": "ImportDirective",
-        "scope": 938,
-        "sourceUnit": 1037,
+        "scope": 945,
+        "sourceUnit": 1049,
         "src": "25:27:4",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1249,24 +1249,24 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 937,
+        "id": 944,
         "linearizedBaseContracts": [
-          937
+          944
         ],
         "name": "AlastriaIdentityServiceProvider",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 845,
+            "id": 852,
             "libraryName": {
               "contractScope": null,
-              "id": 843,
+              "id": 850,
               "name": "Eidas",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1036,
+              "referencedDeclaration": 1048,
               "src": "108:5:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Eidas_$1036",
+                "typeIdentifier": "t_contract$_Eidas_$1048",
                 "typeString": "library Eidas"
               }
             },
@@ -1274,23 +1274,23 @@
             "src": "102:33:4",
             "typeName": {
               "contractScope": null,
-              "id": 844,
+              "id": 851,
               "name": "Eidas.EidasLevel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1002,
+              "referencedDeclaration": 1014,
               "src": "118:16:4",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                "typeIdentifier": "t_enum$_EidasLevel_$1014",
                 "typeString": "enum Eidas.EidasLevel"
               }
             }
           },
           {
             "constant": false,
-            "id": 849,
+            "id": 856,
             "name": "providers",
             "nodeType": "VariableDeclaration",
-            "scope": 937,
+            "scope": 944,
             "src": "141:43:4",
             "stateVariable": true,
             "storageLocation": "default",
@@ -1299,9 +1299,9 @@
               "typeString": "mapping(address => bool)"
             },
             "typeName": {
-              "id": 848,
+              "id": 855,
               "keyType": {
-                "id": 846,
+                "id": 853,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "149:7:4",
@@ -1317,7 +1317,7 @@
                 "typeString": "mapping(address => bool)"
               },
               "valueType": {
-                "id": 847,
+                "id": 854,
                 "name": "bool",
                 "nodeType": "ElementaryTypeName",
                 "src": "160:4:4",
@@ -1332,7 +1332,7 @@
           },
           {
             "body": {
-              "id": 860,
+              "id": 867,
               "nodeType": "Block",
               "src": "262:89:4",
               "statements": [
@@ -1345,11 +1345,11 @@
                         "arguments": [
                           {
                             "argumentTypes": null,
-                            "id": 855,
+                            "id": 862,
                             "name": "_identityServiceProvider",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 851,
+                            "referencedDeclaration": 858,
                             "src": "307:24:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
@@ -1364,18 +1364,18 @@
                               "typeString": "address"
                             }
                           ],
-                          "id": 854,
+                          "id": 861,
                           "name": "isIdentityServiceProvider",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 936,
+                          "referencedDeclaration": 943,
                           "src": "281:25:4",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                             "typeString": "function (address) view returns (bool)"
                           }
                         },
-                        "id": 856,
+                        "id": 863,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1397,21 +1397,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 853,
+                      "id": 860,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "272:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 857,
+                    "id": 864,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1425,31 +1425,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 858,
+                  "id": 865,
                   "nodeType": "ExpressionStatement",
                   "src": "272:61:4"
                 },
                 {
-                  "id": 859,
+                  "id": 866,
                   "nodeType": "PlaceholderStatement",
                   "src": "343:1:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 861,
+            "id": 868,
             "name": "onlyIdentityServiceProvider",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 852,
+              "id": 859,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 851,
+                  "id": 858,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 861,
+                  "scope": 868,
                   "src": "228:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1458,7 +1458,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 850,
+                    "id": 857,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "228:7:4",
@@ -1479,7 +1479,7 @@
           },
           {
             "body": {
-              "id": 873,
+              "id": 880,
               "nodeType": "Block",
               "src": "427:90:4",
               "statements": [
@@ -1489,7 +1489,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 869,
+                        "id": 876,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1503,11 +1503,11 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 867,
+                              "id": 874,
                               "name": "_identityServiceProvider",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 863,
+                              "referencedDeclaration": 870,
                               "src": "473:24:4",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -1522,18 +1522,18 @@
                                 "typeString": "address"
                               }
                             ],
-                            "id": 866,
+                            "id": 873,
                             "name": "isIdentityServiceProvider",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 936,
+                            "referencedDeclaration": 943,
                             "src": "447:25:4",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
                               "typeString": "function (address) view returns (bool)"
                             }
                           },
-                          "id": 868,
+                          "id": 875,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1560,21 +1560,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 865,
+                      "id": 872,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "437:7:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 870,
+                    "id": 877,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1588,31 +1588,31 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 871,
+                  "id": 878,
                   "nodeType": "ExpressionStatement",
                   "src": "437:62:4"
                 },
                 {
-                  "id": 872,
+                  "id": 879,
                   "nodeType": "PlaceholderStatement",
                   "src": "509:1:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 874,
+            "id": 881,
             "name": "notIdentityServiceProvider",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 864,
+              "id": 871,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 863,
+                  "id": 870,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 874,
+                  "scope": 881,
                   "src": "393:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1621,7 +1621,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 862,
+                    "id": 869,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "393:7:4",
@@ -1642,14 +1642,14 @@
           },
           {
             "body": {
-              "id": 885,
+              "id": 892,
               "nodeType": "Block",
               "src": "577:49:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 883,
+                    "id": 890,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1658,25 +1658,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 879,
+                        "id": 886,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "587:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 881,
+                      "id": 888,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 880,
+                        "id": 887,
                         "name": "_firstIdentity",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 876,
+                        "referencedDeclaration": 883,
                         "src": "597:14:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1699,7 +1699,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 882,
+                      "id": 889,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1720,29 +1720,29 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 884,
+                  "id": 891,
                   "nodeType": "ExpressionStatement",
                   "src": "587:32:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 886,
+            "id": 893,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_initialize",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 877,
+              "id": 884,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 876,
+                  "id": 883,
                   "name": "_firstIdentity",
                   "nodeType": "VariableDeclaration",
-                  "scope": 886,
+                  "scope": 893,
                   "src": "544:22:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1751,7 +1751,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 875,
+                    "id": 882,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "544:7:4",
@@ -1768,12 +1768,12 @@
               "src": "543:24:4"
             },
             "returnParameters": {
-              "id": 878,
+              "id": 885,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "577:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "523:103:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1781,14 +1781,14 @@
           },
           {
             "body": {
-              "id": 904,
+              "id": 911,
               "nodeType": "Block",
               "src": "802:59:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 902,
+                    "id": 909,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1797,25 +1797,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 898,
+                        "id": 905,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "812:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 900,
+                      "id": 907,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 899,
+                        "id": 906,
                         "name": "_identityServiceProvider",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 888,
+                        "referencedDeclaration": 895,
                         "src": "822:24:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1838,7 +1838,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "74727565",
-                      "id": 901,
+                      "id": 908,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1859,14 +1859,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 903,
+                  "id": 910,
                   "nodeType": "ExpressionStatement",
                   "src": "812:42:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 905,
+            "id": 912,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -1876,18 +1876,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 891,
+                      "id": 898,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "737:3:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 892,
+                    "id": 899,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1902,14 +1902,14 @@
                     }
                   }
                 ],
-                "id": 893,
+                "id": 900,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 890,
+                  "id": 897,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "709:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -1923,11 +1923,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 895,
+                    "id": 902,
                     "name": "_identityServiceProvider",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 888,
+                    "referencedDeclaration": 895,
                     "src": "776:24:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1935,14 +1935,14 @@
                     }
                   }
                 ],
-                "id": 896,
+                "id": 903,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 894,
+                  "id": 901,
                   "name": "notIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 874,
+                  "referencedDeclaration": 881,
                   "src": "749:26:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -1956,15 +1956,15 @@
             "name": "addIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 889,
+              "id": 896,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 888,
+                  "id": 895,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 905,
+                  "scope": 912,
                   "src": "668:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1973,7 +1973,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 887,
+                    "id": 894,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "668:7:4",
@@ -1990,12 +1990,12 @@
               "src": "667:34:4"
             },
             "returnParameters": {
-              "id": 897,
+              "id": 904,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "802:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "632:229:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2003,14 +2003,14 @@
           },
           {
             "body": {
-              "id": 923,
+              "id": 930,
               "nodeType": "Block",
               "src": "1041:60:4",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 921,
+                    "id": 928,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2019,25 +2019,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 917,
+                        "id": 924,
                         "name": "providers",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 849,
+                        "referencedDeclaration": 856,
                         "src": "1051:9:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                           "typeString": "mapping(address => bool)"
                         }
                       },
-                      "id": 919,
+                      "id": 926,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 918,
+                        "id": 925,
                         "name": "_identityServiceProvider",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 907,
+                        "referencedDeclaration": 914,
                         "src": "1061:24:4",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2060,7 +2060,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 920,
+                      "id": 927,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -2081,14 +2081,14 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 922,
+                  "id": 929,
                   "nodeType": "ExpressionStatement",
                   "src": "1051:43:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 924,
+            "id": 931,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -2096,11 +2096,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 910,
+                    "id": 917,
                     "name": "_identityServiceProvider",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 907,
+                    "referencedDeclaration": 914,
                     "src": "975:24:4",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2108,14 +2108,14 @@
                     }
                   }
                 ],
-                "id": 911,
+                "id": 918,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 909,
+                  "id": 916,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "947:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -2131,18 +2131,18 @@
                     "argumentTypes": null,
                     "expression": {
                       "argumentTypes": null,
-                      "id": 913,
+                      "id": 920,
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1029:3:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
                         "typeString": "msg"
                       }
                     },
-                    "id": 914,
+                    "id": 921,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2157,14 +2157,14 @@
                     }
                   }
                 ],
-                "id": 915,
+                "id": 922,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 912,
+                  "id": 919,
                   "name": "onlyIdentityServiceProvider",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 861,
+                  "referencedDeclaration": 868,
                   "src": "1001:27:4",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_address_$",
@@ -2178,15 +2178,15 @@
             "name": "deleteIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 908,
+              "id": 915,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 907,
+                  "id": 914,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 924,
+                  "scope": 931,
                   "src": "906:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2195,7 +2195,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 906,
+                    "id": 913,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "906:7:4",
@@ -2212,12 +2212,12 @@
               "src": "905:34:4"
             },
             "returnParameters": {
-              "id": 916,
+              "id": 923,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "1041:0:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "867:234:4",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -2225,7 +2225,7 @@
           },
           {
             "body": {
-              "id": 935,
+              "id": 942,
               "nodeType": "Block",
               "src": "1203:59:4",
               "statements": [
@@ -2234,25 +2234,25 @@
                     "argumentTypes": null,
                     "baseExpression": {
                       "argumentTypes": null,
-                      "id": 931,
+                      "id": 938,
                       "name": "providers",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 849,
+                      "referencedDeclaration": 856,
                       "src": "1220:9:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_bool_$",
                         "typeString": "mapping(address => bool)"
                       }
                     },
-                    "id": 933,
+                    "id": 940,
                     "indexExpression": {
                       "argumentTypes": null,
-                      "id": 932,
+                      "id": 939,
                       "name": "_identityServiceProvider",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 926,
+                      "referencedDeclaration": 933,
                       "src": "1230:24:4",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -2270,30 +2270,30 @@
                       "typeString": "bool"
                     }
                   },
-                  "functionReturnParameters": 930,
-                  "id": 934,
+                  "functionReturnParameters": 937,
+                  "id": 941,
                   "nodeType": "Return",
                   "src": "1213:42:4"
                 }
               ]
             },
             "documentation": null,
-            "id": 936,
+            "id": 943,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "isIdentityServiceProvider",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 927,
+              "id": 934,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 926,
+                  "id": 933,
                   "name": "_identityServiceProvider",
                   "nodeType": "VariableDeclaration",
-                  "scope": 936,
+                  "scope": 943,
                   "src": "1142:32:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2302,7 +2302,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 925,
+                    "id": 932,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "1142:7:4",
@@ -2319,15 +2319,15 @@
               "src": "1141:34:4"
             },
             "returnParameters": {
-              "id": 930,
+              "id": 937,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 929,
+                  "id": 936,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 936,
+                  "scope": 943,
                   "src": "1197:4:4",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2336,7 +2336,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 928,
+                    "id": 935,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "1197:4:4",
@@ -2351,14 +2351,14 @@
               ],
               "src": "1196:6:4"
             },
-            "scope": 937,
+            "scope": 944,
             "src": "1107:155:4",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 938,
+        "scope": 945,
         "src": "54:1211:4"
       }
     ],
@@ -2370,7 +2370,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-04T09:28:21.215Z",
+  "updatedAt": "2021-04-12T12:20:20.337Z",
   "devdoc": {
     "methods": {}
   },

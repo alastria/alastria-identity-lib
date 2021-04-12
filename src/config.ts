@@ -906,7 +906,7 @@ export const config = {
           { internalType: 'bytes', name: '_data', type: 'bytes' }
         ],
         name: 'delegateCall',
-        outputs: [],
+        outputs: [{ internalType: 'bytes', name: '', type: 'bytes' }],
         payable: false,
         stateMutability: 'nonpayable',
         type: 'function'
@@ -1213,7 +1213,18 @@ export const config = {
             name: 'value',
             type: 'uint256'
           },
-          { indexed: false, internalType: 'bytes', name: 'data', type: 'bytes' }
+          {
+            indexed: false,
+            internalType: 'bytes',
+            name: 'data',
+            type: 'bytes'
+          },
+          {
+            indexed: false,
+            internalType: 'bytes',
+            name: 'result',
+            type: 'bytes'
+          }
         ],
         name: 'Forwarded',
         type: 'event'
@@ -1255,7 +1266,7 @@ export const config = {
           { internalType: 'bytes', name: 'data', type: 'bytes' }
         ],
         name: 'forward',
-        outputs: [],
+        outputs: [{ internalType: 'bytes', name: '', type: 'bytes' }],
         payable: false,
         stateMutability: 'nonpayable',
         type: 'function'

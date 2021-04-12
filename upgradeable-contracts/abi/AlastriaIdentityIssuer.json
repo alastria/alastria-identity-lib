@@ -99,15 +99,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"},{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"_level\",\"type\":\"uint8\"}],\"name\":\"addIdentityIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"deleteIdentityIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"getEidasLevel\",\"outputs\":[{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"isIdentityIssuer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"},{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"_level\",\"type\":\"uint8\"}],\"name\":\"updateIdentityIssuerEidasLevel\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol\":\"AlastriaIdentityIssuer\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol\":{\"keccak256\":\"0x0a9e14ffb8c66ec950dff52fca90d14c9d0f67064abeabf2d8d4bcd7bb4d3c32\",\"urls\":[\"bzz-raw://91fa104e445f0d1e930e805e06ac3337e7ae3245671ad59836daea9d18c621fa\",\"dweb:/ipfs/QmNZo99uFcHrcsGjYSFQ4eKeUWXLq6owdHPMsW9tSu5R24\"]},\"/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol\":{\"keccak256\":\"0x16e45031d65c5b0634dfc8202d62b4a47a9bdfbba8c3c9168940ccdbbada3b80\",\"urls\":[\"bzz-raw://4f3bad8027241f4129e9e3906c57ee966aac2c7a2b59f71bc7ccc5bc83eb1213\",\"dweb:/ipfs/QmeLgD2azybRekL6GGYmRuZVP1byfpoESgx8XzukLyPcA1\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b5061045d806100206000396000f3fe608060405234801561001057600080fd5b506004361061005a5760e060020a60003504630e5a4fbb811461005f57806344963610146100a95780636554adf0146100da578063889776a814610114578063cb69159914610143575b600080fd5b6100856004803603602081101561007557600080fd5b5035600160a060020a0316610169565b6040518082600481111561009557fe5b60ff16815260200191505060405180910390f35b6100d8600480360360408110156100bf57600080fd5b508035600160a060020a0316906020013560ff16610187565b005b610100600480360360208110156100f057600080fd5b5035600160a060020a0316610287565b604080519115158252519081900360200190f35b6100d86004803603604081101561012a57600080fd5b508035600160a060020a0316906020013560ff166102aa565b6100d86004803603602081101561015957600080fd5b5035600160a060020a03166103e4565b600160a060020a031660009081526020819052604090205460ff1690565b8080600481111561019457fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156101d257fe5b60ff16815260200191505060206040518083038186803b1580156101f557600080fd5b505af4158015610209573d6000803e3d6000fd5b505050506040513d602081101561021f57600080fd5b505161022a57600080fd5b33600081815260208190526040902054610100900460ff1661024b57600080fd5b600160a060020a038416600090815260208190526040902080548490829060ff1916600183600481111561027b57fe5b02179055505050505050565b600160a060020a0316600090815260208190526040902054610100900460ff1690565b808060048111156102b757fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156102f557fe5b60ff16815260200191505060206040518083038186803b15801561031857600080fd5b505af415801561032c573d6000803e3d6000fd5b505050506040513d602081101561034257600080fd5b505161034d57600080fd5b600160a060020a0383166000908152602081905260409020548390610100900460ff161561037a57600080fd5b33600081815260208190526040902054610100900460ff1661039b57600080fd5b600160a060020a038516600090815260208190526040902080548590829060ff191660018360048111156103cb57fe5b0217905550805461ff0019166101001790555050505050565b33600081815260208190526040902054610100900460ff1661040557600080fd5b50600160a060020a03166000908152602081905260409020805461ffff1916905556fea265627a7a72315820186441b1a436d19ac44562d1c6460102055ae23d03e0a43c9430b7815f5af51664736f6c63430005110032",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005a5760e060020a60003504630e5a4fbb811461005f57806344963610146100a95780636554adf0146100da578063889776a814610114578063cb69159914610143575b600080fd5b6100856004803603602081101561007557600080fd5b5035600160a060020a0316610169565b6040518082600481111561009557fe5b60ff16815260200191505060405180910390f35b6100d8600480360360408110156100bf57600080fd5b508035600160a060020a0316906020013560ff16610187565b005b610100600480360360208110156100f057600080fd5b5035600160a060020a0316610287565b604080519115158252519081900360200190f35b6100d86004803603604081101561012a57600080fd5b508035600160a060020a0316906020013560ff166102aa565b6100d86004803603602081101561015957600080fd5b5035600160a060020a03166103e4565b600160a060020a031660009081526020819052604090205460ff1690565b8080600481111561019457fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156101d257fe5b60ff16815260200191505060206040518083038186803b1580156101f557600080fd5b505af4158015610209573d6000803e3d6000fd5b505050506040513d602081101561021f57600080fd5b505161022a57600080fd5b33600081815260208190526040902054610100900460ff1661024b57600080fd5b600160a060020a038416600090815260208190526040902080548490829060ff1916600183600481111561027b57fe5b02179055505050505050565b600160a060020a0316600090815260208190526040902054610100900460ff1690565b808060048111156102b757fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156102f557fe5b60ff16815260200191505060206040518083038186803b15801561031857600080fd5b505af415801561032c573d6000803e3d6000fd5b505050506040513d602081101561034257600080fd5b505161034d57600080fd5b600160a060020a0383166000908152602081905260409020548390610100900460ff161561037a57600080fd5b33600081815260208190526040902054610100900460ff1661039b57600080fd5b600160a060020a038516600090815260208190526040902080548590829060ff191660018360048111156103cb57fe5b0217905550805461ff0019166101001790555050505050565b33600081815260208190526040902054610100900460ff1661040557600080fd5b50600160a060020a03166000908152602081905260409020805461ffff1916905556fea265627a7a72315820186441b1a436d19ac44562d1c6460102055ae23d03e0a43c9430b7815f5af51664736f6c63430005110032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"},{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"_level\",\"type\":\"uint8\"}],\"name\":\"addIdentityIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"deleteIdentityIssuer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"getEidasLevel\",\"outputs\":[{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"}],\"name\":\"isIdentityIssuer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_identityIssuer\",\"type\":\"address\"},{\"internalType\":\"enum Eidas.EidasLevel\",\"name\":\"_level\",\"type\":\"uint8\"}],\"name\":\"updateIdentityIssuerEidasLevel\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol\":\"AlastriaIdentityIssuer\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol\":{\"keccak256\":\"0x0a9e14ffb8c66ec950dff52fca90d14c9d0f67064abeabf2d8d4bcd7bb4d3c32\",\"urls\":[\"bzz-raw://91fa104e445f0d1e930e805e06ac3337e7ae3245671ad59836daea9d18c621fa\",\"dweb:/ipfs/QmNZo99uFcHrcsGjYSFQ4eKeUWXLq6owdHPMsW9tSu5R24\"]},\"/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol\":{\"keccak256\":\"0x16e45031d65c5b0634dfc8202d62b4a47a9bdfbba8c3c9168940ccdbbada3b80\",\"urls\":[\"bzz-raw://4f3bad8027241f4129e9e3906c57ee966aac2c7a2b59f71bc7ccc5bc83eb1213\",\"dweb:/ipfs/QmeLgD2azybRekL6GGYmRuZVP1byfpoESgx8XzukLyPcA1\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061045d806100206000396000f3fe608060405234801561001057600080fd5b506004361061005a5760e060020a60003504630e5a4fbb811461005f57806344963610146100a95780636554adf0146100da578063889776a814610114578063cb69159914610143575b600080fd5b6100856004803603602081101561007557600080fd5b5035600160a060020a0316610169565b6040518082600481111561009557fe5b60ff16815260200191505060405180910390f35b6100d8600480360360408110156100bf57600080fd5b508035600160a060020a0316906020013560ff16610187565b005b610100600480360360208110156100f057600080fd5b5035600160a060020a0316610287565b604080519115158252519081900360200190f35b6100d86004803603604081101561012a57600080fd5b508035600160a060020a0316906020013560ff166102aa565b6100d86004803603602081101561015957600080fd5b5035600160a060020a03166103e4565b600160a060020a031660009081526020819052604090205460ff1690565b8080600481111561019457fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156101d257fe5b60ff16815260200191505060206040518083038186803b1580156101f557600080fd5b505af4158015610209573d6000803e3d6000fd5b505050506040513d602081101561021f57600080fd5b505161022a57600080fd5b33600081815260208190526040902054610100900460ff1661024b57600080fd5b600160a060020a038416600090815260208190526040902080548490829060ff1916600183600481111561027b57fe5b02179055505050505050565b600160a060020a0316600090815260208190526040902054610100900460ff1690565b808060048111156102b757fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156102f557fe5b60ff16815260200191505060206040518083038186803b15801561031857600080fd5b505af415801561032c573d6000803e3d6000fd5b505050506040513d602081101561034257600080fd5b505161034d57600080fd5b600160a060020a0383166000908152602081905260409020548390610100900460ff161561037a57600080fd5b33600081815260208190526040902054610100900460ff1661039b57600080fd5b600160a060020a038516600090815260208190526040902080548590829060ff191660018360048111156103cb57fe5b0217905550805461ff0019166101001790555050505050565b33600081815260208190526040902054610100900460ff1661040557600080fd5b50600160a060020a03166000908152602081905260409020805461ffff1916905556fea265627a7a723158209937df164dc4cd9faa83b9734bd3d4078e8f557f1091e54025c5cb34f07bd46564736f6c63430005110032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061005a5760e060020a60003504630e5a4fbb811461005f57806344963610146100a95780636554adf0146100da578063889776a814610114578063cb69159914610143575b600080fd5b6100856004803603602081101561007557600080fd5b5035600160a060020a0316610169565b6040518082600481111561009557fe5b60ff16815260200191505060405180910390f35b6100d8600480360360408110156100bf57600080fd5b508035600160a060020a0316906020013560ff16610187565b005b610100600480360360208110156100f057600080fd5b5035600160a060020a0316610287565b604080519115158252519081900360200190f35b6100d86004803603604081101561012a57600080fd5b508035600160a060020a0316906020013560ff166102aa565b6100d86004803603602081101561015957600080fd5b5035600160a060020a03166103e4565b600160a060020a031660009081526020819052604090205460ff1690565b8080600481111561019457fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156101d257fe5b60ff16815260200191505060206040518083038186803b1580156101f557600080fd5b505af4158015610209573d6000803e3d6000fd5b505050506040513d602081101561021f57600080fd5b505161022a57600080fd5b33600081815260208190526040902054610100900460ff1661024b57600080fd5b600160a060020a038416600090815260208190526040902080548490829060ff1916600183600481111561027b57fe5b02179055505050505050565b600160a060020a0316600090815260208190526040902054610100900460ff1690565b808060048111156102b757fe5b73__Eidas_________________________________630fa78bf790916040518263ffffffff1660e060020a028152600401808260048111156102f557fe5b60ff16815260200191505060206040518083038186803b15801561031857600080fd5b505af415801561032c573d6000803e3d6000fd5b505050506040513d602081101561034257600080fd5b505161034d57600080fd5b600160a060020a0383166000908152602081905260409020548390610100900460ff161561037a57600080fd5b33600081815260208190526040902054610100900460ff1661039b57600080fd5b600160a060020a038516600090815260208190526040902080548590829060ff191660018360048111156103cb57fe5b0217905550805461ff0019166101001790555050505050565b33600081815260208190526040902054610100900460ff1661040557600080fd5b50600160a060020a03166000908152602081905260409020805461ffff1916905556fea265627a7a723158209937df164dc4cd9faa83b9734bd3d4078e8f557f1091e54025c5cb34f07bd46564736f6c63430005110032",
   "sourceMap": "54:1984:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:1984:2;;;;;;;",
   "deployedSourceMap": "54:1984:2:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;54:1984:2;;;;;;-1:-1:-1;;;54:1984:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1750:141;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1750:141:2;-1:-1:-1;;;;;1750:141:2;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1204:267;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1204:267:2;;-1:-1:-1;;;;;1204:267:2;;;;;;;;:::i;:::-;;1902:133;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1902:133:2;-1:-1:-1;;;;;1902:133:2;;:::i;:::-;;;;;;;;;;;;;;;;;;871:327;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;871:327:2;;-1:-1:-1;;;;;871:327:2;;;;;;;;:::i;1477:267::-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;1477:267:2;-1:-1:-1;;;;;1477:267:2;;:::i;1750:141::-;-1:-1:-1;;;;;1854:24:2;1819:16;1854:24;;;;;;;;;;:30;;;;1750:141::o;1204:267::-;1312:6;598;:17;;;;;;;;;;;;:19;;;;;-1:-1:-1;;;598:19:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;598:19:2;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;598:19:2;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;598:19:2;589:29;;;;;;1339:10;350:7;:24;;;;;;;;;;:31;;;;;;341:41;;;;;;-1:-1:-1;;;;;1401:24:2;;1361:37;1401:24;;;;;;;;;;1435:29;;1458:6;;1401:24;;-1:-1:-1;;1435:29:2;;1458:6;1435:29;;;;;;;;;;;;;392:1;628;1204:267;;;:::o;1902:133::-;-1:-1:-1;;;;;1997:24:2;1974:4;1997:24;;;;;;;;;;:31;;;;;;;1902:133::o;871:327::-;966:6;598;:17;;;;;;;;;;;;:19;;;;;-1:-1:-1;;;598:19:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;598:19:2;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;598:19:2;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;598:19:2;589:29;;;;;;-1:-1:-1;;;;;478:24:2;;:7;:24;;;;;;;;;;:31;:24;;:31;;;;;477:32;468:42;;;;;;1028:10;350:7;:24;;;;;;;;;;:31;;;;;;341:41;;;;;;-1:-1:-1;;;;;1090:24:2;;1050:37;1090:24;;;;;;;;;;1124:29;;1147:6;;1090:24;;-1:-1:-1;;1124:29:2;;1147:6;1124:29;;;;;;;;;;;;-1:-1:-1;1163:28:2;;-1:-1:-1;;1163:28:2;;;;;-1:-1:-1;;;;;871:327:2:o;1477:267::-;1558:10;350:7;:24;;;;;;;;;;:31;;;;;;341:41;;;;;;-1:-1:-1;;;;;;1620:24:2;1580:37;1620:24;;;;;;;;;;1654:44;;-1:-1:-1;;1708:29:2;;;1477:267::o",
   "source": "pragma solidity 0.5.17;\n\nimport \"../libs/Eidas.sol\";\n\ncontract AlastriaIdentityIssuer {\n\n    using Eidas for Eidas.EidasLevel;\n\n    struct IdentityIssuer {\n        Eidas.EidasLevel level;\n        bool active;\n    }\n\n    mapping(address => IdentityIssuer) internal issuers;\n\n    modifier onlyIdentityIssuer(address _identityIssuer) {\n        require (issuers[_identityIssuer].active);\n        _;\n    }\n\n    modifier notIdentityIssuer(address _identityIssuer) {\n        require (!issuers[_identityIssuer].active);\n        _;\n    }\n\n    modifier alLeastLow(Eidas.EidasLevel _level) {\n        require (_level.atLeastLow());\n        _;\n    }\n\n    function _initialize(address _firstIdentity) internal {\n\t    IdentityIssuer storage identityIssuer = issuers[_firstIdentity];\n        identityIssuer.level = Eidas.EidasLevel.High;\n        identityIssuer.active = true;\n    }\n\n    function addIdentityIssuer(address _identityIssuer, Eidas.EidasLevel _level) public alLeastLow(_level) notIdentityIssuer(_identityIssuer) onlyIdentityIssuer(msg.sender) {\n        IdentityIssuer storage identityIssuer = issuers[_identityIssuer];\n        identityIssuer.level = _level;\n        identityIssuer.active = true;\n    }\n\n    function updateIdentityIssuerEidasLevel(address _identityIssuer, Eidas.EidasLevel _level) public alLeastLow(_level) onlyIdentityIssuer(msg.sender) {\n        IdentityIssuer storage identityIssuer = issuers[_identityIssuer];\n        identityIssuer.level = _level;\n    }\n\n    function deleteIdentityIssuer(address _identityIssuer) public onlyIdentityIssuer(msg.sender) {\n        IdentityIssuer storage identityIssuer = issuers[_identityIssuer];\n        identityIssuer.level = Eidas.EidasLevel.Null;\n        identityIssuer.active = false;\n    }\n\n    function getEidasLevel(address _identityIssuer) public view returns (Eidas.EidasLevel) {\n        return issuers[_identityIssuer].level;\n    }\n    \n     function isIdentityIssuer(address _identityIssuer) public view returns (bool) {\n        return issuers[_identityIssuer].active;\n    }\n\n}\n",
-  "sourcePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
+  "sourcePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
   "ast": {
-    "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
+    "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
     "exportedSymbols": {
       "AlastriaIdentityIssuer": [
         537
@@ -127,12 +127,12 @@
         "src": "0:23:2"
       },
       {
-        "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
+        "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
         "file": "../libs/Eidas.sol",
         "id": 340,
         "nodeType": "ImportDirective",
         "scope": 538,
-        "sourceUnit": 1037,
+        "sourceUnit": 1049,
         "src": "25:27:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -157,10 +157,10 @@
               "id": 341,
               "name": "Eidas",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1036,
+              "referencedDeclaration": 1048,
               "src": "99:5:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Eidas_$1036",
+                "typeIdentifier": "t_contract$_Eidas_$1048",
                 "typeString": "library Eidas"
               }
             },
@@ -171,10 +171,10 @@
               "id": 342,
               "name": "Eidas.EidasLevel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1002,
+              "referencedDeclaration": 1014,
               "src": "109:16:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                "typeIdentifier": "t_enum$_EidasLevel_$1014",
                 "typeString": "enum Eidas.EidasLevel"
               }
             }
@@ -193,7 +193,7 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                  "typeIdentifier": "t_enum$_EidasLevel_$1014",
                   "typeString": "enum Eidas.EidasLevel"
                 },
                 "typeName": {
@@ -201,10 +201,10 @@
                   "id": 344,
                   "name": "Eidas.EidasLevel",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 1002,
+                  "referencedDeclaration": 1014,
                   "src": "164:16:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   }
                 },
@@ -369,10 +369,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "341:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -539,10 +539,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "468:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -639,7 +639,7 @@
                             "referencedDeclaration": 381,
                             "src": "598:6:2",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                              "typeIdentifier": "t_enum$_EidasLevel_$1014",
                               "typeString": "enum Eidas.EidasLevel"
                             }
                           },
@@ -650,10 +650,10 @@
                           "lValueRequested": false,
                           "memberName": "atLeastLow",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1016,
+                          "referencedDeclaration": 1028,
                           "src": "598:17:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_delegatecall_pure$_t_enum$_EidasLevel_$1002_$returns$_t_bool_$bound_to$_t_enum$_EidasLevel_$1002_$",
+                            "typeIdentifier": "t_function_delegatecall_pure$_t_enum$_EidasLevel_$1014_$returns$_t_bool_$bound_to$_t_enum$_EidasLevel_$1014_$",
                             "typeString": "function (enum Eidas.EidasLevel) pure returns (bool)"
                           }
                         },
@@ -683,10 +683,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "589:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -736,7 +736,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -744,10 +744,10 @@
                     "id": 380,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "554:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -877,7 +877,7 @@
                       "referencedDeclaration": 345,
                       "src": "776:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -893,10 +893,10 @@
                           "name": "Eidas",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1036,
+                          "referencedDeclaration": 1048,
                           "src": "799:5:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1036_$",
+                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1048_$",
                             "typeString": "type(library Eidas)"
                           }
                         },
@@ -907,10 +907,10 @@
                         "lValueRequested": false,
                         "memberName": "EidasLevel",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1002,
+                        "referencedDeclaration": 1014,
                         "src": "799:16:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1002_$",
+                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1014_$",
                           "typeString": "type(enum Eidas.EidasLevel)"
                         }
                       },
@@ -924,13 +924,13 @@
                       "referencedDeclaration": null,
                       "src": "799:21:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "776:44:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -1057,7 +1057,7 @@
             "scope": 537,
             "src": "642:223:2",
             "stateMutability": "nonpayable",
-            "superFunction": 886,
+            "superFunction": 893,
             "visibility": "internal"
           },
           {
@@ -1177,7 +1177,7 @@
                       "referencedDeclaration": 345,
                       "src": "1124:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -1192,13 +1192,13 @@
                       "referencedDeclaration": 421,
                       "src": "1147:6:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1124:29:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -1291,7 +1291,7 @@
                     "referencedDeclaration": 421,
                     "src": "966:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   }
@@ -1306,7 +1306,7 @@
                   "referencedDeclaration": 391,
                   "src": "955:10:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1002_$",
+                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1014_$",
                     "typeString": "modifier (enum Eidas.EidasLevel)"
                   }
                 },
@@ -1356,7 +1356,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1028:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -1439,7 +1439,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -1447,10 +1447,10 @@
                     "id": 420,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "923:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -1589,7 +1589,7 @@
                       "referencedDeclaration": 345,
                       "src": "1435:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -1604,13 +1604,13 @@
                       "referencedDeclaration": 457,
                       "src": "1458:6:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1435:29:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -1636,7 +1636,7 @@
                     "referencedDeclaration": 457,
                     "src": "1312:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   }
@@ -1651,7 +1651,7 @@
                   "referencedDeclaration": 391,
                   "src": "1301:10:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1002_$",
+                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1014_$",
                     "typeString": "modifier (enum Eidas.EidasLevel)"
                   }
                 },
@@ -1668,7 +1668,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1339:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -1751,7 +1751,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -1759,10 +1759,10 @@
                     "id": 456,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "1269:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -1901,7 +1901,7 @@
                       "referencedDeclaration": 345,
                       "src": "1654:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -1917,10 +1917,10 @@
                           "name": "Eidas",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1036,
+                          "referencedDeclaration": 1048,
                           "src": "1677:5:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1036_$",
+                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1048_$",
                             "typeString": "type(library Eidas)"
                           }
                         },
@@ -1931,10 +1931,10 @@
                         "lValueRequested": false,
                         "memberName": "EidasLevel",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1002,
+                        "referencedDeclaration": 1014,
                         "src": "1677:16:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1002_$",
+                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1014_$",
                           "typeString": "type(enum Eidas.EidasLevel)"
                         }
                       },
@@ -1948,13 +1948,13 @@
                       "referencedDeclaration": null,
                       "src": "1677:21:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1654:44:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -2046,7 +2046,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1558:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -2193,7 +2193,7 @@
                     "referencedDeclaration": 345,
                     "src": "1854:30:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -2259,7 +2259,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -2267,10 +2267,10 @@
                     "id": 514,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "1819:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -2444,7 +2444,7 @@
     "src": "0:2039:2"
   },
   "legacyAST": {
-    "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
+    "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/identityManager/AlastriaIdentityIssuer.sol",
     "exportedSymbols": {
       "AlastriaIdentityIssuer": [
         537
@@ -2464,12 +2464,12 @@
         "src": "0:23:2"
       },
       {
-        "absolutePath": "/Users/danielluquequintana/Github/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
+        "absolutePath": "/home/anthares101/Proyectos/temp-alastriaID-truffle-contracts/contracts/libs/Eidas.sol",
         "file": "../libs/Eidas.sol",
         "id": 340,
         "nodeType": "ImportDirective",
         "scope": 538,
-        "sourceUnit": 1037,
+        "sourceUnit": 1049,
         "src": "25:27:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2494,10 +2494,10 @@
               "id": 341,
               "name": "Eidas",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1036,
+              "referencedDeclaration": 1048,
               "src": "99:5:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Eidas_$1036",
+                "typeIdentifier": "t_contract$_Eidas_$1048",
                 "typeString": "library Eidas"
               }
             },
@@ -2508,10 +2508,10 @@
               "id": 342,
               "name": "Eidas.EidasLevel",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1002,
+              "referencedDeclaration": 1014,
               "src": "109:16:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                "typeIdentifier": "t_enum$_EidasLevel_$1014",
                 "typeString": "enum Eidas.EidasLevel"
               }
             }
@@ -2530,7 +2530,7 @@
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                  "typeIdentifier": "t_enum$_EidasLevel_$1014",
                   "typeString": "enum Eidas.EidasLevel"
                 },
                 "typeName": {
@@ -2538,10 +2538,10 @@
                   "id": 344,
                   "name": "Eidas.EidasLevel",
                   "nodeType": "UserDefinedTypeName",
-                  "referencedDeclaration": 1002,
+                  "referencedDeclaration": 1014,
                   "src": "164:16:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   }
                 },
@@ -2706,10 +2706,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "341:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2876,10 +2876,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "468:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -2976,7 +2976,7 @@
                             "referencedDeclaration": 381,
                             "src": "598:6:2",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                              "typeIdentifier": "t_enum$_EidasLevel_$1014",
                               "typeString": "enum Eidas.EidasLevel"
                             }
                           },
@@ -2987,10 +2987,10 @@
                           "lValueRequested": false,
                           "memberName": "atLeastLow",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1016,
+                          "referencedDeclaration": 1028,
                           "src": "598:17:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_function_delegatecall_pure$_t_enum$_EidasLevel_$1002_$returns$_t_bool_$bound_to$_t_enum$_EidasLevel_$1002_$",
+                            "typeIdentifier": "t_function_delegatecall_pure$_t_enum$_EidasLevel_$1014_$returns$_t_bool_$bound_to$_t_enum$_EidasLevel_$1014_$",
                             "typeString": "function (enum Eidas.EidasLevel) pure returns (bool)"
                           }
                         },
@@ -3020,10 +3020,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        2746,
-                        2747
+                        2758,
+                        2759
                       ],
-                      "referencedDeclaration": 2746,
+                      "referencedDeclaration": 2758,
                       "src": "589:7:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
@@ -3073,7 +3073,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -3081,10 +3081,10 @@
                     "id": 380,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "554:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -3214,7 +3214,7 @@
                       "referencedDeclaration": 345,
                       "src": "776:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -3230,10 +3230,10 @@
                           "name": "Eidas",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1036,
+                          "referencedDeclaration": 1048,
                           "src": "799:5:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1036_$",
+                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1048_$",
                             "typeString": "type(library Eidas)"
                           }
                         },
@@ -3244,10 +3244,10 @@
                         "lValueRequested": false,
                         "memberName": "EidasLevel",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1002,
+                        "referencedDeclaration": 1014,
                         "src": "799:16:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1002_$",
+                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1014_$",
                           "typeString": "type(enum Eidas.EidasLevel)"
                         }
                       },
@@ -3261,13 +3261,13 @@
                       "referencedDeclaration": null,
                       "src": "799:21:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "776:44:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -3394,7 +3394,7 @@
             "scope": 537,
             "src": "642:223:2",
             "stateMutability": "nonpayable",
-            "superFunction": 886,
+            "superFunction": 893,
             "visibility": "internal"
           },
           {
@@ -3514,7 +3514,7 @@
                       "referencedDeclaration": 345,
                       "src": "1124:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -3529,13 +3529,13 @@
                       "referencedDeclaration": 421,
                       "src": "1147:6:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1124:29:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -3628,7 +3628,7 @@
                     "referencedDeclaration": 421,
                     "src": "966:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   }
@@ -3643,7 +3643,7 @@
                   "referencedDeclaration": 391,
                   "src": "955:10:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1002_$",
+                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1014_$",
                     "typeString": "modifier (enum Eidas.EidasLevel)"
                   }
                 },
@@ -3693,7 +3693,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1028:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -3776,7 +3776,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -3784,10 +3784,10 @@
                     "id": 420,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "923:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -3926,7 +3926,7 @@
                       "referencedDeclaration": 345,
                       "src": "1435:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -3941,13 +3941,13 @@
                       "referencedDeclaration": 457,
                       "src": "1458:6:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1435:29:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -3973,7 +3973,7 @@
                     "referencedDeclaration": 457,
                     "src": "1312:6:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   }
@@ -3988,7 +3988,7 @@
                   "referencedDeclaration": 391,
                   "src": "1301:10:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1002_$",
+                    "typeIdentifier": "t_modifier$_t_enum$_EidasLevel_$1014_$",
                     "typeString": "modifier (enum Eidas.EidasLevel)"
                   }
                 },
@@ -4005,7 +4005,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1339:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -4088,7 +4088,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -4096,10 +4096,10 @@
                     "id": 456,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "1269:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -4238,7 +4238,7 @@
                       "referencedDeclaration": 345,
                       "src": "1654:20:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
@@ -4254,10 +4254,10 @@
                           "name": "Eidas",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 1036,
+                          "referencedDeclaration": 1048,
                           "src": "1677:5:2",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1036_$",
+                            "typeIdentifier": "t_type$_t_contract$_Eidas_$1048_$",
                             "typeString": "type(library Eidas)"
                           }
                         },
@@ -4268,10 +4268,10 @@
                         "lValueRequested": false,
                         "memberName": "EidasLevel",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 1002,
+                        "referencedDeclaration": 1014,
                         "src": "1677:16:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1002_$",
+                          "typeIdentifier": "t_type$_t_enum$_EidasLevel_$1014_$",
                           "typeString": "type(enum Eidas.EidasLevel)"
                         }
                       },
@@ -4285,13 +4285,13 @@
                       "referencedDeclaration": null,
                       "src": "1677:21:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                        "typeIdentifier": "t_enum$_EidasLevel_$1014",
                         "typeString": "enum Eidas.EidasLevel"
                       }
                     },
                     "src": "1654:44:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -4383,7 +4383,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2743,
+                      "referencedDeclaration": 2755,
                       "src": "1558:3:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -4530,7 +4530,7 @@
                     "referencedDeclaration": 345,
                     "src": "1854:30:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -4596,7 +4596,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                    "typeIdentifier": "t_enum$_EidasLevel_$1014",
                     "typeString": "enum Eidas.EidasLevel"
                   },
                   "typeName": {
@@ -4604,10 +4604,10 @@
                     "id": 514,
                     "name": "Eidas.EidasLevel",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1002,
+                    "referencedDeclaration": 1014,
                     "src": "1819:16:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_EidasLevel_$1002",
+                      "typeIdentifier": "t_enum$_EidasLevel_$1014",
                       "typeString": "enum Eidas.EidasLevel"
                     }
                   },
@@ -4786,7 +4786,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-04T09:28:21.211Z",
+  "updatedAt": "2021-04-12T12:20:20.333Z",
   "devdoc": {
     "methods": {}
   },

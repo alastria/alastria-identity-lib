@@ -9,8 +9,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "run-s build",
-    "compile": "git clone --branch mvp0.1 https://github.com/alastria/alastria-identity.git && node src/configFile.js && tsc",
-    "clean": "rimraf dist",
+    "compile": "git clone --branch develop https://github.com/alastria/temp-alastriaID-truffle-contracts.git && npm install --prefix temp-alastriaID-truffle-contracts && npm run compile --prefix temp-alastriaID-truffle-contracts && node src/configFile.js && tsc",
+    "clean": "rimraf dist temp-alastriaID-truffle-contracts",
     "build": "run-s clean compile",
     "test": "mocha -r ts-node/register test/**/*.ts",
     "lint": "eslint 'src/**/*.{js,ts,tsx}'",

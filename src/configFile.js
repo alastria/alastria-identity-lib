@@ -2,37 +2,37 @@
 const fs = require('fs')
 const path = require('path')
 
-const contractsPath = '../alastria-identity/contracts'
+const contractsABIPath = '../temp-alastriaID-truffle-contracts/build/contracts'
 var _contractsAbi = {}
 
 // Process the abi dir for getting an object with all the abi functions
-fs.readdirSync(path.join(__dirname, `${contractsPath}/abi`)).forEach((file) => {
+fs.readdirSync(path.join(__dirname, `${contractsABIPath}`)).forEach((file) => {
   const abi = {}
   const abiFile = JSON.parse(
-    fs.readFileSync(path.join(__dirname, `${contractsPath}/abi`, file), 'utf8')
+    fs.readFileSync(path.join(__dirname, `${contractsABIPath}`, file), 'utf8')
   )
-  abiFile.forEach((element) => {
+  abiFile.abi.forEach((element) => {
     if (element.type === 'constructor') {
       abi.constructor = element
     } else {
-      abi[element.name] = element
+      if (element.name) {
+        abi[element.name] = element
+      }
     }
   })
-  _contractsAbi[file.match(/sol_(.*)\.abi/)[1]] = abi
+  _contractsAbi[abiFile.contractName] = abi
 })
 
-// Read file ContractInfo.md and take rows to aobtain the addres of each contract
-const contractsInfo = fs.readFileSync(
-  path.join(__dirname, `${contractsPath}/`, 'ContractInfo.md'),
-  'utf8'
+const contractsAddressesPath = '../temp-alastriaID-truffle-contracts'
+const contractsInfo = JSON.parse(
+  fs.readFileSync(path.join(__dirname, `${contractsAddressesPath}`, 'addresses.json'), 'utf8')
 )
-const contractInfoRow = contractsInfo.split('\n')
 
 const config = {
-  alastriaIdentityManager: contractInfoRow[3].split(' | ')[1],
-  alastriaCredentialRegistry: contractInfoRow[4].split(' | ')[1],
-  alastriaPresentationRegistry: contractInfoRow[5].split(' | ')[1],
-  alastriaPublicKeyRegistry: contractInfoRow[6].split(' | ')[1],
+  alastriaIdentityManager: contractsInfo.AlastriaIdentityManager,
+  alastriaCredentialRegistry: contractsInfo.AlastriaCredentialRegistry,
+  alastriaPresentationRegistry: contractsInfo.AlastriaPresentationRegistry,
+  alastriaPublicKeyRegistry: contractsInfo.AlastriaPublicKeyRegistry,
   basicTransaction: {
     to: '0x0000000000000000000000000000000000000000',
     data: '0x0',

@@ -126,7 +126,7 @@ export function getIssuerCredentialStatus(
   didIssuer,
   issuerCredentialHash
 ) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.getIssuerCredentialStatus,

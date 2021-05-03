@@ -64,7 +64,7 @@ export function createAlastriaIdentity(web3, publicKey) {
  * @param level
  */
 export function addIdentityIssuer(web3, didIssuer, level) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.addIdentityIssuer,
@@ -83,7 +83,7 @@ export function addIdentityIssuer(web3, didIssuer, level) {
  * @param level
  */
 export function updateIdentityIssuerEidasLevel(web3, didIssuer, level) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.updateIdentityIssuerEidasLevel,
@@ -101,7 +101,7 @@ export function updateIdentityIssuerEidasLevel(web3, didIssuer, level) {
  * @param didIssuer
  */
 export function deleteIdentityIssuer(web3, didIssuer) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.deleteIdentityIssuer,
@@ -119,7 +119,7 @@ export function deleteIdentityIssuer(web3, didIssuer) {
  * @param didIssuer
  */
 export function getEidasLevel(web3, didIssuer) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.getEidasLevel,
@@ -191,7 +191,7 @@ export function isIdentityServiceProvider(web3, didServiceProvider) {
  * @param didIssuer
  */
 export function isIdentityIssuer(web3, didIssuer) {
-  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
+  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityIssuer.isIdentityIssuer,

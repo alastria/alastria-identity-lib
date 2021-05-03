@@ -137,7 +137,7 @@ export function getEidasLevel(web3, didIssuer) {
  * @param didServiceProvider
  */
 export function addIdentityServiceProvider(web3, didServiceProvider) {
-  const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
+  const providerAddr = `0x${AIdUtils.getProxyAddress(didServiceProvider)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.addIdentityServiceProvider,
@@ -155,7 +155,7 @@ export function addIdentityServiceProvider(web3, didServiceProvider) {
  * @param didServiceProvider
  */
 export function deleteIdentityServiceProvider(web3, didServiceProvider) {
-  const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
+  const providerAddr = `0x${AIdUtils.getProxyAddress(didServiceProvider)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.deleteIdentityServiceProvider,
@@ -173,7 +173,7 @@ export function deleteIdentityServiceProvider(web3, didServiceProvider) {
  * @param didServiceProvider
  */
 export function isIdentityServiceProvider(web3, didServiceProvider) {
-  const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
+  const providerAddr = `0x${AIdUtils.getProxyAddress(didServiceProvider)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityServiceProvider
@@ -223,7 +223,7 @@ export function addEntity(
   urlAOA,
   status
 ) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.addEntity,
@@ -242,7 +242,7 @@ export function addEntity(
  * @param name
  */
 export function setNameEntity(web3, didEntity, name) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setNameEntity,
@@ -261,7 +261,7 @@ export function setNameEntity(web3, didEntity, name) {
  * @param cif
  */
 export function setCifEntity(web3, didEntity, cif) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setCifEntity,
@@ -280,7 +280,7 @@ export function setCifEntity(web3, didEntity, cif) {
  * @param urlLogo
  */
 export function setUrlLogo(web3, didEntity, urlLogo) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlLogo,
@@ -299,7 +299,7 @@ export function setUrlLogo(web3, didEntity, urlLogo) {
  * @param urlCreateAID
  */
 export function setUrlCreateAID(web3, didEntity, urlCreateAID) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlCreateAID,
@@ -318,7 +318,7 @@ export function setUrlCreateAID(web3, didEntity, urlCreateAID) {
  * @param urlAOA
  */
 export function setUrlAOA(web3, didEntity, urlAOA) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.setUrlAOA,
@@ -336,7 +336,7 @@ export function setUrlAOA(web3, didEntity, urlAOA) {
  * @param didEntity
  */
 export function getEntity(web3, didEntity) {
-  const entityAddr = AIdUtils.getProxyAddress(didEntity)
+  const entityAddr = `0x${AIdUtils.getProxyAddress(didEntity)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityEntity.getEntity,

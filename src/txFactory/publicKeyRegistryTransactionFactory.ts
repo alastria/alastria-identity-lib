@@ -60,7 +60,7 @@ export function deletePublicKey(web3, publicKey) {
  * @param did
  */
 export function getCurrentPublicKey(web3, did) {
-  const subjectAddr = AIdUtils.getProxyAddress(did)
+  const subjectAddr = `0x${AIdUtils.getProxyAddress(did)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.getCurrentPublicKey,
@@ -77,7 +77,7 @@ export function getCurrentPublicKey(web3, did) {
  * @param publicKey
  */
 export function getPublicKeyStatus(web3, did, publicKey) {
-  const subjectAddr = AIdUtils.getProxyAddress(did)
+  const subjectAddr = `0x${AIdUtils.getProxyAddress(did)}`
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.getPublicKeyStatus,

@@ -41,7 +41,7 @@ function signJWT(jwt: JwtToken, rawPrivateKey: string) {
       jwt.header
     )
   } else {
-    return new TokenSigner('ES256K', rawPrivateKey).sign(jwt)
+    return new TokenSigner('ES256K', rawPrivateKey).sign(JSON.stringify(jwt))
   }
 }
 

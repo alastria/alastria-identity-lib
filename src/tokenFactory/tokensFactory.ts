@@ -26,7 +26,7 @@ function createDID(network: string, proxyAddress: string, networkID: string) {
 
 // Used by Service Provider or Subject Wallet
 export function decodeJWT(jwt: string) {
-  var tokenData = null
+  let tokenData = null
   if (jwt) {
     tokenData = decodeToken(jwt)
   }

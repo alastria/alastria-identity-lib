@@ -67,7 +67,7 @@ export function getSubjectCredentialStatus(
   didSubject,
   subjectCredentialHash
 ) {
-  const subjectAddr = `0x${AIdUtils.getProxyAddress(didSubject)}`
+  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.getSubjectCredentialStatus,
@@ -85,7 +85,7 @@ export function getSubjectCredentialStatus(
  * @param didSubject subject to recover credential list
  */
 export function getSubjectCredentialList(web3, didSubject) {
-  const subjectAddr = `0x${AIdUtils.getProxyAddress(didSubject)}`
+  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.getSubjectCredentialList,
@@ -126,7 +126,7 @@ export function getIssuerCredentialStatus(
   didIssuer,
   issuerCredentialHash
 ) {
-  const issuerAddr = `0x${AIdUtils.getProxyAddress(didIssuer)}`
+  const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.getIssuerCredentialStatus,

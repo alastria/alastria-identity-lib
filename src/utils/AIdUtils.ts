@@ -23,6 +23,6 @@ export class AIdUtils {
    * @returns ProxyAddress part of the did
    */
   public static getProxyAddress(did) {
-    return did.split(':')[4]
+    return `0x${did.split(':')[4]}`
   }
 }

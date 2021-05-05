@@ -28,6 +28,6 @@ describe('AIdUtils parse DID token correctly', () => {
   it('should get proxy address from valid DID correclty', function () {
     const parsedProxyAddres = AIdUtils.getProxyAddress(validDID)
 
-    expect(parsedProxyAddres).equal(proxyAddress)
+    expect(parsedProxyAddres).equal(`0x${proxyAddress}`)
   })
 })

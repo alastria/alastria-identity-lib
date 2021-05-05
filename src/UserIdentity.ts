@@ -35,7 +35,7 @@ export class UserIdentity {
    */
   public getSignedTransactions() {
     const processedTransactions = []
-    this.transactions.map((transaction) => {
+    this.transactions.forEach((transaction) => {
       processedTransactions.push(
         this.signTransaction(transaction, this.privateKey)
       )
@@ -49,7 +49,7 @@ export class UserIdentity {
    */
   public async getKnownTransaction(transaction) {
     const customizedTransaction = await this.customize(transaction)
-    var signedTx = await this.signTransaction(
+    const signedTx = await this.signTransaction(
       customizedTransaction,
       this.privateKey
     )

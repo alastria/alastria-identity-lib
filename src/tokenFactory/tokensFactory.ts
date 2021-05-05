@@ -26,7 +26,7 @@ function createDID(network: string, proxyAddress: string, networkID: string) {
 
 // Used by Service Provider or Subject Wallet
 export function decodeJWT(jwt: string) {
-  var tokenData = null
+  let tokenData = null
   if (jwt) {
     tokenData = decodeToken(jwt)
   }
@@ -41,7 +41,7 @@ function signJWT(jwt: JwtToken, rawPrivateKey: string) {
       jwt.header
     )
   } else {
-    return new TokenSigner('ES256K', rawPrivateKey).sign(jwt)
+    return new TokenSigner('ES256K', rawPrivateKey).sign(JSON.stringify(jwt))
   }
 }
 

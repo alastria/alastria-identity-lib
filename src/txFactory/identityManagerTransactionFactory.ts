@@ -47,7 +47,7 @@ export function createAlastriaIdentity(web3, publicKey) {
   transaction.gasLimit = 600000
   const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
-    [publicKey]
+    [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,

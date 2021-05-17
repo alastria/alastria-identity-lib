@@ -2,6 +2,7 @@ import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
 import { SignedToken } from 'jsontokens/lib/signer'
 import { JwtToken } from '../interfaces'
 import { AddressUtils } from '../utils/AddressUtils'
+import { PublicKeyUtils } from '../utils/PublicKeyUtils'
 
 export const tokensFactory = {
   tokens: {
@@ -48,7 +49,7 @@ function signJWT(jwt: JwtToken, rawPrivateKey: string) {
 }
 
 function verifyJWT(jwt: string | SignedToken, rawPublicKey: string) {
-  return new TokenVerifier('ES256K', rawPublicKey).verify(jwt)
+  return new TokenVerifier('ES256K', PublicKeyUtils.getUncompressedFormatPublicKey(rawPublicKey)).verify(jwt)
 }
 
 /** Creates an Alastria Session
@@ -77,6 +78,9 @@ function createAlastriaSession(
     'https://alastria.github.io/identity/artifacts/v1'
   ]
   const requiredTypes: string[] = ['AlastriaSession']
+  if(pku){
+    pku = AddressUtils.getAddressWithHexPrefix(pku)
+  }
 
   const jwt = {
     header: {
@@ -121,6 +125,10 @@ function createAlastriaToken(
   nbf?: number,
   jti?: string
 ) {
+  if(jwk){
+    jwk = AddressUtils.getAddressWithHexPrefix(jwk)
+  }
+
   const jwt = {
     header: {
       alg: 'ES256K',
@@ -173,6 +181,9 @@ export function createCredential(
     'VerifiableCredential',
     'AlastriaVerifiableCredential'
   ]
+  if(jwk){
+    jwk = AddressUtils.getAddressWithHexPrefix(jwk)
+  }
 
   context = context ? requiredContext.concat(context) : requiredContext
   type = type ? requiredTypes.concat(type) : requiredTypes
@@ -237,6 +248,9 @@ function createPresentation(
     'VerifiablePresentation',
     'AlastriaVerifiablePresentation'
   ]
+  if(jwk){
+    jwk = AddressUtils.getAddressWithHexPrefix(jwk)
+  }
 
   const jwt = {
     header: {
@@ -300,6 +314,9 @@ function createPresentationRequest(
     'VerifiablePresentationRequest',
     'AlastriaVerifiablePresentationRequest'
   ]
+  if(jwk){
+    jwk = AddressUtils.getAddressWithHexPrefix(jwk)
+  }
 
   const jwt = {
     header: {
@@ -362,6 +379,9 @@ function createAIC(
     'https://alastria.github.io/identity/artifacts/v1'
   ]
   const requiredTypes: string[] = ['AlastriaIdentityCreation']
+  if(jwk){
+    jwk = AddressUtils.getAddressWithHexPrefix(jwk)
+  }
 
   const jwt = {
     header: {

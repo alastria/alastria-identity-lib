@@ -1,6 +1,7 @@
 import { decodeToken, TokenSigner, TokenVerifier } from 'jsontokens'
 import { SignedToken } from 'jsontokens/lib/signer'
 import { JwtToken } from '../interfaces'
+import { AddressUtils } from '../utils/AddressUtils'
 
 export const tokensFactory = {
   tokens: {
@@ -21,7 +22,8 @@ export const tokensFactory = {
 function createDID(network: string, proxyAddress: string, networkID: string) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
-  return `did:ala:${network}:${networkID}:${proxyAddress}`
+  const proxyAddressParsed = AddressUtils.getAddressWithoutHexPrefix(proxyAddress)
+  return `did:ala:${network}:${networkID}:${proxyAddressParsed}`
 }
 
 // Used by Service Provider or Subject Wallet

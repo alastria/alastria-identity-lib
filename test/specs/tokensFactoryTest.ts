@@ -433,7 +433,7 @@ describe('validate createAlastriaToken', function () {
     const exp = 1000
     const nbf = 1000
     const jti = 'http://example.edu/credentials/3732'
-    const jwk = 'lkdjeo2n2__23oisd'
+    const jwk = '0xlkdjeo2n2__23oisd'
     const sub = 'did:ala:quor:redT:00f471c75c14c9ee9b16e4d64f8acb47a7bf2c4a'
 
     it('should create a valid credential with required params', () => {

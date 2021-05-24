@@ -6,9 +6,14 @@ export class PublicKeyUtils {
    * @param publicKey Hexadecimal public key
    * @returns Determine if the address has the 04 prefix
    */
-   public static hasUncompressedFormatPrefix(publicKey) {
+  public static hasUncompressedFormatPrefix(publicKey) {
     const prefix = publicKey.substring(0, 2)
-    if (prefix === '04') {
+    const hex = publicKey.substring(2, publicKey.length)
+
+    if (
+      prefix === '04' &&
+      AddressUtils.getAddressWithoutHexPrefix(hex).length === 128
+    ) {
       return true
     }
     return false
@@ -21,10 +26,10 @@ export class PublicKeyUtils {
    */
   public static getUncompressedFormatPublicKey(publicKey) {
     let hex = publicKey
-    if(this.hasUncompressedFormatPrefix(publicKey)){
+    if (this.hasUncompressedFormatPrefix(publicKey)) {
       hex = publicKey.substring(2, publicKey.length)
     }
-    
+
     return `04${AddressUtils.getAddressWithoutHexPrefix(hex)}`
   }
 }

@@ -21,6 +21,9 @@ import {
   deleteIdentityServiceProvider,
   isIdentityServiceProvider,
   isIdentityIssuer,
+} from './identityManagerTransactionFactory'
+
+import {
   addEntity,
   setNameEntity,
   setCifEntity,
@@ -29,7 +32,7 @@ import {
   setUrlAOA,
   getEntity,
   entitiesList
-} from './identityManagerTransactionFactory'
+} from './alastriaNameServiceTransactionFactory'
 
 import {
   addSubjectPresentation,

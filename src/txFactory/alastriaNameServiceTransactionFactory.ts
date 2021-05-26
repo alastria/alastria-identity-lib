@@ -10,7 +10,6 @@ import { AIdUtils } from '../utils/AIdUtils'
  * @param urlLogo
  * @param urlCreateAID
  * @param urlAOA
- * @param status
  */
 export function addEntity(
   web3,
@@ -19,14 +18,13 @@ export function addEntity(
   cif,
   urlLogo,
   urlCreateAID,
-  urlAOA,
-  status
+  urlAOA
 ) {
   const entityAddr = AIdUtils.getProxyAddress(didEntity)
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaNameService.addEntity,
-    [entityAddr, name, cif, urlLogo, urlCreateAID, urlAOA, status]
+    [entityAddr, name, cif, urlLogo, urlCreateAID, urlAOA]
   )
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
@@ -141,7 +139,7 @@ export function getEntity(web3, didEntity) {
     config.contractsAbi.AlastriaNameService.getEntity,
     [entityAddr]
   )
-  transaction.to = config.alastriaIdentityManager
+  transaction.to = config.alastriaNameService
   transaction.gasLimit = 600000
   return transaction
 }
@@ -156,7 +154,7 @@ export function entitiesList(web3) {
     config.contractsAbi.AlastriaNameService.entitiesList,
     []
   )
-  transaction.to = config.alastriaIdentityManager
+  transaction.to = config.alastriaNameService
   transaction.gasLimit = 600000
   return transaction
 }

@@ -23,8 +23,7 @@ export const tokensFactory = {
 function createDID(network: string, proxyAddress: string, networkID: string) {
   // network -> "quor" / "fabr"
   // networkID -> redT,...
-  const proxyAddressParsed = AddressUtils.getAddressWithoutHexPrefix(proxyAddress)
-  return `did:ala:${network}:${networkID}:${proxyAddressParsed}`
+  return `did:ala:${network}:${networkID}:${proxyAddress}`
 }
 
 // Used by Service Provider or Subject Wallet

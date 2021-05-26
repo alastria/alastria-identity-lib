@@ -2,6 +2,7 @@ import { config } from '../config'
 import { transactionFactory } from './transactionFactory'
 import { AIdUtils } from '../utils/AIdUtils'
 import { PublicKeyStatus } from '../interfaces'
+import { AddressUtils } from '../utils/AddressUtils'
 
 /**
  * function addKey(string memory publicKey, address subject) public
@@ -12,7 +13,7 @@ export function addKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
-    [publicKey]
+    [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
@@ -29,7 +30,7 @@ export function revokePublicKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.revokePublicKey,
-    [publicKey]
+    [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
@@ -46,7 +47,7 @@ export function deletePublicKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.deletePublicKey,
-    [publicKey]
+    [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
@@ -81,7 +82,7 @@ export function getPublicKeyStatus(web3, did, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.getPublicKeyStatus,
-    [subjectAddr, publicKey]
+    [subjectAddr, AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.to = config.alastriaPublicKeyRegistry
   transaction.gasLimit = 600000
@@ -124,6 +125,7 @@ export function getPublicKeyStatusDecodedAsJSON(
  * @param date in milliseconds
  */
 export function isPublicKeyValidForDate(web3, did, publicKey, date) {
+  publicKey = AddressUtils.getAddressWithHexPrefix(publicKey)
   return new Promise((resolve, reject) => {
     transactionFactory.publicKeyRegistry
       .getPublicKeyStatusDecodedAsJSON(web3, did, publicKey)

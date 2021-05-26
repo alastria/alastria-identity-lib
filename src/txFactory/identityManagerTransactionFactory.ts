@@ -1,5 +1,6 @@
 import { config } from '../config'
 import { AIdUtils } from '../utils/AIdUtils'
+import { AddressUtils } from '../utils/AddressUtils'
 
 /**
  * function delegateCall(address _destination, uint256 _value, bytes _data) public
@@ -28,7 +29,7 @@ export function prepareAlastriaID(web3, signAddress) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.prepareAlastriaID,
-    [signAddress]
+    [AddressUtils.getAddressWithHexPrefix(signAddress)]
   )
   transaction.data = delegated(web3, delegatedData)
   transaction.to = config.alastriaIdentityManager
@@ -46,7 +47,7 @@ export function createAlastriaIdentity(web3, publicKey) {
   transaction.gasLimit = 600000
   const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
-    [publicKey]
+    [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
   )
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,

@@ -20,7 +20,7 @@ import {
   addIdentityServiceProvider,
   deleteIdentityServiceProvider,
   isIdentityServiceProvider,
-  isIdentityIssuer,
+  isIdentityIssuer
 } from './identityManagerTransactionFactory'
 
 import {
@@ -65,6 +65,16 @@ export const transactionFactory = {
     getIssuerCredentialStatus: getIssuerCredentialStatus,
     getCredentialStatus: getCredentialStatus
   },
+  alastriaNameService: {
+    addEntity: addEntity,
+    setNameEntity: setNameEntity,
+    setCifEntity: setCifEntity,
+    setUrlLogo: setUrlLogo,
+    setUrlCreateAID: setUrlCreateAID,
+    setUrlAOA: setUrlAOA,
+    getEntity: getEntity,
+    entitiesList: entitiesList
+  },
   identityManager: {
     delegateCall: delegateCall,
     prepareAlastriaID: prepareAlastriaID,
@@ -76,15 +86,7 @@ export const transactionFactory = {
     addIdentityServiceProvider: addIdentityServiceProvider,
     deleteIdentityServiceProvider: deleteIdentityServiceProvider,
     isIdentityServiceProvider: isIdentityServiceProvider,
-    isIdentityIssuer: isIdentityIssuer,
-    addEntity: addEntity,
-    setNameEntity: setNameEntity,
-    setCifEntity: setCifEntity,
-    setUrlLogo: setUrlLogo,
-    setUrlCreateAID: setUrlCreateAID,
-    setUrlAOA: setUrlAOA,
-    getEntity: getEntity,
-    entitiesList: entitiesList
+    isIdentityIssuer: isIdentityIssuer
   },
   presentationRegistry: {
     addSubjectPresentation: addSubjectPresentation,

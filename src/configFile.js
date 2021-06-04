@@ -2,7 +2,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const contractsABIPath = '../temp-alastriaID-truffle-contracts/build/contracts'
+const contractsABIPath = '../alastriaID-truffle-contracts/build/contracts'
 const _contractsAbi = {}
 
 // Process the abi dir for getting an object with all the abi functions
@@ -23,7 +23,7 @@ fs.readdirSync(path.join(__dirname, `${contractsABIPath}`)).forEach((file) => {
   _contractsAbi[abiFile.contractName] = abi
 })
 
-const contractsAddressesPath = '../temp-alastriaID-truffle-contracts'
+const contractsAddressesPath = '../alastriaID-truffle-contracts'
 const contractsInfo = JSON.parse(
   fs.readFileSync(path.join(__dirname, `${contractsAddressesPath}`, 'addresses.json'), 'utf8')
 )

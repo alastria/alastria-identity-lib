@@ -1,6 +1,6 @@
 {
   "name": "alastria-identity-lib",
-  "version": "1.5.0",
+  "version": "2.0",
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "src/index.js",
   "bin": {

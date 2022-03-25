@@ -1,6 +1,7 @@
 // With web3 v1.0.0 the encode can be done with web3.eth.abi.encodeFunctionCall(jsonInterface,parameters)
 // TODO: change encoding when v1.0.0 releases stable version
 import * as EthereumTxAll from 'ethereumjs-tx'
+import { AddressUtils } from './utils/AddressUtils'
 
 export class UserIdentity {
   public endPoint: any
@@ -17,7 +18,7 @@ export class UserIdentity {
    */
   public constructor(_endPoint, _address, _privateKey, _initialNonce) {
     this.endPoint = _endPoint
-    this.address = _address
+    this.address = AddressUtils.getAddressWithHexPrefix(_address)
     this.privateKey = _privateKey
     this.nonce = _initialNonce
   }
@@ -35,7 +36,7 @@ export class UserIdentity {
    */
   public getSignedTransactions() {
     const processedTransactions = []
-    this.transactions.map((transaction) => {
+    this.transactions.forEach((transaction) => {
       processedTransactions.push(
         this.signTransaction(transaction, this.privateKey)
       )
@@ -49,7 +50,7 @@ export class UserIdentity {
    */
   public async getKnownTransaction(transaction) {
     const customizedTransaction = await this.customize(transaction)
-    var signedTx = await this.signTransaction(
+    const signedTx = await this.signTransaction(
       customizedTransaction,
       this.privateKey
     )

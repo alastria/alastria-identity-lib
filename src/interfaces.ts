@@ -1,3 +1,5 @@
+import { Json } from "jsontokens";
+
 export interface PublicKeyStatus {
   exists: boolean
   status: number
@@ -6,6 +8,6 @@ export interface PublicKeyStatus {
 }
 
 export interface JwtToken {
-  header: object
-  payload: object
+  header: Json
+  payload: Json
 }

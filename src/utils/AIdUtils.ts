@@ -1,3 +1,5 @@
+import { AddressUtils } from './AddressUtils'
+
 export class AIdUtils {
   /**
    * function getNetwork(did)
@@ -23,6 +25,6 @@ export class AIdUtils {
    * @returns ProxyAddress part of the did
    */
   public static getProxyAddress(did) {
-    return did.split(':')[4]
+    return AddressUtils.getAddressWithHexPrefix(did.split(':')[4])
   }
 }

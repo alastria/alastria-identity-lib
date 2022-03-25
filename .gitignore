@@ -35,7 +35,7 @@ build/Release
 
 # Dependency directories
 node_modules/
-alastria-identity
+alastriaID-truffle-contracts
 jspm_packages/
 package-lock.json
 

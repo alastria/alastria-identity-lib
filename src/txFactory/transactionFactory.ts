@@ -3,7 +3,6 @@ import {
   addIssuerCredential,
   deleteSubjectCredential,
   getSubjectCredentialStatus,
-  getSubjectCredentialList,
   updateCredentialStatus,
   getIssuerCredentialStatus,
   getCredentialStatus
@@ -38,7 +37,6 @@ import {
   addSubjectPresentation,
   updateSubjectPresentation,
   getSubjectPresentationStatus,
-  getSubjectPresentationList,
   updateReceiverPresentation,
   getReceiverPresentationStatus,
   getPresentationStatus

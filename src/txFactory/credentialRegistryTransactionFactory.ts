@@ -84,17 +84,17 @@ export function getSubjectCredentialStatus(
  * @param web3 ethereum connection
  * @param didSubject subject to recover credential list
  */
-export function getSubjectCredentialList(web3, didSubject) {
-  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
-  const transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaCredentialRegistry.getSubjectCredentialList,
-    [subjectAddr]
-  )
-  transaction.to = config.alastriaCredentialRegistry
-  transaction.gasLimit = 600000
-  return transaction
-}
+//export function getSubjectCredentialList(web3, didSubject) {
+  //const subjectAddr = AIdUtils.getProxyAddress(didSubject)
+  //const transaction = Object.assign({}, config.basicTransaction)
+  //transaction.data = web3.eth.abi.encodeFunctionCall(
+    //config.contractsAbi.AlastriaCredentialRegistry.getSubjectCredentialList,
+    //[subjectAddr]
+  //)
+  //transaction.to = config.alastriaCredentialRegistry
+  //transaction.gasLimit = 600000
+  //return transaction
+//}
 
 /**
  * function updateCredentialStatus(web3, issuerCredentialHash, status)

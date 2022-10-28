@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "run-s build",
-    "compile": "git clone --branch proposed_revision_2.1 https://github.com/alastria/alastriaID-truffle-contracts.git && npm install --prefix alastriaID-truffle-contracts && npm run compile --prefix alastriaID-truffle-contracts && node src/configFile.js && tsc",
+    "compile": "git clone --branch develop https://github.com/alastria/alastriaID-truffle-contracts.git && npm install --prefix alastriaID-truffle-contracts && npm run compile --prefix alastriaID-truffle-contracts && node src/configFile.js && tsc",
     "clean": "rimraf dist alastriaID-truffle-contracts",
     "build": "run-s clean compile",
     "test": "mocha -r ts-node/register test/**/*.ts",

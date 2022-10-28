@@ -3,7 +3,6 @@ import {
   addIssuerCredential,
   deleteSubjectCredential,
   getSubjectCredentialStatus,
-  getSubjectCredentialList,
   updateCredentialStatus,
   getIssuerCredentialStatus,
   getCredentialStatus
@@ -38,7 +37,6 @@ import {
   addSubjectPresentation,
   updateSubjectPresentation,
   getSubjectPresentationStatus,
-  getSubjectPresentationList,
   updateReceiverPresentation,
   getReceiverPresentationStatus,
   getPresentationStatus
@@ -60,7 +58,6 @@ export const transactionFactory = {
     addIssuerCredential: addIssuerCredential,
     deleteSubjectCredential: deleteSubjectCredential,
     getSubjectCredentialStatus: getSubjectCredentialStatus,
-    getSubjectCredentialList: getSubjectCredentialList,
     updateCredentialStatus: updateCredentialStatus,
     getIssuerCredentialStatus: getIssuerCredentialStatus,
     getCredentialStatus: getCredentialStatus
@@ -92,7 +89,6 @@ export const transactionFactory = {
     addSubjectPresentation: addSubjectPresentation,
     updateSubjectPresentation: updateSubjectPresentation,
     getSubjectPresentationStatus: getSubjectPresentationStatus,
-    getSubjectPresentationList: getSubjectPresentationList,
     updateReceiverPresentation: updateReceiverPresentation,
     getReceiverPresentationStatus: getReceiverPresentationStatus,
     getPresentationStatus: getPresentationStatus

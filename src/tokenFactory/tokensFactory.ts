@@ -66,9 +66,9 @@ function createAlastriaSession(
   context: string[],
   iss: string,
   kid: string,
-  type: string[],
   alastriaToken: string,
   exp: number,
+  type?: string[],
   pku?: string,
   nbf?: number,
   jti?: string
@@ -103,27 +103,35 @@ function createAlastriaSession(
 }
 
 /** Creates the AlastriaToken
+ * @param context aditional urls to "https://alastria.github.io/identity/artifacts/v1"
  * @param iss DID representing the AlastriaID of the entity that issued the Alastria Token
  * @param gwu Provider gateway url
- * @param cbu Callbacku url from the user
- * @param ani Alastria Network ID
+ * @param cbu Callback url from the user
  * @param exp expiration time
  * @param kid indicates which key was used to secure (digitally sign) the JWT
+ * @param type aditional types to "AlastriaToken"
+ * @param mfau callback from a mfau 
  * @param jwk Users public key
  * @param nbf not before
  * @param jti Unique token identifier
  */
 function createAlastriaToken(
+  context: string[],
   iss: string,
   gwu: string,
   cbu: string,
-  ani: string,
   exp: number,
   kid: string,
+  type?: string[],
+  mfau?: string,
   jwk?: string,
   nbf?: number,
   jti?: string
 ) {
+  const requiredContext: string[] = [
+    'https://alastria.github.io/identity/artifacts/v1'
+  ]
+  const requiredTypes: string[] = ['AlastriaToken']
   if(jwk){
     jwk = AddressUtils.getAddressWithHexPrefix(jwk)
   }
@@ -136,11 +144,13 @@ function createAlastriaToken(
       jwk
     },
     payload: {
+      '@context': requiredContext.concat(context),
       iss,
       gwu,
       cbu,
       iat: Math.round(Date.now() / 1000),
-      ani,
+      type: requiredTypes.concat(type),
+      mfau,
       nbf,
       exp,
       jti
@@ -164,13 +174,14 @@ export function createCredential(
   iss: string,
   context: string[],
   credentialSubject: object,
+  type: string[],
   kid?: string,
   sub?: string,
   exp?: number,
   nbf?: number,
   jti?: string,
   jwk?: string,
-  type?: string[]
+  
 ) {
   const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
@@ -224,6 +235,7 @@ export function createCredential(
  * @param exp identifies the expiration time on or after which the JWT (presentation) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific presentation instance (it is NOT the identifier of the holder or of any other actor)
+ * @param jtipr this is a field that links this presentation to the originally sent presentation request
  */
 function createPresentation(
   iss: string,
@@ -237,7 +249,8 @@ function createPresentation(
   jwk?: string,
   exp?: number,
   nbf?: number,
-  jti?: string
+  jti?: string,
+  jtipr?: string,
 ) {
   const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
@@ -260,6 +273,7 @@ function createPresentation(
     },
     payload: {
       jti,
+      jtipr,
       iss,
       aud,
       iat: Math.round(Date.now() / 1000),
@@ -290,6 +304,9 @@ function createPresentation(
  * @param exp identifies the expiration time on or after which the JWT (Presentation Request) MUST NOT be accepted for processing
  * @param nbf identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
  * @param jti This is the identification of this specific Presentation Request (it is NOT the identifier of the holder or of any other actor)
+ * @param p_exp it contains the suggested expiration date (exp field) to be used by the corresponding presentation in response to this Presentation Request.
+ * @param p_exp_delta identifies the time before which the JWT (presentation) MUST NOT be accepted for processing
+ * @param procDesc This is a value in seconds, so that the wallet can later obtain this value and calculate based on the current date what will be the date of issuance of the presentation.
  */
 function createPresentationRequest(
   iss: string,
@@ -303,7 +320,10 @@ function createPresentationRequest(
   jwk?: string,
   exp?: number,
   nbf?: number,
-  jti?: string
+  p_exp?: number,
+  p_exp_delta?: number,
+  jti?: string,
+  procDesc?: string
 ) {
   const requiredContext: string[] = [
     'https://www.w3.org/2018/credentials/v1',
@@ -331,11 +351,14 @@ function createPresentationRequest(
       exp,
       nbf,
       cbu,
+      p_exp,
+      p_exp_delta,
       pr: {
         '@context': requiredContext.concat(context),
         type: requiredTypes.concat(type),
         procHash,
         procUrl,
+        procDesc,
         data
       }
     }
@@ -370,7 +393,6 @@ function createAIC(
   kid?: string,
   jwk?: string,
   jti?: string,
-  iat?: number,
   exp?: number,
   nbf?: number
 ) {
@@ -396,7 +418,7 @@ function createAIC(
       alastriaToken,
       publicKey,
       jti: jti,
-      iat: iat,
+      iat: Math.round(Date.now() / 1000),
       exp: exp,
       nbf: nbf
     }

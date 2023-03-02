@@ -68,7 +68,7 @@ function createAlastriaSession(
   kid: string,
   alastriaToken: string,
   exp: number,
-  type?: string[],
+  type: string[],
   pku?: string,
   nbf?: number,
   jti?: string
@@ -122,7 +122,7 @@ function createAlastriaToken(
   cbu: string,
   exp: number,
   kid: string,
-  type?: string[],
+  type: string[],
   mfau?: string,
   jwk?: string,
   nbf?: number,

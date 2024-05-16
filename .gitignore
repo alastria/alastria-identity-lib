@@ -36,8 +36,10 @@ build/Release
 # Dependency directories
 node_modules/
 alastriaID-truffle-contracts
+alastriaID-hardhat-contracts
 jspm_packages/
 package-lock.json
+src/config.ts
 
 # Typescript v1 declaration files
 typings/

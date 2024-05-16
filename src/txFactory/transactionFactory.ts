@@ -19,7 +19,8 @@ import {
   addIdentityServiceProvider,
   deleteIdentityServiceProvider,
   isIdentityServiceProvider,
-  isIdentityIssuer
+  isIdentityIssuer,
+  createAlastriaIdentityHash
 } from './identityManagerTransactionFactory'
 
 import {
@@ -49,7 +50,13 @@ import {
   getCurrentPublicKey,
   getPublicKeyStatus,
   getPublicKeyStatusDecodedAsJSON,
-  isPublicKeyValidForDate
+  isPublicKeyValidForDate,
+  isPublicKeyValidForDateHash,
+  getPublicKeyStatusDecodedAsJSONHash,
+  getPublicKeyStatusHash,
+  deletePublicKeyHash,
+  revokePublicKeyHash,
+  addPublicKey
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
@@ -76,6 +83,7 @@ export const transactionFactory = {
     delegateCall: delegateCall,
     prepareAlastriaID: prepareAlastriaID,
     createAlastriaIdentity: createAlastriaIdentity,
+    createAlastriaIdentityHash: createAlastriaIdentityHash,
     addIdentityIssuer: addIdentityIssuer,
     updateIdentityIssuerEidasLevel: updateIdentityIssuerEidasLevel,
     deleteIdentityIssuer: deleteIdentityIssuer,
@@ -95,11 +103,17 @@ export const transactionFactory = {
   },
   publicKeyRegistry: {
     addKey: addKey,
+    addPublicKey: addPublicKey,
     revokePublicKey: revokePublicKey,
+    revokePublicKeyHash: revokePublicKeyHash,
     deletePublicKey: deletePublicKey,
+    deletePublicKeyHash: deletePublicKeyHash,
     getCurrentPublicKey: getCurrentPublicKey,
     getPublicKeyStatus: getPublicKeyStatus,
+    getPublicKeyStatusHash: getPublicKeyStatusHash,
     getPublicKeyStatusDecodedAsJSON: getPublicKeyStatusDecodedAsJSON,
-    isPublicKeyValidForDate: isPublicKeyValidForDate
+    getPublicKeyStatusDecodedAsJSONHash: getPublicKeyStatusDecodedAsJSONHash,
+    isPublicKeyValidForDate: isPublicKeyValidForDate,
+    isPublicKeyValidForDateHash: isPublicKeyValidForDateHash
   }
 }

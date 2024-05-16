@@ -38,7 +38,7 @@ export function prepareAlastriaID(web3, signAddress) {
 }
 
 /**
- * function createAlastriaIdentity(bytes publicKeyData) public validAddress(msg.sender) isOnTimeToLiveAndIsFromCaller(msg.sender)
+ * THIS METHOD WILL BE DEPREATED
  * @param web3
  * @param publicKey publicKey is a String
  */
@@ -48,6 +48,26 @@ export function createAlastriaIdentity(web3, publicKey) {
   const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
     [AddressUtils.getAddressWithoutHexPrefix(publicKey)]
+  )
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,
+    [publicKeyCallData]
+  )
+  transaction.to = config.alastriaIdentityManager
+  return transaction
+}
+
+/**
+
+ * @param web3
+ * @param publicKeyHash
+ */
+export function createAlastriaIdentityHash(web3, publicKeyHash) {
+  const transaction = Object.assign({}, config.basicTransaction)
+  transaction.gasLimit = 600000
+  const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
+    [publicKeyHash]
   )
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,

@@ -66,7 +66,7 @@ export function createAlastriaIdentityHash(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.gasLimit = 600000
   const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPublicKeyRegistry.addKey,
+    config.contractsAbi.AlastriaPublicKeyRegistry.addPublicKey,
     [publicKeyHash]
   )
   transaction.data = web3.eth.abi.encodeFunctionCall(

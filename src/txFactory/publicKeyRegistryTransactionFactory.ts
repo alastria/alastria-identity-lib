@@ -105,7 +105,7 @@ export function deletePublicKeyHash(web3, publicKeyHash) {
 }
 
 /**
- * function getCurrentPublicKey(address subject) view public validAddress(subject) returns (string)
+ * THIS METHOD WILL BE DEPREATED
  * @param web3
  * @param did
  */
@@ -115,6 +115,23 @@ export function getCurrentPublicKey(web3, did) {
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaPublicKeyRegistry.getCurrentPublicKey,
     [subjectAddr]
+  )
+  transaction.to = config.alastriaPublicKeyRegistry
+  transaction.gasLimit = 600000
+  return transaction
+}
+
+/**
+ * @param web3
+ * @param did
+ * @param publicKeyHash
+ */
+export function getCurrentPublicKeyHash(web3, did, publicKeyHash) {
+  const subjectAddr = AIdUtils.getProxyAddress(did)
+  const transaction = Object.assign({}, config.basicTransaction)
+  transaction.data = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPublicKeyRegistry.getCurrentPublicKey,
+    [subjectAddr, publicKeyHash]
   )
   transaction.to = config.alastriaPublicKeyRegistry
   transaction.gasLimit = 600000

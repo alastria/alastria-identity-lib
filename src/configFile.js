@@ -53,7 +53,7 @@ fs.readdirSync(path.join(__dirname, `${contractsABIPath}`)).forEach((folder) => 
 
 const contractsAddressesPath = '../alastriaID-hardhat-contracts'
 const contractsInfo = JSON.parse(
-  fs.readFileSync(path.join(__dirname, `${contractsAddressesPath}`, 'addresses.json'), 'utf8')
+  fs.readFileSync(path.join(__dirname, `${contractsAddressesPath}`, 'addresses-t.json'), 'utf8')
 )
 
 const config = {

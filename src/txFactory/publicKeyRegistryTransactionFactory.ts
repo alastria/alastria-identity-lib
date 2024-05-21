@@ -122,23 +122,6 @@ export function getCurrentPublicKey(web3, did) {
 }
 
 /**
- * @param web3
- * @param did
- * @param publicKeyHash
- */
-export function getCurrentPublicKeyHash(web3, did, publicKeyHash) {
-  const subjectAddr = AIdUtils.getProxyAddress(did)
-  const transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPublicKeyRegistry.getCurrentPublicKey,
-    [subjectAddr, publicKeyHash]
-  )
-  transaction.to = config.alastriaPublicKeyRegistry
-  transaction.gasLimit = 600000
-  return transaction
-}
-
-/**
  * THIS METHOD WILL BE DEPREATED
  * @param web3
  * @param did

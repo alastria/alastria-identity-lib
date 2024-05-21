@@ -12,6 +12,7 @@ import {
   delegateCall,
   prepareAlastriaID,
   createAlastriaIdentity,
+  createAlastriaIdentityHash,
   addIdentityIssuer,
   updateIdentityIssuerEidasLevel,
   deleteIdentityIssuer,
@@ -19,8 +20,7 @@ import {
   addIdentityServiceProvider,
   deleteIdentityServiceProvider,
   isIdentityServiceProvider,
-  isIdentityIssuer,
-  createAlastriaIdentityHash
+  isIdentityIssuer
 } from './identityManagerTransactionFactory'
 
 import {
@@ -45,19 +45,18 @@ import {
 
 import {
   addKey,
+  addPublicKey,
   revokePublicKey,
+  revokePublicKeyHash,
   deletePublicKey,
+  deletePublicKeyHash,
   getCurrentPublicKey,
   getPublicKeyStatus,
+  getPublicKeyStatusHash,
   getPublicKeyStatusDecodedAsJSON,
+  getPublicKeyStatusDecodedAsJSONHash,
   isPublicKeyValidForDate,
   isPublicKeyValidForDateHash,
-  getPublicKeyStatusDecodedAsJSONHash,
-  getPublicKeyStatusHash,
-  deletePublicKeyHash,
-  revokePublicKeyHash,
-  addPublicKey,
-  getCurrentPublicKeyHash
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
@@ -110,7 +109,6 @@ export const transactionFactory = {
     deletePublicKey: deletePublicKey,
     deletePublicKeyHash: deletePublicKeyHash,
     getCurrentPublicKey: getCurrentPublicKey,
-    getCurrentPublicKeyHash: getCurrentPublicKeyHash,
     getPublicKeyStatus: getPublicKeyStatus,
     getPublicKeyStatusHash: getPublicKeyStatusHash,
     getPublicKeyStatusDecodedAsJSON: getPublicKeyStatusDecodedAsJSON,

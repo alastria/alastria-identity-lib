@@ -54,9 +54,7 @@ import {
   getPublicKeyStatus,
   getPublicKeyStatusHash,
   getPublicKeyStatusDecodedAsJSON,
-  getPublicKeyStatusDecodedAsJSONHash,
   isPublicKeyValidForDate,
-  isPublicKeyValidForDateHash,
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
@@ -112,8 +110,6 @@ export const transactionFactory = {
     getPublicKeyStatus: getPublicKeyStatus,
     getPublicKeyStatusHash: getPublicKeyStatusHash,
     getPublicKeyStatusDecodedAsJSON: getPublicKeyStatusDecodedAsJSON,
-    getPublicKeyStatusDecodedAsJSONHash: getPublicKeyStatusDecodedAsJSONHash,
     isPublicKeyValidForDate: isPublicKeyValidForDate,
-    isPublicKeyValidForDateHash: isPublicKeyValidForDateHash
   }
 }

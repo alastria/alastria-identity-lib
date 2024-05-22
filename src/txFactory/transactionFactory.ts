@@ -3,7 +3,6 @@ import {
   addIssuerCredential,
   deleteSubjectCredential,
   getSubjectCredentialStatus,
-  getSubjectCredentialList,
   updateCredentialStatus,
   getIssuerCredentialStatus,
   getCredentialStatus
@@ -13,6 +12,7 @@ import {
   delegateCall,
   prepareAlastriaID,
   createAlastriaIdentity,
+  createAlastriaIdentityHash,
   addIdentityIssuer,
   updateIdentityIssuerEidasLevel,
   deleteIdentityIssuer,
@@ -38,7 +38,6 @@ import {
   addSubjectPresentation,
   updateSubjectPresentation,
   getSubjectPresentationStatus,
-  getSubjectPresentationList,
   updateReceiverPresentation,
   getReceiverPresentationStatus,
   getPresentationStatus
@@ -46,12 +45,14 @@ import {
 
 import {
   addKey,
+  addPublicKey,
   revokePublicKey,
+  revokePublicKeyHash,
   deletePublicKey,
+  deletePublicKeyHash,
   getCurrentPublicKey,
   getPublicKeyStatus,
-  getPublicKeyStatusDecodedAsJSON,
-  isPublicKeyValidForDate
+  getPublicKeyStatusHash,
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
@@ -60,7 +61,6 @@ export const transactionFactory = {
     addIssuerCredential: addIssuerCredential,
     deleteSubjectCredential: deleteSubjectCredential,
     getSubjectCredentialStatus: getSubjectCredentialStatus,
-    getSubjectCredentialList: getSubjectCredentialList,
     updateCredentialStatus: updateCredentialStatus,
     getIssuerCredentialStatus: getIssuerCredentialStatus,
     getCredentialStatus: getCredentialStatus
@@ -79,6 +79,7 @@ export const transactionFactory = {
     delegateCall: delegateCall,
     prepareAlastriaID: prepareAlastriaID,
     createAlastriaIdentity: createAlastriaIdentity,
+    createAlastriaIdentityHash: createAlastriaIdentityHash,
     addIdentityIssuer: addIdentityIssuer,
     updateIdentityIssuerEidasLevel: updateIdentityIssuerEidasLevel,
     deleteIdentityIssuer: deleteIdentityIssuer,
@@ -92,18 +93,19 @@ export const transactionFactory = {
     addSubjectPresentation: addSubjectPresentation,
     updateSubjectPresentation: updateSubjectPresentation,
     getSubjectPresentationStatus: getSubjectPresentationStatus,
-    getSubjectPresentationList: getSubjectPresentationList,
     updateReceiverPresentation: updateReceiverPresentation,
     getReceiverPresentationStatus: getReceiverPresentationStatus,
     getPresentationStatus: getPresentationStatus
   },
   publicKeyRegistry: {
     addKey: addKey,
+    addPublicKey: addPublicKey,
     revokePublicKey: revokePublicKey,
+    revokePublicKeyHash: revokePublicKeyHash,
     deletePublicKey: deletePublicKey,
+    deletePublicKeyHash: deletePublicKeyHash,
     getCurrentPublicKey: getCurrentPublicKey,
     getPublicKeyStatus: getPublicKeyStatus,
-    getPublicKeyStatusDecodedAsJSON: getPublicKeyStatusDecodedAsJSON,
-    isPublicKeyValidForDate: isPublicKeyValidForDate
+    getPublicKeyStatusHash: getPublicKeyStatusHash,
   }
 }

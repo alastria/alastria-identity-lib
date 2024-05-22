@@ -1,7 +1,5 @@
 import { config } from '../config'
-import { transactionFactory } from './transactionFactory'
 import { AIdUtils } from '../utils/AIdUtils'
-import { PublicKeyStatus } from '../interfaces'
 import { AddressUtils } from '../utils/AddressUtils'
 
 /**
@@ -154,80 +152,6 @@ export function getPublicKeyStatusHash(web3, did, publicKeyHash) {
   transaction.to = config.alastriaPublicKeyRegistry
   transaction.gasLimit = 600000
   return transaction
-}
-
-/**
- * @param web3
- * @param did
- * @param publicKeyHash
- */
-export function getPublicKeyStatusDecodedAsJSON(
-  web3,
-  did,
-  publicKeyHash
-): Promise<PublicKeyStatus> {
-  const publicKeyStatusTx = getPublicKeyStatus(web3, did, publicKeyHash)
-
-  return new Promise((resolve) => {
-    web3.eth.call(publicKeyStatusTx).then((data) => {
-      const publicKeyStatusDecoded = web3.eth.abi.decodeParameters(
-        ['bool', 'uint8', 'uint', 'uint'],
-        data
-      )
-      const publicKeyStatusDecodedAsJSON = {
-        exists: publicKeyStatusDecoded['0'],
-        status: publicKeyStatusDecoded['1'],
-        startDate: parseInt(publicKeyStatusDecoded['2']),
-        endDate: parseInt(publicKeyStatusDecoded['3'])
-      }
-      resolve(publicKeyStatusDecodedAsJSON)
-    })
-  })
-}
-
-/**
- * @param web3
- * @param did
- * @param publicKeyHash
- * @param date in milliseconds
- */
-export function isPublicKeyValidForDate(web3, did, publicKeyHash, date) {
-  publicKeyHash = AddressUtils.getAddressWithHexPrefix(publicKeyHash)
-  return new Promise((resolve, reject) => {
-    transactionFactory.publicKeyRegistry
-      .getPublicKeyStatusDecodedAsJSON(web3, did, publicKeyHash)
-      .then((publicKeyStatusAsJSON) => {
-        const existsPublicKey = publicKeyStatusAsJSON.exists
-
-        if (existsPublicKey) {
-          const isUserDateBetweenDates = _isUserDateBetweeenDates(
-            date,
-            publicKeyStatusAsJSON.startDate,
-            publicKeyStatusAsJSON.endDate
-          )
-          resolve(isUserDateBetweenDates)
-        } else {
-          reject(new Error('Public key does not exist'))
-        }
-      })
-      .catch(() => {
-        reject(new Error('Unresolved error'))
-      })
-  })
-}
-
-/**
- * @param userDate in milliseconds
- * @param publicKeyStartDate in milliseconds
- * @param publicKeyEndDate in milliseconds. If equals to 0, there is no enddate
- */
-function _isUserDateBetweeenDates(
-  userDate,
-  publicKeyStartDate,
-  publicKeyEndDate
-) {
-  if (publicKeyStartDate && publicKeyEndDate === 0) return true
-  else return userDate >= publicKeyStartDate && userDate <= publicKeyEndDate
 }
 
 function delegated(web3, delegatedData) {

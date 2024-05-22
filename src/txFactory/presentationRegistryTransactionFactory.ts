@@ -61,23 +61,6 @@ export function getSubjectPresentationStatus(
 }
 
 /**
- * function getSubjectPresentationList(address subject) public view returns(uint, bytes32[])
- * @param web3
- * @param didSubject
- */
-/** export function getSubjectPresentationList(web3, didSubject) {
-  const subjectAddr = AIdUtils.getProxyAddress(didSubject)
-  const transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPresentationRegistry.getSubjectPresentationList,
-    [subjectAddr]
-  )
-  transaction.to = config.alastriaPresentationRegistry
-  transaction.gasLimit = 600000
-  return transaction
-} */
-
-/**
  * Receiver functions
  * function updateReceiverPresentation(bytes32 receiverPresentationHash, Status status) public validStatus(status)
  * @param web3

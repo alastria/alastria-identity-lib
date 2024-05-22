@@ -2,7 +2,7 @@
 
 ## What it does
 
-This library interacts with the Alastria Identity smart contracts which are in the alastriaID-truffle-contracts repository ([https://github.com/alastria/alastriaID-truffle-contracts](https://github.com/alastria/alastriaID-truffle-contracts)).
+This library interacts with the Alastria Identity smart contracts which are in the alastriaID-hardhat-contracts repository ([https://github.com/alastria/alastriaID-hardhat-contracts](https://github.com/alastria/alastriaID-hardhat-contracts)).
 
 This library has three different modules:
 

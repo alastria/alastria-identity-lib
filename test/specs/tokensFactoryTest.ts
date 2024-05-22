@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import 'mocha'
 import { expect } from 'chai'
 import { tokensFactory } from '../../src/tokenFactory/tokensFactory'

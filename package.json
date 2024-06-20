@@ -1,6 +1,6 @@
 {
   "name": "alastria-identity-lib",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A library to interact with alastria-identity smart contracts",
   "main": "src/index.js",
   "bin": {
@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "postinstall": "run-s build",
-    "compile": "git clone --branch master https://github.com/alastria/alastriaID-hardhat-contracts.git && npm install --prefix alastriaID-hardhat-contracts && npm run compile --prefix alastriaID-hardhat-contracts && node src/configFile.js && tsc",
+    "compile": "git clone https://github.com/alastria/alastriaID-hardhat-contracts.git && npm install --prefix alastriaID-hardhat-contracts && npm run compile --prefix alastriaID-hardhat-contracts && node src/configFile.js && tsc",
     "clean": "rimraf dist alastriaID-hardhat-contracts",
     "build": "run-s clean compile",
     "test": "mocha -r ts-node/register test/**/*.ts",

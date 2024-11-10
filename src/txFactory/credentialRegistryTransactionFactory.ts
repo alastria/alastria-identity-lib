@@ -125,7 +125,7 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
  * @param issuerCredentialHash
  * @param status
  */
-export function updateIssuerCredentialStatus(web3, issuerCredentialHash, status) {
+export function updateIssuerCredential(web3, issuerCredentialHash, status) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.updateIssuerCredential,

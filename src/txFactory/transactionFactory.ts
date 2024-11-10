@@ -1,6 +1,8 @@
 import {
   addSubjectCredential,
+  updateSubjectCredential,
   addIssuerCredential,
+  updateIssuerCredential,
   deleteSubjectCredential,
   getSubjectCredentialStatus,
   updateCredentialStatus,
@@ -58,7 +60,9 @@ import {
 export const transactionFactory = {
   credentialRegistry: {
     addSubjectCredential: addSubjectCredential,
+    updateSubjectCredential: updateSubjectCredential,
     addIssuerCredential: addIssuerCredential,
+    updateIssuerCredential: updateIssuerCredential,
     deleteSubjectCredential: deleteSubjectCredential,
     getSubjectCredentialStatus: getSubjectCredentialStatus,
     updateCredentialStatus: updateCredentialStatus,

@@ -1,6 +1,14 @@
 import { config } from '../config'
 import { AIdUtils } from '../utils/AIdUtils'
 
+/**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectPresentation
+ * Subject functions
+ * function addSubjectPresentation(web3, subjectPresentationHash, URI)
+ * @param web3
+ * @param subjectPresentationHash
+ * @param URI
+ */
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
@@ -109,6 +117,7 @@ export function getReceiverPresentationStatus(
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED
  * Utility function
  * Defining three status functions avoids linking the Subject to the Receiver or the corresponding hashes
  * function getPresentationStatus(Status subjectStatus, Status receiverStatus) pure public validStatus(subjectStatus) validStatus(receiverStatus) returns(Status){

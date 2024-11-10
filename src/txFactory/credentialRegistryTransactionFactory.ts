@@ -2,6 +2,7 @@ import { config } from '../config'
 import { AIdUtils } from '../utils/AIdUtils'
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectCredential
  * function addSubjectCredential(web3, subjectCredentialHash, URI)
  * Dev: get delegated invoke addSubjectCredential transaction object
  * @param web3 ethereum connection
@@ -20,6 +21,26 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
 }
 
 /**
+ * function updateSubjectCredential(web3, subjectCredentialHash, status)
+ * Dev: get delegated invoke updateSubjectCredential transaction object
+ * @param web3 ethereum connection
+ * @param subjectCredentialHash should have 32 bytes, credential identification
+ * @param status uint that indicates the status of the credential
+ */
+export function updateSubjectCredential(web3, subjectCredentialHash, status) {
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaCredentialRegistry.updateSubjectCredential,
+    [subjectCredentialHash, status]
+  )
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager // When delegated, target is alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
+}
+
+/**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateIssuerCredential
  * function addIssuerCredential(web3, issuerCredentialHash)
  * Dev: get delegated invoke addIssuerCredential transaction object
  * @param web3 ethereum connection
@@ -38,6 +59,7 @@ export function addIssuerCredential(web3, issuerCredentialHash) {
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectCredential
  * function deleteSubjectCredential(web3, subjectCredentialHash)
  * Dev: get delegated invoke deleteSubjectCredential transaction object
  * @param web3 ethereum connection
@@ -79,6 +101,7 @@ export function getSubjectCredentialStatus(
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateIssuerCredential
  * function updateCredentialStatus(web3, issuerCredentialHash, status)
  * @param web3
  * @param issuerCredentialHash
@@ -88,6 +111,24 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
   const transaction = Object.assign({}, config.basicTransaction)
   const delegatedData = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaCredentialRegistry.updateCredentialStatus,
+    [issuerCredentialHash, status]
+  )
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
+}
+
+/**
+ * function updateIssuerCredentialStatus(web3, issuerCredentialHash, status)
+ * @param web3
+ * @param issuerCredentialHash
+ * @param status
+ */
+export function updateIssuerCredentialStatus(web3, issuerCredentialHash, status) {
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaCredentialRegistry.updateIssuerCredential,
     [issuerCredentialHash, status]
   )
   transaction.data = delegated(web3, delegatedData)
@@ -120,6 +161,7 @@ export function getIssuerCredentialStatus(
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED
  * Dev: Defining three status functions avoid linking the subject to the issuer or the corresponding hashes
  * @param web3 ethereum connection
  * @param subjectStatus

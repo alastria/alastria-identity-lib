@@ -4,8 +4,8 @@ import { AddressUtils } from '../utils/AddressUtils'
 
 /**
  * function delegateCall(address _destination, uint256 _value, bytes _data) public
- * @param web3
- * @param _destination
+ * @param web3 ethereum connection
+ * @param _destination 
  * @param _value
  * @param _data
  */
@@ -22,8 +22,8 @@ export function delegateCall(web3, _destination, _value, _data) {
 
 /**
  * function generateAccessToken(address _signAddress) public onlyIdentityServiceProvider(msg.sender)
- * @param web3
- * @param signAddress
+ * @param web3 ethereum connection
+ * @param signAddress Proxy address of the entity that sends the prepare and create TX
  */
 export function prepareAlastriaID(web3, signAddress) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -39,7 +39,7 @@ export function prepareAlastriaID(web3, signAddress) {
 
 /**
  * THIS METHOD WILL BE DEPREATED
- * @param web3
+ * @param web3 ethereum connection
  * @param publicKey publicKey is a String
  */
 export function createAlastriaIdentity(web3, publicKey) {
@@ -58,16 +58,20 @@ export function createAlastriaIdentity(web3, publicKey) {
 }
 
 /**
-
- * @param web3
- * @param publicKeyHash
+ * function createAlastriaIdentity(bytes32 publicKeyHash) public
+ * @param web3 ethereum connection
+ * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
 export function createAlastriaIdentityHash(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.gasLimit = 600000
+  const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaPublicKeyRegistry.addPublicKey,
+    [publicKeyHash]
+  )
   transaction.data = web3.eth.abi.encodeFunctionCall(
     config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,
-    [publicKeyHash]
+    [publicKeyCallData]
   )
   transaction.to = config.alastriaIdentityManager
   return transaction
@@ -76,9 +80,9 @@ export function createAlastriaIdentityHash(web3, publicKeyHash) {
 /**
  * AlastriaIdentityIssuer.sol
  * function addIdentityIssuer(address _identityIssuer, Eidas.EidasLevel _level) public alLeastLow(_level) notIdentityIssuer(_identityIssuer)
- * @param web3
- * @param didIssuer
- * @param level
+ * @param web3 ethereum connection
+ * @param didIssuer alastria Id
+ * @param level uint that indicates the eidas leves
  */
 export function addIdentityIssuer(web3, didIssuer, level) {
   const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
@@ -95,9 +99,9 @@ export function addIdentityIssuer(web3, didIssuer, level) {
 
 /**
  * function updateIdentityIssuerEidasLevel(address _identityIssuer, Eidas.EidasLevel _level) public alLeastLow(_level) onlyIdentityIssuer(_identityIssuer)
- * @param web3
- * @param didIssuer
- * @param level
+ * @param web3 ethereum connection
+ * @param didIssuer alastria Id
+ * @param level uint that indicates the eidas leves
  */
 export function updateIdentityIssuerEidasLevel(web3, didIssuer, level) {
   const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
@@ -114,8 +118,8 @@ export function updateIdentityIssuerEidasLevel(web3, didIssuer, level) {
 
 /**
  * function deleteIdentityIssuer(address _identityIssuer) public onlyIdentityIssuer(_identityIssuer)
- * @param web3
- * @param didIssuer
+ * @param web3 ethereum connection
+ * @param didIssuer alastria Id
  */
 export function deleteIdentityIssuer(web3, didIssuer) {
   const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
@@ -132,8 +136,8 @@ export function deleteIdentityIssuer(web3, didIssuer) {
 
 /**
  * function getEidasLevel(address _identityIssuer) public constant onlyIdentityIssuer(_identityIssuer) returns (Eidas.EidasLevel)
- * @param web3
- * @param didIssuer
+ * @param web3 ethereum connection
+ * @param didIssuer alastria Id
  */
 export function getEidasLevel(web3, didIssuer) {
   const issuerAddr = AIdUtils.getProxyAddress(didIssuer)
@@ -150,8 +154,8 @@ export function getEidasLevel(web3, didIssuer) {
 /**
  * AlastriaIdentityServiceProvider.sol
  * function addIdentityServiceProvider(address _identityServiceProvider) public notIdentityServiceProvider(_identityServiceProvider)
- * @param web3
- * @param didServiceProvider
+ * @param web3 ethereum connection
+ * @param didServiceProvider alastria Id
  */
 export function addIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
@@ -168,8 +172,8 @@ export function addIdentityServiceProvider(web3, didServiceProvider) {
 
 /**
  * function deleteIdentityServiceProvider(address _identityServiceProvider) public onlyIdentityServiceProvider(_identityServiceProvider)
- * @param web3
- * @param didServiceProvider
+ * @param web3 ethereum connection
+ * @param didServiceProvider alastria Id
  */
 export function deleteIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
@@ -186,8 +190,8 @@ export function deleteIdentityServiceProvider(web3, didServiceProvider) {
 
 /**
  * function isIdentityServiceProvider(address _identityServiceProvider) public constant returns (bool)
- * @param web3
- * @param didServiceProvider
+ * @param web3 ethereum connection
+ * @param didServiceProvider alastria Id
  */
 export function isIdentityServiceProvider(web3, didServiceProvider) {
   const providerAddr = AIdUtils.getProxyAddress(didServiceProvider)
@@ -204,8 +208,8 @@ export function isIdentityServiceProvider(web3, didServiceProvider) {
 
 /**
  * function isIdentityIssuer(address _identityIssuer) public constant returns (bool)
- * @param web3
- * @param didIssuer
+ * @param web3 ethereum connection
+ * @param didIssuer alastria Id
  */
 export function isIdentityIssuer(web3, didIssuer) {
   const issuerAddr = AIdUtils.getProxyAddress(didIssuer)

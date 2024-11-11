@@ -1,6 +1,8 @@
 import {
   addSubjectCredential,
+  updateSubjectCredential,
   addIssuerCredential,
+  updateIssuerCredential,
   deleteSubjectCredential,
   getSubjectCredentialStatus,
   updateCredentialStatus,
@@ -52,13 +54,14 @@ import {
   deletePublicKeyHash,
   getCurrentPublicKey,
   getPublicKeyStatus,
-  getPublicKeyStatusHash,
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
   credentialRegistry: {
     addSubjectCredential: addSubjectCredential,
+    updateSubjectCredential: updateSubjectCredential,
     addIssuerCredential: addIssuerCredential,
+    updateIssuerCredential: updateIssuerCredential,
     deleteSubjectCredential: deleteSubjectCredential,
     getSubjectCredentialStatus: getSubjectCredentialStatus,
     updateCredentialStatus: updateCredentialStatus,
@@ -105,7 +108,6 @@ export const transactionFactory = {
     deletePublicKey: deletePublicKey,
     deletePublicKeyHash: deletePublicKeyHash,
     getCurrentPublicKey: getCurrentPublicKey,
-    getPublicKeyStatus: getPublicKeyStatus,
-    getPublicKeyStatusHash: getPublicKeyStatusHash,
+    getPublicKeyStatus: getPublicKeyStatus
   }
 }

@@ -2,10 +2,12 @@ import { config } from '../config'
 import { AIdUtils } from '../utils/AIdUtils'
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectCredential
  * function addSubjectCredential(web3, subjectCredentialHash, URI)
  * Dev: get delegated invoke addSubjectCredential transaction object
  * @param web3 ethereum connection
  * @param subjectCredentialHash should have 32 bytes, credential identification
+ * @param URI url for store the credentials for backup
  */
 export function addSubjectCredential(web3, subjectCredentialHash, URI) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -20,6 +22,26 @@ export function addSubjectCredential(web3, subjectCredentialHash, URI) {
 }
 
 /**
+ * function updateSubjectCredential(web3, subjectCredentialHash, status)
+ * Dev: get delegated invoke updateSubjectCredential transaction object
+ * @param web3 ethereum connection
+ * @param subjectCredentialHash should have 32 bytes, credential identification
+ * @param status uint that indicates the status of the credential
+ */
+export function updateSubjectCredential(web3, subjectCredentialHash, status) {
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaCredentialRegistry.updateSubjectCredential,
+    [subjectCredentialHash, status]
+  )
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager // When delegated, target is alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
+}
+
+/**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateIssuerCredential
  * function addIssuerCredential(web3, issuerCredentialHash)
  * Dev: get delegated invoke addIssuerCredential transaction object
  * @param web3 ethereum connection
@@ -38,6 +60,7 @@ export function addIssuerCredential(web3, issuerCredentialHash) {
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectCredential
  * function deleteSubjectCredential(web3, subjectCredentialHash)
  * Dev: get delegated invoke deleteSubjectCredential transaction object
  * @param web3 ethereum connection
@@ -79,10 +102,11 @@ export function getSubjectCredentialStatus(
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateIssuerCredential
  * function updateCredentialStatus(web3, issuerCredentialHash, status)
- * @param web3
- * @param issuerCredentialHash
- * @param status
+ * @param web3 ethereum connection
+ * @param issuerCredentialHash should have 32 bytes
+ * @param status uint that indicates the status of the credential
  */
 export function updateCredentialStatus(web3, issuerCredentialHash, status) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -97,11 +121,29 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
 }
 
 /**
+ * function updateIssuerCredential(web3, issuerCredentialHash, status)
+ * @param web3 ethereum connection
+ * @param issuerCredentialHash should have 32 bytes
+ * @param status uint that indicates the status of the credential
+ */
+export function updateIssuerCredential(web3, issuerCredentialHash, status) {
+  const transaction = Object.assign({}, config.basicTransaction)
+  const delegatedData = web3.eth.abi.encodeFunctionCall(
+    config.contractsAbi.AlastriaCredentialRegistry.updateIssuerCredential,
+    [issuerCredentialHash, status]
+  )
+  transaction.data = delegated(web3, delegatedData)
+  transaction.to = config.alastriaIdentityManager
+  transaction.gasLimit = 600000
+  return transaction
+}
+
+/**
  * Dev: get the invoke updateCredentialStatus transaction object
  * function getIssuerCredentialStatus(address issuer, bytes32 issuerCredentialHash) view public validAddress(issuer) returns (bool exists, Status status)
  * @param web3 ethereum connection
- * @param didIssuer
- * @param issuerCredentialHash
+ * @param didIssuer alastria Id
+ * @param issuerCredentialHash should have 32 bytes
  */
 export function getIssuerCredentialStatus(
   web3,
@@ -120,10 +162,11 @@ export function getIssuerCredentialStatus(
 }
 
 /**
+ * THIS METHOD WILL BE DEPREATED
  * Dev: Defining three status functions avoid linking the subject to the issuer or the corresponding hashes
  * @param web3 ethereum connection
- * @param subjectStatus
- * @param issuerStatus
+ * @param subjectStatus uint that indicates the status of the credential for subject
+ * @param issuerStatus uint that indicates the status of the credential for issuer
  */
 export function getCredentialStatus(web3, subjectStatus, issuerStatus) {
   const transaction = Object.assign({}, config.basicTransaction)

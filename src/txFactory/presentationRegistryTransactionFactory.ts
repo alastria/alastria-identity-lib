@@ -5,9 +5,9 @@ import { AIdUtils } from '../utils/AIdUtils'
  * THIS METHOD WILL BE DEPREATED, USE INSTEAD updateSubjectPresentation
  * Subject functions
  * function addSubjectPresentation(web3, subjectPresentationHash, URI)
- * @param web3
- * @param subjectPresentationHash
- * @param URI
+ * @param web3 ethereum connection
+ * @param subjectPresentationHash should have 32 bytes
+ * @param URI url for store the presentations for backup
  */
 export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -24,8 +24,8 @@ export function addSubjectPresentation(web3, subjectPresentationHash, URI) {
 /**
  * Subject functions
  * function updateSubjectPresentation(bytes32 subjectPresentationHash, Status status) public validStatus(status)
- * @param web3
- * @param subjectPresentationHash
+ * @param web3 ethereum connection
+ * @param subjectPresentationHash should have 32 bytes
  */
 export function updateSubjectPresentation(
   web3,
@@ -47,9 +47,9 @@ export function updateSubjectPresentation(
  * If the Presentation does not exists the return is a void Presentation
  * If we want a log, should we add an event?
  * function getSubjectPresentationStatus(address subject, bytes32 subjectPresentationHash) view public validAddress(subject) returns(bool exists, Status status)
- * @param web3
- * @param didSubject
- * @param subsubjectPresentationHashject
+ * @param web3 ethereum connection
+ * @param didSubject alastria Id
+ * @param subsubjectPresentationHashject should have 32 bytes
  */
 export function getSubjectPresentationStatus(
   web3,
@@ -71,9 +71,9 @@ export function getSubjectPresentationStatus(
 /**
  * Receiver functions
  * function updateReceiverPresentation(bytes32 receiverPresentationHash, Status status) public validStatus(status)
- * @param web3
- * @param receiverPresentationHash
- * @param status
+ * @param web3 ethereum connection
+ * @param receiverPresentationHash should have 32 bytes
+ * @param status uint that indicates the status of the presentation
  */
 export function updateReceiverPresentation(
   web3,
@@ -95,9 +95,9 @@ export function updateReceiverPresentation(
  * If the Presentation does not exists the return is a void Presentation
  * If we want a log, should we add an event?
  * function getReceiverPresentationStatus(address receiver, bytes32 receiverPresentationHash) view public validAddress(receiver) returns(bool exists, Status status) {
- * @param web3
- * @param didReceiver
- * @param receiverPresentationHash
+ * @param web3 ethereum connection
+ * @param didReceiver alastria Id
+ * @param receiverPresentationHash should have 32 bytes
  */
 export function getReceiverPresentationStatus(
   web3,
@@ -121,9 +121,9 @@ export function getReceiverPresentationStatus(
  * Utility function
  * Defining three status functions avoids linking the Subject to the Receiver or the corresponding hashes
  * function getPresentationStatus(Status subjectStatus, Status receiverStatus) pure public validStatus(subjectStatus) validStatus(receiverStatus) returns(Status){
- * @param web3
- * @param subjectStatus
- * @param receiverStatus
+ * @param web3 ethereum connection
+ * @param subjectStatus uint that indicates the status of the presentation for subject
+ * @param receiverStatus uint that indicates the status of the presentation for receiver
  */
 export function getPresentationStatus(web3, subjectStatus, receiverStatus) {
   const transaction = Object.assign({}, config.basicTransaction)

@@ -3,10 +3,10 @@ import { AIdUtils } from '../utils/AIdUtils'
 import { AddressUtils } from '../utils/AddressUtils'
 
 /**
- * THIS METHOD WILL BE DEPREATED
- * function addKey(string memory publicKey, address subject) public
- * @param web3
- * @param publicKey
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD addPublicKey
+ * function addKey(string memory publicKey) public
+ * @param web3 ethereum connection
+ * @param publicKey the public key.
  */
 export function addKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -21,8 +21,9 @@ export function addKey(web3, publicKey) {
 }
 
 /**
- * @param web3
- * @param publicKeyHash
+ * function addPublicKey(bytes32 publicKeyHash) public
+ * @param web3 ethereum connection
+ * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
 export function addPublicKey(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -37,9 +38,10 @@ export function addPublicKey(web3, publicKeyHash) {
 }
 
 /**
- * THIS METHOD WILL BE DEPREATED
- * @param web3
- * @param publicKey
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD revokePublicKeyHash
+ * function revokePublicKey(string memory publicKey) public
+ * @param web3 ethereum connection
+ * @param publicKey the public key.
  */
 export function revokePublicKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -54,8 +56,9 @@ export function revokePublicKey(web3, publicKey) {
 }
 
 /**
- * @param web3
- * @param publicKeyHash
+ * function revokePublicKey(bytes32 publicKeyHash) public
+ * @param web3 ethereum connection
+ * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
 export function revokePublicKeyHash(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -70,9 +73,10 @@ export function revokePublicKeyHash(web3, publicKeyHash) {
 }
 
 /**
- * THIS METHOD WILL BE DEPREATED
- * @param web3
- * @param publicKey
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD deletePublicKeyHash
+ * function deletePublicKey(string memory publicKey) public
+ * @param web3 ethereum connection
+ * @param publicKey the public key.
  */
 export function deletePublicKey(web3, publicKey) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -87,8 +91,9 @@ export function deletePublicKey(web3, publicKey) {
 }
 
 /**
- * @param web3
- * @param publicKeyHash
+ * function deletePublicKey(bytes32 publicKeyHash) public
+ * @param web3 ethereum connection
+ * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
 export function deletePublicKeyHash(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
@@ -103,9 +108,10 @@ export function deletePublicKeyHash(web3, publicKeyHash) {
 }
 
 /**
- * THIS METHOD WILL BE DEPREATED
- * @param web3
- * @param did
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD getPublicKeyStatusHash
+ * function getCurrentPublicKey(address subject) view public
+ * @param web3 ethereum connection
+ * @param did alastri Id
  */
 export function getCurrentPublicKey(web3, did) {
   const subjectAddr = AIdUtils.getProxyAddress(did)
@@ -120,10 +126,11 @@ export function getCurrentPublicKey(web3, did) {
 }
 
 /**
- * THIS METHOD WILL BE DEPREATED
- * @param web3
- * @param did
- * @param publicKey
+ * TODO: ELIMINAR???
+ * THIS METHOD WILL BE DEPREATED, USE INSTEAD getPublicKeyStatusHash
+ * function getPublicKeyStatus(address subject, bytes32 publicKeyHash) view public
+ * @param did ethereum connection
+ * @param publicKey the public key.
  */
 export function getPublicKeyStatus(web3, did, publicKey) {
   const subjectAddr = AIdUtils.getProxyAddress(did)
@@ -138,9 +145,10 @@ export function getPublicKeyStatus(web3, did, publicKey) {
 }
 
 /**
- * @param web3
- * @param did
- * @param publicKeyHash
+ * function getPublicKeyStatus(address subject, bytes32 publicKeyHash) view public
+ * @param web3 ethereum connection
+ * @param did alastri Id
+ * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
 export function getPublicKeyStatusHash(web3, did, publicKeyHash) {
   const subjectAddr = AIdUtils.getProxyAddress(did)

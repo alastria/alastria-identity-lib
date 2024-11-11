@@ -126,31 +126,12 @@ export function getCurrentPublicKey(web3, did) {
 }
 
 /**
- * TODO: ELIMINAR???
- * THIS METHOD WILL BE DEPREATED, USE INSTEAD getPublicKeyStatusHash
- * function getPublicKeyStatus(address subject, bytes32 publicKeyHash) view public
- * @param did ethereum connection
- * @param publicKey the public key.
- */
-export function getPublicKeyStatus(web3, did, publicKey) {
-  const subjectAddr = AIdUtils.getProxyAddress(did)
-  const transaction = Object.assign({}, config.basicTransaction)
-  transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPublicKeyRegistry.getPublicKeyStatus,
-    [subjectAddr, AddressUtils.getAddressWithoutHexPrefix(publicKey)]
-  )
-  transaction.to = config.alastriaPublicKeyRegistry
-  transaction.gasLimit = 600000
-  return transaction
-}
-
-/**
  * function getPublicKeyStatus(address subject, bytes32 publicKeyHash) view public
  * @param web3 ethereum connection
  * @param did alastri Id
  * @param publicKeyHash the hash of the publickey. should have 32 bytes
  */
-export function getPublicKeyStatusHash(web3, did, publicKeyHash) {
+export function getPublicKeyStatus(web3, did, publicKeyHash) {
   const subjectAddr = AIdUtils.getProxyAddress(did)
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.data = web3.eth.abi.encodeFunctionCall(

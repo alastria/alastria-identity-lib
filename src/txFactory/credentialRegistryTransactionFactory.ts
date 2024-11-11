@@ -121,7 +121,7 @@ export function updateCredentialStatus(web3, issuerCredentialHash, status) {
 }
 
 /**
- * function updateIssuerCredentialStatus(web3, issuerCredentialHash, status)
+ * function updateIssuerCredential(web3, issuerCredentialHash, status)
  * @param web3 ethereum connection
  * @param issuerCredentialHash should have 32 bytes
  * @param status uint that indicates the status of the credential

@@ -54,7 +54,6 @@ import {
   deletePublicKeyHash,
   getCurrentPublicKey,
   getPublicKeyStatus,
-  getPublicKeyStatusHash,
 } from './publicKeyRegistryTransactionFactory'
 
 export const transactionFactory = {
@@ -109,7 +108,6 @@ export const transactionFactory = {
     deletePublicKey: deletePublicKey,
     deletePublicKeyHash: deletePublicKeyHash,
     getCurrentPublicKey: getCurrentPublicKey,
-    getPublicKeyStatus: getPublicKeyStatus,
-    getPublicKeyStatusHash: getPublicKeyStatusHash,
+    getPublicKeyStatus: getPublicKeyStatus
   }
 }

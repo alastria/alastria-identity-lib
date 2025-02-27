@@ -53,15 +53,17 @@ You can execute some of our examples by running:
 ```
 node file_name.js
 ```
+
 ## Dependencies
+
 This library is using functionality from others.
 
-| Lib | URL |
-|:------------- |:-------------|
-| web3     | https://www.npmjs.com/package/web3 | 
-| web3-utils | https://www.npmjs.com/package/web3-utils | 
-| ethereumjs-tx   | https://www.npmjs.com/package/ethereumjs-tx |
-| jsontokens-npm   | https://www.npmjs.com/package/jsontokens |
+| Lib            | URL                                         |
+| :------------- | :------------------------------------------ |
+| web3           | https://www.npmjs.com/package/web3          |
+| web3-utils     | https://www.npmjs.com/package/web3-utils    |
+| ethereumjs-tx  | https://www.npmjs.com/package/ethereumjs-tx |
+| jsontokens-npm | https://www.npmjs.com/package/jsontokens    |
 
 Or create yours.
 
@@ -114,3 +116,7 @@ The repository already has configuration files for both, so you won't have to co
 To automatically format Javascript and Typescript code
 
 If you have installed some plugin that add keyboard shortcuts, like IntelliJ IDEA Keybindings (https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings) you will be able to format documents with Prettier with shortcuts like `cmd+alt+l`
+
+### Contribution
+
+**Contribution made by Inetum during 2024 in this document has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101084071. (Dome project https://dome-marketplace.eu/)**

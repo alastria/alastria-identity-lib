@@ -5,7 +5,7 @@ import { AddressUtils } from '../utils/AddressUtils'
 /**
  * function delegateCall(address _destination, uint256 _value, bytes _data) public
  * @param web3 ethereum connection
- * @param _destination 
+ * @param _destination
  * @param _value
  * @param _data
  */
@@ -65,13 +65,13 @@ export function createAlastriaIdentity(web3, publicKey) {
 export function createAlastriaIdentityHash(web3, publicKeyHash) {
   const transaction = Object.assign({}, config.basicTransaction)
   transaction.gasLimit = 600000
-  const publicKeyCallData = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaPublicKeyRegistry.addPublicKey,
-    [publicKeyHash]
-  )
   transaction.data = web3.eth.abi.encodeFunctionCall(
-    config.contractsAbi.AlastriaIdentityManager.createAlastriaIdentity,
-    [publicKeyCallData]
+    {
+      name: 'createAlastriaIdentity',
+      type: 'function',
+      inputs: [{ type: 'bytes32', name: 'publicKeyHash' }]
+    },
+    [publicKeyHash]
   )
   transaction.to = config.alastriaIdentityManager
   return transaction
